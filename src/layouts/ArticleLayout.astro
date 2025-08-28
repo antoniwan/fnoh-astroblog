@@ -80,6 +80,7 @@ const {
 </BaseLayout>
 
 <style>
+	/* Layout-specific styles only */
 	.article {
 		max-width: 800px;
 		margin: 0 auto;
@@ -138,108 +139,9 @@ const {
 		color: #92400e;
 	}
 	
-	.article-content {
-		font-size: 1.1rem;
-		line-height: 1.8;
-		color: #374151;
-	}
-	
-	.article-content :global(h2) {
-		font-size: 1.8rem;
-		font-weight: 700;
-		margin: 2.5rem 0 1rem 0;
-		color: #1f2937;
-		padding-top: 1rem;
-		border-top: 1px solid #e5e7eb;
-	}
-	
-	.article-content :global(h3) {
-		font-size: 1.4rem;
-		font-weight: 600;
-		margin: 2rem 0 0.75rem 0;
-		color: #374151;
-	}
-	
-	.article-content :global(h4) {
-		font-size: 1.2rem;
-		font-weight: 600;
-		margin: 1.5rem 0 0.5rem 0;
-		color: #374151;
-	}
-	
-	.article-content :global(p) {
-		margin-bottom: 1.5rem;
-	}
-	
-	.article-content :global(ul), .article-content :global(ol) {
-		margin: 1.5rem 0;
-		padding-left: 1.5rem;
-	}
-	
-	.article-content :global(li) {
-		margin-bottom: 0.5rem;
-	}
-	
-	.article-content :global(blockquote) {
-		border-left: 4px solid #667eea;
-		padding: 1rem 1.5rem;
-		margin: 2rem 0;
-		background: #f8fafc;
-		border-radius: 0 8px 8px 0;
-		font-style: italic;
-		color: #475569;
-	}
-	
-	.article-content :global(code) {
-		background: #f1f5f9;
-		padding: 0.2rem 0.4rem;
-		border-radius: 4px;
-		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-		font-size: 0.9em;
-		color: #dc2626;
-	}
-	
-	.article-content :global(pre) {
-		background: #1e293b;
-		color: #f1f5f9;
-		padding: 1.5rem;
-		border-radius: 8px;
-		overflow-x: auto;
-		margin: 2rem 0;
-		line-height: 1.6;
-	}
-	
-	.article-content :global(pre code) {
-		background: transparent;
-		padding: 0;
-		color: inherit;
-	}
-	
-	.article-content :global(a) {
-		color: #667eea;
-		text-decoration: none;
-		border-bottom: 1px solid transparent;
-		transition: border-color 0.2s ease;
-	}
-	
-	.article-content :global(a:hover) {
-		border-bottom-color: #667eea;
-	}
-	
-	.article-content :global(hr) {
-		border: none;
-		height: 1px;
-		background: #e5e7eb;
-		margin: 3rem 0;
-	}
-	
 	@media (max-width: 768px) {
 		.article-header h1 {
 			font-size: 2.2rem;
-		}
-		
-		.article-content {
-			font-size: 1rem;
 		}
 		
 		.article-meta {
