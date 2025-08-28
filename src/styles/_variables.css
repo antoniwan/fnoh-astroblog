@@ -6,8 +6,20 @@
   --color-link: #0066cc;
   --color-border: #ccc;
   
+  /* Enhanced color system */
+  --color-link-hover: #0052a3;
+  --color-focus: #0066cc;
+  --color-code-bg: #f5f5f5;
+  --color-code-text: #333;
+  --color-blockquote-bg: rgba(0, 0, 0, 0.02);
+  --color-table-header-bg: rgba(0, 0, 0, 0.05);
+  --color-input-bg: #fff;
+  --color-selection-bg: rgba(0, 102, 204, 0.2);
+  --color-selection-text: inherit;
+  
   /* Basic typography */
   --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
   --font-size-base: 16px;
   --line-height: 1.5;
   
@@ -16,4 +28,19 @@
   
   /* Basic layout */
   --max-width: 800px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Border radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
