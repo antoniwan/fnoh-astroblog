@@ -10,6 +10,10 @@ pnpm create astro@latest -- --template blog
 
 Features:
 
+- ✅ **Modern CSS Architecture** with 2025 best practices
+- ✅ **Enhanced Accessibility** with reduced motion support and focus management
+- ✅ **Print-Optimized Styles** for PDF generation and printing
+- ✅ **Performance Optimized** with modern CSS features
 - ✅ Minimal styling (make it your own!)
 - ✅ 100/100 Lighthouse performance
 - ✅ SEO-friendly with canonical URLs and OpenGraph data
@@ -27,20 +31,32 @@ Inside of your Astro project, you'll see the following folders and files:
 │   ├── components/
 │   ├── content/
 │   ├── layouts/
-│   └── pages/
+│   ├── pages/
+│   └── styles/
+│       ├── main.css              # CSS entry point
+│       ├── _variables.css        # Design tokens & CSS variables
+│       ├── _reset.css           # Modern CSS reset (2025)
+│       ├── _typography.css      # Typography system
+│       ├── _utilities.css       # Utility classes
+│       ├── _print.css           # Print-optimized styles
+│       └── README.md            # CSS architecture docs
 ├── astro.config.mjs
 ├── README.md
 ├── package.json
 └── tsconfig.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🎨 CSS Architecture
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+This project features a **modern, well-structured CSS architecture** that follows 2025 best practices:
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+- **Foundation CSS**: Reset, variables, typography, utilities, and print styles
+- **Component Scoping**: Astro's built-in CSS scoping for component-specific styles
+- **Design System**: CSS custom properties for consistent theming
+- **Accessibility First**: Reduced motion support, focus management, and semantic markup
+- **Performance**: Modern CSS features like `clamp()`, `calc()`, and logical properties
 
-Any static assets, like images, can be placed in the `public/` directory.
+See [`src/styles/README.md`](src/styles/README.md) for detailed CSS architecture documentation.
 
 ## 🧞 Commands
 
@@ -62,3 +78,10 @@ Check out [our documentation](https://docs.astro.build) or jump into our [Discor
 ## Credit
 
 This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+
+## 🆕 Recent Updates
+
+- **Enhanced CSS Reset**: Modern browser normalization with accessibility features
+- **Print Styles**: Optimized styles for printing and PDF generation
+- **Performance**: Modern CSS features and reduced motion support
+- **Documentation**: Comprehensive CSS architecture guide
