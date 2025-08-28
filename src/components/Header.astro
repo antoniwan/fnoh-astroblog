@@ -1,6 +1,7 @@
 ---
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
 ---
 
 <header>
@@ -10,6 +11,7 @@ import HeaderLink from './HeaderLink.astro';
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/writings">Writings</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
+			<ThemeToggle />
 		</div>
 	</nav>
 </header>

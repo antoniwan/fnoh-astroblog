@@ -1,6 +1,6 @@
 /* ===== ESSENTIAL TYPOGRAPHY ===== */
 
-/* Base typography */
+/* Base typography - Modern field notes feel */
 body {
   font-family: var(--font-family);
   font-size: var(--font-size-base);
@@ -8,15 +8,21 @@ body {
   color: var(--color-text);
   font-weight: var(--font-weight-normal);
   letter-spacing: var(--letter-spacing-normal);
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "liga" 1, "kern" 1;
+  font-feature-settings: "liga" 1, "kern" 1;
 }
 
-/* Headings */
+/* Headings - Bold, versatile sans */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-heading);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
   margin: 0 0 var(--spacing) 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "liga" 1, "kern" 1;
+  font-feature-settings: "liga" 1, "kern" 1;
 }
 
 h1 {
@@ -53,11 +59,12 @@ h6 {
   font-weight: var(--font-weight-medium);
 }
 
-/* Paragraphs and text */
+/* Paragraphs and text - Modern field notes readability */
 p {
-  margin: 0 0 var(--spacing) 0;
+  margin: 0 0 calc(var(--spacing) * 1.125) 0;
   line-height: var(--line-height-relaxed);
   letter-spacing: var(--letter-spacing-normal);
+  text-align: left;
 }
 
 /* Links */
@@ -86,19 +93,50 @@ ul, ol {
 
 li {
   margin-bottom: calc(var(--spacing) * 0.5);
+  text-align: left;
 }
 
-/* Blockquotes */
+/* Enhanced typography for Charter */
+.article-content,
+.prose {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  text-align: left;
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.article-content p,
+.prose p {
+  margin-bottom: calc(var(--spacing) * 1.25);
+  text-indent: 0;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.prose h1,
+.prose h2,
+.prose h3 {
+  margin-top: calc(var(--spacing) * 2);
+  margin-bottom: calc(var(--spacing) * 1);
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* Blockquotes - Modern field notes style */
 blockquote {
   margin: calc(var(--spacing) * 2) 0;
   padding: var(--spacing) calc(var(--spacing) * 1.5);
-  border-left: 4px solid var(--color-link);
+  border-left: 3px solid var(--color-link);
   background-color: var(--color-blockquote-bg);
   font-family: var(--font-family-serif);
   font-style: italic;
   font-size: var(--font-size-lg);
   line-height: var(--line-height-relaxed);
+  border-radius: var(--border-radius-sm);
 }
+
+
 
 /* Code */
 code {

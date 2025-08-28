@@ -1,0 +1,100 @@
+---
+import { Sun, Moon } from 'lucide-astro';
+---
+
+<button id="theme-toggle" aria-label="Toggle theme" class="theme-toggle">
+  <Sun class="sun-icon" />
+  <Moon class="moon-icon" />
+</button>
+
+<script>
+  // Theme toggle functionality
+  const themeToggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  
+  // Check for saved theme preference or default to light
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', currentTheme);
+  
+  // Update button state
+  function updateButtonState() {
+    const theme = html.getAttribute('data-theme');
+    if (theme === 'dark') {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
+  }
+  
+  // Toggle theme
+  function toggleTheme() {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateButtonState();
+  }
+  
+  // Initialize
+  updateButtonState();
+  
+  // Event listener
+  themeToggle?.addEventListener('click', toggleTheme);
+</script>
+
+<style>
+  .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all var(--transition-fast);
+    color: var(--color-text);
+    background-color: transparent;
+  }
+  
+  .theme-toggle:hover {
+    background-color: var(--color-hover-bg);
+    transform: scale(1.05);
+  }
+  
+  .theme-toggle:focus {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+  
+  .sun-icon,
+  .moon-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: all var(--transition-fast);
+  }
+  
+  /* Show sun icon in dark mode, moon icon in light mode */
+  .sun-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .moon-icon {
+    opacity: 0;
+    transform: scale(0.8);
+    position: absolute;
+  }
+  
+  html[data-theme="dark"] .sun-icon {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  
+  html[data-theme="dark"] .moon-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>
