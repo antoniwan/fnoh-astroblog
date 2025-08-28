@@ -7,7 +7,6 @@ interface Props {
 	title: string;
 	description: string;
 	image?: import('astro').ImageMetadata;
-	layout?: 'default' | 'blog' | 'minimal';
 	showHeader?: boolean;
 	showFooter?: boolean;
 	class?: string;
@@ -17,7 +16,6 @@ const {
 	title,
 	description,
 	image,
-	layout = 'default',
 	showHeader = true,
 	showFooter = true,
 	class: className = ''
@@ -32,7 +30,7 @@ const {
 	<body class={className}>
 		{showHeader && <Header />}
 		
-		<main class={`layout-${layout}`}>
+		<main>
 			<slot />
 		</main>
 		

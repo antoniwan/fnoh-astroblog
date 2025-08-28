@@ -29,7 +29,6 @@ const {
 	title={title} 
 	description={description} 
 	image={image}
-	layout="blog"
 	class={`article-layout ${className}`}
 >
 	<article class="article">
@@ -81,43 +80,60 @@ const {
 
 <style>
 	.article {
-		max-width: 800px;
-		margin: 0 auto;
+		width: 100%;
+		max-width: 100%;
+		padding: 0 var(--container-padding);
 	}
 	
 	.article-hero {
-		margin-bottom: 2rem;
+		margin-bottom: calc(var(--spacing) * 2);
 		text-align: center;
+		width: 100%;
 	}
 	
 	.article-hero img {
 		max-width: 100%;
 		height: auto;
+		width: 100%;
+		object-fit: cover;
 	}
 	
 	.article-header {
-		margin-bottom: 2rem;
+		margin-bottom: calc(var(--spacing) * 2);
 		text-align: center;
+		width: 100%;
 	}
 	
 	.article-meta {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 1rem;
+		gap: var(--spacing);
 		justify-content: center;
 		align-items: center;
+		margin-top: var(--spacing);
 	}
 	
 	.article-meta > * {
-		padding: 0.25rem 0.75rem;
-		background: #f3f4f6;
-		border-radius: 20px;
+		padding: calc(var(--spacing) * 0.25) calc(var(--spacing) * 0.75);
+		background: var(--color-blockquote-bg);
+		border-radius: var(--border-radius-lg);
+		font-size: var(--font-size-sm);
+	}
+	
+	.article-content {
+		width: 100%;
+		max-width: 100%;
+		line-height: var(--line-height-relaxed);
 	}
 	
 	@media (max-width: 768px) {
+		.article {
+			padding: 0 calc(var(--container-padding) * 0.5);
+		}
+		
 		.article-meta {
 			flex-direction: column;
-			gap: 0.5rem;
+			gap: calc(var(--spacing) * 0.5);
 		}
 	}
 </style>

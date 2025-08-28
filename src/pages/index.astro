@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} layout="default">
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
 	<div class="hero">
 		<h1>Field Notes on Humanity</h1>
 		<p class="subtitle">
@@ -21,3 +21,102 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		</div>
 	</div>
 </BaseLayout>
+
+<style>
+	.hero {
+		width: 100%;
+		text-align: center;
+		padding: calc(var(--spacing) * 4) var(--container-padding);
+		background-color: var(--color-bg);
+	}
+	
+	.hero h1 {
+		font-size: var(--font-size-6xl);
+		margin-bottom: var(--spacing);
+		font-weight: var(--font-weight-extrabold);
+		letter-spacing: var(--letter-spacing-tight);
+	}
+	
+	.subtitle {
+		font-size: var(--font-size-xl);
+		margin-bottom: var(--spacing);
+		line-height: var(--line-height-relaxed);
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.description {
+		font-size: var(--font-size-lg);
+		margin-bottom: calc(var(--spacing) * 3);
+		line-height: var(--line-height-relaxed);
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+		opacity: 0.8;
+	}
+	
+	.cta-links {
+		display: flex;
+		gap: var(--spacing);
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	
+	.cta-button {
+		display: inline-block;
+		padding: calc(var(--spacing) * 0.875) calc(var(--spacing) * 2);
+		border-radius: var(--border-radius-md);
+		text-decoration: none;
+		font-weight: var(--font-weight-semibold);
+		transition: all var(--transition-fast);
+		border: 2px solid transparent;
+	}
+	
+	.cta-button.primary {
+		background: var(--color-link);
+		color: white;
+	}
+	
+	.cta-button.primary:hover {
+		background: var(--color-link-hover);
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+	}
+	
+	.cta-button.secondary {
+		background: transparent;
+		color: var(--color-link);
+		border-color: var(--color-link);
+	}
+	
+	.cta-button.secondary:hover {
+		background: var(--color-link);
+		color: white;
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+	}
+	
+	@media (max-width: 768px) {
+		.hero {
+			padding: calc(var(--spacing) * 3) calc(var(--container-padding) * 0.5);
+		}
+		
+		.hero h1 {
+			font-size: var(--font-size-4xl);
+		}
+		
+		.subtitle {
+			font-size: var(--font-size-lg);
+		}
+		
+		.description {
+			font-size: var(--font-size-base);
+		}
+		
+		.cta-links {
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+</style>

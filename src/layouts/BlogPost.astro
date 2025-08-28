@@ -12,7 +12,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 <BaseLayout 
 	title={title} 
 	description={description} 
-	layout="blog"
 	class="blog-post"
 >
 	<article>
@@ -45,32 +44,183 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 </BaseLayout>
 
 <style>
+	article {
+		width: 100%;
+		max-width: 100%;
+		padding: 0 var(--container-padding);
+		background-color: var(--color-bg);
+	}
+	
 	.hero-image {
-		margin-bottom: 2rem;
+		width: 100%;
+		margin-bottom: calc(var(--spacing) * 2);
 		text-align: center;
 	}
 	
 	.hero-image img {
 		max-width: 100%;
 		height: auto;
+		width: 100%;
+		object-fit: cover;
 	}
 	
 	.content {
 		width: 100%;
+		max-width: 100%;
 	}
 	
 	header {
-		margin-bottom: 2rem;
+		margin-bottom: calc(var(--spacing) * 2);
 		text-align: center;
 	}
 	
+	header h1 {
+		font-size: var(--font-size-5xl);
+		font-weight: var(--font-weight-extrabold);
+		letter-spacing: var(--letter-spacing-tight);
+		margin-bottom: var(--spacing);
+	}
+	
 	.meta {
-		color: #666;
-		font-size: 0.9rem;
+		color: var(--color-text);
+		opacity: 0.7;
+		font-size: var(--font-size-sm);
+		display: flex;
+		flex-direction: column;
+		gap: calc(var(--spacing) * 0.25);
+		align-items: center;
+	}
+	
+	.meta time {
+		font-weight: var(--font-weight-medium);
 	}
 	
 	.updated {
-		margin-top: 0.5rem;
+		margin-top: calc(var(--spacing) * 0.5);
 		font-style: italic;
+		opacity: 0.8;
+	}
+	
+	.prose {
+		width: 100%;
+		max-width: 100%;
+		line-height: var(--line-height-relaxed);
+		font-size: var(--font-size-base);
+	}
+	
+	.prose h2 {
+		font-size: var(--font-size-3xl);
+		margin-top: calc(var(--spacing) * 2);
+		margin-bottom: var(--spacing);
+		font-weight: var(--font-weight-bold);
+	}
+	
+	.prose h3 {
+		font-size: var(--font-size-2xl);
+		margin-top: calc(var(--spacing) * 1.5);
+		margin-bottom: calc(var(--spacing) * 0.75);
+		font-weight: var(--font-weight-semibold);
+	}
+	
+	.prose h4, .prose h5, .prose h6 {
+		font-size: var(--font-size-xl);
+		margin-top: calc(var(--spacing) * 1.25);
+		margin-bottom: calc(var(--spacing) * 0.5);
+		font-weight: var(--font-weight-semibold);
+	}
+	
+	.prose p {
+		margin-bottom: var(--spacing);
+		line-height: var(--line-height-relaxed);
+	}
+	
+	.prose ul, .prose ol {
+		margin-bottom: var(--spacing);
+		padding-left: calc(var(--spacing) * 1.5);
+	}
+	
+	.prose li {
+		margin-bottom: calc(var(--spacing) * 0.5);
+	}
+	
+	.prose blockquote {
+		margin: calc(var(--spacing) * 2) 0;
+		padding: var(--spacing) calc(var(--spacing) * 1.5);
+		border-left: 4px solid var(--color-link);
+		background-color: var(--color-blockquote-bg);
+		font-style: italic;
+		font-size: var(--font-size-lg);
+	}
+	
+	.prose code {
+		font-family: var(--font-family-mono);
+		font-size: var(--font-size-sm);
+		background-color: var(--color-code-bg);
+		color: var(--color-code-text);
+		padding: calc(var(--spacing) * 0.125) calc(var(--spacing) * 0.25);
+		border-radius: var(--border-radius-sm);
+	}
+	
+	.prose pre {
+		font-family: var(--font-family-mono);
+		font-size: var(--font-size-sm);
+		background-color: var(--color-code-bg);
+		color: var(--color-code-text);
+		padding: var(--spacing);
+		border-radius: var(--border-radius-md);
+		overflow-x: auto;
+		margin: calc(var(--spacing) * 2) 0;
+	}
+	
+	.prose pre code {
+		background: none;
+		padding: 0;
+	}
+	
+	.prose img {
+		max-width: 100%;
+		height: auto;
+		margin: calc(var(--spacing) * 2) 0;
+		border-radius: var(--border-radius-md);
+	}
+	
+	.prose table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: calc(var(--spacing) * 2) 0;
+		font-size: var(--font-size-sm);
+	}
+	
+	.prose th, .prose td {
+		padding: calc(var(--spacing) * 0.75);
+		text-align: left;
+		border-bottom: 1px solid var(--color-border);
+	}
+	
+	.prose th {
+		background-color: var(--color-table-header-bg);
+		font-weight: var(--font-weight-semibold);
+	}
+	
+	@media (max-width: 768px) {
+		article {
+			padding: 0 calc(var(--container-padding) * 0.5);
+		}
+		
+		header h1 {
+			font-size: var(--font-size-4xl);
+		}
+		
+		.prose h2 {
+			font-size: var(--font-size-2xl);
+		}
+		
+		.prose h3 {
+			font-size: var(--font-size-xl);
+		}
+		
+		.prose h4, .prose h5, .prose h6 {
+			font-size: var(--font-size-lg);
+		}
 	}
 </style>

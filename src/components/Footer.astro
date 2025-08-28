@@ -5,3 +5,27 @@ const today = new Date();
 <footer>
 	<p>&copy; {today.getFullYear()} Field Notes on Humanity. All rights reserved.</p>
 </footer>
+
+<style>
+	footer {
+		width: 100%;
+		text-align: center;
+		padding: calc(var(--spacing) * 2) var(--container-padding);
+		border-top: 1px solid var(--color-border);
+		margin-top: calc(var(--spacing) * 3);
+		color: var(--color-text);
+		background-color: var(--color-bg);
+	}
+	
+	footer p {
+		margin: 0;
+		font-size: var(--font-size-sm);
+		opacity: 0.8;
+	}
+	
+	@media (max-width: 768px) {
+		footer {
+			padding: calc(var(--spacing) * 2) calc(var(--container-padding) * 0.5);
+		}
+	}
+</style>

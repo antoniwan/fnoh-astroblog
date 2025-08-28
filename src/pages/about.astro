@@ -6,7 +6,6 @@ import { SITE_TITLE } from '../consts';
 <BaseLayout 
 	title={`About - ${SITE_TITLE}`} 
 	description="Learn more about Field Notes on Humanity and the mission behind this thoughtful exploration of human nature."
-	layout="minimal"
 >
 	<div class="about-content">
 		<h1>About Field Notes on Humanity</h1>
@@ -49,3 +48,85 @@ import { SITE_TITLE } from '../consts';
 		</div>
 	</div>
 </BaseLayout>
+
+<style>
+	.about-content {
+		width: 100%;
+		max-width: 100%;
+		padding: calc(var(--spacing) * 2) var(--container-padding);
+		background-color: var(--color-bg);
+	}
+	
+	.about-content h1 {
+		text-align: center;
+		margin-bottom: calc(var(--spacing) * 3);
+		font-size: var(--font-size-5xl);
+		font-weight: var(--font-weight-extrabold);
+		letter-spacing: var(--letter-spacing-tight);
+	}
+	
+	.mission, .approach, .values, .join {
+		margin-bottom: calc(var(--spacing) * 3);
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.mission h2, .approach h2, .values h2, .join h2 {
+		color: var(--color-link);
+		margin-bottom: var(--spacing);
+		font-size: var(--font-size-3xl);
+		font-weight: var(--font-weight-bold);
+	}
+	
+	.mission p, .approach p, .join p {
+		font-size: var(--font-size-lg);
+		line-height: var(--line-height-relaxed);
+		margin-bottom: var(--spacing);
+	}
+	
+	.values ul {
+		list-style: none;
+		padding: 0;
+	}
+	
+	.values li {
+		margin-bottom: calc(var(--spacing) * 0.75);
+		padding: var(--spacing);
+		background-color: var(--color-blockquote-bg);
+		border-radius: var(--border-radius-md);
+		border-left: 4px solid var(--color-link);
+	}
+	
+	.values strong {
+		color: var(--color-link);
+	}
+	
+	.join a {
+		color: var(--color-link);
+		text-decoration: none;
+		font-weight: var(--font-weight-semibold);
+	}
+	
+	.join a:hover {
+		text-decoration: underline;
+	}
+	
+	@media (max-width: 768px) {
+		.about-content {
+			padding: calc(var(--spacing) * 2) calc(var(--container-padding) * 0.5);
+		}
+		
+		.about-content h1 {
+			font-size: var(--font-size-4xl);
+		}
+		
+		.mission h2, .approach h2, .values h2, .join h2 {
+			font-size: var(--font-size-2xl);
+		}
+		
+		.mission p, .approach p, .join p {
+			font-size: var(--font-size-base);
+		}
+	}
+</style>
