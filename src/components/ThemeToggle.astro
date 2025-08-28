@@ -10,28 +10,41 @@ import { Sun, Moon } from 'lucide-astro';
 <script>
   // Theme toggle functionality
   const themeToggle = document.getElementById('theme-toggle');
-  const html = document.documentElement;
+  const htmlElement = document.documentElement;
   
   // Check for saved theme preference or default to light
   const currentTheme = localStorage.getItem('theme') || 'light';
-  html.setAttribute('data-theme', currentTheme);
+  htmlElement.setAttribute('data-theme', currentTheme);
   
   // Update button state
   function updateButtonState() {
-    const theme = html.getAttribute('data-theme');
+    const theme = htmlElement.getAttribute('data-theme');
     if (theme === 'dark') {
-      html.classList.add('dark');
+      htmlElement.classList.add('dark');
     } else {
-      html.classList.remove('dark');
+      htmlElement.classList.remove('dark');
+    }
+    
+    // Ensure html and body have proper theme colors
+    const computedStyle = getComputedStyle(htmlElement);
+    const bgColor = computedStyle.getPropertyValue('--color-bg');
+    const textColor = computedStyle.getPropertyValue('--color-text');
+    
+    htmlElement.style.backgroundColor = bgColor;
+    htmlElement.style.color = textColor;
+    
+    if (document.body) {
+      document.body.style.backgroundColor = bgColor;
+      document.body.style.color = textColor;
     }
   }
   
   // Toggle theme
   function toggleTheme() {
-    const currentTheme = html.getAttribute('data-theme');
+    const currentTheme = htmlElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     
-    html.setAttribute('data-theme', newTheme);
+    htmlElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateButtonState();
   }
@@ -41,6 +54,16 @@ import { Sun, Moon } from 'lucide-astro';
   
   // Event listener
   themeToggle?.addEventListener('click', toggleTheme);
+  
+  // Ensure theme is applied on page load
+  document.addEventListener('DOMContentLoaded', updateButtonState);
+  
+  // Also apply theme when page becomes visible (for better theme switching)
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      updateButtonState();
+    }
+  });
 </script>
 
 <style>
@@ -57,16 +80,19 @@ import { Sun, Moon } from 'lucide-astro';
     transition: all var(--transition-fast);
     color: var(--color-text);
     background-color: transparent;
+    border: 1px solid var(--color-border);
   }
   
   .theme-toggle:hover {
     background-color: var(--color-hover-bg);
     transform: scale(1.05);
+    border-color: var(--color-link);
   }
   
   .theme-toggle:focus {
     outline: 2px solid var(--color-focus);
     outline-offset: 2px;
+    border-color: var(--color-focus);
   }
   
   .sun-icon,
@@ -74,6 +100,7 @@ import { Sun, Moon } from 'lucide-astro';
     width: 1.25rem;
     height: 1.25rem;
     transition: all var(--transition-fast);
+    color: var(--color-text);
   }
   
   /* Show sun icon in dark mode, moon icon in light mode */

@@ -23,6 +23,27 @@ const { title, description, image = FallbackImage } = Astro.props;
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 
+<!-- Theme initialization script -->
+<script is:inline>
+  // Initialize theme immediately to prevent flash of unstyled content
+  (function() {
+    const theme = localStorage.getItem('theme') || 'light';
+    const htmlElement = document.documentElement;
+    
+    // Set the data-theme attribute
+    htmlElement.setAttribute('data-theme', theme);
+    
+    // Apply theme colors immediately to prevent flash
+    if (theme === 'dark') {
+      htmlElement.style.backgroundColor = '#1a1a1a';
+      htmlElement.style.color = '#e5e5e5';
+    } else {
+      htmlElement.style.backgroundColor = '#fff';
+      htmlElement.style.color = '#000';
+    }
+  })();
+</script>
+
 <!-- Typography: Charter for body (modern philosophy books), Montserrat for headers (bold, versatile sans) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
