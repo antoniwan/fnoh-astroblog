@@ -1,4 +1,6 @@
-# Astro Starter Kit: Blog
+# Field Notes on Becoming Human
+
+A thoughtful exploration of the human journey through blog posts, reflections, and shared experiences.
 
 ```sh
 pnpm create astro@latest -- --template blog

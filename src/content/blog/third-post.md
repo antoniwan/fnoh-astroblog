@@ -1,16 +1,30 @@
 ---
-title: 'Third post'
-description: 'Lorem ipsum dolor sit amet'
+title: 'The Stories We Tell Ourselves'
+description: 'Examining how our internal narratives shape our experience of becoming human and what field notes can reveal about these stories'
 pubDate: 'Jul 22 2022'
 heroImage: '../../assets/blog-placeholder-2.jpg'
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+In my previous field notes, I've written about beginning this journey and developing the practice of paying attention. Now I want to explore something I've been noticing more and more: the stories we tell ourselves about who we are and what's happening in our lives.
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+These internal narratives are fascinating to observe because they're so pervasive yet often invisible. They run like background programs, constantly interpreting our experiences, making meaning out of events, and shaping how we respond to the world around us. What's remarkable is how these stories can change over time, sometimes dramatically, as we grow and learn.
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+I've been paying attention to my own stories lately. There's the story about my capabilities ("I'm not good at this"), the story about my relationships ("They don't really care"), the story about my future ("This will never work out"). Some of these stories feel true in the moment, but when I examine them more closely, I realize they're often interpretations rather than facts.
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+What I'm discovering is that these stories aren't just passive descriptions—they're active creators of our experience. The story "I'm not good at this" doesn't just describe a situation; it creates a particular way of being in that situation. It affects my posture, my energy, my willingness to try, and how others respond to me.
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+The practice of field notes has been helpful here because it allows me to step back and observe these stories as they're happening. Instead of being completely identified with a story, I can notice it, write it down, and begin to see it as one possible interpretation among many.
+
+I've also been noticing how these stories connect to broader patterns of human behavior. The stories we tell ourselves about our worth, our relationships, our capabilities—these aren't unique to me. They're part of a shared human experience, shaped by culture, upbringing, and the universal challenges of being alive.
+
+What's interesting is that some of the most powerful moments of human becoming seem to happen when we're able to question or change these stories. When someone moves from "I'm not good enough" to "I'm learning and growing," something fundamental shifts in their experience of themselves and the world.
+
+I'm curious about how others work with their own internal narratives. What stories do you tell yourself? How do they shape your experience? And what happens when you're able to see them as stories rather than absolute truths?
+
+This feels like important territory for field notes because these internal narratives are such a fundamental part of what it means to be human. They're the software that runs our experience, and understanding how they work—how they're created, maintained, and changed—seems essential to the project of becoming more conscious, more choiceful, more fully human.
+
+As I continue this practice, I'm learning to approach my own stories with curiosity rather than judgment. Instead of trying to eliminate "negative" stories or force "positive" ones, I'm trying to understand how they work, where they come from, and how they might be serving me (even when they seem unhelpful).
+
+This feels like a different kind of field note—one that explores not just external observations, but the internal landscape of meaning-making that shapes how we experience the world. It's a reminder that becoming human isn't just about what happens to us, but about how we make sense of what happens to us.
+
+The stories we tell ourselves are powerful tools for understanding and transformation. By learning to observe them with the same curiosity we bring to external phenomena, we open up new possibilities for growth and change. Each story is a window into our current understanding of ourselves and the world, and each shift in story is a step in the ongoing process of becoming.
