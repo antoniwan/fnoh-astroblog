@@ -1,19 +1,23 @@
-/* Global Styles - All components and layouts */
+/* ===== LEGACY GLOBAL.CSS - DEPRECATED ===== */
+/* 
+ * This file is deprecated and will be removed in future versions.
+ * 
+ * All styles have been moved to the new CSS architecture:
+ * - Use src/styles/main.css instead
+ * - This file is kept for backward compatibility only
+ * 
+ * NEW ARCHITECTURE:
+ * - _variables.css - Design tokens and CSS variables
+ * - _reset.css - CSS reset and normalization
+ * - _typography.css - Typography system
+ * - _utilities.css - Utility classes
+ * - Layout, component, and page styles use Astro CSS scoping
+ * 
+ * IMPORTANT: Import src/styles/main.css in your layouts instead of this file.
+ */
 
-/* ===== RESET & BASE ===== */
-* {
-	box-sizing: border-box;
-}
-
-body {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-	font-size: 16px;
-	line-height: 1.6;
-	margin: 0;
-	padding: 0;
-	color: #333;
-	background: #fff;
-}
+/* Import the new CSS architecture */
+@import './main.css';
 
 /* ===== LAYOUT CONTAINERS ===== */
 main {

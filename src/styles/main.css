@@ -1,0 +1,146 @@
+/* ===== MAIN CSS ENTRY POINT ===== */
+/* 
+ * This is the main CSS file that imports all other CSS files.
+ * 
+ * IMPORT ORDER (DO NOT CHANGE):
+ * 1. Variables - CSS custom properties and design tokens
+ * 2. Reset - Browser normalization and base styles
+ * 3. Typography - Text and font styles
+ * 4. Layout - Handled by Astro CSS scoping (component/page level)
+ * 5. Components - Handled by Astro CSS scoping (component level)
+ * 6. Pages - Handled by Astro CSS scoping (page level)
+ * 7. Utilities - Helper classes and utilities
+ * 
+ * IMPORTANT: The order matters because:
+ * - Variables must be defined before they're used
+ * - Reset must come before other styles
+ * - Utilities should come last to allow overrides
+ * - Layout, component, and page styles use Astro CSS scoping
+ * 
+ * USAGE:
+ * - Import this file in your main layout or entry point
+ * - Foundation CSS (variables, reset, typography, utilities) is included
+ * - Layout, component, and page styles use Astro CSS scoping
+ * - Component-specific CSS goes in component .astro files
+ */
+
+/* ===== 1. VARIABLES & DESIGN TOKENS ===== */
+@import './_variables.css';
+
+/* ===== 2. CSS RESET & NORMALIZE ===== */
+@import './_reset.css';
+
+/* ===== 3. TYPOGRAPHY SYSTEM ===== */
+@import './_typography.css';
+
+/* ===== 4. LAYOUT & GRID SYSTEM ===== */
+/* 
+ * Layout styles are handled by Astro's CSS scoping feature.
+ * Each component and page manages its own layout styles.
+ * See README.md for details on CSS organization.
+ */
+
+/* ===== 5. COMPONENT STYLES ===== */
+/* 
+ * Component styles are handled by Astro's CSS scoping feature.
+ * Each component manages its own styles in its .astro file.
+ * See README.md for details on CSS organization.
+ */
+
+/* ===== 6. PAGE-SPECIFIC STYLES ===== */
+/* 
+ * Page-specific styles are handled by Astro's CSS scoping feature.
+ * Each page manages its own styles in its .astro file.
+ * See README.md for details on CSS organization.
+ */
+
+/* ===== 7. UTILITY CLASSES ===== */
+@import './_utilities.css';
+
+/* ===== GLOBAL OVERRIDES & CUSTOMIZATIONS ===== */
+/* 
+ * Add any global overrides or customizations here.
+ * This section should be used sparingly and only for:
+ * - Global style adjustments that don't fit elsewhere
+ * - Third-party library overrides
+ * - Site-wide customizations
+ * 
+ * NOTE: Most styles should go in the appropriate files above.
+ * Only use this section when absolutely necessary.
+ */
+
+/* ===== CUSTOM GLOBAL STYLES ===== */
+/* 
+ * If you need to add custom global styles, add them below.
+ * Remember to document what they're for and why they're global.
+ */
+
+/* Example: Global focus styles for better accessibility */
+*:focus {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Example: Global selection styles */
+::selection {
+  background-color: var(--color-primary-200);
+  color: var(--color-text-primary);
+}
+
+/* Example: Global smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+/* 
+ * CSS optimizations for better performance.
+ */
+
+/* Optimize paint operations */
+* {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== BROWSER-SPECIFIC FIXES ===== */
+/* 
+ * Fixes for specific browser issues.
+ */
+
+/* Safari flexbox fixes */
+@supports (-webkit-appearance: none) {
+  .flex {
+    -webkit-flex: 1;
+  }
+}
+
+/* Firefox scrollbar fixes */
+@-moz-document url-prefix() {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-neutral-300) var(--color-neutral-100);
+  }
+}
+
+/* ===== END OF MAIN CSS ===== */
+/* 
+ * All CSS imports are now complete.
+ * 
+ * REMEMBER:
+ * - Keep component-specific styles in component files
+ * - Use utility classes for quick adjustments
+ * - Maintain the import order above
+ * - Document any global overrides added here
+ */
