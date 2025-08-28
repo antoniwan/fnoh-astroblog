@@ -45,7 +45,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 </BaseLayout>
 
 <style>
-	/* Layout-specific styles only */
 	.hero-image {
 		margin-bottom: 2rem;
 		text-align: center;
@@ -54,8 +53,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	.hero-image img {
 		max-width: 100%;
 		height: auto;
-		border-radius: 8px;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	}
 	
 	.content {
@@ -67,13 +64,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		text-align: center;
 	}
 	
-	h1 {
-		margin-bottom: 1rem;
-		font-size: 2.5rem;
-		font-weight: 700;
-		line-height: 1.2;
-	}
-	
 	.meta {
 		color: #666;
 		font-size: 0.9rem;
@@ -82,11 +72,5 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	.updated {
 		margin-top: 0.5rem;
 		font-style: italic;
-	}
-	
-	@media (max-width: 768px) {
-		h1 {
-			font-size: 2rem;
-		}
 	}
 </style>
