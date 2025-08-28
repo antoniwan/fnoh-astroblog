@@ -4,16 +4,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE_TITLE } from '../../consts';
 import FormattedDate from '../../components/FormattedDate.astro';
 
-const posts = await getCollection('blog');
+const posts = await getCollection('writings');
 ---
 
 <BaseLayout 
-	title={`Blog - ${SITE_TITLE}`} 
-	description="Explore thoughtful reflections on humanity, personal growth, and the human condition through our collection of blog posts."
+	title={`Writings - ${SITE_TITLE}`} 
+	description="Explore thoughtful reflections on humanity, personal growth, and the human condition through our collection of writings."
 >
-	<div class="blog-index">
+	<div class="writings-index">
 		<header class="page-header">
-			<h1>Blog Posts</h1>
+			<h1>Writings</h1>
 			<p>Thoughtful explorations of what it means to be human</p>
 		</header>
 		
@@ -31,7 +31,7 @@ const posts = await getCollection('blog');
 						</div>
 					)}
 					<div class="post-content">
-						<h2><a href={`/blog/${post.id}`}>{post.data.title}</a></h2>
+						<h2><a href={`/writings/${post.id}`}>{post.data.title}</a></h2>
 						<p class="post-excerpt">{post.data.description}</p>
 						<div class="post-meta">
 							<time datetime={post.data.pubDate.toISOString()}>
@@ -50,15 +50,15 @@ const posts = await getCollection('blog');
 		
 		{posts.length === 0 && (
 			<div class="no-posts">
-				<h2>No posts yet</h2>
-				<p>Check back soon for thoughtful reflections on humanity.</p>
+						<h2>No writings yet</h2>
+		<p>Check back soon for thoughtful reflections on humanity.</p>
 			</div>
 		)}
 	</div>
 </BaseLayout>
 
 <style>
-	.blog-index {
+	.writings-index {
 		width: 100%;
 		max-width: 100%;
 		padding: calc(var(--spacing) * 2) var(--container-padding);
@@ -182,7 +182,7 @@ const posts = await getCollection('blog');
 	}
 	
 	@media (max-width: 768px) {
-		.blog-index {
+		.writings-index {
 			padding: calc(var(--spacing) * 2) calc(var(--container-padding) * 0.5);
 		}
 		
