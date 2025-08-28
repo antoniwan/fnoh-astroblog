@@ -1,0 +1,69 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	image?: import('astro').ImageMetadata;
+	layout?: 'default' | 'blog' | 'minimal';
+	showHeader?: boolean;
+	showFooter?: boolean;
+	class?: string;
+}
+
+const {
+	title,
+	description,
+	image,
+	layout = 'default',
+	showHeader = true,
+	showFooter = true,
+	class: className = ''
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} image={image} />
+	</head>
+	<body class={className}>
+		{showHeader && <Header />}
+		
+		<main class={`layout-${layout}`}>
+			<slot />
+		</main>
+		
+		{showFooter && <Footer />}
+	</body>
+</html>
+
+<style>
+	.layout-default {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+	
+	.layout-blog {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+	
+	.layout-minimal {
+		max-width: 600px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+	
+	@media (max-width: 768px) {
+		.layout-default,
+		.layout-blog,
+		.layout-minimal {
+			padding: 0 0.5rem;
+		}
+	}
+</style>

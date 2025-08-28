@@ -1,44 +1,132 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
-<Layout
-	title="About This Project"
-	description="Field Notes on Humanity is a thoughtful exploration of the human journey through blog posts, reflections, and shared experiences."
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
+<BaseLayout 
+	title={`About - ${SITE_TITLE}`} 
+	description="Learn more about Field Notes on Humanity and the mission behind this thoughtful exploration of human nature."
+	layout="minimal"
 >
-	<p>
-		<strong>Field Notes on Humanity</strong> is a space for thoughtful inquiry into what it means 
-		to be human in our rapidly evolving world. This project emerged from a simple observation: that 
-		the journey of human becoming is ongoing, complex, and deeply personal—yet also universally shared.
-	</p>
+	<div class="about-content">
+		<h1>About Field Notes on Humanity</h1>
+		
+		<div class="mission">
+			<h2>Our Mission</h2>
+			<p>
+				Field Notes on Humanity is a space dedicated to exploring the depths of what it means to be human 
+				in our rapidly evolving world. We believe that understanding ourselves and our shared humanity 
+				is the foundation for creating a better future.
+			</p>
+		</div>
+		
+		<div class="approach">
+			<h2>Our Approach</h2>
+			<p>
+				Through thoughtful reflection, careful observation, and shared experiences, we explore the 
+				intersections of personal growth, human nature, and the changing landscape of our collective existence. 
+				We believe in the power of storytelling, reflection, and honest dialogue to illuminate the human condition.
+			</p>
+		</div>
+		
+		<div class="values">
+			<h2>Core Values</h2>
+			<ul>
+				<li><strong>Authenticity:</strong> We value honest, genuine exploration of human experience</li>
+				<li><strong>Empathy:</strong> We approach human nature with compassion and understanding</li>
+				<li><strong>Growth:</strong> We believe in the potential for continuous human development</li>
+				<li><strong>Connection:</strong> We foster meaningful dialogue about shared human experiences</li>
+			</ul>
+		</div>
+		
+		<div class="join">
+			<h2>Join the Conversation</h2>
+			<p>
+				Whether you're here to read, reflect, or contribute, we welcome you to this ongoing 
+				exploration of humanity. Start with our <a href="/blog">blog posts</a> or reach out 
+				to share your own field notes on what it means to be human.
+			</p>
+		</div>
+	</div>
+</BaseLayout>
 
-	<p>
-		Like field notes from an anthropologist or naturalist, each post here captures a moment of 
-		observation, reflection, or insight. These notes explore the intersections of personal growth, 
-		human nature, relationships, meaning-making, and the challenges of navigating modern life. They're 
-		not meant to be definitive answers, but rather thoughtful questions and shared experiences that 
-		might resonate with others on similar paths.
-	</p>
-
-	<p>
-		The title "Field Notes on Humanity" reflects several ideas: First, that we are all in 
-		process—constantly becoming, growing, and changing. Second, that this becoming happens in the 
-		"field" of our daily lives, relationships, and experiences. And third, that taking notes—paying 
-		attention, reflecting, and sharing—is a valuable part of the journey.
-	</p>
-
-	<p>
-		This space welcomes anyone interested in thoughtful reflection on the human condition. Whether 
-		you're seeking understanding, connection, or simply a moment to pause and consider, you're welcome 
-		here. The posts range from personal reflections to broader observations about human nature, always 
-		aiming for authenticity, curiosity, and gentle wisdom.
-	</p>
-
-	<p>
-		Thank you for joining this exploration. May these notes serve as companions on your own journey 
-		of becoming human.
-	</p>
-</Layout>
+<style>
+	.about-content {
+		max-width: 700px;
+		margin: 0 auto;
+		padding: 2rem 0;
+	}
+	
+	h1 {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 2rem;
+		text-align: center;
+		color: #1f2937;
+	}
+	
+	h2 {
+		font-size: 1.8rem;
+		font-weight: 600;
+		margin: 2rem 0 1rem 0;
+		color: #374151;
+		border-bottom: 2px solid #e5e7eb;
+		padding-bottom: 0.5rem;
+	}
+	
+	p {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		margin-bottom: 1.5rem;
+		color: #4b5563;
+	}
+	
+	ul {
+		margin: 1rem 0 1.5rem 0;
+		padding-left: 1.5rem;
+	}
+	
+	li {
+		font-size: 1.1rem;
+		line-height: 1.6;
+		margin-bottom: 0.75rem;
+		color: #4b5563;
+	}
+	
+	strong {
+		color: #1f2937;
+		font-weight: 600;
+	}
+	
+	a {
+		color: #667eea;
+		text-decoration: none;
+		font-weight: 500;
+	}
+	
+	a:hover {
+		text-decoration: underline;
+	}
+	
+	.mission, .approach, .values, .join {
+		margin-bottom: 3rem;
+	}
+	
+	@media (max-width: 768px) {
+		.about-content {
+			padding: 1rem 0;
+		}
+		
+		h1 {
+			font-size: 2rem;
+		}
+		
+		h2 {
+			font-size: 1.5rem;
+		}
+		
+		p, li {
+			font-size: 1rem;
+		}
+	}
+</style>

@@ -1,53 +1,48 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
+import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-	</head>
-
-	<body>
-		<Header />
-		<main>
-			<article>
-				{heroImage && (
-					<div class="hero-image">
-						<Image width={1020} height={510} src={heroImage} alt="" />
-					</div>
-				)}
-				<div class="content">
-					<header>
-						<h1>{title}</h1>
-						<div class="meta">
-							<time datetime={pubDate.toISOString()}>
-								<FormattedDate date={pubDate} />
-							</time>
-							{updatedDate && (
-								<div class="updated">
-									Updated: <FormattedDate date={updatedDate} />
-								</div>
-							)}
+<BaseLayout 
+	title={title} 
+	description={description} 
+	layout="blog"
+	class="blog-post"
+>
+	<article>
+		{heroImage && (
+			<div class="hero-image">
+				<Image width={1020} height={510} src={heroImage} alt="" />
+			</div>
+		)}
+		
+		<div class="content">
+			<header>
+				<h1>{title}</h1>
+				<div class="meta">
+					<time datetime={pubDate.toISOString()}>
+						<FormattedDate date={pubDate} />
+					</time>
+					{updatedDate && (
+						<div class="updated">
+							Updated: <FormattedDate date={updatedDate} />
 						</div>
-					</header>
-					<div class="prose">
-						<slot />
-					</div>
+					)}
 				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
-</html>
+			</header>
+			
+			<div class="prose">
+				<slot />
+			</div>
+		</div>
+	</article>
+</BaseLayout>
 
 <style>
 	.hero-image {
@@ -58,11 +53,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	.hero-image img {
 		max-width: 100%;
 		height: auto;
+		border-radius: 8px;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	}
 	
 	.content {
-		max-width: 700px;
-		margin: 0 auto;
+		width: 100%;
 	}
 	
 	header {
@@ -72,6 +68,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	
 	h1 {
 		margin-bottom: 1rem;
+		font-size: 2.5rem;
+		font-weight: 700;
+		line-height: 1.2;
 	}
 	
 	.meta {
@@ -86,5 +85,65 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	
 	.prose {
 		line-height: 1.7;
+		font-size: 1.1rem;
+	}
+	
+	.prose :global(h2) {
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+		font-size: 1.8rem;
+		font-weight: 600;
+	}
+	
+	.prose :global(h3) {
+		margin-top: 1.5rem;
+		margin-bottom: 0.75rem;
+		font-size: 1.4rem;
+		font-weight: 600;
+	}
+	
+	.prose :global(p) {
+		margin-bottom: 1.5rem;
+	}
+	
+	.prose :global(blockquote) {
+		border-left: 4px solid #e5e7eb;
+		padding-left: 1rem;
+		margin: 1.5rem 0;
+		font-style: italic;
+		color: #6b7280;
+	}
+	
+	.prose :global(code) {
+		background-color: #f3f4f6;
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+		font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+		font-size: 0.9em;
+	}
+	
+	.prose :global(pre) {
+		background-color: #1f2937;
+		color: #f9fafb;
+		padding: 1rem;
+		border-radius: 8px;
+		overflow-x: auto;
+		margin: 1.5rem 0;
+	}
+	
+	.prose :global(pre code) {
+		background-color: transparent;
+		padding: 0;
+		color: inherit;
+	}
+	
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 2rem;
+		}
+		
+		.prose {
+			font-size: 1rem;
+		}
 	}
 </style>

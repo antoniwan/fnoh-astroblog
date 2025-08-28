@@ -1,0 +1,85 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	image?: import('astro').ImageMetadata;
+	showHeader?: boolean;
+	showFooter?: boolean;
+	class?: string;
+	sidebar?: boolean;
+}
+
+const {
+	title,
+	description,
+	image,
+	showHeader = true,
+	showFooter = true,
+	class: className = '',
+	sidebar = false
+} = Astro.props;
+---
+
+<BaseLayout 
+	title={title} 
+	description={description} 
+	image={image}
+	showHeader={showHeader}
+	showFooter={showFooter}
+	class={className}
+	layout="default"
+>
+	<div class={`page-content ${sidebar ? 'with-sidebar' : ''}`}>
+		<main class="main-content">
+			<slot />
+		</main>
+		
+		{sidebar && (
+			<aside class="sidebar">
+				<slot name="sidebar" />
+			</aside>
+		)}
+	</div>
+</BaseLayout>
+
+<style>
+	.page-content {
+		display: flex;
+		gap: 3rem;
+		align-items: flex-start;
+	}
+	
+	.main-content {
+		flex: 1;
+		min-width: 0; /* Prevents flex item from overflowing */
+	}
+	
+	.sidebar {
+		width: 300px;
+		flex-shrink: 0;
+		position: sticky;
+		top: 2rem;
+	}
+	
+	.with-sidebar .main-content {
+		max-width: calc(100% - 300px - 3rem);
+	}
+	
+	@media (max-width: 1024px) {
+		.page-content {
+			flex-direction: column;
+			gap: 2rem;
+		}
+		
+		.sidebar {
+			width: 100%;
+			position: static;
+		}
+		
+		.with-sidebar .main-content {
+			max-width: 100%;
+		}
+	}
+</style>

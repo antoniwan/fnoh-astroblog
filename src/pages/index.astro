@@ -1,33 +1,122 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>Field Notes on Humanity</h1>
-			<p>
-				Welcome to a thoughtful exploration of what it means to be human in an ever-changing world. 
-				This space serves as a collection of reflections, observations, and shared experiences from 
-				the ongoing journey of human becoming.
-			</p>
-			<p>
-				Here you'll find blog posts that explore the intersections of personal growth, 
-				human nature, and the evolving landscape of our shared humanity.
-			</p>
-			<p>
-				Start exploring with the <a href="/blog">blog posts</a>, or learn more 
-				<a href="/about">about this project</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} layout="default">
+	<div class="hero">
+		<h1>Field Notes on Humanity</h1>
+		<p class="subtitle">
+			Welcome to a thoughtful exploration of what it means to be human in an ever-changing world. 
+			This space serves as a collection of reflections, observations, and shared experiences from 
+			the ongoing journey of human becoming.
+		</p>
+		<p class="description">
+			Here you'll find blog posts that explore the intersections of personal growth, 
+			human nature, and the evolving landscape of our shared humanity.
+		</p>
+		<div class="cta-links">
+			<a href="/blog" class="cta-button primary">Explore Blog Posts</a>
+			<a href="/about" class="cta-button secondary">Learn More</a>
+		</div>
+	</div>
+</BaseLayout>
+
+<style>
+	.hero {
+		text-align: center;
+		padding: 4rem 0;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+	
+	h1 {
+		font-size: 3.5rem;
+		font-weight: 800;
+		margin-bottom: 1.5rem;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		line-height: 1.1;
+	}
+	
+	.subtitle {
+		font-size: 1.3rem;
+		line-height: 1.6;
+		margin-bottom: 1.5rem;
+		color: #374151;
+		font-weight: 500;
+	}
+	
+	.description {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		margin-bottom: 3rem;
+		color: #6b7280;
+	}
+	
+	.cta-links {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	
+	.cta-button {
+		display: inline-block;
+		padding: 0.875rem 2rem;
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: 600;
+		transition: all 0.2s ease;
+		border: 2px solid transparent;
+	}
+	
+	.cta-button.primary {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+	}
+	
+	.cta-button.primary:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+	}
+	
+	.cta-button.secondary {
+		background: transparent;
+		color: #667eea;
+		border-color: #667eea;
+	}
+	
+	.cta-button.secondary:hover {
+		background: #667eea;
+		color: white;
+		transform: translateY(-2px);
+	}
+	
+	@media (max-width: 768px) {
+		.hero {
+			padding: 2rem 0;
+		}
+		
+		h1 {
+			font-size: 2.5rem;
+		}
+		
+		.subtitle {
+			font-size: 1.1rem;
+		}
+		
+		.cta-links {
+			flex-direction: column;
+			align-items: center;
+		}
+		
+		.cta-button {
+			width: 100%;
+			max-width: 300px;
+			text-align: center;
+		}
+	}
+</style>
