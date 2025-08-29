@@ -1,10 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Container from '../../components/ui/Container.astro';
 import { SITE_TITLE } from '../../consts';
-import PostCard from '../../components/ui/PostCard.astro';
-import PageHeader from '../../components/ui/PageHeader.astro';
 
 // Get all posts and sort by publication date
 const allPosts = await getCollection('writings');
@@ -20,25 +17,44 @@ const totalPosts = sortedPosts.length;
 	title={`Writings - ${SITE_TITLE}`} 
 	description="Explore thoughtful reflections on humanity, personal growth, and the human condition through our collection of writings."
 >
-	<Container size="xl" class="writings-index">
-		<PageHeader
-			title="Writings"
-			description="Thoughtful explorations of what it means to be human"
-			subtitle={`Showing ${initialPosts.length} of ${totalPosts} writings`}
-		/>
-		
-		<div class="posts-grid">
-			{initialPosts.map((post) => (
-				<PostCard
-					title={post.data.title}
-					description={post.data.description}
-					href={`/writings/${post.id}`}
-					heroImage={post.data.heroImage}
-					pubDate={post.data.pubDate}
-					updatedDate={post.data.updatedDate}
-				/>
-			))}
+	<header class="category-header">
+		<div class="category-info">
+			<span class="category-emoji">✍️</span>
+			<h1 class="category-title">Writings</h1>
 		</div>
+		<p class="category-description">Thoughtful explorations of what it means to be human <strong>{totalPosts} writing{totalPosts !== 1 ? 's' : ''}</strong>.</p>
+	</header>
+
+	<main class="category-content">
+		{initialPosts.length > 0 ? (
+			<div class="posts-grid">
+				{initialPosts.map((post) => (
+					<article class="post-card">
+						<a href={`/writings/${post.id}`} class="post-link">
+							<div class="post-image">
+								<img src={post.data.heroImage?.src || ''} alt="" loading="lazy" />
+							</div>
+							<div class="post-content">
+								<h2 class="post-title">{post.data.title}</h2>
+								<p class="post-description">{post.data.description}</p>
+								<time class="post-date" datetime={post.data.pubDate.toISOString()}>
+									{post.data.pubDate.toLocaleDateString('en-US', { 
+										year: 'numeric', 
+										month: 'long', 
+										day: 'numeric' 
+									})}
+								</time>
+							</div>
+						</a>
+					</article>
+				))}
+			</div>
+		) : (
+			<div class="no-posts">
+				<p>No writings found.</p>
+				<a href="/" class="back-link">← Back to Home</a>
+			</div>
+		)}
 		
 		{totalPosts > POSTS_PER_PAGE && (
 			<div class="pagination">
@@ -47,14 +63,7 @@ const totalPosts = sortedPosts.length;
 				</button>
 			</div>
 		)}
-		
-		{totalPosts === 0 && (
-			<div class="no-posts">
-				<h2>No writings yet</h2>
-				<p>Check back soon for thoughtful reflections on humanity.</p>
-			</div>
-		)}
-	</Container>
+	</main>
 </BaseLayout>
 
 <script>
@@ -83,18 +92,141 @@ const totalPosts = sortedPosts.length;
 </script>
 
 <style>
-	.writings-index {
-		/* Container component handles width, max-width, and padding */
+	.category-header {
+		text-align: center;
+		margin-bottom: var(--spacing-2xl);
+		padding: var(--spacing-xl) 0;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.category-info {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--spacing);
+		margin-bottom: var(--spacing);
+	}
+
+	.category-emoji {
+		font-size: var(--font-size-3xl);
+	}
+
+	.category-title {
+		font-size: var(--font-size-3xl);
+		font-weight: var(--font-weight-bold);
+		margin: 0;
+		color: var(--color-text);
+	}
+
+	.category-description {
+		font-size: var(--font-size-lg);
+		color: var(--color-text-light);
+		max-width: 600px;
+		margin: 0 auto var(--spacing);
+		line-height: var(--line-height-relaxed);
+	}
+
+	.category-content {
+		max-width: 1200px;
+		margin: 0 auto;
 	}
 
 	.posts-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 		gap: var(--spacing-xl);
-		width: 100%;
-		max-width: 100%;
 	}
-	
+
+	.post-card {
+		border: 1px solid var(--color-border-subtle);
+		border-radius: var(--border-radius);
+		overflow: hidden;
+		transition: all 0.2s ease;
+		background: var(--color-background);
+	}
+
+	.post-card:hover {
+		border-color: var(--color-border);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		transform: translateY(-2px);
+	}
+
+	.post-link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+		height: 100%;
+	}
+
+	.post-image {
+		width: 100%;
+		height: 200px;
+		overflow: hidden;
+	}
+
+	.post-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.post-card:hover .post-image img {
+		transform: scale(1.05);
+	}
+
+	.post-content {
+		padding: var(--spacing-lg);
+	}
+
+	.post-title {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-semibold);
+		color: var(--color-text);
+		margin: 0 0 var(--spacing-sm) 0;
+		line-height: var(--line-height-tight);
+	}
+
+	.post-description {
+		font-size: var(--font-size-base);
+		color: var(--color-text-light);
+		margin: 0 0 var(--spacing-sm) 0;
+		line-height: var(--line-height-relaxed);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.post-date {
+		font-size: var(--font-size-sm);
+		color: var(--color-text-lighter);
+		font-style: italic;
+	}
+
+	.no-posts {
+		text-align: center;
+		padding: var(--spacing-2xl);
+	}
+
+	.no-posts p {
+		font-size: var(--font-size-lg);
+		color: var(--color-text-light);
+		margin-bottom: var(--spacing-lg);
+	}
+
+	.back-link {
+		display: inline-block;
+		color: var(--color-primary);
+		text-decoration: none;
+		font-weight: var(--font-weight-medium);
+		transition: color 0.2s ease;
+	}
+
+	.back-link:hover {
+		color: var(--color-primary-dark);
+	}
+
 	.pagination {
 		text-align: center;
 		margin-top: var(--spacing-2xl);
@@ -121,36 +253,28 @@ const totalPosts = sortedPosts.length;
 		opacity: 0.6;
 		cursor: not-allowed;
 	}
-	
-	.no-posts {
-		text-align: center;
-		padding: var(--spacing-3xl) 0;
-	}
-	
-	.no-posts h2 {
-		font-size: var(--font-size-3xl);
-		margin-bottom: var(--spacing);
-		color: var(--color-text);
-		opacity: 0.7;
-	}
-	
-	.no-posts p {
-		font-size: var(--font-size-lg);
-		color: var(--color-text);
-		opacity: 0.6;
-	}
-	
-	@media (max-width: 1024px) {
-		.posts-grid {
-			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-			gap: var(--spacing-lg);
-		}
-	}
-	
+
 	@media (max-width: 768px) {
+		.category-header {
+			padding: var(--spacing-lg) 0;
+			margin-bottom: var(--spacing-xl);
+		}
+
+		.category-title {
+			font-size: var(--font-size-2xl);
+		}
+
+		.category-description {
+			font-size: var(--font-size-base);
+		}
+
 		.posts-grid {
 			grid-template-columns: 1fr;
-			gap: var(--spacing);
+			gap: var(--spacing-lg);
+		}
+
+		.post-image {
+			height: 150px;
 		}
 	}
 </style>
