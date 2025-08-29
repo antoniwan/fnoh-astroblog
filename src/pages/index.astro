@@ -10,13 +10,11 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.pubDate).getTime() - ne
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-	<div class="hero">
-		<p class="subtitle">
+		<p class="welcome-text">
 			Welcome to a thoughtful exploration of what it means to be human in an ever-changing world. 
 			This space serves as a collection of reflections, observations, and shared experiences from 
 			the ongoing journey of human becoming.
 		</p>
-	</div>
 
 	<div class="masonry-container">
 		<div class="masonry-grid" id="masonry-grid">
@@ -167,33 +165,23 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.pubDate).getTime() - ne
 </script>
 
 <style>
-	.hero {
-		width: 100%;
-		max-width: 100%;
-		text-align: center;
-		padding: var(--spacing-3xl) var(--container-padding);
-	}
-	
-	.subtitle {
+	.welcome-text {
 		font-size: var(--font-size-xl);
-		margin-bottom: var(--spacing);
+		margin-bottom: var(--spacing-lg);
 		line-height: var(--line-height-relaxed);
 		max-width: 800px;
-		margin-left: auto;
-		margin-right: auto;
 	}
 	
 	.masonry-container {
 		width: 100%;
 		max-width: 100%;
-		padding: 0 var(--container-padding);
 		margin-bottom: var(--spacing-3xl);
 	}
 	
 	.masonry-grid {
 		position: relative;
 		width: 100%;
-		margin: 0 auto;
+		margin: 0;
 	}
 	
 	.post-card {
@@ -276,7 +264,7 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.pubDate).getTime() - ne
 	}
 	
 	.load-more-container {
-		text-align: center;
+		text-align: left;
 		margin-top: var(--spacing-2xl);
 	}
 	
@@ -299,25 +287,7 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.pubDate).getTime() - ne
 		box-shadow: var(--shadow-md);
 	}
 	
-	@media (max-width: 1024px) {
-		.hero {
-			padding: var(--spacing-2xl) var(--container-padding-mobile);
-		}
-		
-		.masonry-container {
-			padding: 0 var(--container-padding-mobile);
-		}
-	}
-	
 	@media (max-width: 768px) {
-		.hero {
-			padding: var(--spacing-2xl) var(--container-padding-mobile);
-		}
-		
-		.subtitle {
-			font-size: var(--font-size-lg);
-		}
-		
 		.post-card {
 			position: static !important;
 			width: 100% !important;

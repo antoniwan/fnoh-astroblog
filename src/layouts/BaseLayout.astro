@@ -43,5 +43,53 @@ const {
 		width: 100%;
 		max-width: 100%;
 		min-height: calc(100vh - 200px); /* Account for header/footer */
+		padding: 0 var(--container-padding);
+	}
+	
+	/* Ensure all direct children of main-content have proper spacing */
+	.main-content > *:first-child {
+		margin-top: var(--spacing-3xl);
+	}
+	
+	.main-content > *:last-child {
+		margin-bottom: var(--spacing-3xl);
+	}
+	
+	/* Handle common content elements */
+	.main-content p {
+		max-width: 800px;
+		line-height: var(--line-height-relaxed);
+		margin-bottom: var(--spacing-lg);
+	}
+	
+	.main-content h1,
+	.main-content h2,
+	.main-content h3,
+	.main-content h4,
+	.main-content h5,
+	.main-content h6 {
+		max-width: 800px;
+		margin-bottom: var(--spacing-md);
+	}
+	
+	/* Responsive adjustments */
+	@media (max-width: 1024px) {
+		.main-content {
+			padding: 0 var(--container-padding-mobile);
+		}
+	}
+	
+	@media (max-width: 768px) {
+		.main-content {
+			padding: 0 var(--container-padding-mobile);
+		}
+		
+		.main-content > *:first-child {
+			margin-top: var(--spacing-2xl);
+		}
+		
+		.main-content > *:last-child {
+			margin-bottom: var(--spacing-2xl);
+		}
 	}
 </style>
