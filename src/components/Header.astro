@@ -148,7 +148,7 @@ import { Menu, X } from 'lucide-astro';
 		width: 100%;
 		max-width: 100%;
 		padding: 0.75rem var(--container-padding);
-		border-bottom: 1px solid transparent;
+		border-bottom: 1px solid rgba(var(--color-border-rgb, 204, 204, 204), 0.15);
 		background-color: rgba(var(--color-bg-rgb, 255, 255, 255), 0.8);
 		backdrop-filter: blur(0px);
 		-webkit-backdrop-filter: blur(0px);
@@ -163,7 +163,7 @@ import { Menu, X } from 'lucide-astro';
 		background-color: rgba(var(--color-bg-rgb, 255, 255, 255), 0.95);
 		backdrop-filter: blur(20px);
 		-webkit-backdrop-filter: blur(20px);
-		border-bottom-color: rgba(var(--color-border-rgb, 204, 204, 204), 0.3);
+		border-bottom-color: rgba(var(--color-border-rgb, 204, 204, 204), 0.25);
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	}
 	
@@ -179,6 +179,7 @@ import { Menu, X } from 'lucide-astro';
 	/* Dark theme adjustments */
 	html[data-theme="dark"] .header-nav {
 		background-color: rgba(var(--color-bg-rgb, 26, 26, 26), 0.8);
+		border-bottom-color: rgba(var(--color-border-rgb, 64, 64, 64), 0.2);
 	}
 	
 	html[data-theme="dark"] .header-nav[data-scrolled="true"] {
