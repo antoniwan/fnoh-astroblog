@@ -201,6 +201,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		font-weight: var(--font-weight-semibold);
 	}
 	
+	@media (max-width: 1024px) {
+		article {
+			padding: 0 var(--container-padding-mobile);
+		}
+	}
+	
 	@media (max-width: 768px) {
 		article {
 			padding: 0 var(--container-padding-mobile);

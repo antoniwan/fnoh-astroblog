@@ -74,6 +74,12 @@ input, textarea, select {
   padding: 0 var(--container-padding);
 }
 
+@media (max-width: 1024px) {
+  .container-full {
+    padding: 0 var(--container-padding-mobile);
+  }
+}
+
 @media (max-width: 768px) {
   .container-full {
     padding: 0 var(--container-padding-mobile);

@@ -73,6 +73,11 @@
 --container-padding: 1.5rem;
 --container-padding-mobile: 1rem;
 
+/* Breakpoints */
+--breakpoint-mobile: 480px;
+--breakpoint-tablet: 768px;
+--breakpoint-desktop: 1024px;
+
 /* Additional spacing variables */
 --spacing-xs: calc(var(--spacing) * 0.25);   /* 4px */
 --spacing-sm: calc(var(--spacing) * 0.5);    /* 8px */

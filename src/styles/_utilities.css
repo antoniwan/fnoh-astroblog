@@ -59,6 +59,16 @@
 .mt-3 { margin-top: calc(var(--spacing) * 3); }
 
 /* Responsive utilities */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 var(--container-padding-mobile);
+  }
+  
+  .container-full {
+    padding: 0 var(--container-padding-mobile);
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 0 var(--container-padding-mobile);

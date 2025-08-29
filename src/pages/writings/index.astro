@@ -179,6 +179,17 @@ const posts = await getCollection('writings');
 		opacity: 0.6;
 	}
 	
+	@media (max-width: 1024px) {
+		.writings-index {
+			padding: var(--spacing-lg) var(--container-padding-mobile);
+		}
+		
+		.posts-grid {
+			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+			gap: var(--spacing-lg);
+		}
+	}
+	
 	@media (max-width: 768px) {
 		.writings-index {
 			padding: var(--spacing-lg) var(--container-padding-mobile);
