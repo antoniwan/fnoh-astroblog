@@ -7,6 +7,10 @@
   --color-link: #0066cc;
   --color-border: #ccc;
   
+  /* RGB color values for backdrop blur effects */
+  --color-bg-rgb: 255, 255, 255;
+  --color-border-rgb: 204, 204, 204;
+  
   /* Enhanced color system */
 --color-link-hover: #0052a3;
 --color-focus: #0066cc;
@@ -131,4 +135,8 @@ html[data-theme="dark"] {
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4) !important;
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4) !important;
+  
+  /* Dark theme RGB values */
+  --color-bg-rgb: 26, 26, 26 !important;
+  --color-border-rgb: 64, 64, 64 !important;
 }

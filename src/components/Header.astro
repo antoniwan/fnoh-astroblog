@@ -5,7 +5,7 @@ import ThemeToggle from './ThemeToggle.astro';
 import { Menu, X } from 'lucide-astro';
 ---
 
-<header>
+<header class="header-nav" data-scroll="show">
 	<nav>
 		<h1><a href="/">{SITE_TITLE}</a></h1>
 		
@@ -17,13 +17,13 @@ import { Menu, X } from 'lucide-astro';
 			<ThemeToggle />
 		</div>
 		
-			<!-- Mobile Navigation Toggle -->
-	<button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-		<div class="icon-container">
-			<Menu class="menu-icon" />
-			<X class="close-icon" />
-		</div>
-	</button>
+		<!-- Mobile Navigation Toggle -->
+		<button class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+			<div class="icon-container">
+				<Menu class="menu-icon" />
+				<X class="close-icon" />
+			</div>
+		</button>
 		
 		<!-- Mobile Navigation Menu -->
 		<div class="mobile-nav" aria-hidden="true">
@@ -84,17 +84,99 @@ import { Menu, X } from 'lucide-astro';
 			toggleMobileNav();
 		}
 	});
+	
+	// Scroll-based header behavior
+	let lastScrollY = window.scrollY;
+	let ticking = false;
+	
+	function updateHeader() {
+		const header = document.querySelector('.header-nav');
+		const currentScrollY = window.scrollY;
+		
+		if (header) {
+			// Show header when scrolling up, hide when scrolling down
+			if (currentScrollY > lastScrollY && currentScrollY > 100) {
+				// Scrolling down and past initial threshold
+				header.setAttribute('data-scroll', 'hide');
+			} else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
+				// Scrolling up or at top
+				header.setAttribute('data-scroll', 'show');
+			}
+			
+			// Add scrolled state for backdrop blur
+			if (currentScrollY > 10) {
+				header.setAttribute('data-scrolled', 'true');
+			} else {
+				header.setAttribute('data-scrolled', 'false');
+			}
+		}
+		
+		lastScrollY = currentScrollY;
+		ticking = false;
+	}
+	
+	function requestTick() {
+		if (!ticking) {
+			requestAnimationFrame(updateHeader);
+			ticking = true;
+		}
+	}
+	
+	// Throttled scroll listener
+	window.addEventListener('scroll', requestTick, { passive: true });
+	
+	// Initial call
+	updateHeader();
 </script>
 
 <style>
-	header {
+	/* Header scroll behavior and positioning */
+	.header-nav {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1000;
 		width: 100%;
 		max-width: 100%;
-		padding: var(--spacing) var(--container-padding);
-		border-bottom: 1px solid var(--color-border);
-		margin-bottom: var(--spacing-xl);
-		background-color: var(--color-bg);
-		position: relative;
+		padding: 0.75rem var(--container-padding);
+		border-bottom: 1px solid transparent;
+		background-color: rgba(var(--color-bg-rgb, 255, 255, 255), 0.8);
+		backdrop-filter: blur(0px);
+		-webkit-backdrop-filter: blur(0px);
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		height: 60px;
+		display: flex;
+		align-items: center;
+	}
+	
+	/* Scrolled state with backdrop blur and border */
+	.header-nav[data-scrolled="true"] {
+		background-color: rgba(var(--color-bg-rgb, 255, 255, 255), 0.95);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		border-bottom-color: rgba(var(--color-border-rgb, 204, 204, 204), 0.3);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	}
+	
+	/* Scroll hide/show animations */
+	.header-nav[data-scroll="hide"] {
+		transform: translateY(-100%);
+	}
+	
+	.header-nav[data-scroll="show"] {
+		transform: translateY(0);
+	}
+	
+	/* Dark theme adjustments */
+	html[data-theme="dark"] .header-nav {
+		background-color: rgba(var(--color-bg-rgb, 26, 26, 26), 0.8);
+	}
+	
+	html[data-theme="dark"] .header-nav[data-scrolled="true"] {
+		background-color: rgba(var(--color-bg-rgb, 26, 26, 26), 0.95);
+		border-bottom-color: rgba(var(--color-border-rgb, 64, 64, 64), 0.3);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 	}
 	
 	nav {
@@ -104,13 +186,15 @@ import { Menu, X } from 'lucide-astro';
 		width: 100%;
 		max-width: 100%;
 		position: relative;
+		height: 50px;
 	}
 	
 	header h1 {
 		margin: 0;
-		font-size: var(--font-size-2xl);
+		font-size: 1.25rem;
 		font-weight: var(--font-weight-bold);
 		z-index: 1001;
+		line-height: 1.2;
 	}
 	
 	header h1 a {
@@ -126,8 +210,9 @@ import { Menu, X } from 'lucide-astro';
 	/* Desktop Navigation */
 	.desktop-nav {
 		display: flex;
-		gap: var(--spacing);
+		gap: 0.75rem;
 		align-items: center;
+		height: 100%;
 	}
 	
 	/* Mobile Navigation Toggle */
@@ -136,7 +221,7 @@ import { Menu, X } from 'lucide-astro';
 		background: transparent;
 		border: none;
 		cursor: pointer;
-		padding: var(--spacing-sm);
+		padding: 0.5rem;
 		border-radius: var(--border-radius-md);
 		z-index: 1001;
 		transition: all var(--transition-fast);
@@ -144,6 +229,8 @@ import { Menu, X } from 'lucide-astro';
 		border: 1px solid var(--color-border);
 		position: relative;
 		overflow: hidden;
+		height: 2.5rem;
+		width: 2.5rem;
 	}
 	
 	.mobile-nav-toggle:hover {
@@ -160,17 +247,8 @@ import { Menu, X } from 'lucide-astro';
 	
 	.icon-container {
 		position: relative;
-		width: 1.5rem;
-		height: 1.5rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	
-	.icon-container {
-		position: relative;
-		width: 1.5rem;
-		height: 1.5rem;
+		width: 1.25rem;
+		height: 1.25rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -178,8 +256,8 @@ import { Menu, X } from 'lucide-astro';
 	
 	.menu-icon,
 	.close-icon {
-		width: 1.5rem;
-		height: 1.5rem;
+		width: 1.25rem;
+		height: 1.25rem;
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -211,20 +289,19 @@ import { Menu, X } from 'lucide-astro';
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background-color: var(--color-bg) !important;
-		z-index: 1000;
+		background-color: rgba(var(--color-bg-rgb, 255, 255, 255), 0.95) !important;
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		z-index: 999;
 		opacity: 0;
 		visibility: hidden;
 		transition: all var(--transition-normal);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
 	}
 	
 	.mobile-nav.active {
 		opacity: 1;
 		visibility: visible;
 		display: block;
-		background-color: var(--color-bg) !important;
 	}
 	
 	.mobile-nav-links {
@@ -235,7 +312,6 @@ import { Menu, X } from 'lucide-astro';
 		height: 100vh;
 		padding: var(--spacing-3xl) var(--container-padding);
 		gap: var(--spacing-xl);
-		background-color: var(--color-bg) !important;
 		width: 100%;
 	}
 	
@@ -259,6 +335,11 @@ import { Menu, X } from 'lucide-astro';
 		margin-top: var(--spacing-lg);
 	}
 	
+	/* Dark theme mobile nav */
+	html[data-theme="dark"] .mobile-nav {
+		background-color: rgba(var(--color-bg-rgb, 26, 26, 26), 0.95) !important;
+	}
+	
 	/* Responsive Design */
 	@media (max-width: 1024px) {
 		/* Tablet breakpoint - show burger menu on tablets */
@@ -276,8 +357,8 @@ import { Menu, X } from 'lucide-astro';
 	}
 	
 	@media (max-width: 768px) {
-		header {
-			padding: var(--spacing) var(--container-padding-mobile);
+		.header-nav {
+			padding: 0.75rem var(--container-padding-mobile);
 		}
 		
 		.mobile-nav-links {
@@ -286,8 +367,16 @@ import { Menu, X } from 'lucide-astro';
 	}
 	
 	@media (max-width: 480px) {
+		.header-nav {
+			height: 55px;
+		}
+		
+		nav {
+			height: 45px;
+		}
+		
 		header h1 {
-			font-size: var(--font-size-xl);
+			font-size: 1.125rem;
 		}
 		
 		.mobile-nav-links a {
@@ -295,18 +384,25 @@ import { Menu, X } from 'lucide-astro';
 		}
 		
 		.mobile-nav-toggle {
-			padding: var(--spacing-xs);
+			padding: 0.375rem;
+			height: 2.25rem;
+			width: 2.25rem;
 		}
 		
 		.icon-container {
-			width: 1.25rem;
-			height: 1.25rem;
+			width: 1.125rem;
+			height: 1.125rem;
 		}
 		
 		.menu-icon,
 		.close-icon {
-			width: 1.25rem;
-			height: 1.25rem;
+			width: 1.125rem;
+			height: 1.125rem;
 		}
+	}
+	
+	/* Smooth scrolling for the page */
+	html {
+		scroll-behavior: smooth;
 	}
 </style>
