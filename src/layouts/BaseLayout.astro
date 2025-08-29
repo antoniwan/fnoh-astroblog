@@ -46,7 +46,7 @@ const {
 		min-height: calc(100vh - 60px - 120px - var(--spacing-2xl));
 		padding: 0 var(--container-padding);
 		/* Add top padding to prevent content from being hidden behind fixed header */
-		padding-top: calc(60px + var(--spacing-lg));
+		padding-top: calc(60px + var(--spacing-2xl));
 		/* Add top margin to account for fixed header */
 		margin-top: 0;
 	}
@@ -57,7 +57,7 @@ const {
 	}
 	
 	.main-content > *:last-child {
-		margin-bottom: var(--spacing-2xl);
+		margin-bottom: calc(var(--spacing-2xl) + 60px);
 	}
 	
 	/* Handle common content elements */
@@ -79,7 +79,7 @@ const {
 	@media (max-width: 1024px) {
 		.main-content {
 			padding: 0 var(--container-padding-mobile);
-			padding-top: calc(60px + var(--spacing-lg));
+			padding-top: calc(60px + var(--spacing-2xl));
 		}
 	}
 	
@@ -87,7 +87,7 @@ const {
 		.main-content {
 			padding: 0 var(--container-padding-mobile);
 			/* Adjust top padding for mobile header height (55px) */
-			padding-top: calc(55px + var(--spacing-md));
+			padding-top: calc(55px + var(--spacing-xl));
 			/* Adjust min-height for mobile */
 			min-height: calc(100vh - 55px - 100px - var(--spacing-xl));
 		}
@@ -97,14 +97,14 @@ const {
 		}
 		
 		.main-content > *:last-child {
-			margin-bottom: var(--spacing-xl);
+			margin-bottom: calc(var(--spacing-xl) + 55px);
 		}
 	}
 	
 	@media (max-width: 480px) {
 		.main-content {
 			/* Further adjust top padding for small mobile */
-			padding-top: calc(55px + var(--spacing-sm));
+			padding-top: calc(55px + var(--spacing-lg));
 			/* Further adjust min-height for small mobile */
 			min-height: calc(100vh - 55px - 90px - var(--spacing-lg));
 		}
@@ -114,7 +114,7 @@ const {
 		}
 		
 		.main-content > *:last-child {
-			margin-bottom: var(--spacing-lg);
+			margin-bottom: calc(var(--spacing-lg) + 55px);
 		}
 	}
 </style>

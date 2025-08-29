@@ -52,7 +52,7 @@ const today = new Date();
     const scrollToTopBtn = document.getElementById('scroll-to-top');
     if (!scrollToTopBtn) return;
     
-    let scrollTimeout: number;
+    let scrollTimeout: ReturnType<typeof setTimeout>;
     
     // Throttled scroll handler for better performance
     function handleScroll() {
@@ -85,7 +85,7 @@ const today = new Date();
     max-width: 100%;
     background-color: var(--color-bg);
     border-top: 1px solid var(--color-border);
-    margin-top: 0;
+    margin-top: var(--spacing-2xl);
     color: var(--color-text);
     position: relative;
   }
@@ -295,6 +295,10 @@ const today = new Date();
   }
   
   @media (max-width: 768px) {
+    .footer {
+      margin-top: var(--spacing-xl);
+    }
+    
     .footer-content {
       flex-direction: column;
       gap: var(--spacing-xl);
@@ -318,6 +322,12 @@ const today = new Date();
       right: 1rem;
       width: 2.5rem;
       height: 2.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .footer {
+      margin-top: var(--spacing-lg);
     }
   }
 </style>
