@@ -27,10 +27,6 @@ const totalPosts = posts.length;
 	</Container>
 
 	<Container size="lg" as="main" class="index-content">
-		<div class="toc-intro">
-			<h2 class="toc-title">Table of Contents</h2>
-			<p class="toc-subtitle">Navigate through the collection by category</p>
-		</div>
 
 		{Object.entries(CATEGORIES).map(([categoryKey, category]) => {
 			const categoryPosts = postsByCategory[categoryKey] || [];
