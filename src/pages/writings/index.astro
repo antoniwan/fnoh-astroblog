@@ -13,7 +13,6 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pu
 const POSTS_PER_PAGE = 12;
 const initialPosts = sortedPosts.slice(0, POSTS_PER_PAGE);
 const totalPosts = sortedPosts.length;
-const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 ---
 
 <BaseLayout 
@@ -158,21 +157,9 @@ const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 			padding: var(--spacing-lg) var(--container-padding-mobile);
 		}
 		
-		.page-header h1 {
-			font-size: var(--font-size-4xl);
-		}
-		
-		.page-header p {
-			font-size: var(--font-size-base);
-		}
-		
 		.posts-grid {
 			grid-template-columns: 1fr;
 			gap: var(--spacing);
-		}
-		
-		.post-card {
-			margin-bottom: var(--spacing);
 		}
 	}
 </style>
