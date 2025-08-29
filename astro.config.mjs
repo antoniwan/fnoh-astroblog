@@ -11,5 +11,41 @@ export default defineConfig({
 	build: {
 		// Enable tree-shaking and dead code elimination
 		inlineStylesheets: 'auto',
+		// Optimize assets
+		assets: '_astro',
 	},
+	// Performance optimizations
+	vite: {
+		// Optimize dependencies
+		optimizeDeps: {
+			include: ['lucide-astro']
+		},
+		// Build optimizations
+		build: {
+			rollupOptions: {
+				output: {
+					manualChunks: {
+						'vendor': ['lucide-astro']
+					}
+				}
+			}
+		},
+		// Development server optimizations
+		server: {
+			hmr: {
+				overlay: false
+			}
+		}
+	},
+	// Image optimization
+	image: {
+		// Enable Sharp for better image processing
+		serviceEntryPoint: '@astrojs/image/sharp',
+		// Responsive images
+		densities: [1, 2],
+		// Format optimization
+		formats: ['webp', 'avif', 'jpeg'],
+		// Quality settings
+		quality: 80
+	}
 });

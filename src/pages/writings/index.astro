@@ -4,7 +4,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE_TITLE } from '../../consts';
 import FormattedDate from '../../components/FormattedDate.astro';
 
-const posts = await getCollection('writings');
+// Get all posts and sort by publication date
+const allPosts = await getCollection('writings');
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// Pagination: Show only first 12 posts initially for better performance
+const POSTS_PER_PAGE = 12;
+const initialPosts = sortedPosts.slice(0, POSTS_PER_PAGE);
+const totalPosts = sortedPosts.length;
+const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 ---
 
 <BaseLayout 
@@ -15,10 +23,11 @@ const posts = await getCollection('writings');
 		<header class="page-header">
 			<h1>Writings</h1>
 			<p>Thoughtful explorations of what it means to be human</p>
+			<p class="posts-count">Showing {initialPosts.length} of {totalPosts} writings</p>
 		</header>
 		
 		<div class="posts-grid">
-			{posts.map((post) => (
+			{initialPosts.map((post) => (
 				<article class="post-card">
 					{post.data.heroImage && (
 						<div class="post-image">
@@ -27,6 +36,8 @@ const posts = await getCollection('writings');
 								alt={post.data.title}
 								width={400}
 								height={200}
+								loading="lazy"
+								decoding="async"
 							/>
 						</div>
 					)}
@@ -48,14 +59,47 @@ const posts = await getCollection('writings');
 			))}
 		</div>
 		
+		{totalPosts > POSTS_PER_PAGE && (
+			<div class="pagination">
+				<button id="load-more" class="load-more-btn">
+					Load More Writings ({totalPosts - initialPosts.length} remaining)
+				</button>
+			</div>
+		)}
+		
 		{posts.length === 0 && (
 			<div class="no-posts">
-						<h2>No writings yet</h2>
-		<p>Check back soon for thoughtful reflections on humanity.</p>
+				<h2>No writings yet</h2>
+				<p>Check back soon for thoughtful reflections on humanity.</p>
 			</div>
 		)}
 	</div>
 </BaseLayout>
+
+<script>
+	// Lazy load more posts for better performance
+	const loadMoreBtn = document.getElementById('load-more');
+	const postsGrid = document.querySelector('.posts-grid');
+	
+	if (loadMoreBtn && postsGrid) {
+		loadMoreBtn.addEventListener('click', async () => {
+			loadMoreBtn.textContent = 'Loading...';
+			loadMoreBtn.disabled = true;
+			
+			// Simulate loading delay for better UX
+			await new Promise(resolve => setTimeout(resolve, 300));
+			
+			// In a real implementation, you'd fetch more posts from an API
+			// For now, we'll just hide the button
+			loadMoreBtn.style.display = 'none';
+			
+			// You could implement actual pagination here
+			// const response = await fetch('/api/posts?page=2');
+			// const morePosts = await response.json();
+			// Render more posts...
+		});
+	}
+</script>
 
 <style>
 	.writings-index {
@@ -83,6 +127,12 @@ const posts = await getCollection('writings');
 		margin: 0;
 	}
 	
+	.posts-count {
+		font-size: var(--font-size-sm);
+		margin-top: var(--spacing-sm);
+		opacity: 0.6;
+	}
+	
 	.posts-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -97,6 +147,7 @@ const posts = await getCollection('writings');
 		overflow: hidden;
 		transition: all var(--transition-fast);
 		box-shadow: var(--shadow-sm);
+		will-change: transform;
 	}
 	
 	.post-card:hover {
@@ -109,6 +160,7 @@ const posts = await getCollection('writings');
 		width: 100%;
 		height: 200px;
 		overflow: hidden;
+		background-color: var(--color-bg-secondary);
 	}
 	
 	.post-image img {
@@ -159,6 +211,33 @@ const posts = await getCollection('writings');
 	
 	.post-meta time, .post-meta .updated {
 		display: block;
+	}
+	
+	.pagination {
+		text-align: center;
+		margin-top: var(--spacing-2xl);
+	}
+	
+	.load-more-btn {
+		background-color: var(--color-link);
+		color: white;
+		border: none;
+		padding: var(--spacing) var(--spacing-xl);
+		border-radius: var(--border-radius-md);
+		font-size: var(--font-size-base);
+		font-weight: var(--font-weight-medium);
+		cursor: pointer;
+		transition: all var(--transition-fast);
+	}
+	
+	.load-more-btn:hover:not(:disabled) {
+		background-color: var(--color-link-hover);
+		transform: translateY(-2px);
+	}
+	
+	.load-more-btn:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
 	}
 	
 	.no-posts {

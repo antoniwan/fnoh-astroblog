@@ -47,25 +47,36 @@ const today = new Date();
 </footer>
 
 <script>
-  // Scroll to top functionality
-  const scrollToTopBtn = document.getElementById('scroll-to-top');
-  
-  // Show/hide button based on scroll position
-  window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-      scrollToTopBtn?.classList.add('visible');
-    } else {
-      scrollToTopBtn?.classList.remove('visible');
+  // Optimized scroll to top functionality
+  (function() {
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+    if (!scrollToTopBtn) return;
+    
+    let scrollTimeout: number;
+    
+    // Throttled scroll handler for better performance
+    function handleScroll() {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const shouldShow = window.pageYOffset > 300;
+        scrollToTopBtn.classList.toggle('visible', shouldShow);
+      }, 100);
     }
-  });
-  
-  // Scroll to top when clicked
-  scrollToTopBtn?.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+    
+    // Scroll to top when clicked
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
-  });
+    
+    // Use passive scroll listener for better performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Initial check
+    handleScroll();
+  })();
 </script>
 
 <style>

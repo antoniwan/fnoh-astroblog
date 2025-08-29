@@ -1,4 +1,4 @@
-/* ===== ESSENTIAL CSS VARIABLES ===== */
+/* ===== OPTIMIZED CSS VARIABLES ===== */
 :root {
   /* Basic colors */
   --color-text: #000;
@@ -11,40 +11,39 @@
   --color-bg-rgb: 255, 255, 255;
   --color-border-rgb: 204, 204, 204;
   
-  /* Enhanced color system */
---color-link-hover: #0052a3;
---color-focus: #0066cc;
---color-code-bg: #f5f5f5;
---color-code-text: #333;
---color-blockquote-bg: rgba(0, 0, 0, 0.02);
---color-table-header-bg: rgba(0, 0, 0, 0.05);
---color-input-bg: #fff;
---color-selection-bg: rgba(0, 102, 204, 0.2);
---color-selection-text: inherit;
---color-hover-bg: rgba(0, 0, 0, 0.05);
---color-success: #10b981;
---color-warning: #f59e0b;
---color-error: #ef4444;
---color-muted: rgba(0, 0, 0, 0.6);
---color-muted-light: rgba(0, 0, 0, 0.3);
+  /* Enhanced color system - simplified */
+  --color-link-hover: #0052a3;
+  --color-focus: #0066cc;
+  --color-code-bg: #f5f5f5;
+  --color-code-text: #333;
+  --color-blockquote-bg: rgba(0, 0, 0, 0.02);
+  --color-table-header-bg: rgba(0, 0, 0, 0.05);
+  --color-input-bg: #fff;
+  --color-selection-bg: rgba(0, 102, 204, 0.2);
+  --color-selection-text: inherit;
+  --color-hover-bg: rgba(0, 0, 0, 0.05);
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-muted: rgba(0, 0, 0, 0.6);
+  --color-muted-light: rgba(0, 0, 0, 0.3);
   
-  /* Enhanced typography system */
+  /* Typography system - simplified */
   --font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-family-heading: 'DM Serif Text', Georgia, 'Times New Roman', serif;
   --font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  --font-family-serif: 'DM Serif Text', Georgia, 'Times New Roman', serif;
   
-  /* Font sizes */
-  --font-size-xs: 0.75rem;    /* 12px */
-  --font-size-sm: 0.875rem;   /* 14px */
-  --font-size-base: 1rem;     /* 16px */
-  --font-size-lg: 1.125rem;   /* 18px */
-  --font-size-xl: 1.25rem;    /* 20px */
-  --font-size-2xl: 1.5rem;    /* 24px */
-  --font-size-3xl: 1.875rem;  /* 30px */
-  --font-size-4xl: 2.25rem;   /* 36px */
-  --font-size-5xl: 3rem;      /* 48px */
-  --font-size-6xl: 3.75rem;   /* 60px */
+  /* Font sizes - simplified scale */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 3.75rem;
   
   /* Font weights */
   --font-weight-light: 300;
@@ -65,78 +64,68 @@
   --letter-spacing-tight: -0.025em;
   --letter-spacing-normal: 0;
   --letter-spacing-wide: 0.025em;
-  --letter-spacing-wider: 0.05em;
-  --letter-spacing-widest: 0.1em;
   
-  /* Basic spacing */
---spacing: 1rem;
-
-/* Layout - Full width with mobile-first approach */
---max-width: 100%;
---container-max-width: 100%;
---container-padding: 1.5rem;
---container-padding-mobile: 1rem;
-
-/* Breakpoints */
---breakpoint-mobile: 480px;
---breakpoint-tablet: 768px;
---breakpoint-desktop: 1024px;
-
-/* Additional spacing variables */
---spacing-xs: calc(var(--spacing) * 0.25);   /* 4px */
---spacing-sm: calc(var(--spacing) * 0.5);    /* 8px */
---spacing-md: var(--spacing);                 /* 16px */
---spacing-lg: calc(var(--spacing) * 1.5);    /* 24px */
---spacing-xl: calc(var(--spacing) * 2);      /* 32px */
---spacing-2xl: calc(var(--spacing) * 3);     /* 48px */
---spacing-3xl: calc(var(--spacing) * 4);     /* 64px */
+  /* Spacing system - simplified calculations */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing: 1rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
   
-  /* Transitions */
-  --transition-ultra-fast: 0.1s ease;
+  /* Layout - simplified */
+  --container-padding: 1.5rem;
+  --container-padding-mobile: 1rem;
+  
+  /* Breakpoints */
+  --breakpoint-mobile: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  
+  /* Transitions - simplified */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.2s ease;
   --transition-slow: 0.3s ease;
-  
-  /* Performance optimizations */
-  --will-change-transform: will-change;
   
   /* Border radius */
   --border-radius-sm: 4px;
   --border-radius-md: 6px;
   --border-radius-lg: 8px;
   
-  /* Shadows */
+  /* Shadows - simplified */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark theme variables */
+/* Dark theme variables - simplified */
 html[data-theme="dark"] {
-  --color-text: #e5e5e5 !important;
-  --color-bg: #1a1a1a !important;
-  --color-bg-secondary: #2d2d2d !important;
-  --color-link: #66b3ff !important;
-  --color-border: #404040 !important;
-  --color-link-hover: #99ccff !important;
-  --color-focus: #66b3ff !important;
-  --color-code-bg: #2d2d2d !important;
-  --color-code-text: #e5e5e5 !important;
-  --color-blockquote-bg: rgba(255, 255, 255, 0.05) !important;
-  --color-table-header-bg: rgba(255, 255, 255, 0.1) !important;
-  --color-input-bg: #2d2d2d !important;
-  --color-selection-bg: rgba(102, 179, 255, 0.3) !important;
-  --color-hover-bg: rgba(255, 255, 255, 0.1) !important;
-  --color-success: #34d399 !important;
-  --color-warning: #fbbf24 !important;
-  --color-error: #f87171 !important;
-  --color-muted: rgba(255, 255, 255, 0.6) !important;
-  --color-muted-light: rgba(255, 255, 255, 0.3) !important;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4) !important;
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4) !important;
+  --color-text: #e5e5e5;
+  --color-bg: #1a1a1a;
+  --color-bg-secondary: #2d2d2d;
+  --color-link: #66b3ff;
+  --color-border: #404040;
+  --color-link-hover: #99ccff;
+  --color-focus: #66b3ff;
+  --color-code-bg: #2d2d2d;
+  --color-code-text: #e5e5e5;
+  --color-blockquote-bg: rgba(255, 255, 255, 0.05);
+  --color-table-header-bg: rgba(255, 255, 255, 0.1);
+  --color-input-bg: #2d2d2d;
+  --color-selection-bg: rgba(102, 179, 255, 0.3);
+  --color-hover-bg: rgba(255, 255, 255, 0.1);
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  --color-muted: rgba(255, 255, 255, 0.6);
+  --color-muted-light: rgba(255, 255, 255, 0.3);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
   
   /* Dark theme RGB values */
-  --color-bg-rgb: 26, 26, 26 !important;
-  --color-border-rgb: 64, 64, 64 !important;
+  --color-bg-rgb: 26, 26, 26;
+  --color-border-rgb: 64, 64, 64;
 }

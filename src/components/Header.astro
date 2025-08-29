@@ -40,93 +40,100 @@ import { Menu, X } from 'lucide-astro';
 </header>
 
 <script>
-	// Mobile navigation functionality
-	const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-	const mobileNav = document.querySelector('.mobile-nav');
-	
-	function toggleMobileNav() {
-		const isExpanded = mobileNavToggle?.getAttribute('aria-expanded') === 'true';
-		const newExpanded = !isExpanded;
+	// Performance-optimized mobile navigation functionality
+	(function() {
+		const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+		const mobileNav = document.querySelector('.mobile-nav');
+		let isNavOpen = false;
 		
-		mobileNavToggle?.setAttribute('aria-expanded', newExpanded.toString());
-		mobileNav?.setAttribute('aria-hidden', (!newExpanded).toString());
-		
-		// Toggle classes for animations
-		mobileNav?.classList.toggle('active');
-		mobileNavToggle?.classList.toggle('active');
-		
-		// Prevent body scroll when menu is open
-		document.body.style.overflow = newExpanded ? 'hidden' : '';
-	}
-	
-	// Close mobile nav when clicking outside
-	document.addEventListener('click', (e) => {
-		if (mobileNav?.classList.contains('active') && 
-			!mobileNav.contains(e.target as Node) && 
-			!mobileNavToggle?.contains(e.target as Node)) {
-			toggleMobileNav();
+		function toggleMobileNav() {
+			isNavOpen = !isNavOpen;
+			
+			if (mobileNavToggle) {
+				mobileNavToggle.setAttribute('aria-expanded', isNavOpen.toString());
+			}
+			if (mobileNav) {
+				mobileNav.setAttribute('aria-hidden', (!isNavOpen).toString());
+				mobileNav.classList.toggle('active', isNavOpen);
+			}
+			
+			mobileNavToggle?.classList.toggle('active', isNavOpen);
+			document.body.style.overflow = isNavOpen ? 'hidden' : '';
 		}
-	});
-	
-	// Close mobile nav when pressing Escape
-	document.addEventListener('keydown', (e) => {
-		if (e.key === 'Escape' && mobileNav?.classList.contains('active')) {
-			toggleMobileNav();
-		}
-	});
-	
-	// Event listener for mobile nav toggle
-	mobileNavToggle?.addEventListener('click', toggleMobileNav);
-	
-	// Close mobile nav when window is resized to desktop size
-	window.addEventListener('resize', () => {
-		if (window.innerWidth > parseInt(getComputedStyle(document.documentElement).getPropertyValue('--breakpoint-tablet')) && mobileNav?.classList.contains('active')) {
-			toggleMobileNav();
-		}
-	});
-	
-	// Scroll-based header behavior
-	let lastScrollY = window.scrollY;
-	let ticking = false;
-	
-	function updateHeader() {
-		const header = document.querySelector('.header-nav');
-		const currentScrollY = window.scrollY;
 		
-		if (header) {
-			// Show header when scrolling up, hide when scrolling down
+		// Event delegation for better performance
+		document.addEventListener('click', (e) => {
+			const target = e.target as Element;
+			
+			// Handle mobile nav toggle
+			if (target.closest('.mobile-nav-toggle')) {
+				toggleMobileNav();
+				return;
+			}
+			
+			// Close mobile nav when clicking outside
+			if (isNavOpen && 
+				!target.closest('.mobile-nav') && 
+				!target.closest('.mobile-nav-toggle')) {
+				toggleMobileNav();
+			}
+		});
+		
+		// Close mobile nav when pressing Escape
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && isNavOpen) {
+				toggleMobileNav();
+			}
+		});
+		
+		// Optimized resize handler with debouncing
+		let resizeTimeout: number;
+		window.addEventListener('resize', () => {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(() => {
+				if (window.innerWidth > 1024 && isNavOpen) {
+					toggleMobileNav();
+				}
+			}, 150);
+		});
+		
+		// Optimized scroll-based header behavior
+		let lastScrollY = window.scrollY;
+		let ticking = false;
+		
+		function updateHeader() {
+			const header = document.querySelector('.header-nav');
+			if (!header) return;
+			
+			const currentScrollY = window.scrollY;
+			
+			// Show/hide header based on scroll direction
 			if (currentScrollY > lastScrollY && currentScrollY > 100) {
-				// Scrolling down and past initial threshold
 				header.setAttribute('data-scroll', 'hide');
 			} else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
-				// Scrolling up or at top
 				header.setAttribute('data-scroll', 'show');
 			}
 			
 			// Add scrolled state for backdrop blur
-			if (currentScrollY > 10) {
-				header.setAttribute('data-scrolled', 'true');
-			} else {
-				header.setAttribute('data-scrolled', 'false');
+			header.setAttribute('data-scrolled', currentScrollY > 10 ? 'true' : 'false');
+			
+			lastScrollY = currentScrollY;
+			ticking = false;
+		}
+		
+		function requestTick() {
+			if (!ticking) {
+				requestAnimationFrame(updateHeader);
+				ticking = true;
 			}
 		}
 		
-		lastScrollY = currentScrollY;
-		ticking = false;
-	}
-	
-	function requestTick() {
-		if (!ticking) {
-			requestAnimationFrame(updateHeader);
-			ticking = true;
-		}
-	}
-	
-	// Throttled scroll listener
-	window.addEventListener('scroll', requestTick, { passive: true });
-	
-	// Initial call
-	updateHeader();
+		// Use passive scroll listener for better performance
+		window.addEventListener('scroll', requestTick, { passive: true });
+		
+		// Initial call
+		updateHeader();
+	})();
 </script>
 
 <style>
