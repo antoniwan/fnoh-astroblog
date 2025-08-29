@@ -77,7 +77,7 @@ import { Sun, Moon } from 'lucide-astro';
     align-items: center;
     justify-content: center;
     position: relative;
-    transition: all var(--transition-fast);
+    transition: all var(--transition-ultra-fast);
     color: var(--color-text);
     background-color: transparent;
     border: 1px solid var(--color-border);
@@ -99,7 +99,7 @@ import { Sun, Moon } from 'lucide-astro';
   .moon-icon {
     width: 1.25rem;
     height: 1.25rem;
-    transition: all var(--transition-fast);
+    transition: all var(--transition-ultra-fast);
     color: var(--color-text);
   }
   
@@ -123,5 +123,14 @@ import { Sun, Moon } from 'lucide-astro';
   html[data-theme="dark"] .moon-icon {
     opacity: 1;
     transform: scale(1);
+  }
+  
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .theme-toggle,
+    .sun-icon,
+    .moon-icon {
+      transition: none;
+    }
   }
 </style>

@@ -82,9 +82,13 @@
 --spacing-3xl: calc(var(--spacing) * 4);     /* 64px */
   
   /* Transitions */
-  --transition-fast: 0.2s ease;
-  --transition-normal: 0.3s ease;
-  --transition-slow: 0.5s ease;
+  --transition-ultra-fast: 0.1s ease;
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+  --transition-slow: 0.3s ease;
+  
+  /* Performance optimizations */
+  --will-change-transform: will-change;
   
   /* Border radius */
   --border-radius-sm: 4px;
