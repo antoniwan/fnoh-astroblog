@@ -19,9 +19,11 @@ import ThemeToggle from './ThemeToggle.astro';
 <style>
 	header {
 		width: 100%;
+		max-width: 100%;
 		padding: var(--spacing) var(--container-padding);
 		border-bottom: 1px solid var(--color-border);
-		margin-bottom: calc(var(--spacing) * 2);
+		margin-bottom: var(--spacing-xl);
+		background-color: var(--color-bg);
 	}
 	
 	nav {
@@ -56,7 +58,7 @@ import ThemeToggle from './ThemeToggle.astro';
 	
 	@media (max-width: 768px) {
 		header {
-			padding: var(--spacing) calc(var(--container-padding) * 0.5);
+			padding: var(--spacing) var(--container-padding-mobile);
 		}
 		
 		nav {
@@ -66,7 +68,7 @@ import ThemeToggle from './ThemeToggle.astro';
 		
 		.nav-links {
 			flex-direction: column;
-			gap: calc(var(--spacing) * 0.5);
+			gap: var(--spacing-sm);
 		}
 	}
 </style>

@@ -47,7 +47,7 @@ const {
 	.page-content {
 		width: 100%;
 		max-width: 100%;
-		padding: calc(var(--spacing) * 2) var(--container-padding);
+		padding: var(--spacing-xl) var(--container-padding);
 	}
 	
 	.main-content {
@@ -58,7 +58,7 @@ const {
 	.page-content.with-sidebar {
 		display: grid;
 		grid-template-columns: 1fr 300px;
-		gap: calc(var(--spacing) * 2);
+		gap: var(--spacing-xl);
 		align-items: start;
 	}
 	
@@ -72,7 +72,7 @@ const {
 	
 	@media (max-width: 768px) {
 		.page-content {
-			padding: calc(var(--spacing) * 2) calc(var(--container-padding) * 0.5);
+			padding: var(--spacing-lg) var(--container-padding-mobile);
 		}
 		
 		.page-content.with-sidebar {

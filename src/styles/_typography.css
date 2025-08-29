@@ -61,7 +61,7 @@ h6 {
 
 /* Paragraphs and text - Modern field notes readability */
 p {
-  margin: 0 0 calc(var(--spacing) * 1.125) 0;
+  margin: 0 0 var(--spacing-lg) 0;
   line-height: var(--line-height-relaxed);
   letter-spacing: var(--letter-spacing-normal);
   text-align: left;
@@ -86,29 +86,31 @@ a:focus {
 
 /* Lists */
 ul, ol {
-  margin: 0 0 var(--spacing) 0;
-  padding-left: calc(var(--spacing) * 1.5);
+  margin: 0 0 var(--spacing-lg) 0;
+  padding-left: var(--spacing-lg);
   line-height: var(--line-height-relaxed);
 }
 
 li {
-  margin-bottom: calc(var(--spacing) * 0.5);
+  margin-bottom: var(--spacing-sm);
   text-align: left;
 }
 
-/* Enhanced typography for Charter */
+/* Enhanced typography for Charter - Full-width optimized */
 .article-content,
 .prose {
   font-size: var(--font-size-lg);
   line-height: var(--line-height-relaxed);
   text-align: left;
   letter-spacing: var(--letter-spacing-normal);
+  max-width: 100%;
 }
 
 .article-content p,
 .prose p {
-  margin-bottom: calc(var(--spacing) * 1.25);
+  margin-bottom: var(--spacing-lg);
   text-indent: 0;
+  max-width: 100%;
 }
 
 .article-content h1,
@@ -117,16 +119,17 @@ li {
 .prose h1,
 .prose h2,
 .prose h3 {
-  margin-top: calc(var(--spacing) * 2);
-  margin-bottom: calc(var(--spacing) * 1);
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing);
   page-break-after: avoid;
   break-after: avoid;
+  max-width: 100%;
 }
 
 /* Blockquotes - Modern field notes style */
 blockquote {
-  margin: calc(var(--spacing) * 2) 0;
-  padding: var(--spacing) calc(var(--spacing) * 1.5);
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing) var(--spacing-lg);
   border-left: 3px solid var(--color-link);
   background-color: var(--color-blockquote-bg);
   font-family: var(--font-family-serif);
@@ -134,9 +137,8 @@ blockquote {
   font-size: var(--font-size-lg);
   line-height: var(--line-height-relaxed);
   border-radius: var(--border-radius-sm);
+  max-width: 100%;
 }
-
-
 
 /* Code */
 code {
@@ -144,7 +146,7 @@ code {
   font-size: var(--font-size-sm);
   background-color: var(--color-code-bg);
   color: var(--color-code-text);
-  padding: 0.125rem 0.25rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--border-radius-sm);
 }
 
@@ -157,6 +159,7 @@ pre {
   border-radius: var(--border-radius-md);
   overflow-x: auto;
   line-height: var(--line-height-relaxed);
+  max-width: 100%;
 }
 
 pre code {
@@ -168,12 +171,13 @@ pre code {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: calc(var(--spacing) * 2) 0;
+  margin: var(--spacing-xl) 0;
   font-size: var(--font-size-sm);
+  max-width: 100%;
 }
 
 th, td {
-  padding: calc(var(--spacing) * 0.75);
+  padding: var(--spacing-sm);
   text-align: left;
   border-bottom: 1px solid var(--color-border);
 }
@@ -229,5 +233,15 @@ small {
   
   body {
     font-size: var(--font-size-base);
+  }
+  
+  .article-content,
+  .prose {
+    font-size: var(--font-size-base);
+  }
+  
+  .article-content p,
+  .prose p {
+    margin-bottom: var(--spacing);
   }
 }

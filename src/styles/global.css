@@ -6,12 +6,18 @@ html {
   transition: background-color var(--transition-fast), color var(--transition-fast);
   background-color: var(--color-bg) !important;
   color: var(--color-text) !important;
+  width: 100%;
+  max-width: 100%;
 }
 
 body {
   background-color: var(--color-bg) !important;
   color: var(--color-text) !important;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* Only transition essential theme-related properties on specific elements */
@@ -43,6 +49,7 @@ body {
 img {
   max-width: 100%;
   height: auto;
+  width: 100%;
 }
 
 /* Global button reset */
@@ -58,4 +65,17 @@ button {
 input, textarea, select {
   font: inherit;
   color: inherit;
+}
+
+/* Full-width container support */
+.container-full {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 var(--container-padding);
+}
+
+@media (max-width: 768px) {
+  .container-full {
+    padding: 0 var(--container-padding-mobile);
+  }
 }

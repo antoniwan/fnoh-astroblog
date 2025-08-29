@@ -1,8 +1,22 @@
 /* ===== ESSENTIAL UTILITIES ===== */
 .container {
+  width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--container-padding);
+}
+
+/* Full-width container utilities */
+.container-full {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 var(--container-padding);
+}
+
+.container-full-mobile {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 var(--container-padding-mobile);
 }
 
 .text-center { text-align: center; }
@@ -43,3 +57,14 @@
 .mt-1 { margin-top: var(--spacing); }
 .mt-2 { margin-top: calc(var(--spacing) * 2); }
 .mt-3 { margin-top: calc(var(--spacing) * 3); }
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--container-padding-mobile);
+  }
+  
+  .container-full {
+    padding: 0 var(--container-padding-mobile);
+  }
+}

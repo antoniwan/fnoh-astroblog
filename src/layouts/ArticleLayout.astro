@@ -86,7 +86,7 @@ const {
 	}
 	
 	.article-hero {
-		margin-bottom: calc(var(--spacing) * 2);
+		margin-bottom: var(--spacing-xl);
 		text-align: center;
 		width: 100%;
 	}
@@ -99,7 +99,7 @@ const {
 	}
 	
 	.article-header {
-		margin-bottom: calc(var(--spacing) * 2);
+		margin-bottom: var(--spacing-xl);
 		text-align: center;
 		width: 100%;
 	}
@@ -114,7 +114,7 @@ const {
 	}
 	
 	.article-meta > * {
-		padding: calc(var(--spacing) * 0.25) calc(var(--spacing) * 0.75);
+		padding: var(--spacing-xs) var(--spacing-sm);
 		background: var(--color-blockquote-bg);
 		border-radius: var(--border-radius-lg);
 		font-size: var(--font-size-sm);
@@ -128,12 +128,12 @@ const {
 	
 	@media (max-width: 768px) {
 		.article {
-			padding: 0 calc(var(--container-padding) * 0.5);
+			padding: 0 var(--container-padding-mobile);
 		}
 		
 		.article-meta {
 			flex-direction: column;
-			gap: calc(var(--spacing) * 0.5);
+			gap: var(--spacing-sm);
 		}
 	}
 </style>

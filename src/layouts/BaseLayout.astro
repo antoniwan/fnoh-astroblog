@@ -30,10 +30,18 @@ const {
 	<body class={className}>
 		{showHeader && <Header />}
 		
-		<main>
+		<main class="main-content">
 			<slot />
 		</main>
 		
 		{showFooter && <Footer />}
 	</body>
 </html>
+
+<style>
+	.main-content {
+		width: 100%;
+		max-width: 100%;
+		min-height: calc(100vh - 200px); /* Account for header/footer */
+	}
+</style>
