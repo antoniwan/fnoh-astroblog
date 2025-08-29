@@ -3,6 +3,7 @@ title: 'Dancing with Uncertainty'
 description: 'Learning to find grace and growth in the unknown spaces of life and human becoming'
 pubDate: '2024-01-28'
 heroImage: '../../assets/blog-placeholder-5.jpg'
+category: 'recovery-reconstruction'
 ---
 
 Uncertainty is uncomfortable. It makes us feel unsafe, out of control, and vulnerable. We naturally want to eliminate it, to create certainty where there is none. But what if uncertainty isn't something to be avoided, but something to be embraced?

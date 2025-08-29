@@ -3,6 +3,7 @@ title: 'The Beginning of Becoming'
 description: 'Reflections on starting a journey of human becoming and the practice of field notes'
 pubDate: 'Jul 08 2022'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+category: 'curiosity-lab'
 ---
 
 Every journey begins with a single step, and every becoming starts with a moment of recognition. This is my first field note in what I hope will be a long series of observations, reflections, and shared experiences about what it means to be human.

@@ -3,6 +3,7 @@ title: 'Silence as Teacher'
 description: 'Discovering the wisdom that emerges when we stop talking and start listening'
 pubDate: '2024-02-04'
 heroImage: '../../assets/blog-placeholder-2.jpg'
+category: 'recovery-reconstruction'
 ---
 
 In our modern world, we often overlook the profound wisdom that lies in simple practices. This exploration of silence as teacher reveals how ancient understanding can transform our contemporary experience of being human.

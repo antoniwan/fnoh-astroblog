@@ -3,6 +3,7 @@ title: 'The Art of Mindful Waiting'
 description: 'Exploring how patience and presence transform our experience of time and uncertainty'
 pubDate: '2024-01-15'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+category: 'recovery-reconstruction'
 ---
 
 In our fast-paced world, waiting has become something to avoid at all costs. We fill every moment with distractions, notifications, and busyness. But what if waiting itself could be a practice of becoming more human?

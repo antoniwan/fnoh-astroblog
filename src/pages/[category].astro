@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE, CATEGORIES } from '../consts';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('writings');
+	
+	// Get unique categories from posts
+	const categories = [...new Set(posts.map(post => post.data.category).filter(Boolean))];
+	
+	return categories.map(category => ({
+		params: { category },
+		props: { category }
+	}));
+}
+
+const { category } = Astro.props;
+const posts = await getCollection('writings');
+const categoryPosts = posts
+	.filter(post => post.data.category === category)
+	.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+
+const categoryInfo = CATEGORIES[category as keyof typeof CATEGORIES];
+const pageTitle = categoryInfo ? categoryInfo.title : category;
+---
+
+<BaseLayout title={`${pageTitle} - ${SITE_TITLE}`} description={categoryInfo?.description || `Posts in the ${category} category`}>
+	<header class="category-header">
+		<div class="category-info">
+			<span class="category-emoji">{categoryInfo?.emoji || '📁'}</span>
+			<h1 class="category-title">{pageTitle}</h1>
+		</div>
+		<p class="category-description">{categoryInfo?.description || `Posts in the ${category} category`}</p>
+		<p class="post-count">{categoryPosts.length} post{categoryPosts.length !== 1 ? 's' : ''}</p>
+	</header>
+
+	<main class="category-content">
+		{categoryPosts.length > 0 ? (
+			<div class="posts-grid">
+				{categoryPosts.map((post) => (
+					<article class="post-card">
+						<a href={`/writings/${post.id}`} class="post-link">
+							<div class="post-image">
+								<img src={post.data.heroImage?.src || ''} alt="" loading="lazy" />
+							</div>
+							<div class="post-content">
+								<h2 class="post-title">{post.data.title}</h2>
+								<p class="post-description">{post.data.description}</p>
+								<time class="post-date" datetime={post.data.pubDate.toISOString()}>
+									{post.data.pubDate.toLocaleDateString('en-US', { 
+										year: 'numeric', 
+										month: 'long', 
+										day: 'numeric' 
+									})}
+								</time>
+							</div>
+						</a>
+					</article>
+				))}
+			</div>
+		) : (
+			<div class="no-posts">
+				<p>No posts found in this category.</p>
+				<a href="/" class="back-link">← Back to Home</a>
+			</div>
+		)}
+	</main>
+</BaseLayout>
+
+<style>
+	.category-header {
+		text-align: center;
+		margin-bottom: var(--spacing-2xl);
+		padding: var(--spacing-xl) 0;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.category-info {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--spacing);
+		margin-bottom: var(--spacing);
+	}
+
+	.category-emoji {
+		font-size: var(--font-size-3xl);
+	}
+
+	.category-title {
+		font-size: var(--font-size-3xl);
+		font-weight: var(--font-weight-bold);
+		margin: 0;
+		color: var(--color-text);
+	}
+
+	.category-description {
+		font-size: var(--font-size-lg);
+		color: var(--color-text-light);
+		max-width: 600px;
+		margin: 0 auto var(--spacing);
+		line-height: var(--line-height-relaxed);
+	}
+
+	.post-count {
+		font-size: var(--font-size-base);
+		color: var(--color-text-lighter);
+		font-style: italic;
+		margin: 0;
+	}
+
+	.category-content {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.posts-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		gap: var(--spacing-xl);
+	}
+
+	.post-card {
+		border: 1px solid var(--color-border-subtle);
+		border-radius: var(--border-radius);
+		overflow: hidden;
+		transition: all 0.2s ease;
+		background: var(--color-background);
+	}
+
+	.post-card:hover {
+		border-color: var(--color-border);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		transform: translateY(-2px);
+	}
+
+	.post-link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+		height: 100%;
+	}
+
+	.post-image {
+		width: 100%;
+		height: 200px;
+		overflow: hidden;
+	}
+
+	.post-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.post-card:hover .post-image img {
+		transform: scale(1.05);
+	}
+
+	.post-content {
+		padding: var(--spacing-lg);
+	}
+
+	.post-title {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-semibold);
+		color: var(--color-text);
+		margin: 0 0 var(--spacing-sm) 0;
+		line-height: var(--line-height-tight);
+	}
+
+	.post-description {
+		font-size: var(--font-size-base);
+		color: var(--color-text-light);
+		margin: 0 0 var(--spacing-sm) 0;
+		line-height: var(--line-height-relaxed);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.post-date {
+		font-size: var(--font-size-sm);
+		color: var(--color-text-lighter);
+		font-style: italic;
+	}
+
+	.no-posts {
+		text-align: center;
+		padding: var(--spacing-2xl);
+	}
+
+	.no-posts p {
+		font-size: var(--font-size-lg);
+		color: var(--color-text-light);
+		margin-bottom: var(--spacing-lg);
+	}
+
+	.back-link {
+		display: inline-block;
+		color: var(--color-primary);
+		text-decoration: none;
+		font-weight: var(--font-weight-medium);
+		transition: color 0.2s ease;
+	}
+
+	.back-link:hover {
+		color: var(--color-primary-dark);
+	}
+
+	@media (max-width: 768px) {
+		.category-header {
+			padding: var(--spacing-lg) 0;
+			margin-bottom: var(--spacing-xl);
+		}
+
+		.category-title {
+			font-size: var(--font-size-2xl);
+		}
+
+		.category-description {
+			font-size: var(--font-size-base);
+		}
+
+		.posts-grid {
+			grid-template-columns: 1fr;
+			gap: var(--spacing-lg);
+		}
+
+		.post-image {
+			height: 150px;
+		}
+	}
+</style>

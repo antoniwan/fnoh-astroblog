@@ -3,6 +3,7 @@ title: 'The Courage to Be Seen'
 description: 'How vulnerability becomes the bridge to authentic human connection and deeper understanding'
 pubDate: '2024-01-18'
 heroImage: '../../assets/blog-placeholder-2.jpg'
+category: 'empathy-healing'
 ---
 
 Vulnerability is often misunderstood. We think of it as weakness, as something to hide or overcome. But vulnerability is actually the birthplace of courage, connection, and creativity. It's the willingness to show up when we can't control the outcome.

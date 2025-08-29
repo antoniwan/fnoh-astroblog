@@ -24,6 +24,20 @@
   --color-focus: #3b82f6;
   --color-focus-ring: rgba(59, 130, 246, 0.3);
   
+  /* Primary colors for interactive elements */
+  --color-primary: #1e40af;
+  --color-primary-dark: #1e3a8a;
+  --color-primary-light: #3b82f6;
+  
+  /* Background colors */
+  --color-background: #fefefe;
+  --color-background-secondary: #f8f6f3;
+  
+  /* Text hierarchy colors */
+  --color-text-light: #6b7280;
+  --color-text-lighter: #9ca3af;
+  --color-text-subtle: #d1d5db;
+  
   /* Code and technical elements */
   --color-code-bg: #f8f9fa;
   --color-code-border: #e5e7eb;
@@ -116,6 +130,8 @@
   --container-padding-mobile: 1.5rem;
   --max-width: 65ch;
   --max-width-wide: 80ch;
+  --max-width-sm: 45ch;
+  --max-width-xl: 100ch;
   
   /* Breakpoints */
   --breakpoint-mobile: 480px;
@@ -131,6 +147,7 @@
   /* Border radius - subtle editorial style */
   --border-radius-sm: 4px;
   --border-radius-md: 6px;
+  --border-radius: 6px;
   --border-radius-lg: 8px;
   --border-radius-xl: 12px;
   
@@ -193,6 +210,20 @@ html[data-theme="dark"] {
   --color-muted-lighter: #475569;
   --color-heading: #f8fafc;
   --color-subtle: #1e293b;
+  
+  /* Primary colors for interactive elements */
+  --color-primary: #60a5fa;
+  --color-primary-dark: #3b82f6;
+  --color-primary-light: #93c5fd;
+  
+  /* Background colors */
+  --color-background: #0f172a;
+  --color-background-secondary: #1e293b;
+  
+  /* Text hierarchy colors */
+  --color-text-light: #94a3b8;
+  --color-text-lighter: #64748b;
+  --color-text-subtle: #475569;
   
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);

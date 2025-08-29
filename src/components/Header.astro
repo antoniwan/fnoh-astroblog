@@ -89,7 +89,7 @@ import { Menu, X } from 'lucide-astro';
 		});
 		
 		// Close mobile nav on resize
-		let resizeTimeout: number;
+		let resizeTimeout: ReturnType<typeof setTimeout>;
 		window.addEventListener('resize', () => {
 			clearTimeout(resizeTimeout);
 			resizeTimeout = setTimeout(() => {

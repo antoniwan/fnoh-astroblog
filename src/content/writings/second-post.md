@@ -3,6 +3,7 @@ title: 'The Practice of Paying Attention'
 description: 'Exploring how mindful observation becomes the foundation of meaningful field notes on human becoming'
 pubDate: 'Jul 15 2022'
 heroImage: '../../assets/blog-placeholder-4.jpg'
+category: 'curiosity-lab'
 ---
 
 In my first field note, I wrote about the beginning of this journey. Now, I want to explore what it means to actually practice the art of observation—the fundamental skill that makes field notes possible and meaningful.

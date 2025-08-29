@@ -1,0 +1,66 @@
+---
+interface Props {
+	size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+	class?: string;
+	as?: 'div' | 'section' | 'main' | 'article' | 'header' | 'footer';
+}
+
+const { 
+	size = 'md', 
+	class: className = '',
+	as: Element = 'div'
+} = Astro.props;
+
+// Map size to max-width values
+const sizeMap: Record<string, string> = {
+	sm: 'var(--max-width-sm)',
+	md: 'var(--max-width)',
+	lg: 'var(--max-width-wide)',
+	xl: 'var(--max-width-xl)',
+	full: '100%'
+};
+
+// Map size to padding values
+const paddingMap: Record<string, string> = {
+	sm: 'var(--spacing-lg)',
+	md: 'var(--spacing-xl)',
+	lg: 'var(--spacing-2xl)',
+	xl: 'var(--spacing-3xl)',
+	full: 'var(--spacing-xl)'
+};
+---
+
+<Element 
+	class:list={['container', `container-${size}`, className]}
+	style={`--container-max-width: ${sizeMap[size]}; --container-padding: ${paddingMap[size]};`}
+>
+	<slot />
+</Element>
+
+<style>
+	.container {
+		width: 100%;
+		max-width: var(--container-max-width);
+		margin: 0 auto;
+		padding: 0 var(--container-padding);
+	}
+
+	/* Responsive adjustments */
+	@media (max-width: 1024px) {
+		.container {
+			padding: 0 var(--container-padding-mobile);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 0 var(--container-padding-mobile);
+		}
+	}
+
+	@media (max-width: 480px) {
+		.container {
+			padding: 0 var(--container-padding-mobile);
+		}
+	}
+</style>

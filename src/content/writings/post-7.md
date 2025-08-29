@@ -1,8 +1,9 @@
 ---
 title: 'The Questions That Shape Us'
-description: 'How the questions we ask—and don\''t ask—determine the direction of our personal evolution'
+description: "How the questions we ask—and don't ask—determine the direction of our personal evolution"
 pubDate: '2024-01-25'
 heroImage: '../../assets/blog-placeholder-4.jpg'
+category: 'curiosity-lab'
 ---
 
 Questions are powerful things. They shape not only what we think about, but how we think. They determine the boundaries of our understanding and the possibilities we can imagine. The questions we ask ourselves become the lens through which we see the world.

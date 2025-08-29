@@ -44,7 +44,6 @@ const {
 		max-width: 100%;
 		/* Account for fixed header (60px) + footer height + proper spacing */
 		min-height: calc(100vh - 60px - 120px - var(--spacing-2xl));
-		padding: 0 var(--container-padding);
 		/* Add top padding to prevent content from being hidden behind fixed header */
 		padding-top: calc(60px + var(--spacing-2xl));
 		/* Add top margin to account for fixed header */
@@ -67,7 +66,6 @@ const {
 		line-height: var(--line-height-relaxed);
 		margin-bottom: var(--spacing-lg);
 		color: var(--color-text);
-		max-width: var(--max-width);
 	}
 	
 	.main-content h1,
@@ -88,23 +86,35 @@ const {
 	
 	.main-content h2 {
 		font-size: var(--font-size-4xl);
-		margin-top: var(--spacing-2xl);
 		margin-bottom: var(--spacing-lg);
 	}
 	
 	.main-content h3 {
 		font-size: var(--font-size-3xl);
-		margin-top: var(--spacing-xl);
+		margin-bottom: var(--spacing);
+	}
+	
+	.main-content h4 {
+		font-size: var(--font-size-2xl);
+		margin-bottom: var(--spacing);
+	}
+	
+	.main-content h5 {
+		font-size: var(--font-size-xl);
+		margin-bottom: var(--spacing);
+	}
+	
+	.main-content h6 {
+		font-size: var(--font-size-lg);
 		margin-bottom: var(--spacing);
 	}
 	
 	/* Enhanced list styling */
 	.main-content ul,
 	.main-content ol {
-		margin: 0 0 var(--spacing-lg) 0;
+		margin-bottom: var(--spacing-lg);
 		padding-left: var(--spacing-xl);
 		line-height: var(--line-height-relaxed);
-		max-width: var(--max-width);
 	}
 	
 	.main-content li {
@@ -112,43 +122,23 @@ const {
 		color: var(--color-text);
 	}
 	
-	/* Enhanced link styling */
-	.main-content a {
-		color: var(--color-link);
-		text-decoration: none;
-		transition: all var(--transition-fast);
-		border-bottom: 1px solid transparent;
-	}
-	
-	.main-content a:hover {
-		color: var(--color-link-hover);
-		border-bottom-color: var(--color-link-hover);
-	}
-	
 	/* Enhanced blockquote styling */
 	.main-content blockquote {
 		margin: var(--spacing-xl) 0;
 		padding: var(--spacing-lg) var(--spacing-xl);
-		border-left: 4px solid var(--color-blockquote-border);
+		border-left: 4px solid var(--color-link);
 		background-color: var(--color-blockquote-bg);
-		font-family: var(--font-family-serif);
 		font-style: italic;
 		font-size: var(--font-size-lg);
+		color: var(--color-text);
 		line-height: var(--line-height-relaxed);
 		border-radius: var(--border-radius-md);
-		max-width: var(--max-width);
-		color: var(--color-blockquote-text);
-		position: relative;
+		box-shadow: var(--shadow-sm);
 	}
 	
-	.main-content blockquote::before {
-		content: '"';
-		font-size: var(--font-size-4xl);
-		color: var(--color-blockquote-border);
-		position: absolute;
-		top: var(--spacing-sm);
-		left: var(--spacing-lg);
-		font-family: var(--font-family-heading);
+	.main-content blockquote p {
+		margin: 0;
+		font-family: var(--font-family-serif);
 	}
 	
 	/* Enhanced code styling */
@@ -213,21 +203,12 @@ const {
 	/* Responsive adjustments */
 	@media (max-width: 1024px) {
 		.main-content {
-			padding: 0 var(--container-padding-mobile);
 			padding-top: calc(60px + var(--spacing-2xl));
-		}
-		
-		.main-content p,
-		.main-content ul,
-		.main-content ol,
-		.main-content blockquote {
-			max-width: var(--max-width-wide);
 		}
 	}
 	
 	@media (max-width: 768px) {
 		.main-content {
-			padding: 0 var(--container-padding-mobile);
 			/* Adjust top padding for mobile header height (55px) */
 			padding-top: calc(55px + var(--spacing-xl));
 			/* Adjust min-height for mobile */

@@ -1,8 +1,9 @@
 ---
 title: 'Sacred in the Ordinary'
-description: 'Discovering the profound beauty and meaning hidden within life\''s most mundane moments'
+description: "Discovering the profound beauty and meaning hidden within life's most mundane moments"
 pubDate: '2024-01-22'
 heroImage: '../../assets/blog-placeholder-3.jpg'
+category: 'curiosity-lab'
 ---
 
 We spend so much of our lives searching for the extraordinary, the spectacular, the once-in-a-lifetime moments. But what if the most meaningful experiences are actually hidden in plain sight, in the everyday moments we often overlook?

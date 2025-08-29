@@ -3,6 +3,7 @@ title: 'The Language of Touch'
 description: 'How physical connection shapes our understanding of human intimacy and belonging'
 pubDate: '2024-02-01'
 heroImage: '../../assets/blog-placeholder-1.jpg'
+category: 'empathy-healing'
 ---
 
 There's something deeply human about the language of touch. It's one of those fundamental experiences that connects us across cultures, generations, and circumstances. Yet despite its universality, each of us experiences the language of touch in our own unique way.

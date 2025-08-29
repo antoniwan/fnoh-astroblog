@@ -1,54 +1,40 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE_TITLE } from '../consts';
-import PageHeader from '../components/ui/PageHeader.astro';
+import Container from '../components/ui/Container.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
-<BaseLayout 
-	title={`About - ${SITE_TITLE}`} 
-	description="Learn more about Field Notes on Humanity and the mission behind this thoughtful exploration of human nature."
->
-	<div class="about-content">
-		<PageHeader
-			title="About Field Notes on Humanity"
-			description="Learn more about Field Notes on Humanity and the mission behind this thoughtful exploration of human nature."
-		/>
-		
-		<div class="mission">
-			<h2>Our Mission</h2>
-			<p>
-				Field Notes on Humanity is a space dedicated to exploring the depths of what it means to be human 
-				in our rapidly evolving world. We believe that understanding ourselves and our shared humanity 
-				is the foundation for creating a better future.
-			</p>
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<Container size="md" class="about-container">
+		<div class="about-content">
+			<h1>About</h1>
+			<p>This is the about page. Content will be added here.</p>
 		</div>
-		
-		<div class="approach">
-			<h2>Our Approach</h2>
-			<p>
-				Through thoughtful reflection, careful observation, and shared experiences, we explore the 
-				intersections of personal growth, human nature, and the changing landscape of our collective existence. 
-				We believe in the power of storytelling, reflection, and honest dialogue to illuminate the human condition.
-			</p>
-		</div>
-		
-		<div class="values">
-			<h2>Core Values</h2>
-			<ul>
-				<li><strong>Authenticity:</strong> We value honest, genuine exploration of human experience</li>
-				<li><strong>Empathy:</strong> We approach human nature with compassion and understanding</li>
-				<li><strong>Growth:</strong> We believe in the potential for continuous human development</li>
-				<li><strong>Connection:</strong> We foster meaningful dialogue about shared human experiences</li>
-			</ul>
-		</div>
-		
-		<div class="join">
-			<h2>Join the Conversation</h2>
-			<p>
-				Whether you're here to read, reflect, or contribute, we welcome you to this ongoing 
-				exploration of humanity. Start with our <a href="/writings">writings</a> or reach out 
-				to share your own field notes on what it means to be human.
-			</p>
-		</div>
-	</div>
+	</Container>
 </BaseLayout>
+
+<style>
+	.about-container {
+		min-height: 60vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.about-content {
+		text-align: center;
+		max-width: 600px;
+	}
+
+	.about-content h1 {
+		font-size: var(--font-size-4xl);
+		margin-bottom: var(--spacing-lg);
+		color: var(--color-text);
+	}
+
+	.about-content p {
+		font-size: var(--font-size-lg);
+		color: var(--color-text-light);
+		line-height: var(--line-height-relaxed);
+	}
+</style>

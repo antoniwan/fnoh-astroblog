@@ -3,6 +3,7 @@ title: 'The Stories We Tell Ourselves'
 description: 'Examining how our internal narratives shape our experience of becoming human and what field notes can reveal about these stories'
 pubDate: 'Jul 22 2022'
 heroImage: '../../assets/blog-placeholder-2.jpg'
+category: 'recovery-reconstruction'
 ---
 
 In my previous field notes, I've written about beginning this journey and developing the practice of paying attention. Now I want to explore something I've been noticing more and more: the stories we tell ourselves about who we are and what's happening in our lives.
