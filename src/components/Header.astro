@@ -27,12 +27,14 @@ import { Menu, X } from 'lucide-astro';
   
 		<!-- Mobile Navigation Menu -->
 		<div class="mobile-nav" aria-hidden="true">
-			<div class="mobile-nav-links">
-				<HeaderLink href="/">Home</HeaderLink>
-				<HeaderLink href="/writings">Writings</HeaderLink>
-				<HeaderLink href="/about">About</HeaderLink>
-				<div class="mobile-theme-toggle">
-					<ThemeToggle />
+			<div class="mobile-nav-content">
+				<div class="mobile-nav-links">
+					<HeaderLink href="/">Home</HeaderLink>
+					<HeaderLink href="/writings">Writings</HeaderLink>
+					<HeaderLink href="/about">About</HeaderLink>
+					<div class="mobile-theme-toggle">
+						<ThemeToggle />
+					</div>
 				</div>
 			</div>
 		</div>
@@ -40,7 +42,7 @@ import { Menu, X } from 'lucide-astro';
 </header>
 
 <script>
-	// Performance-optimized mobile navigation functionality
+	// Mobile navigation functionality
 	(function() {
 		const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
 		const mobileNav = document.querySelector('.mobile-nav');
@@ -86,7 +88,7 @@ import { Menu, X } from 'lucide-astro';
 			}
 		});
 		
-		// Optimized resize handler with debouncing
+		// Close mobile nav on resize
 		let resizeTimeout: number;
 		window.addEventListener('resize', () => {
 			clearTimeout(resizeTimeout);
@@ -97,7 +99,7 @@ import { Menu, X } from 'lucide-astro';
 			}, 150);
 		});
 		
-		// Optimized scroll-based header behavior
+		// Scroll-based header behavior
 		let lastScrollY = window.scrollY;
 		let ticking = false;
 		
@@ -128,7 +130,6 @@ import { Menu, X } from 'lucide-astro';
 			}
 		}
 		
-		// Use passive scroll listener for better performance
 		window.addEventListener('scroll', requestTick, { passive: true });
 		
 		// Initial call
@@ -296,22 +297,29 @@ import { Menu, X } from 'lucide-astro';
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background-color: var(--color-bg);
 		z-index: 999;
 		opacity: 0;
 		visibility: hidden;
 		transition: all var(--transition-normal);
-		backdrop-filter: blur(20px);
-		-webkit-backdrop-filter: blur(20px);
-		/* Ensure full coverage */
-		min-height: 100vh;
-		min-width: 100vw;
 	}
 	
 	.mobile-nav.active {
 		opacity: 1;
 		visibility: visible;
 		display: block;
+	}
+	
+	/* Mobile Navigation Content with proper background */
+	.mobile-nav-content {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: var(--color-bg);
+		/* Ensure full coverage */
+		min-height: 100vh;
+		min-width: 100vw;
 	}
 	
 	.mobile-nav-links {
@@ -323,26 +331,8 @@ import { Menu, X } from 'lucide-astro';
 		padding: var(--spacing-3xl) var(--container-padding);
 		gap: var(--spacing-xl);
 		width: 100%;
-		background-color: var(--color-bg);
 		position: relative;
-		/* Ensure full background coverage */
-		min-height: 100vh;
-		min-width: 100vw;
-	}
-	
-	.mobile-nav-links::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: var(--color-bg);
-		z-index: -1;
-		/* Add subtle pattern overlay for better visual separation */
-		background-image: 
-			radial-gradient(circle at 25% 25%, rgba(var(--color-border-rgb), 0.03) 0%, transparent 50%),
-			radial-gradient(circle at 75% 75%, rgba(var(--color-border-rgb), 0.03) 0%, transparent 50%);
+		background-color: var(--color-bg-secondary);
 	}
 	
 	.mobile-nav-links a {
@@ -355,37 +345,24 @@ import { Menu, X } from 'lucide-astro';
 		width: 100%;
 		max-width: 300px;
 		color: var(--color-text);
-		background-color: var(--color-bg-secondary);
-		border: 2px solid var(--color-border);
 		text-decoration: none;
 		position: relative;
 		z-index: 1;
 	}
 	
 	.mobile-nav-links a:hover {
-		background-color: var(--color-hover-bg);
-		border-color: var(--color-link);
 		color: var(--color-link);
-		transform: translateY(-2px);
-		box-shadow: var(--shadow-md);
 	}
 	
 	.mobile-nav-links a.active {
-		background-color: var(--color-link);
-		color: var(--color-bg);
-		border-color: var(--color-link);
+		color: var(--color-link);
 		font-weight: var(--font-weight-bold);
 	}
 	
 	.mobile-theme-toggle {
 		margin-top: var(--spacing-lg);
 		padding: var(--spacing);
-		background-color: var(--color-bg-secondary);
-		border-radius: var(--border-radius-lg);
-		border: 2px solid var(--color-border);
 	}
-	
-	/* Dark theme mobile nav - now handled by CSS variables */
 	
 	/* Responsive Design */
 	@media (max-width: 1024px) {
