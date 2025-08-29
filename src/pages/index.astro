@@ -1,26 +1,170 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content';
+
+// Get all blog posts
+const posts = await getCollection('writings');
+// Sort by publication date (newest first)
+const sortedPosts = posts.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
 	<div class="hero">
-		<h1>Field Notes on Humanity</h1>
 		<p class="subtitle">
 			Welcome to a thoughtful exploration of what it means to be human in an ever-changing world. 
 			This space serves as a collection of reflections, observations, and shared experiences from 
 			the ongoing journey of human becoming.
 		</p>
-		<p class="description">
-			Here you'll find writings that explore the intersections of personal growth, 
-			human nature, and the evolving landscape of our shared humanity.
-		</p>
-		<div class="cta-links">
-			<a href="/writings" class="cta-button primary">Explore Writings</a>
-			<a href="/about" class="cta-button secondary">Learn More</a>
+	</div>
+
+	<div class="masonry-container">
+		<div class="masonry-grid" id="masonry-grid">
+			{sortedPosts.map((post) => {
+				// Calculate reading time (rough estimate: 200 words per minute)
+				const wordCount = post.body ? post.body.split(' ').length : 0;
+				const readingTime = Math.ceil(wordCount / 200);
+				
+				return (
+					<article class="post-card" data-post-id={post.id}>
+						<a href={`/writings/${post.id}`} class="post-link">
+							{post.data.heroImage && (
+								<div class="post-image">
+									<img 
+										src={post.data.heroImage.src} 
+										alt={post.data.title}
+										loading="lazy"
+										width="400"
+										height="300"
+									/>
+								</div>
+							)}
+							<div class="post-content">
+								<h2 class="post-title">{post.data.title}</h2>
+								<p class="post-excerpt">{post.data.description}</p>
+								<div class="post-meta">
+									<span class="reading-time">{readingTime} min read</span>
+									<time class="pub-date" datetime={post.data.pubDate.toISOString()}>
+										{post.data.pubDate.toLocaleDateString('en-US', { 
+											year: 'numeric', 
+											month: 'long', 
+											day: 'numeric' 
+										})}
+									</time>
+								</div>
+							</div>
+						</a>
+					</article>
+				);
+			})}
+		</div>
+		
+		<div class="load-more-container">
+			<button class="load-more-btn" id="load-more-btn" style="display: none;">
+				Load More Posts
+			</button>
 		</div>
 	</div>
 </BaseLayout>
+
+<script>
+	// Infinite scroll and masonry functionality
+	document.addEventListener('DOMContentLoaded', function() {
+		const masonryGrid = document.getElementById('masonry-grid') as HTMLElement;
+		const loadMoreBtn = document.getElementById('load-more-btn') as HTMLButtonElement;
+		
+		if (!masonryGrid) return;
+		
+		// Initialize masonry layout
+		function initMasonry() {
+			const cards = masonryGrid.querySelectorAll('.post-card') as NodeListOf<HTMLElement>;
+			const containerWidth = masonryGrid.offsetWidth;
+			const cardWidth = 350; // Fixed card width
+			const gap = 24; // Gap between cards
+			const columns = Math.floor((containerWidth + gap) / (cardWidth + gap));
+			
+			// Reset positioning
+			cards.forEach(card => {
+				card.style.position = 'static';
+				card.style.transform = 'none';
+			});
+			
+			// Calculate positions for masonry layout
+			const columnHeights = new Array(columns).fill(0);
+			
+			cards.forEach(card => {
+				// Find the shortest column
+				const shortestColumn = columnHeights.indexOf(Math.min(...columnHeights));
+				const x = shortestColumn * (cardWidth + gap);
+				const y = columnHeights[shortestColumn];
+				
+				// Position the card
+				card.style.position = 'absolute';
+				card.style.left = x + 'px';
+				card.style.top = y + 'px';
+				card.style.width = cardWidth + 'px';
+				
+				// Update column height
+				columnHeights[shortestColumn] += card.offsetHeight + gap;
+			});
+			
+			// Set container height
+			masonryGrid.style.height = Math.max(...columnHeights) + 'px';
+		}
+		
+		// Debounced resize handler
+		let resizeTimeout: ReturnType<typeof setTimeout>;
+		window.addEventListener('resize', function() {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(initMasonry, 250);
+		});
+		
+		// Initialize masonry on load
+		window.addEventListener('load', initMasonry);
+		
+		// Re-initialize when images load
+		const images = masonryGrid.querySelectorAll('img');
+		images.forEach(img => {
+			img.addEventListener('load', initMasonry);
+		});
+		
+		// Intersection Observer for infinite scroll
+		const observerOptions = {
+			root: null,
+			rootMargin: '100px',
+			threshold: 0.1
+		};
+		
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					// Load more posts when reaching the end
+					loadMorePosts();
+				}
+			});
+		}, observerOptions);
+		
+		// Observe the last card
+		function observeLastCard() {
+			const cards = masonryGrid.querySelectorAll('.post-card');
+			if (cards.length > 0) {
+				observer.observe(cards[cards.length - 1]);
+			}
+		}
+		
+		// Simulate loading more posts (in a real app, this would fetch from an API)
+		function loadMorePosts() {
+			// For demo purposes, we'll just show the load more button
+			// In a real implementation, you'd fetch more posts here
+			if (loadMoreBtn) {
+				loadMoreBtn.style.display = 'block';
+			}
+		}
+		
+		// Initialize observation
+		observeLastCard();
+	});
+</script>
 
 <style>
 	.hero {
@@ -28,13 +172,6 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		max-width: 100%;
 		text-align: center;
 		padding: var(--spacing-3xl) var(--container-padding);
-	}
-	
-	.hero h1 {
-		font-size: var(--font-size-6xl);
-		margin-bottom: var(--spacing);
-		font-weight: var(--font-weight-extrabold);
-		letter-spacing: var(--letter-spacing-tight);
 	}
 	
 	.subtitle {
@@ -46,53 +183,118 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		margin-right: auto;
 	}
 	
-	.description {
-		font-size: var(--font-size-lg);
-		margin-bottom: var(--spacing-2xl);
-		line-height: var(--line-height-relaxed);
-		max-width: 600px;
-		margin-left: auto;
-		margin-right: auto;
-		opacity: 0.8;
+	.masonry-container {
+		width: 100%;
+		max-width: 100%;
+		padding: 0 var(--container-padding);
+		margin-bottom: var(--spacing-3xl);
 	}
 	
-	.cta-links {
-		display: flex;
-		gap: var(--spacing);
-		justify-content: center;
-		flex-wrap: wrap;
+	.masonry-grid {
+		position: relative;
+		width: 100%;
+		margin: 0 auto;
 	}
 	
-	.cta-button {
-		display: inline-block;
-		padding: var(--spacing-sm) var(--spacing-xl);
-		border-radius: var(--border-radius-md);
-		text-decoration: none;
-		font-weight: var(--font-weight-semibold);
-		transition: all var(--transition-fast);
-		border: 2px solid transparent;
+	.post-card {
+		background: var(--color-bg);
+		border-radius: var(--border-radius-lg);
+		box-shadow: var(--shadow-sm);
+		overflow: hidden;
+		transition: all var(--transition-normal);
+		border: 1px solid var(--color-border);
 	}
 	
-	.cta-button.primary {
-		background: var(--color-link);
-		color: white;
-	}
-	
-	.cta-button.primary:hover {
-		background: var(--color-link-hover);
-		transform: translateY(-2px);
-		box-shadow: var(--shadow-md);
-	}
-	
-	.cta-button.secondary {
-		background: transparent;
-		color: var(--color-link);
+	.post-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
 		border-color: var(--color-link);
 	}
 	
-	.cta-button.secondary:hover {
+	.post-link {
+		text-decoration: none;
+		color: inherit;
+		display: block;
+	}
+	
+	.post-image {
+		width: 100%;
+		height: 200px;
+		overflow: hidden;
+	}
+	
+	.post-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform var(--transition-normal);
+	}
+	
+	.post-card:hover .post-image img {
+		transform: scale(1.05);
+	}
+	
+	.post-content {
+		padding: var(--spacing-lg);
+	}
+	
+	.post-title {
+		font-family: var(--font-family-heading);
+		font-size: var(--font-size-xl);
+		font-weight: var(--font-weight-semibold);
+		margin: 0 0 var(--spacing-sm) 0;
+		line-height: var(--line-height-tight);
+		color: var(--color-text);
+	}
+	
+	.post-excerpt {
+		font-family: var(--font-family);
+		font-size: var(--font-size-base);
+		line-height: var(--line-height-relaxed);
+		color: var(--color-muted);
+		margin: 0 0 var(--spacing-md) 0;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+	
+	.post-meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-size: var(--font-size-sm);
+		color: var(--color-muted-light);
+	}
+	
+	.reading-time {
+		font-weight: var(--font-weight-medium);
+	}
+	
+	.pub-date {
+		font-style: italic;
+	}
+	
+	.load-more-container {
+		text-align: center;
+		margin-top: var(--spacing-2xl);
+	}
+	
+	.load-more-btn {
 		background: var(--color-link);
 		color: white;
+		border: none;
+		padding: var(--spacing-sm) var(--spacing-xl);
+		border-radius: var(--border-radius-md);
+		font-family: var(--font-family-heading);
+		font-weight: var(--font-weight-semibold);
+		font-size: var(--font-size-base);
+		cursor: pointer;
+		transition: all var(--transition-fast);
+	}
+	
+	.load-more-btn:hover {
+		background: var(--color-link-hover);
 		transform: translateY(-2px);
 		box-shadow: var(--shadow-md);
 	}
@@ -101,6 +303,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		.hero {
 			padding: var(--spacing-2xl) var(--container-padding-mobile);
 		}
+		
+		.masonry-container {
+			padding: 0 var(--container-padding-mobile);
+		}
 	}
 	
 	@media (max-width: 768px) {
@@ -108,21 +314,18 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 			padding: var(--spacing-2xl) var(--container-padding-mobile);
 		}
 		
-		.hero h1 {
-			font-size: var(--font-size-4xl);
-		}
-		
 		.subtitle {
 			font-size: var(--font-size-lg);
 		}
 		
-		.description {
-			font-size: var(--font-size-base);
+		.post-card {
+			position: static !important;
+			width: 100% !important;
+			margin-bottom: var(--spacing-lg);
 		}
 		
-		.cta-links {
-			flex-direction: column;
-			align-items: center;
+		.masonry-grid {
+			height: auto !important;
 		}
 	}
 </style>
