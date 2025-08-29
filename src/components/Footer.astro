@@ -1,18 +1,362 @@
 ---
 import { 
   Rss,
-  FileText
+  FileText,
+  Heart,
+  ExternalLink
 } from 'lucide-astro';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 const today = new Date();
 ---
 
-© {today.getFullYear()} {SITE_TITLE} • 
-<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a> • 
-<a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT</a>
+<footer class="site-footer">
+  <div class="footer-content">
+    <!-- Main footer section -->
+    <div class="footer-main">
+      <div class="footer-brand">
+        <h3 class="footer-title">{SITE_TITLE}</h3>
+        <p class="footer-description">{SITE_DESCRIPTION}</p>
+      </div>
+      
+      <div class="footer-links">
+        <div class="footer-section">
+          <h4 class="footer-section-title">Navigation</h4>
+          <ul class="footer-link-list">
+            <li><a href="/" class="footer-link">Home</a></li>
+            <li><a href="/writings" class="footer-link">Writings</a></li>
+            <li><a href="/about" class="footer-link">About</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4 class="footer-section-title">Categories</h4>
+          <ul class="footer-link-list">
+            <li><a href="/lessons-in-balance" class="footer-link">Lessons in Balance</a></li>
+            <li><a href="/chaos-notes" class="footer-link">Chaos Notes</a></li>
+            <li><a href="/recovery-reconstruction" class="footer-link">Recovery & Reconstruction</a></li>
+            <li><a href="/empathy-healing" class="footer-link">Empathy & Healing</a></li>
+            <li><a href="/modern-life" class="footer-link">Modern Life</a></li>
+            <li><a href="/curiosity-lab" class="footer-link">Curiosity Lab</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4 class="footer-section-title">Resources</h4>
+          <ul class="footer-link-list">
+            <li><a href="/rss.xml" class="footer-link">
+              <Rss class="footer-icon" />
+              RSS Feed
+            </a></li>
+            <li><a href="/sitemap-index.xml" class="footer-link">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer bottom with legal and version info -->
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <p class="footer-copyright">
+          © {today.getFullYear()} {SITE_TITLE}. All rights reserved.
+        </p>
+        <div class="footer-licenses">
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="footer-license-link">
+            CC BY-NC-SA 4.0
+            <ExternalLink class="footer-external-icon" />
+          </a>
+          <span class="footer-separator">•</span>
+          <a href="https://opensource.org/licenses/MIT" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="footer-license-link">
+            MIT License
+            <ExternalLink class="footer-external-icon" />
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-meta">
+        <span class="footer-version">v0.0.1</span>
+        <span class="footer-made-with">
+          Made with <Heart class="footer-heart" /> using Astro
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
 
-<a href="/sitemap-index.xml">Sitemap</a>
-<a href="/rss.xml"><Rss />RSS</a>
-<a href="/privacy"><FileText />Privacy</a>
-v0.0.1
+<style>
+  .site-footer {
+    background-color: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border-light);
+    color: var(--color-text);
+    padding: var(--spacing-3xl) 0 var(--spacing-2xl);
+    margin-top: auto;
+  }
+
+  .footer-content {
+    padding: 0 var(--container-padding);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3xl);
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-3xl);
+    align-items: start;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .footer-title {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-heading);
+    margin: 0;
+    line-height: var(--line-height-tight);
+  }
+
+  .footer-description {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-light);
+    margin: 0;
+    max-width: 40ch;
+  }
+
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-2xl);
+  }
+
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .footer-section-title {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-heading);
+    margin: 0;
+    line-height: var(--line-height-tight);
+  }
+
+  .footer-link-list {
+    list-style: none !important;
+    list-style-type: none !important;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .footer-link-list li {
+    list-style: none !important;
+    list-style-type: none !important;
+    margin: 0;
+  }
+
+  .footer-link {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  .footer-link:hover {
+    color: var(--color-link);
+    transform: translateX(2px);
+  }
+
+  .footer-icon {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--spacing-2xl);
+    border-top: 1px solid var(--color-border-light);
+    gap: var(--spacing-lg);
+  }
+
+  .footer-legal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .footer-copyright {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    margin: 0;
+  }
+
+  .footer-licenses {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+
+  .footer-license-link {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  .footer-license-link:hover {
+    color: var(--color-link);
+  }
+
+  .footer-external-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+    opacity: 0.7;
+  }
+
+  .footer-separator {
+    color: var(--color-text-lighter);
+    font-size: var(--font-size-sm);
+  }
+
+  .footer-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-xs);
+  }
+
+  .footer-version {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-lighter);
+    font-family: var(--font-family-mono);
+  }
+
+  .footer-made-with {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-lighter);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  .footer-heart {
+    width: 0.875rem;
+    height: 0.875rem;
+    color: #ef4444;
+    animation: heartbeat 2s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .footer-main {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-2xl);
+    }
+
+    .footer-links {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-xl);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .site-footer {
+      padding: var(--spacing-2xl) 0 var(--spacing-xl);
+    }
+
+    .footer-content {
+      gap: var(--spacing-2xl);
+      padding: 0 var(--container-padding-mobile);
+    }
+
+    .footer-links {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+    }
+
+    .footer-meta {
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .site-footer {
+      padding: var(--spacing-xl) 0 var(--spacing-lg);
+    }
+
+    .footer-content {
+      gap: var(--spacing-xl);
+      padding: 0 var(--container-padding-mobile);
+    }
+
+    .footer-main {
+      gap: var(--spacing-xl);
+    }
+
+    .footer-title {
+      font-size: var(--font-size-xl);
+    }
+
+    .footer-description {
+      font-size: var(--font-size-sm);
+    }
+
+    .footer-section-title {
+      font-size: var(--font-size-base);
+    }
+
+    .footer-link {
+      font-size: var(--font-size-xs);
+    }
+  }
+
+  /* Dark theme adjustments */
+  html[data-theme="dark"] .site-footer {
+    background-color: var(--color-bg-tertiary);
+    border-top-color: var(--color-border-dark);
+  }
+
+  html[data-theme="dark"] .footer-bottom {
+    border-top-color: var(--color-border-dark);
+  }
+</style>
