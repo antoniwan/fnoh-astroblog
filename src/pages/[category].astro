@@ -31,8 +31,7 @@ const pageTitle = categoryInfo ? categoryInfo.title : category;
 			<span class="category-emoji">{categoryInfo?.emoji || '📁'}</span>
 			<h1 class="category-title">{pageTitle}</h1>
 		</div>
-		<p class="category-description">{categoryInfo?.description || `Posts in the ${category} category`}</p>
-		<p class="post-count">{categoryPosts.length} post{categoryPosts.length !== 1 ? 's' : ''}</p>
+		<p class="category-description">{categoryInfo?.description} <strong>{categoryPosts.length} writing{categoryPosts.length !== 1 ? 's' : ''}</strong>.</p>
 	</header>
 
 	<main class="category-content">
