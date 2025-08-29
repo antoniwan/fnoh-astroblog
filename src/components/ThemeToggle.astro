@@ -8,62 +8,31 @@ import { Sun, Moon } from 'lucide-astro';
 </button>
 
 <script>
-  // Theme toggle functionality
+  // Simplified theme toggle functionality
   const themeToggle = document.getElementById('theme-toggle');
   const htmlElement = document.documentElement;
   
-  // Check for saved theme preference or default to light
+  // Get current theme
   const currentTheme = localStorage.getItem('theme') || 'light';
   htmlElement.setAttribute('data-theme', currentTheme);
   
-  // Update button state
-  function updateButtonState() {
-    const theme = htmlElement.getAttribute('data-theme');
-    if (theme === 'dark') {
-      htmlElement.classList.add('dark');
-    } else {
-      htmlElement.classList.remove('dark');
-    }
-    
-    // Ensure html and body have proper theme colors
-    const computedStyle = getComputedStyle(htmlElement);
-    const bgColor = computedStyle.getPropertyValue('--color-bg');
-    const textColor = computedStyle.getPropertyValue('--color-text');
-    
-    htmlElement.style.backgroundColor = bgColor;
-    htmlElement.style.color = textColor;
-    
-    if (document.body) {
-      document.body.style.backgroundColor = bgColor;
-      document.body.style.color = textColor;
-    }
-  }
-  
-  // Toggle theme
+  // Toggle theme function
   function toggleTheme() {
     const currentTheme = htmlElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     
     htmlElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-    updateButtonState();
+    
+    // Update button state
+    htmlElement.classList.toggle('dark', newTheme === 'dark');
   }
-  
-  // Initialize
-  updateButtonState();
   
   // Event listener
   themeToggle?.addEventListener('click', toggleTheme);
   
-  // Ensure theme is applied on page load
-  document.addEventListener('DOMContentLoaded', updateButtonState);
-  
-  // Also apply theme when page becomes visible (for better theme switching)
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) {
-      updateButtonState();
-    }
-  });
+  // Initialize button state
+  htmlElement.classList.toggle('dark', currentTheme === 'dark');
 </script>
 
 <style>

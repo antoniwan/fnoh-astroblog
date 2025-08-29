@@ -1,6 +1,6 @@
 /* ===== ESSENTIAL TYPOGRAPHY ===== */
 
-/* Base typography - Modern field notes feel */
+/* Base typography - Open Sans for classic, versatile digital reading */
 body {
   font-family: var(--font-family);
   font-size: var(--font-size-base);
@@ -13,10 +13,10 @@ body {
   font-feature-settings: "liga" 1, "kern" 1;
 }
 
-/* Headings - Bold, versatile sans */
+/* Headings - DM Serif Text for elegant, readable headings */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-normal);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
   margin: 0 0 var(--spacing) 0;
@@ -27,36 +27,36 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: var(--font-size-5xl);
-  font-weight: var(--font-weight-extrabold);
+  font-weight: var(--font-weight-normal);
   letter-spacing: var(--letter-spacing-tight);
   line-height: var(--line-height-tight);
 }
 
 h2 {
   font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-normal);
   letter-spacing: var(--letter-spacing-tight);
 }
 
 h3 {
   font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-normal);
   letter-spacing: var(--letter-spacing-tight);
 }
 
 h4 {
   font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-normal);
 }
 
 h5 {
   font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-normal);
 }
 
 h6 {
   font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-normal);
 }
 
 /* Paragraphs and text - Modern field notes readability */
@@ -96,7 +96,7 @@ li {
   text-align: left;
 }
 
-/* Enhanced typography for Charter - Full-width optimized */
+/* Enhanced typography for Open Sans - Full-width optimized */
 .article-content,
 .prose {
   font-size: var(--font-size-lg);
@@ -126,7 +126,7 @@ li {
   max-width: 100%;
 }
 
-/* Blockquotes - Modern field notes style */
+/* Blockquotes - DM Serif Text for elegant quotes */
 blockquote {
   margin: var(--spacing-xl) 0;
   padding: var(--spacing) var(--spacing-lg);

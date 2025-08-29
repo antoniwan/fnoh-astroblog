@@ -8,4 +8,8 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	site: 'https://fieldnotesonhumanity.com',
 	integrations: [mdx(), sitemap()],
+	build: {
+		// Enable tree-shaking and dead code elimination
+		inlineStylesheets: 'auto',
+	},
 });
