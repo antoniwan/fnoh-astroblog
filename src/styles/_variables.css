@@ -3,6 +3,7 @@
   /* Basic colors */
   --color-text: #000;
   --color-bg: #fff;
+  --color-bg-secondary: #f8f9fa;
   --color-link: #0066cc;
   --color-border: #ccc;
   
@@ -68,6 +69,7 @@
 
 /* Layout - Full width */
 --max-width: 100%;
+--container-max-width: 1200px;
 --container-padding: 2rem;
 
 /* Additional spacing variables */
@@ -99,6 +101,7 @@
 html[data-theme="dark"] {
   --color-text: #e5e5e5 !important;
   --color-bg: #1a1a1a !important;
+  --color-bg-secondary: #2d2d2d !important;
   --color-link: #66b3ff !important;
   --color-border: #404040 !important;
   --color-link-hover: #99ccff !important;
