@@ -1,0 +1,141 @@
+---
+import FormattedDate from '../FormattedDate.astro';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+	title: string;
+	description: string;
+	href: string;
+	heroImage?: ImageMetadata;
+	pubDate: Date;
+	updatedDate?: Date;
+	showImage?: boolean;
+	class?: string;
+}
+
+const { 
+	title, 
+	description, 
+	href, 
+	heroImage, 
+	pubDate, 
+	updatedDate, 
+	showImage = true,
+	class: className = ''
+} = Astro.props;
+---
+
+<article class:list={['post-card', className]}>
+	{showImage && heroImage && (
+		<div class="post-image">
+			<img 
+				src={heroImage.src} 
+				alt={title}
+				width={400}
+				height={200}
+				loading="lazy"
+				decoding="async"
+			/>
+		</div>
+	)}
+	<div class="post-content">
+		<h2><a href={href}>{title}</a></h2>
+		<p class="post-excerpt">{description}</p>
+		<div class="post-meta">
+			<time datetime={pubDate.toISOString()}>
+				<FormattedDate date={pubDate} />
+			</time>
+			{updatedDate && (
+				<span class="updated">
+					Updated: <FormattedDate date={updatedDate} />
+				</span>
+			)}
+		</div>
+	</div>
+</article>
+
+<style>
+	.post-card {
+		border: 1px solid var(--color-border);
+		border-radius: var(--border-radius-lg);
+		overflow: hidden;
+		transition: all var(--transition-fast);
+		box-shadow: var(--shadow-sm);
+		will-change: transform;
+	}
+	
+	.post-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
+		border-color: var(--color-link);
+	}
+	
+	.post-image {
+		width: 100%;
+		height: 200px;
+		overflow: hidden;
+		background-color: var(--color-bg-secondary);
+	}
+	
+	.post-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform var(--transition-normal);
+	}
+	
+	.post-card:hover .post-image img {
+		transform: scale(1.05);
+	}
+	
+	.post-content {
+		padding: var(--spacing);
+	}
+	
+	.post-content h2 {
+		margin-bottom: var(--spacing-sm);
+		font-size: var(--font-size-xl);
+	}
+	
+	.post-content h2 a {
+		color: var(--color-text);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+	
+	.post-content h2 a:hover {
+		color: var(--color-link);
+	}
+	
+	.post-excerpt {
+		margin-bottom: var(--spacing);
+		line-height: var(--line-height-relaxed);
+		color: var(--color-text);
+		opacity: 0.8;
+	}
+	
+	.post-meta {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-xs);
+		font-size: var(--font-size-sm);
+		color: var(--color-text);
+		opacity: 0.7;
+	}
+	
+	.post-meta time, .post-meta .updated {
+		display: block;
+	}
+	
+	@media (max-width: 1024px) {
+		.post-card {
+			/* Adjustments for tablet */
+		}
+	}
+	
+	@media (max-width: 768px) {
+		.post-card {
+			margin-bottom: var(--spacing);
+		}
+	}
+</style>

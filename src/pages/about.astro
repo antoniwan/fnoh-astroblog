@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_TITLE } from '../consts';
+import PageHeader from '../components/ui/PageHeader.astro';
 ---
 
 <BaseLayout 
@@ -8,7 +9,10 @@ import { SITE_TITLE } from '../consts';
 	description="Learn more about Field Notes on Humanity and the mission behind this thoughtful exploration of human nature."
 >
 	<div class="about-content">
-		<h1>About Field Notes on Humanity</h1>
+		<PageHeader
+			title="About Field Notes on Humanity"
+			description="Learn more about Field Notes on Humanity and the mission behind this thoughtful exploration of human nature."
+		/>
 		
 		<div class="mission">
 			<h2>Our Mission</h2>

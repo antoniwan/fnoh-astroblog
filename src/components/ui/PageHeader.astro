@@ -1,0 +1,89 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+	subtitle?: string;
+	class?: string;
+	centered?: boolean;
+}
+
+const { 
+	title, 
+	description, 
+	subtitle, 
+	class: className = '',
+	centered = true
+} = Astro.props;
+---
+
+<header class:list={['page-header', { 'centered': centered }, className]}>
+	<h1>{title}</h1>
+	{description && <p class="description">{description}</p>}
+	{subtitle && <p class="subtitle">{subtitle}</p>}
+</header>
+
+<style>
+	.page-header {
+		text-align: center;
+		margin-bottom: var(--spacing-2xl);
+		width: 100%;
+		max-width: 100%;
+	}
+	
+	.page-header.centered {
+		text-align: center;
+	}
+	
+	.page-header:not(.centered) {
+		text-align: left;
+	}
+	
+	.page-header h1 {
+		font-size: var(--font-size-5xl);
+		font-weight: var(--font-weight-extrabold);
+		letter-spacing: var(--letter-spacing-tight);
+		margin-bottom: var(--spacing);
+		color: var(--color-text);
+	}
+	
+	.description {
+		font-size: var(--font-size-lg);
+		color: var(--color-text);
+		opacity: 0.8;
+		margin: 0;
+		line-height: var(--line-height-relaxed);
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.subtitle {
+		font-size: var(--font-size-sm);
+		margin-top: var(--spacing-sm);
+		opacity: 0.6;
+		color: var(--color-text);
+	}
+	
+	/* Responsive adjustments */
+	@media (max-width: 1024px) {
+		.page-header {
+			margin-bottom: var(--spacing-xl);
+		}
+	}
+	
+	@media (max-width: 768px) {
+		.page-header h1 {
+			font-size: var(--font-size-4xl);
+		}
+		
+		.description {
+			font-size: var(--font-size-base);
+		}
+	}
+	
+	@media (max-width: 480px) {
+		.page-header h1 {
+			font-size: var(--font-size-3xl);
+		}
+	}
+</style>

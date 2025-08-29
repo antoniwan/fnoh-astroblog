@@ -1,0 +1,76 @@
+---
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+	src: ImageMetadata;
+	alt: string;
+	title?: string;
+	width?: number;
+	height?: number;
+	class?: string;
+	centered?: boolean;
+	rounded?: boolean;
+}
+
+const { 
+	src, 
+	alt, 
+	title, 
+	width = 800, 
+	height = 400, 
+	class: className = '',
+	centered = true,
+	rounded = true
+} = Astro.props;
+---
+
+<div class:list={['hero-image', { 'centered': centered, 'rounded': rounded }, className]}>
+	<img 
+		src={src.src} 
+		alt={alt}
+		title={title || alt}
+		width={width}
+		height={height}
+		loading="lazy"
+		decoding="async"
+	/>
+</div>
+
+<style>
+	.hero-image {
+		width: 100%;
+		margin-bottom: var(--spacing-xl);
+		text-align: center;
+	}
+	
+	.hero-image.centered {
+		text-align: center;
+	}
+	
+	.hero-image:not(.centered) {
+		text-align: left;
+	}
+	
+	.hero-image img {
+		max-width: 100%;
+		height: auto;
+		width: 100%;
+		object-fit: cover;
+		transition: transform var(--transition-normal);
+	}
+	
+	.hero-image.rounded img {
+		border-radius: var(--border-radius-md);
+	}
+	
+	.hero-image:hover img {
+		transform: scale(1.02);
+	}
+	
+	/* Responsive adjustments */
+	@media (max-width: 768px) {
+		.hero-image {
+			margin-bottom: var(--spacing-lg);
+		}
+	}
+</style>

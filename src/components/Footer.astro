@@ -9,12 +9,12 @@ import {
   Github, 
   Youtube, 
   Laptop, 
-  ArrowUp,
   Rss,
   FileText,
   ExternalLink
 } from 'lucide-astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import ScrollToTop from './ui/ScrollToTop.astro';
 
 const today = new Date();
 ---
@@ -41,43 +41,10 @@ const today = new Date();
     </div>
   </div>
   
-  <button id="scroll-to-top" class="scroll-to-top" aria-label="Scroll to top">
-    <ArrowUp />
-  </button>
+  <ScrollToTop />
 </footer>
 
-<script>
-  // Optimized scroll to top functionality
-  (function() {
-    const scrollToTopBtn = document.getElementById('scroll-to-top');
-    if (!scrollToTopBtn) return;
-    
-    let scrollTimeout: ReturnType<typeof setTimeout>;
-    
-    // Throttled scroll handler for better performance
-    function handleScroll() {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        const shouldShow = window.pageYOffset > 300;
-        scrollToTopBtn.classList.toggle('visible', shouldShow);
-      }, 100);
-    }
-    
-    // Scroll to top when clicked
-    scrollToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-    
-    // Use passive scroll listener for better performance
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Initial check
-    handleScroll();
-  })();
-</script>
+
 
 <style>
   .footer {
@@ -237,47 +204,7 @@ const today = new Date();
     font-weight: 500;
   }
   
-  .scroll-to-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    background-color: #8b5cf6;
-    color: white;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(1rem);
-    transition: all var(--transition-fast);
-    z-index: 1000;
-  }
-  
-  .scroll-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-  
-  .scroll-to-top:hover {
-    background-color: #7c3aed;
-    transform: translateY(-0.25rem);
-  }
-  
-  .scroll-to-top:focus {
-    outline: 2px solid var(--color-focus);
-    outline-offset: 2px;
-  }
-  
-  .scroll-to-top svg {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
+
   
   @media (max-width: 1024px) {
     .footer-content {
@@ -317,12 +244,7 @@ const today = new Date();
       padding: var(--spacing) var(--container-padding-mobile);
     }
     
-    .scroll-to-top {
-      bottom: 1rem;
-      right: 1rem;
-      width: 2.5rem;
-      height: 2.5rem;
-    }
+
   }
   
   @media (max-width: 480px) {

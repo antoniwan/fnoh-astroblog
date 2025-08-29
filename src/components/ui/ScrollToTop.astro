@@ -1,0 +1,140 @@
+---
+import { ArrowUp } from 'lucide-astro';
+
+interface Props {
+	class?: string;
+	threshold?: number;
+	position?: 'bottom-right' | 'bottom-left' | 'bottom-center';
+}
+
+const { 
+	class: className = '',
+	threshold = 300,
+	position = 'bottom-right'
+} = Astro.props;
+---
+
+<button id="scroll-to-top" class:list={['scroll-to-top', `position-${position}`, className]} aria-label="Scroll to top">
+	<ArrowUp />
+</button>
+
+<script define:vars={{ threshold, position }}>
+	// Optimized scroll to top functionality
+	(function() {
+		const scrollToTopBtn = document.getElementById('scroll-to-top');
+		if (!scrollToTopBtn) return;
+		
+		let scrollTimeout: ReturnType<typeof setTimeout>;
+		
+		// Throttled scroll handler for better performance
+		function handleScroll() {
+			clearTimeout(scrollTimeout);
+			scrollTimeout = setTimeout(() => {
+				const shouldShow = window.pageYOffset > threshold;
+				scrollToTopBtn.classList.toggle('visible', shouldShow);
+			}, 100);
+		}
+		
+		// Scroll to top when clicked
+		scrollToTopBtn.addEventListener('click', () => {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+		});
+		
+		// Use passive scroll listener for better performance
+		window.addEventListener('scroll', handleScroll, { passive: true });
+		
+		// Initial check
+		handleScroll();
+	})();
+</script>
+
+<style>
+	.scroll-to-top {
+		position: fixed;
+		width: 3rem;
+		height: 3rem;
+		border-radius: 50%;
+		background-color: #8b5cf6;
+		color: white;
+		border: none;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(1rem);
+		transition: all var(--transition-fast);
+		z-index: 1000;
+	}
+	
+	.scroll-to-top.position-bottom-right {
+		bottom: 2rem;
+		right: 2rem;
+	}
+	
+	.scroll-to-top.position-bottom-left {
+		bottom: 2rem;
+		left: 2rem;
+	}
+	
+	.scroll-to-top.position-bottom-center {
+		bottom: 2rem;
+		left: 50%;
+		transform: translateX(-50%) translateY(1rem);
+	}
+	
+	.scroll-to-top.visible {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+	
+	.scroll-to-top.position-bottom-center.visible {
+		transform: translateX(-50%) translateY(0);
+	}
+	
+	.scroll-to-top:hover {
+		background-color: #7c3aed;
+		transform: translateY(-0.25rem);
+	}
+	
+	.scroll-to-top.position-bottom-center:hover {
+		transform: translateX(-50%) translateY(-0.25rem);
+	}
+	
+	.scroll-to-top:focus {
+		outline: 2px solid var(--color-focus);
+		outline-offset: 2px;
+	}
+	
+	.scroll-to-top svg {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+	
+	/* Responsive adjustments */
+	@media (max-width: 768px) {
+		.scroll-to-top {
+			width: 2.5rem;
+			height: 2.5rem;
+		}
+		
+		.scroll-to-top.position-bottom-right,
+		.scroll-to-top.position-bottom-left {
+			bottom: 1rem;
+		}
+		
+		.scroll-to-top.position-bottom-center {
+			bottom: 1rem;
+		}
+		
+		.scroll-to-top svg {
+			width: 1rem;
+			height: 1rem;
+		}
+	}
+</style>

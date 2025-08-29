@@ -2,7 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE_TITLE } from '../../consts';
-import FormattedDate from '../../components/FormattedDate.astro';
+import PostCard from '../../components/ui/PostCard.astro';
+import PageHeader from '../../components/ui/PageHeader.astro';
 
 // Get all posts and sort by publication date
 const allPosts = await getCollection('writings');
@@ -20,42 +21,22 @@ const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 	description="Explore thoughtful reflections on humanity, personal growth, and the human condition through our collection of writings."
 >
 	<div class="writings-index">
-		<header class="page-header">
-			<h1>Writings</h1>
-			<p>Thoughtful explorations of what it means to be human</p>
-			<p class="posts-count">Showing {initialPosts.length} of {totalPosts} writings</p>
-		</header>
+		<PageHeader
+			title="Writings"
+			description="Thoughtful explorations of what it means to be human"
+			subtitle={`Showing ${initialPosts.length} of ${totalPosts} writings`}
+		/>
 		
 		<div class="posts-grid">
 			{initialPosts.map((post) => (
-				<article class="post-card">
-					{post.data.heroImage && (
-						<div class="post-image">
-							<img 
-								src={post.data.heroImage.src} 
-								alt={post.data.title}
-								width={400}
-								height={200}
-								loading="lazy"
-								decoding="async"
-							/>
-						</div>
-					)}
-					<div class="post-content">
-						<h2><a href={`/writings/${post.id}`}>{post.data.title}</a></h2>
-						<p class="post-excerpt">{post.data.description}</p>
-						<div class="post-meta">
-							<time datetime={post.data.pubDate.toISOString()}>
-								<FormattedDate date={post.data.pubDate} />
-							</time>
-							{post.data.updatedDate && (
-								<span class="updated">
-									Updated: <FormattedDate date={post.data.updatedDate} />
-								</span>
-							)}
-						</div>
-					</div>
-				</article>
+				<PostCard
+					title={post.data.title}
+					description={post.data.description}
+					href={`/writings/${post.id}`}
+					heroImage={post.data.heroImage}
+					pubDate={post.data.pubDate}
+					updatedDate={post.data.updatedDate}
+				/>
 			))}
 		</div>
 		
@@ -78,7 +59,7 @@ const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 
 <script>
 	// Lazy load more posts for better performance
-	const loadMoreBtn = document.getElementById('load-more');
+	const loadMoreBtn = document.getElementById('load-more') as HTMLButtonElement;
 	const postsGrid = document.querySelector('.posts-grid');
 	
 	if (loadMoreBtn && postsGrid) {
@@ -108,109 +89,12 @@ const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 		padding: var(--spacing-xl) var(--container-padding);
 	}
 	
-	.page-header {
-		text-align: center;
-		margin-bottom: var(--spacing-2xl);
-	}
-	
-	.page-header h1 {
-		font-size: var(--font-size-5xl);
-		font-weight: var(--font-weight-extrabold);
-		letter-spacing: var(--letter-spacing-tight);
-		margin-bottom: var(--spacing);
-	}
-	
-	.page-header p {
-		font-size: var(--font-size-lg);
-		color: var(--color-text);
-		opacity: 0.8;
-		margin: 0;
-	}
-	
-	.posts-count {
-		font-size: var(--font-size-sm);
-		margin-top: var(--spacing-sm);
-		opacity: 0.6;
-	}
-	
 	.posts-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 		gap: var(--spacing-xl);
 		width: 100%;
 		max-width: 100%;
-	}
-	
-	.post-card {
-		border: 1px solid var(--color-border);
-		border-radius: var(--border-radius-lg);
-		overflow: hidden;
-		transition: all var(--transition-fast);
-		box-shadow: var(--shadow-sm);
-		will-change: transform;
-	}
-	
-	.post-card:hover {
-		transform: translateY(-4px);
-		box-shadow: var(--shadow-lg);
-		border-color: var(--color-link);
-	}
-	
-	.post-image {
-		width: 100%;
-		height: 200px;
-		overflow: hidden;
-		background-color: var(--color-bg-secondary);
-	}
-	
-	.post-image img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		transition: transform var(--transition-normal);
-	}
-	
-	.post-card:hover .post-image img {
-		transform: scale(1.05);
-	}
-	
-	.post-content {
-		padding: var(--spacing);
-	}
-	
-	.post-content h2 {
-		margin-bottom: var(--spacing-sm);
-		font-size: var(--font-size-xl);
-	}
-	
-	.post-content h2 a {
-		color: var(--color-text);
-		text-decoration: none;
-		transition: color var(--transition-fast);
-	}
-	
-	.post-content h2 a:hover {
-		color: var(--color-link);
-	}
-	
-	.post-excerpt {
-		margin-bottom: var(--spacing);
-		line-height: var(--line-height-relaxed);
-		color: var(--color-text);
-		opacity: 0.8;
-	}
-	
-	.post-meta {
-		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-xs);
-		font-size: var(--font-size-sm);
-		color: var(--color-text);
-		opacity: 0.7;
-	}
-	
-	.post-meta time, .post-meta .updated {
-		display: block;
 	}
 	
 	.pagination {
