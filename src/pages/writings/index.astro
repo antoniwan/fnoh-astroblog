@@ -67,7 +67,7 @@ const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 			</div>
 		)}
 		
-		{posts.length === 0 && (
+		{totalPosts === 0 && (
 			<div class="no-posts">
 				<h2>No writings yet</h2>
 				<p>Check back soon for thoughtful reflections on humanity.</p>

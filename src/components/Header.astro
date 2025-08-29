@@ -24,7 +24,7 @@ import { Menu, X } from 'lucide-astro';
 				<X class="close-icon" />
 			</div>
 		</button>
-		
+  
 		<!-- Mobile Navigation Menu -->
 		<div class="mobile-nav" aria-hidden="true">
 			<div class="mobile-nav-links">
@@ -45,7 +45,7 @@ import { Menu, X } from 'lucide-astro';
 		const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
 		const mobileNav = document.querySelector('.mobile-nav');
 		let isNavOpen = false;
-		
+  
 		function toggleMobileNav() {
 			isNavOpen = !isNavOpen;
 			
@@ -296,11 +296,16 @@ import { Menu, X } from 'lucide-astro';
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background-color: var(--color-bg) !important;
+		background-color: var(--color-bg);
 		z-index: 999;
 		opacity: 0;
 		visibility: hidden;
 		transition: all var(--transition-normal);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+		/* Ensure full coverage */
+		min-height: 100vh;
+		min-width: 100vw;
 	}
 	
 	.mobile-nav.active {
@@ -319,38 +324,68 @@ import { Menu, X } from 'lucide-astro';
 		gap: var(--spacing-xl);
 		width: 100%;
 		background-color: var(--color-bg);
+		position: relative;
+		/* Ensure full background coverage */
+		min-height: 100vh;
+		min-width: 100vw;
+	}
+	
+	.mobile-nav-links::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: var(--color-bg);
+		z-index: -1;
+		/* Add subtle pattern overlay for better visual separation */
+		background-image: 
+			radial-gradient(circle at 25% 25%, rgba(var(--color-border-rgb), 0.03) 0%, transparent 50%),
+			radial-gradient(circle at 75% 75%, rgba(var(--color-border-rgb), 0.03) 0%, transparent 50%);
 	}
 	
 	.mobile-nav-links a {
 		font-size: var(--font-size-2xl);
 		font-weight: var(--font-weight-semibold);
-		padding: var(--spacing);
-		border-radius: var(--border-radius-md);
+		padding: var(--spacing-lg) var(--spacing-xl);
+		border-radius: var(--border-radius-lg);
 		transition: all var(--transition-fast);
 		text-align: center;
 		width: 100%;
 		max-width: 300px;
 		color: var(--color-text);
-		background-color: transparent;
+		background-color: var(--color-bg-secondary);
+		border: 2px solid var(--color-border);
+		text-decoration: none;
+		position: relative;
+		z-index: 1;
 	}
 	
 	.mobile-nav-links a:hover {
 		background-color: var(--color-hover-bg);
+		border-color: var(--color-link);
+		color: var(--color-link);
 		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+	}
+	
+	.mobile-nav-links a.active {
+		background-color: var(--color-link);
+		color: var(--color-bg);
+		border-color: var(--color-link);
+		font-weight: var(--font-weight-bold);
 	}
 	
 	.mobile-theme-toggle {
 		margin-top: var(--spacing-lg);
+		padding: var(--spacing);
+		background-color: var(--color-bg-secondary);
+		border-radius: var(--border-radius-lg);
+		border: 2px solid var(--color-border);
 	}
 	
-	/* Dark theme mobile nav */
-	html[data-theme="dark"] .mobile-nav {
-		background-color: var(--color-bg) !important;
-	}
-	
-	html[data-theme="dark"] .mobile-nav-links {
-		background-color: var(--color-bg);
-	}
+	/* Dark theme mobile nav - now handled by CSS variables */
 	
 	/* Responsive Design */
 	@media (max-width: 1024px) {
