@@ -289,9 +289,7 @@ import { Menu, X } from 'lucide-astro';
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background-color: rgba(var(--color-bg-rgb, 255, 255, 255), 0.95) !important;
-		backdrop-filter: blur(20px);
-		-webkit-backdrop-filter: blur(20px);
+		background-color: var(--color-bg) !important;
 		z-index: 999;
 		opacity: 0;
 		visibility: hidden;
@@ -313,6 +311,7 @@ import { Menu, X } from 'lucide-astro';
 		padding: var(--spacing-3xl) var(--container-padding);
 		gap: var(--spacing-xl);
 		width: 100%;
+		background-color: var(--color-bg);
 	}
 	
 	.mobile-nav-links a {
@@ -324,6 +323,8 @@ import { Menu, X } from 'lucide-astro';
 		text-align: center;
 		width: 100%;
 		max-width: 300px;
+		color: var(--color-text);
+		background-color: transparent;
 	}
 	
 	.mobile-nav-links a:hover {
@@ -337,7 +338,11 @@ import { Menu, X } from 'lucide-astro';
 	
 	/* Dark theme mobile nav */
 	html[data-theme="dark"] .mobile-nav {
-		background-color: rgba(var(--color-bg-rgb, 26, 26, 26), 0.95) !important;
+		background-color: var(--color-bg) !important;
+	}
+	
+	html[data-theme="dark"] .mobile-nav-links {
+		background-color: var(--color-bg);
 	}
 	
 	/* Responsive Design */

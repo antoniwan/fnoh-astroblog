@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
 
 // Get all blog posts
 const posts = await getCollection('writings');
@@ -10,159 +11,43 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.pubDate).getTime() - ne
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-		<p class="welcome-text">
-			Welcome to a thoughtful exploration of what it means to be human in an ever-changing world. 
-			This space serves as a collection of reflections, observations, and shared experiences from 
-			the ongoing journey of human becoming.
-		</p>
+	<p class="welcome-text">
+		Welcome to a thoughtful exploration of what it means to be human in an ever-changing world. 
+		This space serves as a collection of reflections, observations, and shared experiences from 
+		the ongoing journey of human becoming.
+	</p>
 
-	<div class="masonry-container">
-		<div class="masonry-grid" id="masonry-grid">
-			{sortedPosts.map((post) => {
-				// Calculate reading time (rough estimate: 200 words per minute)
-				const wordCount = post.body ? post.body.split(' ').length : 0;
-				const readingTime = Math.ceil(wordCount / 200);
-				
-				return (
-					<article class="post-card" data-post-id={post.id}>
-						<a href={`/writings/${post.id}`} class="post-link">
-							{post.data.heroImage && (
-								<div class="post-image">
-									<img 
-										src={post.data.heroImage.src} 
-										alt={post.data.title}
-										loading="lazy"
-										width="400"
-										height="300"
-									/>
-								</div>
-							)}
-							<div class="post-content">
-								<h2 class="post-title">{post.data.title}</h2>
-								<p class="post-excerpt">{post.data.description}</p>
-								<div class="post-meta">
-									<span class="reading-time">{readingTime} min read</span>
-									<time class="pub-date" datetime={post.data.pubDate.toISOString()}>
-										{post.data.pubDate.toLocaleDateString('en-US', { 
-											year: 'numeric', 
-											month: 'long', 
-											day: 'numeric' 
-										})}
-									</time>
-								</div>
-							</div>
-						</a>
-					</article>
-				);
-			})}
-		</div>
-		
-		<div class="load-more-container">
-			<button class="load-more-btn" id="load-more-btn" style="display: none;">
-				Load More Posts
-			</button>
-		</div>
+	<div class="posts-grid">
+		{sortedPosts.map((post) => (
+			<article class="post-card">
+				{post.data.heroImage && (
+					<div class="post-image">
+						<img 
+							src={post.data.heroImage.src} 
+							alt={post.data.title}
+							width={400}
+							height={200}
+						/>
+					</div>
+				)}
+				<div class="post-content">
+					<h2><a href={`/writings/${post.id}`}>{post.data.title}</a></h2>
+					<p class="post-excerpt">{post.data.description}</p>
+					<div class="post-meta">
+						<time datetime={post.data.pubDate.toISOString()}>
+							<FormattedDate date={post.data.pubDate} />
+						</time>
+						{post.data.updatedDate && (
+							<span class="updated">
+								Updated: <FormattedDate date={post.data.updatedDate} />
+							</span>
+						)}
+					</div>
+				</div>
+			</article>
+		))}
 	</div>
 </BaseLayout>
-
-<script>
-	// Infinite scroll and masonry functionality
-	document.addEventListener('DOMContentLoaded', function() {
-		const masonryGrid = document.getElementById('masonry-grid') as HTMLElement;
-		const loadMoreBtn = document.getElementById('load-more-btn') as HTMLButtonElement;
-		
-		if (!masonryGrid) return;
-		
-		// Initialize masonry layout
-		function initMasonry() {
-			const cards = masonryGrid.querySelectorAll('.post-card') as NodeListOf<HTMLElement>;
-			const containerWidth = masonryGrid.offsetWidth;
-			const cardWidth = 350; // Fixed card width
-			const gap = 24; // Gap between cards
-			const columns = Math.floor((containerWidth + gap) / (cardWidth + gap));
-			
-			// Reset positioning
-			cards.forEach(card => {
-				card.style.position = 'static';
-				card.style.transform = 'none';
-			});
-			
-			// Calculate positions for masonry layout
-			const columnHeights = new Array(columns).fill(0);
-			
-			cards.forEach(card => {
-				// Find the shortest column
-				const shortestColumn = columnHeights.indexOf(Math.min(...columnHeights));
-				const x = shortestColumn * (cardWidth + gap);
-				const y = columnHeights[shortestColumn];
-				
-				// Position the card
-				card.style.position = 'absolute';
-				card.style.left = x + 'px';
-				card.style.top = y + 'px';
-				card.style.width = cardWidth + 'px';
-				
-				// Update column height
-				columnHeights[shortestColumn] += card.offsetHeight + gap;
-			});
-			
-			// Set container height
-			masonryGrid.style.height = Math.max(...columnHeights) + 'px';
-		}
-		
-		// Debounced resize handler
-		let resizeTimeout: ReturnType<typeof setTimeout>;
-		window.addEventListener('resize', function() {
-			clearTimeout(resizeTimeout);
-			resizeTimeout = setTimeout(initMasonry, 250);
-		});
-		
-		// Initialize masonry on load
-		window.addEventListener('load', initMasonry);
-		
-		// Re-initialize when images load
-		const images = masonryGrid.querySelectorAll('img');
-		images.forEach(img => {
-			img.addEventListener('load', initMasonry);
-		});
-		
-		// Intersection Observer for infinite scroll
-		const observerOptions = {
-			root: null,
-			rootMargin: '100px',
-			threshold: 0.1
-		};
-		
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-					// Load more posts when reaching the end
-					loadMorePosts();
-				}
-			});
-		}, observerOptions);
-		
-		// Observe the last card
-		function observeLastCard() {
-			const cards = masonryGrid.querySelectorAll('.post-card');
-			if (cards.length > 0) {
-				observer.observe(cards[cards.length - 1]);
-			}
-		}
-		
-		// Simulate loading more posts (in a real app, this would fetch from an API)
-		function loadMorePosts() {
-			// For demo purposes, we'll just show the load more button
-			// In a real implementation, you'd fetch more posts here
-			if (loadMoreBtn) {
-				loadMoreBtn.style.display = 'block';
-			}
-		}
-		
-		// Initialize observation
-		observeLastCard();
-	});
-</script>
 
 <style>
 	.welcome-text {
@@ -172,37 +57,26 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.pubDate).getTime() - ne
 		max-width: 800px;
 	}
 	
-	.masonry-container {
+	.posts-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		gap: var(--spacing-xl);
 		width: 100%;
 		max-width: 100%;
-		margin-bottom: var(--spacing-3xl);
-	}
-	
-	.masonry-grid {
-		position: relative;
-		width: 100%;
-		margin: 0;
 	}
 	
 	.post-card {
-		background: var(--color-bg);
-		border-radius: var(--border-radius-lg);
-		box-shadow: var(--shadow-sm);
-		overflow: hidden;
-		transition: all var(--transition-normal);
 		border: 1px solid var(--color-border);
+		border-radius: var(--border-radius-lg);
+		overflow: hidden;
+		transition: all var(--transition-fast);
+		box-shadow: var(--shadow-sm);
 	}
 	
 	.post-card:hover {
 		transform: translateY(-4px);
 		box-shadow: var(--shadow-lg);
 		border-color: var(--color-link);
-	}
-	
-	.post-link {
-		text-decoration: none;
-		color: inherit;
-		display: block;
 	}
 	
 	.post-image {
@@ -223,79 +97,59 @@ const sortedPosts = posts.sort((a, b) => new Date(b.data.pubDate).getTime() - ne
 	}
 	
 	.post-content {
-		padding: var(--spacing-lg);
+		padding: var(--spacing);
 	}
 	
-	.post-title {
-		font-family: var(--font-family-heading);
+	.post-content h2 {
+		margin-bottom: var(--spacing-sm);
 		font-size: var(--font-size-xl);
-		font-weight: var(--font-weight-semibold);
-		margin: 0 0 var(--spacing-sm) 0;
-		line-height: var(--line-height-tight);
+	}
+	
+	.post-content h2 a {
 		color: var(--color-text);
+		text-decoration: none;
+		transition: color var(--transition-fast);
+	}
+	
+	.post-content h2 a:hover {
+		color: var(--color-link);
 	}
 	
 	.post-excerpt {
-		font-family: var(--font-family);
-		font-size: var(--font-size-base);
+		margin-bottom: var(--spacing);
 		line-height: var(--line-height-relaxed);
-		color: var(--color-muted);
-		margin: 0 0 var(--spacing-md) 0;
-		display: -webkit-box;
-		-webkit-line-clamp: 3;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
+		color: var(--color-text);
+		opacity: 0.8;
 	}
 	
 	.post-meta {
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		flex-direction: column;
+		gap: var(--spacing-xs);
 		font-size: var(--font-size-sm);
-		color: var(--color-muted-light);
+		color: var(--color-text);
+		opacity: 0.7;
 	}
 	
-	.reading-time {
-		font-weight: var(--font-weight-medium);
+	.post-meta time, .post-meta .updated {
+		display: block;
 	}
 	
-	.pub-date {
-		font-style: italic;
-	}
-	
-	.load-more-container {
-		text-align: left;
-		margin-top: var(--spacing-2xl);
-	}
-	
-	.load-more-btn {
-		background: var(--color-link);
-		color: white;
-		border: none;
-		padding: var(--spacing-sm) var(--spacing-xl);
-		border-radius: var(--border-radius-md);
-		font-family: var(--font-family-heading);
-		font-weight: var(--font-weight-semibold);
-		font-size: var(--font-size-base);
-		cursor: pointer;
-		transition: all var(--transition-fast);
-	}
-	
-	.load-more-btn:hover {
-		background: var(--color-link-hover);
-		transform: translateY(-2px);
-		box-shadow: var(--shadow-md);
+	@media (max-width: 1024px) {
+		.posts-grid {
+			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+			gap: var(--spacing-lg);
+		}
 	}
 	
 	@media (max-width: 768px) {
-		.post-card {
-			position: static !important;
-			width: 100% !important;
-			margin-bottom: var(--spacing-lg);
+		.posts-grid {
+			grid-template-columns: 1fr;
+			gap: var(--spacing);
 		}
 		
-		.masonry-grid {
-			height: auto !important;
+		.post-card {
+			margin-bottom: var(--spacing);
 		}
 	}
 </style>
