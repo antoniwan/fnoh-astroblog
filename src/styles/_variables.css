@@ -1,39 +1,74 @@
-/* ===== OPTIMIZED CSS VARIABLES ===== */
+/* ===== ENHANCED EDITORIAL COLOR SCHEME ===== */
 :root {
-  /* Basic colors */
-  --color-text: #000;
-  --color-bg: #fff;
-  --color-bg-secondary: #f8f9fa;
-  --color-link: #0066cc;
-  --color-border: #ccc;
+  /* Primary editorial colors - warm, paper-like tones */
+  --color-text: #1a1a1a;
+  --color-bg: #fefefe;
+  --color-bg-secondary: #f8f6f3;
+  --color-bg-tertiary: #f2f0ed;
+  
+  /* Enhanced link colors - professional blue */
+  --color-link: #1e40af;
+  --color-link-hover: #1e3a8a;
+  --color-link-visited: #7c3aed;
+  
+  /* Editorial borders and dividers */
+  --color-border: #d1d5db;
+  --color-border-light: #e5e7eb;
+  --color-border-dark: #9ca3af;
   
   /* RGB color values for backdrop blur effects */
-  --color-bg-rgb: 255, 255, 255;
-  --color-border-rgb: 204, 204, 204;
+  --color-bg-rgb: 254, 254, 254;
+  --color-border-rgb: 209, 213, 219;
   
-  /* Enhanced color system - simplified */
-  --color-link-hover: #0052a3;
-  --color-focus: #0066cc;
-  --color-code-bg: #f5f5f5;
-  --color-code-text: #333;
-  --color-blockquote-bg: rgba(0, 0, 0, 0.02);
-  --color-table-header-bg: rgba(0, 0, 0, 0.05);
-  --color-input-bg: #fff;
-  --color-selection-bg: rgba(0, 102, 204, 0.2);
-  --color-selection-text: inherit;
-  --color-hover-bg: rgba(0, 0, 0, 0.05);
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-muted: rgba(0, 0, 0, 0.6);
-  --color-muted-light: rgba(0, 0, 0, 0.3);
+  /* Enhanced editorial color system */
+  --color-focus: #3b82f6;
+  --color-focus-ring: rgba(59, 130, 246, 0.3);
   
-  /* Typography system - simplified */
-  --font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-family-heading: 'DM Serif Text', Georgia, 'Times New Roman', serif;
-  --font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  /* Code and technical elements */
+  --color-code-bg: #f8f9fa;
+  --color-code-border: #e5e7eb;
+  --color-code-text: #374151;
+  --color-inline-code-bg: #f3f4f6;
   
-  /* Font sizes - simplified scale */
+  /* Editorial content elements */
+  --color-blockquote-bg: #f8f6f3;
+  --color-blockquote-border: #d97706;
+  --color-blockquote-text: #92400e;
+  --color-table-header-bg: #f9fafb;
+  --color-table-border: #e5e7eb;
+  
+  /* Form and interactive elements */
+  --color-input-bg: #ffffff;
+  --color-input-border: #d1d5db;
+  --color-input-focus: #3b82f6;
+  
+  /* Selection and focus states */
+  --color-selection-bg: rgba(59, 130, 246, 0.2);
+  --color-selection-text: #1a1a1a;
+  --color-hover-bg: rgba(0, 0, 0, 0.04);
+  
+  /* Status colors - muted and professional */
+  --color-success: #059669;
+  --color-success-bg: #ecfdf5;
+  --color-warning: #d97706;
+  --color-warning-bg: #fffbeb;
+  --color-error: #dc2626;
+  --color-error-bg: #fef2f2;
+  
+  /* Text hierarchy colors */
+  --color-muted: #6b7280;
+  --color-muted-light: #9ca3af;
+  --color-muted-lighter: #d1d5db;
+  --color-heading: #111827;
+  --color-subtle: #f9fafb;
+  
+  /* Enhanced typography system - editorial fonts */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-heading: 'Merriweather', Georgia, 'Times New Roman', serif;
+  --font-family-serif: 'Merriweather', Georgia, 'Times New Roman', serif;
+  --font-family-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  
+  /* Font sizes - editorial scale */
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -45,7 +80,7 @@
   --font-size-5xl: 3rem;
   --font-size-6xl: 3.75rem;
   
-  /* Font weights */
+  /* Font weights - editorial hierarchy */
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -53,19 +88,20 @@
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
   
-  /* Line heights */
+  /* Line heights - optimized for reading */
   --line-height-tight: 1.25;
   --line-height-snug: 1.375;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.625;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.75;
   --line-height-loose: 2;
   
-  /* Letter spacing */
+  /* Letter spacing - editorial precision */
   --letter-spacing-tight: -0.025em;
   --letter-spacing-normal: 0;
   --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
   
-  /* Spacing system - simplified calculations */
+  /* Spacing system - editorial rhythm */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing: 1rem;
@@ -75,57 +111,91 @@
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem;
   
-  /* Layout - simplified */
-  --container-padding: 1.5rem;
-  --container-padding-mobile: 1rem;
+  /* Layout - editorial proportions */
+  --container-padding: 2rem;
+  --container-padding-mobile: 1.5rem;
+  --max-width: 65ch;
+  --max-width-wide: 80ch;
   
   /* Breakpoints */
   --breakpoint-mobile: 480px;
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1024px;
+  --breakpoint-wide: 1280px;
   
-  /* Transitions - simplified */
+  /* Transitions - smooth editorial experience */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.2s ease;
   --transition-slow: 0.3s ease;
   
-  /* Border radius */
+  /* Border radius - subtle editorial style */
   --border-radius-sm: 4px;
   --border-radius-md: 6px;
   --border-radius-lg: 8px;
+  --border-radius-xl: 12px;
   
-  /* Shadows - simplified */
+  /* Shadows - editorial depth */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark theme variables - simplified */
+/* Dark theme - sophisticated dark editorial */
 html[data-theme="dark"] {
-  --color-text: #e5e5e5;
-  --color-bg: #1a1a1a;
-  --color-bg-secondary: #2d2d2d;
-  --color-link: #66b3ff;
-  --color-border: #404040;
-  --color-link-hover: #99ccff;
-  --color-focus: #66b3ff;
-  --color-code-bg: #2d2d2d;
-  --color-code-text: #e5e5e5;
-  --color-blockquote-bg: rgba(255, 255, 255, 0.05);
-  --color-table-header-bg: rgba(255, 255, 255, 0.1);
-  --color-input-bg: #2d2d2d;
-  --color-selection-bg: rgba(102, 179, 255, 0.3);
-  --color-hover-bg: rgba(255, 255, 255, 0.1);
+  --color-text: #f3f4f6;
+  --color-bg: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-bg-tertiary: #334155;
+  
+  --color-link: #60a5fa;
+  --color-link-hover: #93c5fd;
+  --color-link-visited: #a78bfa;
+  
+  --color-border: #475569;
+  --color-border-light: #64748b;
+  --color-border-dark: #334155;
+  
+  --color-bg-rgb: 15, 23, 42;
+  --color-border-rgb: 71, 85, 105;
+  
+  --color-focus: #60a5fa;
+  --color-focus-ring: rgba(96, 165, 250, 0.3);
+  
+  --color-code-bg: #1e293b;
+  --color-code-border: #475569;
+  --color-code-text: #e2e8f0;
+  --color-inline-code-bg: #334155;
+  
+  --color-blockquote-bg: #1e293b;
+  --color-blockquote-border: #f59e0b;
+  --color-blockquote-text: #fbbf24;
+  --color-table-header-bg: #1e293b;
+  --color-table-border: #475569;
+  
+  --color-input-bg: #1e293b;
+  --color-input-border: #475569;
+  --color-input-focus: #60a5fa;
+  
+  --color-selection-bg: rgba(96, 165, 250, 0.3);
+  --color-selection-text: #f3f4f6;
+  --color-hover-bg: rgba(255, 255, 255, 0.05);
+  
   --color-success: #34d399;
+  --color-success-bg: #064e3b;
   --color-warning: #fbbf24;
+  --color-warning-bg: #451a03;
   --color-error: #f87171;
-  --color-muted: rgba(255, 255, 255, 0.6);
-  --color-muted-light: rgba(255, 255, 255, 0.3);
+  --color-error-bg: #450a0a;
+  
+  --color-muted: #94a3b8;
+  --color-muted-light: #cbd5e1;
+  --color-muted-lighter: #475569;
+  --color-heading: #f8fafc;
+  --color-subtle: #1e293b;
+  
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
-  
-  /* Dark theme RGB values */
-  --color-bg-rgb: 26, 26, 26;
-  --color-border-rgb: 64, 64, 64;
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.4);
 }

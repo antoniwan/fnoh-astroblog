@@ -1,4 +1,5 @@
-/* ===== ESSENTIAL CSS ENTRY POINT ===== */
+/* ===== ENHANCED EDITORIAL CSS ENTRY POINT ===== */
+@import './_fonts.css';
 @import './_variables.css';
 @import './_reset.css';
 @import './_typography.css';
