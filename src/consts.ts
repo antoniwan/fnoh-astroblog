@@ -8,31 +8,26 @@ export const CATEGORIES = {
   'lessons-in-balance': {
     title: 'Lessons in Balance',
     emoji: '⚖️',
-    description: 'Explorations of fatherhood, stepfatherhood, respect, communication, and boundaries. Content that distills personal experiences into universal values and principles.'
+    description: 'Content covering fatherhood, stepfatherhood, respect, communication, and boundaries. Personal experiences examined for patterns and principles.'
   },
   'chaos-notes': {
     title: 'Chaos Notes',
     emoji: '🌀',
-    description: 'Short, raw fragments and field notes in process. Unfiltered observations and thoughts marked as works-in-progress to maintain authenticity.'
+    description: 'Short fragments and field notes in process. Observations and thoughts marked as works-in-progress.'
   },
-  'recovery-reconstruction': {
-    title: 'Recovery & Reconstruction',
-    emoji: '🏗️',
-    description: 'Frameworks, rituals, and scaffolding for personal growth and empathy. Documentation of survival strategies and rebuilding processes.'
-  },
-  'empathy-healing': {
-    title: 'Empathy & Healing',
-    emoji: '💝',
-    description: 'Essays on emotional regulation, compassion, and creating safety. Exploration of how empathy functions as both shield and bridge in human relationships.'
+  'healing-growth': {
+    title: 'Healing & Growth',
+    emoji: '🌱',
+    description: 'Essays on emotional regulation, compassion, and creating safety. Frameworks, rituals, and scaffolding for personal growth and empathy. Documentation of survival strategies and rebuilding processes.'
   },
   'modern-life': {
     title: 'Modern Life (Systems & Culture)',
     emoji: '🌐',
-    description: 'Critical analysis of contemporary systems including capitalism, media, technology, and cultural phenomena. Anthropological examination of living in the present moment.'
+    description: 'Analysis of contemporary systems including capitalism, media, technology, and cultural phenomena. Anthropological examination of living in the present moment.'
   },
   'curiosity-lab': {
     title: 'Curiosity Lab',
     emoji: '🧪',
-    description: 'Intellectual experiments, philosophical inquiries, and exploration of big questions. A sandbox for testing ideas and examining fundamental concepts.'
+    description: 'Intellectual experiments, philosophical inquiries, and exploration of big questions. Testing ground for ideas and examination of fundamental concepts.'
   }
 } as const;
