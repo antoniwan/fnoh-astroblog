@@ -34,22 +34,44 @@ const totalPosts = posts.length;
 
 		{Object.entries(CATEGORIES).map(([categoryKey, category]) => {
 			const categoryPosts = postsByCategory[categoryKey] || [];
+			const hasPosts = categoryPosts.length > 0;
+			
 			return (
-				<section class="toc-section">
-					<a href={`/${categoryKey}`} class="section-link">
-						<div class="section-header">
-							<span class="section-emoji">{category.emoji}</span>
-							<div class="section-info">
-								<h2 class="section-title">{category.title}</h2>
-								<p class="section-description">{category.description}</p>
+				<section class={`toc-section ${!hasPosts ? 'coming-soon' : ''}`}>
+					{hasPosts ? (
+						<a href={`/${categoryKey}`} class="section-link">
+							<div class="section-header">
+								<span class="section-emoji">{category.emoji}</span>
+								<div class="section-info">
+									<h2 class="section-title">{category.title}</h2>
+									<p class="section-description">{category.description}</p>
+								</div>
+								<div class="section-meta">
+									<span class="post-count">{categoryPosts.length}</span>
+									<span class="count-label">posts</span>
+									<span class="arrow">→</span>
+								</div>
 							</div>
-							<div class="section-meta">
-								<span class="post-count">{categoryPosts.length}</span>
-								<span class="count-label">posts</span>
-								<span class="arrow">→</span>
+						</a>
+					) : (
+						<div class="section-link coming-soon-link">
+							<div class="section-header">
+								<span class="section-emoji coming-soon-emoji">{category.emoji}</span>
+								<div class="section-info">
+									<h2 class="section-title">{category.title}</h2>
+									<p class="section-description">{category.description}</p>
+									<div class="coming-soon-badge">
+										<span class="badge-text">Coming Soon</span>
+									</div>
+								</div>
+								<div class="section-meta">
+									<span class="post-count coming-soon-count">0</span>
+									<span class="count-label">posts</span>
+									<span class="coming-soon-icon">⏳</span>
+								</div>
 							</div>
 						</div>
-					</a>
+					)}
 				</section>
 			);
 		})}
@@ -98,8 +120,6 @@ const totalPosts = posts.length;
 		margin: 0 auto var(--spacing-xl);
 		line-height: var(--line-height-relaxed);
 	}
-
-
 
 	.index-content {
 		/* Container component handles max-width and padding */
@@ -209,6 +229,74 @@ const totalPosts = posts.length;
 		color: var(--color-primary);
 	}
 
+	/* Coming Soon Styles */
+	.coming-soon-link {
+		cursor: default;
+		opacity: 0.7;
+		background: var(--color-background-muted, #f8f9fa);
+		border-color: var(--color-border-muted, #e9ecef);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.coming-soon-link::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			rgba(255, 255, 255, 0.1),
+			transparent
+		);
+		animation: shimmer 2s infinite;
+	}
+
+	@keyframes shimmer {
+		0% { left: -100%; }
+		100% { left: 100%; }
+	}
+
+	.coming-soon-emoji {
+		opacity: 0.6;
+		filter: grayscale(0.3);
+	}
+
+	.coming-soon-badge {
+		margin-top: var(--spacing-sm);
+	}
+
+	.badge-text {
+		display: inline-block;
+		background: var(--color-accent, #6c757d);
+		color: white;
+		font-size: var(--font-size-xs);
+		font-weight: var(--font-weight-medium);
+		padding: var(--spacing-xs) var(--spacing-sm);
+		border-radius: var(--border-radius-full);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	.coming-soon-count {
+		color: var(--color-text-lighter);
+	}
+
+	.coming-soon-icon {
+		font-size: var(--font-size-lg);
+		color: var(--color-text-lighter);
+		animation: pulse 2s infinite;
+	}
+
+	@keyframes pulse {
+		0%, 100% { opacity: 0.6; }
+		50% { opacity: 1; }
+	}
+
 	@media (max-width: 768px) {
 		.index-header {
 			padding: var(--spacing-xl) 0;
@@ -247,6 +335,10 @@ const totalPosts = posts.length;
 		.section-link:hover .arrow {
 			transform: rotate(90deg) translateY(-4px);
 		}
+
+		.coming-soon-badge {
+			margin-top: var(--spacing-xs);
+		}
 	}
 
 	@media (max-width: 480px) {
@@ -260,6 +352,11 @@ const totalPosts = posts.length;
 
 		.section-description {
 			font-size: var(--font-size-sm);
+		}
+
+		.badge-text {
+			font-size: var(--font-size-2xs);
+			padding: var(--spacing-2xs) var(--spacing-xs);
 		}
 	}
 </style>

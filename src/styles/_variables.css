@@ -144,18 +144,27 @@
   --transition-normal: 0.2s ease;
   --transition-slow: 0.3s ease;
   
+  /* Shadows - editorial depth */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+  
+  /* Additional colors for coming soon states */
+  --color-background-muted: #f8f9fa;
+  --color-border-muted: #e9ecef;
+  --color-accent: #6c757d;
+  
+  /* Additional spacing */
+  --spacing-2xs: 0.25rem;
+  
   /* Border radius - subtle editorial style */
   --border-radius-sm: 4px;
   --border-radius-md: 6px;
   --border-radius: 6px;
   --border-radius-lg: 8px;
   --border-radius-xl: 12px;
-  
-  /* Shadows - editorial depth */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+  --border-radius-full: 9999px;
 }
 
 /* Dark theme - sophisticated dark editorial */
