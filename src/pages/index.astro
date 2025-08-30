@@ -20,7 +20,11 @@ const uncategorizedPosts = posts.filter(post => !post.data.category);
 const totalPosts = posts.length;
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<BaseLayout 
+	title={SITE_TITLE} 
+	description={SITE_DESCRIPTION}
+	type="organization"
+>
 	<Container size="lg" as="header" class="index-header">
 		<h1 class="site-title">{SITE_TITLE}</h1>
 		<p class="site-description">{SITE_DESCRIPTION} Currently featuring <strong>{totalPosts} total writings</strong> across various categories.</p>

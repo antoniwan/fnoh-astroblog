@@ -4,7 +4,12 @@ import Container from '../components/ui/Container.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<BaseLayout 
+	title={`About - ${SITE_TITLE}`} 
+	description={SITE_DESCRIPTION}
+	type="website"
+	section="About"
+>
 	<Container size="md" class="about-container">
 		<div class="about-content">
 			<h1>About</h1>

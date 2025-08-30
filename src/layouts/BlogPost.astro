@@ -6,13 +6,19 @@ import PostMeta from '../components/ui/PostMeta.astro';
 
 type Props = CollectionEntry<'writings'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, category } = Astro.props;
 ---
 
 <BaseLayout 
 	title={title} 
 	description={description} 
 	class="blog-post"
+	type="article"
+	publishedTime={pubDate.toISOString()}
+	modifiedTime={updatedDate?.toISOString()}
+	author="Field Notes on Humanity"
+	section={category || undefined}
+	tags={category ? [category as string] : []}
 >
 	<article>
 		{heroImage && (

@@ -10,6 +10,12 @@ interface Props {
 	showHeader?: boolean;
 	showFooter?: boolean;
 	class?: string;
+	type?: 'website' | 'article' | 'organization';
+	publishedTime?: string;
+	modifiedTime?: string;
+	author?: string;
+	section?: string;
+	tags?: string[];
 }
 
 const {
@@ -18,14 +24,30 @@ const {
 	image,
 	showHeader = true,
 	showFooter = true,
-	class: className = ''
+	class: className = '',
+	type = 'website',
+	publishedTime,
+	modifiedTime,
+	author,
+	section,
+	tags = []
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} image={image} />
+		<BaseHead 
+			title={title} 
+			description={description} 
+			image={image}
+			type={type}
+			publishedTime={publishedTime}
+			modifiedTime={modifiedTime}
+			author={author}
+			section={section}
+			tags={tags}
+		/>
 	</head>
 	<body class={className}>
 		{showHeader && <Header />}

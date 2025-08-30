@@ -5,16 +5,33 @@ import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import { SITE_TITLE } from '../consts';
+import StructuredData from './StructuredData.astro';
 
 interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata;
+	type?: 'website' | 'article' | 'organization';
+	publishedTime?: string;
+	modifiedTime?: string;
+	author?: string;
+	section?: string;
+	tags?: string[];
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = FallbackImage } = Astro.props;
+const { 
+	title, 
+	description, 
+	image = FallbackImage,
+	type = 'website',
+	publishedTime,
+	modifiedTime,
+	author,
+	section,
+	tags = []
+} = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -44,9 +61,17 @@ const { title, description, image = FallbackImage } = Astro.props;
   })();
 </script>
 
-<!-- Typography: Open Sans for body (classic, versatile, digital-optimized), DM Serif Text for headings (elegant serif) -->
+<!-- Resource Hints for Performance -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+<!-- Preload critical resources -->
+<link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" />
+<link rel="preload" href="/_astro/global.css" as="style" />
+
+<!-- Typography: Open Sans for body (classic, versatile, digital-optimized), DM Serif Text for headings (elegant serif) -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
 
 <link
@@ -64,13 +89,24 @@ const { title, description, image = FallbackImage } = Astro.props;
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="author" content="Field Notes on Humanity" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="language" content="en-US" />
+<meta name="revisit-after" content="7 days" />
+<meta name="theme-color" content="#000000" />
+<meta name="color-scheme" content="light dark" />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image.src, Astro.url)} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:locale" content="en_US" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -78,3 +114,33 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+<meta property="twitter:image:alt" content={title} />
+<meta property="twitter:site" content="@fieldnotesonhumanity" />
+<meta property="twitter:creator" content="@fieldnotesonhumanity" />
+
+<!-- Article-specific meta tags -->
+{type === 'article' && publishedTime && (
+	<>
+		<meta property="article:published_time" content={publishedTime} />
+		<meta property="article:modified_time" content={modifiedTime || publishedTime} />
+		{author && <meta property="article:author" content={author} />}
+		{section && <meta property="article:section" content={section} />}
+		{tags.length > 0 && tags.map(tag => (
+			<meta property="article:tag" content={tag} />
+		))}
+	</>
+)}
+
+<!-- Structured Data -->
+<StructuredData
+	type={type}
+	title={title}
+	description={description}
+	url={canonicalURL.toString()}
+	image={new URL(image.src, Astro.url).toString()}
+	publishedTime={publishedTime}
+	modifiedTime={modifiedTime}
+	author={author}
+	section={section}
+	tags={tags}
+/>

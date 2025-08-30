@@ -25,7 +25,12 @@ const categoryInfo = CATEGORIES[category as keyof typeof CATEGORIES];
 const pageTitle = categoryInfo ? categoryInfo.title : category;
 ---
 
-<BaseLayout title={`${pageTitle} - ${SITE_TITLE}`} description={categoryInfo?.description || `Posts in the ${category} category`}>
+<BaseLayout 
+	title={`${pageTitle} - ${SITE_TITLE}`} 
+	description={categoryInfo?.description || `Posts in the ${category} category`}
+	type="website"
+	section={categoryInfo?.title}
+>
 	<header class="category-header">
 		<div class="category-info">
 			<span class="category-emoji">{categoryInfo?.emoji || '📁'}</span>
@@ -41,7 +46,7 @@ const pageTitle = categoryInfo ? categoryInfo.title : category;
 					<article class="post-card">
 						<a href={`/writings/${post.id}`} class="post-link">
 							<div class="post-image">
-								<img src={post.data.heroImage?.src || ''} alt="" loading="lazy" />
+								<img src={post.data.heroImage?.src || ''} alt={post.data.title || `Image for ${post.data.title}`} loading="lazy" />
 							</div>
 							<div class="post-content">
 								<h2 class="post-title">{post.data.title}</h2>
