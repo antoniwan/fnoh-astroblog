@@ -2,7 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import HeroImage from '../components/ui/HeroImage.astro';
-import PostMeta from '../components/ui/PostMeta.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 
 type Props = CollectionEntry<'writings'>['data'];
 
@@ -20,183 +20,435 @@ const { title, description, pubDate, updatedDate, heroImage, category } = Astro.
 	section={category || undefined}
 	tags={category ? [category as string] : []}
 >
-	<article>
-		{heroImage && (
-			<HeroImage
-				src={heroImage}
-				alt={title}
-				width={1020}
-				height={510}
-			/>
-		)}
+	<article class="blog-post-container">
+		<!-- Sidebar -->
+		<aside class="blog-sidebar">
+			<div class="sidebar-content">
+				<header class="sidebar-header">
+					<h1 class="post-title">{title}</h1>
+					{description && (
+						<p class="post-subtitle">{description}</p>
+					)}
+				</header>
+				
+				<div class="post-meta-container">
+					<div class="meta-item">
+						<svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
+						</svg>
+						<span class="meta-text">
+							<FormattedDate date={pubDate} />
+						</span>
+					</div>
+					
+					{updatedDate && (
+						<div class="meta-item">
+							<svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+							</svg>
+							<span class="meta-text">
+								Updated <FormattedDate date={updatedDate} />
+							</span>
+						</div>
+					)}
+					
+					{category && (
+						<div class="meta-item">
+							<svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M3 3h18v18H3zM21 9H3M21 15H3M12 3v18"/>
+							</svg>
+							<span class="meta-text">{category}</span>
+						</div>
+					)}
+				</div>
+				
+				<div class="sidebar-divider"></div>
+				
+				<div class="reading-info">
+					<div class="reading-time-estimate">
+						<svg class="reading-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="12" cy="12" r="10"/>
+							<polyline points="12,6 12,12 16,14"/>
+						</svg>
+						<span>~5 min read</span>
+					</div>
+				</div>
+			</div>
+		</aside>
 		
-		<div class="content">
-			<header>
-				<h1>{title}</h1>
-				<div class="meta">
-					<PostMeta
-						pubDate={pubDate}
-						updatedDate={updatedDate}
-						showUpdatedDate={true}
+		<!-- Main Content -->
+		<main class="blog-main">
+			{heroImage && (
+				<div class="hero-image-container">
+					<HeroImage
+						src={heroImage}
+						alt={title}
+						width={1020}
+						height={510}
+						class="main-hero-image"
 					/>
 				</div>
-			</header>
+			)}
 			
-			<div class="prose">
-				<slot />
+			<div class="content-wrapper">
+				<div class="prose">
+					<slot />
+				</div>
 			</div>
-		</div>
+		</main>
 	</article>
 </BaseLayout>
 
 <style>
-	article {
+	.blog-post-container {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--spacing-2xl);
 		width: 100%;
 		max-width: 100%;
-		padding: 0 var(--container-padding);
+		padding: 0 var(--container-padding-mobile);
+		margin: 0 auto;
+		padding-top: calc(60px + var(--spacing-xl)); /* Account for fixed header */
 	}
 	
-	.content {
-		width: 100%;
-		max-width: 100%;
+	/* Sidebar Styles */
+	.blog-sidebar {
+		order: 1;
 	}
 	
-	header {
+	.sidebar-content {
+		position: sticky;
+		top: calc(60px + var(--spacing-xl)); /* Account for fixed header */
+	}
+	
+	.sidebar-header {
 		margin-bottom: var(--spacing-xl);
-		text-align: center;
 	}
 	
-	header h1 {
-		font-size: var(--font-size-5xl);
-		font-weight: var(--font-weight-extrabold);
+	.post-title {
+		font-family: var(--font-family-heading);
+		font-size: var(--font-size-3xl);
+		font-weight: var(--font-weight-bold);
+		line-height: var(--line-height-tight);
 		letter-spacing: var(--letter-spacing-tight);
-		margin-bottom: var(--spacing);
+		color: var(--color-heading);
+		margin-bottom: var(--spacing-lg);
 	}
 	
-	.meta {
-		color: var(--color-text);
-		opacity: 0.7;
-		font-size: var(--font-size-sm);
+	.post-subtitle {
+		font-size: var(--font-size-lg);
+		line-height: var(--line-height-relaxed);
+		color: var(--color-text-light);
+		font-weight: var(--font-weight-normal);
+		margin: 0;
+	}
+	
+	.post-meta-container {
+		margin-bottom: var(--spacing-xl);
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-xs);
+		gap: var(--spacing-sm);
+	}
+	
+	.meta-item {
+		display: flex;
 		align-items: center;
+		gap: var(--spacing-sm);
+		color: var(--color-text-light);
+		font-size: var(--font-size-sm);
+		padding: var(--spacing-sm) 0;
+	}
+	
+	.meta-icon {
+		width: 16px;
+		height: 16px;
+		color: var(--color-text-lighter);
+		opacity: 0.8;
+		flex-shrink: 0;
+	}
+	
+	.meta-text {
+		font-weight: var(--font-weight-medium);
+	}
+	
+	.sidebar-divider {
+		height: 1px;
+		background: var(--color-border-light);
+		margin: var(--spacing-xl) 0;
+		opacity: 0.6;
+	}
+	
+	.reading-info {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-sm);
+		color: var(--color-text-light);
+		font-size: var(--font-size-sm);
+		padding: var(--spacing-sm) 0;
+	}
+	
+	.reading-time-estimate {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-sm);
+		font-weight: var(--font-weight-medium);
+	}
+	
+	.reading-icon {
+		width: 16px;
+		height: 16px;
+		color: var(--color-text-lighter);
+		opacity: 0.8;
+	}
+	
+	/* Main Content Styles */
+	.blog-main {
+		order: 2;
+	}
+	
+	.hero-image-container {
+		margin-bottom: var(--spacing-2xl);
+	}
+	
+	.main-hero-image {
+		border-radius: var(--border-radius-xl);
+		overflow: hidden;
+		box-shadow: var(--shadow-lg);
+	}
+	
+	.content-wrapper {
+		max-width: var(--max-width-wide);
 	}
 	
 	.prose {
 		width: 100%;
-		max-width: 100%;
 		line-height: var(--line-height-relaxed);
 		font-size: var(--font-size-base);
+		color: var(--color-text);
 	}
 	
 	.prose h2 {
+		font-family: var(--font-family-heading);
 		font-size: var(--font-size-3xl);
-		margin-top: var(--spacing-xl);
-		margin-bottom: var(--spacing);
+		margin-top: var(--spacing-2xl);
+		margin-bottom: var(--spacing-lg);
 		font-weight: var(--font-weight-bold);
+		color: var(--color-heading);
+		line-height: var(--line-height-tight);
 	}
 	
 	.prose h3 {
+		font-family: var(--font-family-heading);
 		font-size: var(--font-size-2xl);
-		margin-top: var(--spacing-lg);
-		margin-bottom: var(--spacing-sm);
+		margin-top: var(--spacing-xl);
+		margin-bottom: var(--spacing);
 		font-weight: var(--font-weight-semibold);
+		color: var(--color-heading);
+		line-height: var(--line-height-snug);
 	}
 	
 	.prose h4, .prose h5, .prose h6 {
+		font-family: var(--font-family-heading);
 		font-size: var(--font-size-xl);
 		margin-top: var(--spacing-lg);
 		margin-bottom: var(--spacing-sm);
 		font-weight: var(--font-weight-semibold);
+		color: var(--color-heading);
 	}
 	
 	.prose p {
-		margin-bottom: var(--spacing);
+		margin-bottom: var(--spacing-lg);
 		line-height: var(--line-height-relaxed);
+		font-size: var(--font-size-lg);
 	}
 	
 	.prose ul, .prose ol {
-		margin-bottom: var(--spacing);
-		padding-left: var(--spacing-lg);
+		margin-bottom: var(--spacing-lg);
+		padding-left: var(--spacing-xl);
 	}
 	
 	.prose li {
 		margin-bottom: var(--spacing-sm);
+		line-height: var(--line-height-relaxed);
 	}
 	
 	.prose blockquote {
-		margin: var(--spacing-xl) 0;
-		padding: var(--spacing) var(--spacing-lg);
-		border-left: 4px solid var(--color-link);
-		background-color: var(--color-blockquote-bg);
+		margin: var(--spacing-2xl) 0;
+		padding: var(--spacing-xl);
+		border-left: 4px solid var(--color-primary);
+		background: var(--color-blockquote-bg);
 		font-style: italic;
 		font-size: var(--font-size-lg);
+		border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
+		color: var(--color-blockquote-text);
 	}
 	
 	.prose code {
 		font-family: var(--font-family-mono);
 		font-size: var(--font-size-sm);
-		background-color: var(--color-code-bg);
+		background: var(--color-inline-code-bg);
 		color: var(--color-code-text);
 		padding: var(--spacing-xs) var(--spacing-sm);
 		border-radius: var(--border-radius-sm);
+		border: 1px solid var(--color-code-border);
 	}
 	
 	.prose pre {
 		font-family: var(--font-family-mono);
 		font-size: var(--font-size-sm);
-		background-color: var(--color-code-bg);
+		background: var(--color-code-bg);
 		color: var(--color-code-text);
-		padding: var(--spacing);
-		border-radius: var(--border-radius-md);
+		padding: var(--spacing-lg);
+		border-radius: var(--border-radius-lg);
 		overflow-x: auto;
-		margin: var(--spacing-xl) 0;
+		margin: var(--spacing-2xl) 0;
+		border: 1px solid var(--color-code-border);
+		box-shadow: var(--shadow-sm);
 	}
 	
 	.prose pre code {
 		background: none;
 		padding: 0;
+		border: none;
 	}
 	
 	.prose img {
 		max-width: 100%;
 		height: auto;
-		margin: var(--spacing-xl) 0;
-		border-radius: var(--border-radius-md);
+		margin: var(--spacing-2xl) 0;
+		border-radius: var(--border-radius-lg);
+		box-shadow: var(--shadow-md);
 	}
 	
 	.prose table {
 		width: 100%;
 		border-collapse: collapse;
-		margin: var(--spacing-xl) 0;
+		margin: var(--spacing-2xl) 0;
 		font-size: var(--font-size-sm);
+		border-radius: var(--border-radius-lg);
+		overflow: hidden;
+		box-shadow: var(--shadow-sm);
+		border: 1px solid var(--color-border);
 	}
 	
 	.prose th, .prose td {
-		padding: var(--spacing-sm);
+		padding: var(--spacing);
 		text-align: left;
 		border-bottom: 1px solid var(--color-border);
 	}
 	
 	.prose th {
-		background-color: var(--color-table-header-bg);
+		background: var(--color-table-header-bg);
 		font-weight: var(--font-weight-semibold);
+		color: var(--color-heading);
 	}
 	
-	@media (max-width: 1024px) {
-		article {
-			padding: 0 var(--container-padding-mobile);
-		}
+	.prose tr:hover {
+		background: var(--color-hover-bg);
 	}
 	
-	@media (max-width: 768px) {
-		article {
-			padding: 0 var(--container-padding-mobile);
+	/* Tablet Layout */
+	@media (min-width: 768px) {
+		.blog-post-container {
+			padding: 0 var(--container-padding);
+			gap: var(--spacing-3xl);
 		}
 		
-		header h1 {
+		.post-title {
 			font-size: var(--font-size-4xl);
+		}
+		
+		.prose h2 {
+			font-size: var(--font-size-4xl);
+		}
+		
+		.prose h3 {
+			font-size: var(--font-size-3xl);
+		}
+	}
+	
+	/* Desktop Layout */
+	@media (min-width: 1024px) {
+		.blog-post-container {
+			grid-template-columns: 350px 1fr;
+			gap: var(--spacing-3xl);
+			max-width: 1400px;
+		}
+		
+		.blog-sidebar {
+			order: 1;
+		}
+		
+		.blog-main {
+			order: 2;
+		}
+		
+		.sidebar-content {
+			position: sticky;
+			top: calc(60px + var(--spacing-xl)); /* Account for fixed header */
+		}
+		
+		.post-title {
+			font-size: var(--font-size-4xl);
+		}
+		
+		.prose h2 {
+			font-size: var(--font-size-4xl);
+		}
+		
+		.prose h3 {
+			font-size: var(--font-size-3xl);
+		}
+	}
+	
+	/* Wide Desktop Layout */
+	@media (min-width: 1280px) {
+		.blog-post-container {
+			grid-template-columns: 400px 1fr;
+			max-width: 1600px;
+		}
+		
+		.post-title {
+			font-size: var(--font-size-5xl);
+		}
+		
+		.prose h2 {
+			font-size: var(--font-size-5xl);
+		}
+	}
+	
+	/* Mobile Optimizations */
+	@media (max-width: 767px) {
+		.blog-post-container {
+			gap: var(--spacing-xl);
+			padding-top: calc(55px + var(--spacing-lg)); /* Account for mobile header height */
+		}
+		
+		.sidebar-content {
+			position: static;
+			padding: var(--spacing-lg) 0;
+		}
+		
+		.post-title {
+			font-size: var(--font-size-3xl);
+			text-align: center;
+		}
+		
+		.post-subtitle {
+			text-align: center;
+			font-size: var(--font-size-base);
+		}
+		
+		.post-meta-container {
+			align-items: center;
+		}
+		
+		.meta-item {
+			justify-content: center;
+		}
+		
+		.reading-info {
+			justify-content: center;
 		}
 		
 		.prose h2 {
@@ -207,8 +459,18 @@ const { title, description, pubDate, updatedDate, heroImage, category } = Astro.
 			font-size: var(--font-size-xl);
 		}
 		
-		.prose h4, .prose h5, .prose h6 {
-			font-size: var(--font-size-lg);
+		.prose p {
+			font-size: var(--font-size-base);
+		}
+		
+		.prose blockquote {
+			padding: var(--spacing-lg);
+			margin: var(--spacing-xl) 0;
+		}
+		
+		.prose pre {
+			padding: var(--spacing);
+			margin: var(--spacing-xl) 0;
 		}
 	}
 </style>
