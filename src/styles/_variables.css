@@ -126,8 +126,7 @@
   --spacing-3xl: 4rem;
   
   /* Layout - editorial proportions */
-  --container-padding: 2rem;
-  --container-padding-mobile: 1.5rem;
+  
   --max-width: 65ch;
   --max-width-wide: 80ch;
   --max-width-sm: 45ch;

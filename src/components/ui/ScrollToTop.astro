@@ -18,38 +18,27 @@ const {
 	<ArrowUp />
 </button>
 
-<script define:vars={{ threshold, position }}>
-	// Optimized scroll to top functionality
-	(function() {
-		const scrollToTopBtn = document.getElementById('scroll-to-top');
-		if (!scrollToTopBtn) return;
-		
-		let scrollTimeout;
-		
-		// Throttled scroll handler for better performance
-		function handleScroll() {
-			clearTimeout(scrollTimeout);
-			scrollTimeout = setTimeout(() => {
-				const shouldShow = window.pageYOffset > threshold;
-				console.log('Scroll position:', window.pageYOffset, 'Threshold:', threshold, 'Should show:', shouldShow);
-				scrollToTopBtn.classList.toggle('visible', shouldShow);
-			}, 100);
-		}
-		
-		// Scroll to top when clicked
-		scrollToTopBtn.addEventListener('click', () => {
-			window.scrollTo({
-				top: 0,
-				behavior: 'smooth'
-			});
-		});
-		
-		// Use passive scroll listener for better performance
-		window.addEventListener('scroll', handleScroll, { passive: true });
-		
-		// Initial check
-		handleScroll();
-	})();
+<script define:vars={{ threshold }}>
+	// Simple scroll to top functionality
+	const scrollToTopBtn = document.getElementById('scroll-to-top');
+	if (!scrollToTopBtn) return;
+	
+	// Show/hide button based on scroll position
+	function handleScroll() {
+		const shouldShow = window.pageYOffset > threshold;
+		scrollToTopBtn.classList.toggle('visible', shouldShow);
+	}
+	
+	// Scroll to top when clicked
+	scrollToTopBtn.addEventListener('click', () => {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	});
+	
+	// Listen for scroll events
+	window.addEventListener('scroll', handleScroll, { passive: true });
+	
+	// Initial check
+	handleScroll();
 </script>
 
 <style>

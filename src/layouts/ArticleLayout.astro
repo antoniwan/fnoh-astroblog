@@ -1,6 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import Container from '../components/ui/Container.astro';
+
 import { type CollectionEntry, render } from 'astro:content';
 
 export interface Props {
@@ -12,7 +12,7 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-	<Container size="md" as="article" class="article">
+	<article class="article container-md">
 		<header class="article-header">
 			<h1>{post.data.title}</h1>
 			<p class="article-description">{post.data.description}</p>
@@ -39,12 +39,11 @@ const { Content } = await render(post);
 		<div class="article-content">
 			<Content />
 		</div>
-	</Container>
 </BaseLayout>
 
 <style>
 	.article {
-		/* Container component handles width, max-width, and padding */
+		/* Container utilities handle width, max-width, and padding */
 		background-color: var(--color-bg);
 		color: var(--color-text);
 	}

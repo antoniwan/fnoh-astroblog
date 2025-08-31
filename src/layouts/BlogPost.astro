@@ -106,7 +106,7 @@ const { title, description, pubDate, updatedDate, heroImage, category } = Astro.
 		gap: var(--spacing-2xl);
 		width: 100%;
 		max-width: 100%;
-		padding: 0 var(--container-padding-mobile);
+		padding: 0 var(--spacing-lg);
 		margin: 0 auto;
 		padding-top: calc(60px + var(--spacing-xl)); /* Account for fixed header */
 	}
@@ -350,7 +350,7 @@ const { title, description, pubDate, updatedDate, heroImage, category } = Astro.
 	/* Tablet Layout */
 	@media (min-width: 768px) {
 		.blog-post-container {
-			padding: 0 var(--container-padding);
+			padding: 0 var(--spacing-xl);
 			gap: var(--spacing-3xl);
 		}
 		

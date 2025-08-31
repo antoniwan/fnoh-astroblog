@@ -125,20 +125,20 @@ input:focus, textarea:focus, select:focus {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--container-padding);
+  padding: 0 var(--spacing-xl);
 }
 
 .container-wide {
   width: 100%;
   max-width: var(--max-width-wide);
   margin: 0 auto;
-  padding: 0 var(--container-padding);
+  padding: 0 var(--spacing-2xl);
 }
 
 .container-full {
   width: 100%;
   max-width: 100%;
-  padding: 0 var(--container-padding);
+  padding: 0 var(--spacing-xl);
 }
 
 /* Editorial content wrapper */
@@ -180,14 +180,6 @@ input:focus, textarea:focus, select:focus {
 
 /* Enhanced responsive design */
 @media (max-width: 1024px) {
-  .container,
-  .container-wide {
-    padding: 0 var(--container-padding-mobile);
-  }
-  
-  .container-full {
-    padding: 0 var(--container-padding-mobile);
-  }
   
   .editorial-content,
   .editorial-content-wide {
@@ -204,14 +196,6 @@ input:focus, textarea:focus, select:focus {
 }
 
 @media (max-width: 768px) {
-  .container,
-  .container-wide {
-    padding: 0 var(--container-padding-mobile);
-  }
-  
-  .container-full {
-    padding: 0 var(--container-padding-mobile);
-  }
   
   .editorial-content,
   .editorial-content-wide {

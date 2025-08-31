@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Container from '../components/ui/Container.astro';
+
 import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from '../consts';
 ---
 
@@ -10,7 +10,7 @@ import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from '../consts';
 	type="website"
 	section="About"
 >
-	<Container size="md" class="about-container">
+	<div class="about-container container-md">
 		<div class="about-content">
 			<h1>About the Field Notes on Humanity</h1>
 			
@@ -36,7 +36,7 @@ import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from '../consts';
 				These are my coordinates. Draw your own map.
 			</p>
 		</div>
-	</Container>
+	</div>
 </BaseLayout>
 
 <style>
