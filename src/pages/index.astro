@@ -101,15 +101,30 @@ const totalPosts = posts.length;
 		text-align: center;
 		margin-bottom: var(--spacing-3xl);
 		padding: var(--spacing-2xl) 0;
-		border-bottom: 2px solid var(--color-border);
+		border-bottom: 2px solid var(--color-border-light);
+		position: relative;
+	}
+
+	.index-header::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 60%;
+		height: 2px;
+		background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+		border-radius: var(--border-radius-sm);
 	}
 
 	.site-title {
+		font-family: var(--font-family-heading);
 		font-size: var(--font-size-4xl);
 		font-weight: var(--font-weight-bold);
 		margin-bottom: var(--spacing-lg);
-		color: var(--color-text);
-		letter-spacing: -0.02em;
+		color: var(--color-heading);
+		letter-spacing: var(--letter-spacing-tight);
+		line-height: var(--line-height-tight);
 	}
 
 	.site-description {
@@ -118,6 +133,7 @@ const totalPosts = posts.length;
 		max-width: 700px;
 		margin: 0 auto var(--spacing-xl);
 		line-height: var(--line-height-relaxed);
+		text-align: justify;
 	}
 
 	.index-content {
@@ -151,16 +167,34 @@ const totalPosts = posts.length;
 		display: block;
 		text-decoration: none;
 		color: inherit;
-		border: 2px solid var(--color-border-subtle);
+		border: 2px solid var(--color-border-light);
 		border-radius: var(--border-radius-lg);
-		transition: all 0.3s ease;
-		background: var(--color-background);
+		transition: all var(--transition-normal);
+		background: var(--color-bg);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.section-link::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+		opacity: 0;
+		transition: opacity var(--transition-normal);
 	}
 
 	.section-link:hover {
 		border-color: var(--color-primary);
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		box-shadow: var(--shadow-md);
 		transform: translateY(-2px);
+	}
+
+	.section-link:hover::before {
+		opacity: 1;
 	}
 
 	.section-header {
@@ -181,11 +215,13 @@ const totalPosts = posts.length;
 	}
 
 	.section-title {
+		font-family: var(--font-family-heading);
 		font-size: var(--font-size-xl);
 		font-weight: var(--font-weight-semibold);
-		color: var(--color-text);
+		color: var(--color-heading);
 		margin: 0 0 var(--spacing-sm) 0;
 		line-height: var(--line-height-tight);
+		letter-spacing: var(--letter-spacing-tight);
 	}
 
 	.section-description {
@@ -193,6 +229,7 @@ const totalPosts = posts.length;
 		color: var(--color-text-light);
 		margin: 0;
 		line-height: var(--line-height-relaxed);
+		text-align: justify;
 	}
 
 	.section-meta {
@@ -208,19 +245,21 @@ const totalPosts = posts.length;
 		font-size: var(--font-size-xl);
 		font-weight: var(--font-weight-bold);
 		color: var(--color-primary);
+		font-family: var(--font-family-heading);
 	}
 
 	.count-label {
 		font-size: var(--font-size-xs);
 		color: var(--color-text-lighter);
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		letter-spacing: var(--letter-spacing-wider);
+		font-weight: var(--font-weight-medium);
 	}
 
 	.arrow {
 		font-size: var(--font-size-lg);
 		color: var(--color-text-light);
-		transition: transform 0.3s ease;
+		transition: transform var(--transition-normal);
 	}
 
 	.section-link:hover .arrow {
@@ -232,8 +271,8 @@ const totalPosts = posts.length;
 	.coming-soon-link {
 		cursor: default;
 		opacity: 0.7;
-		background: var(--color-background-muted, #f8f9fa);
-		border-color: var(--color-border-muted, #e9ecef);
+		background: var(--color-bg-secondary);
+		border-color: var(--color-border-light);
 		position: relative;
 		overflow: hidden;
 	}
@@ -270,15 +309,15 @@ const totalPosts = posts.length;
 
 	.badge-text {
 		display: inline-block;
-		background: var(--color-accent, #6c757d);
+		background: var(--color-accent);
 		color: white;
 		font-size: var(--font-size-xs);
 		font-weight: var(--font-weight-medium);
 		padding: var(--spacing-xs) var(--spacing-sm);
 		border-radius: var(--border-radius-full);
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		letter-spacing: var(--letter-spacing-wider);
+		box-shadow: var(--shadow-sm);
 	}
 
 	.coming-soon-count {
@@ -354,8 +393,8 @@ const totalPosts = posts.length;
 		}
 
 		.badge-text {
-			font-size: var(--font-size-2xs);
-			padding: var(--spacing-2xs) var(--spacing-xs);
+			font-size: var(--font-size-xs);
+			padding: var(--spacing-xs) var(--spacing-sm);
 		}
 	}
 </style>

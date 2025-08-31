@@ -65,7 +65,20 @@ const categoryEmoji = getCategoryEmoji(category as CategoryKey);
 		text-align: center;
 		margin-bottom: var(--spacing-2xl);
 		padding: var(--spacing-xl) 0;
-		border-bottom: 1px solid var(--color-border);
+		border-bottom: 1px solid var(--color-border-light);
+		position: relative;
+	}
+
+	.category-header::after {
+		content: '';
+		position: absolute;
+		bottom: -1px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 60%;
+		height: 2px;
+		background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+		border-radius: var(--border-radius-sm);
 	}
 
 	.category-info {
@@ -81,10 +94,13 @@ const categoryEmoji = getCategoryEmoji(category as CategoryKey);
 	}
 
 	.category-title {
+		font-family: var(--font-family-heading);
 		font-size: var(--font-size-3xl);
 		font-weight: var(--font-weight-bold);
 		margin: 0;
-		color: var(--color-text);
+		color: var(--color-heading);
+		line-height: var(--line-height-tight);
+		letter-spacing: var(--letter-spacing-tight);
 	}
 
 	.category-description {
@@ -93,6 +109,7 @@ const categoryEmoji = getCategoryEmoji(category as CategoryKey);
 		max-width: 600px;
 		margin: 0 auto var(--spacing);
 		line-height: var(--line-height-relaxed);
+		text-align: justify;
 	}
 
 	.category-content {
@@ -115,6 +132,7 @@ const categoryEmoji = getCategoryEmoji(category as CategoryKey);
 		font-size: var(--font-size-lg);
 		color: var(--color-text-light);
 		margin-bottom: var(--spacing-lg);
+		text-align: justify;
 	}
 
 	.back-link {
@@ -122,11 +140,18 @@ const categoryEmoji = getCategoryEmoji(category as CategoryKey);
 		color: var(--color-primary);
 		text-decoration: none;
 		font-weight: var(--font-weight-medium);
-		transition: color 0.2s ease;
+		transition: all var(--transition-fast);
+		padding: var(--spacing-sm) var(--spacing-md);
+		border-radius: var(--border-radius-sm);
+		background-color: var(--color-bg-secondary);
+		border: 1px solid var(--color-border-light);
 	}
 
 	.back-link:hover {
 		color: var(--color-primary-dark);
+		background-color: var(--color-hover-bg);
+		transform: translateX(-2px);
+		box-shadow: var(--shadow-sm);
 	}
 
 	@media (max-width: 768px) {

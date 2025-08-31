@@ -161,16 +161,17 @@ const navigationLinks = [
 		width: 100%;
 		max-width: 100vw;
 		padding: 0.75rem var(--spacing-xl);
-		border-bottom: 1px solid rgba(var(--color-border-rgb, 204, 204, 204), 0.15);
-		background-color: rgba(var(--color-bg-rgb, 255, 255, 255), 0.8);
+		border-bottom: 1px solid rgba(var(--color-border-rgb, 209, 213, 219), 0.15);
+		background-color: rgba(var(--color-bg-rgb, 250, 250, 250), 0.8);
 		backdrop-filter: blur(0px);
 		-webkit-backdrop-filter: blur(0px);
-		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		transition: all var(--transition-normal);
 		height: 60px;
 		display: flex;
 		align-items: center;
 		box-sizing: border-box;
 		overflow: hidden;
+		box-shadow: var(--shadow-sm);
 	}
 	
 	/* Ensure the header content is properly contained */
@@ -181,11 +182,11 @@ const navigationLinks = [
 	
 	/* Scrolled state with backdrop blur and border */
 	.header-nav[data-scrolled="true"] {
-		background-color: rgba(var(--color-bg-rgb, 255, 255, 255), 0.95);
+		background-color: rgba(var(--color-bg-rgb, 250, 250, 250), 0.95);
 		backdrop-filter: blur(20px);
 		-webkit-backdrop-filter: blur(20px);
-		border-bottom-color: rgba(var(--color-border-rgb, 204, 204, 204), 0.25);
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		border-bottom-color: rgba(var(--color-border-rgb, 209, 213, 219), 0.25);
+		box-shadow: var(--shadow-md);
 	}
 	
 	/* Scroll hide/show animations */
@@ -199,14 +200,14 @@ const navigationLinks = [
 	
 	/* Dark theme adjustments */
 	html[data-theme="dark"] .header-nav {
-		background-color: rgba(var(--color-bg-rgb, 26, 26, 26), 0.8);
+		background-color: rgba(var(--color-bg-rgb, 10, 10, 10), 0.8);
 		border-bottom-color: rgba(var(--color-border-rgb, 64, 64, 64), 0.2);
 	}
 	
 	html[data-theme="dark"] .header-nav[data-scrolled="true"] {
-		background-color: rgba(var(--color-bg-rgb, 26, 26, 26), 0.95);
+		background-color: rgba(var(--color-bg-rgb, 10, 10, 10), 0.95);
 		border-bottom-color: rgba(var(--color-border-rgb, 64, 64, 64), 0.3);
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+		box-shadow: var(--shadow-md);
 	}
 	
 	nav {
@@ -221,14 +222,16 @@ const navigationLinks = [
 	
 	header h1 {
 		margin: 0;
-		font-size: 1.25rem;
+		font-size: var(--font-size-xl);
 		font-weight: var(--font-weight-bold);
 		z-index: 1001;
-		line-height: 1.2;
+		line-height: var(--line-height-tight);
+		font-family: var(--font-family-heading);
+		letter-spacing: var(--letter-spacing-tight);
 	}
 	
 	header h1 a {
-		color: var(--color-text);
+		color: var(--color-heading);
 		text-decoration: none;
 		transition: color var(--transition-fast);
 	}
@@ -256,7 +259,7 @@ const navigationLinks = [
 		z-index: 1001;
 		transition: all var(--transition-fast);
 		color: var(--color-text);
-		border: 1px solid var(--color-border);
+		border: 1px solid var(--color-border-light);
 		position: relative;
 		overflow: hidden;
 		height: 2.5rem;
@@ -267,12 +270,14 @@ const navigationLinks = [
 		background-color: var(--color-hover-bg);
 		border-color: var(--color-link);
 		transform: scale(1.05);
+		box-shadow: var(--shadow-sm);
 	}
 	
 	.mobile-nav-toggle:focus {
 		outline: 2px solid var(--color-focus);
 		outline-offset: 2px;
 		border-color: var(--color-focus);
+		box-shadow: 0 0 0 4px var(--color-focus-ring);
 	}
 	
 	.icon-container {
@@ -370,15 +375,22 @@ const navigationLinks = [
 		text-decoration: none;
 		position: relative;
 		z-index: 1;
+		font-family: var(--font-family-heading);
+		letter-spacing: var(--letter-spacing-tight);
 	}
 	
 	.mobile-nav-links a:hover {
 		color: var(--color-link);
+		background-color: var(--color-hover-bg);
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-sm);
 	}
 	
 	.mobile-nav-links a.active {
 		color: var(--color-link);
 		font-weight: var(--font-weight-bold);
+		background-color: var(--color-bg-tertiary);
+		border: 1px solid var(--color-border-light);
 	}
 	
 	.mobile-theme-toggle {
@@ -423,7 +435,7 @@ const navigationLinks = [
 		}
 		
 		header h1 {
-			font-size: 1.125rem;
+			font-size: var(--font-size-lg);
 		}
 		
 		.mobile-nav-links a {
@@ -455,7 +467,7 @@ const navigationLinks = [
 		}
 		
 		header h1 {
-			font-size: 1rem;
+			font-size: var(--font-size-base);
 		}
 	}
 	

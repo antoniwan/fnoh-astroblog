@@ -102,6 +102,7 @@ const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category)
     color: var(--color-text);
     padding: var(--spacing-3xl) 0 var(--spacing-2xl);
     margin-top: var(--spacing-3xl);
+    box-shadow: var(--shadow-sm);
   }
 
   .footer-content {
@@ -131,6 +132,7 @@ const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category)
     color: var(--color-heading);
     margin: 0;
     line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
   }
 
   .footer-description {
@@ -139,6 +141,7 @@ const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category)
     color: var(--color-text-light);
     margin: 0;
     max-width: 40ch;
+    text-align: justify;
   }
 
   .footer-links {
@@ -160,6 +163,7 @@ const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category)
     color: var(--color-heading);
     margin: 0;
     line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
   }
 
   .footer-link-list {
@@ -187,11 +191,14 @@ const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category)
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
   }
 
   .footer-link:hover {
     color: var(--color-link);
     transform: translateX(2px);
+    background-color: var(--color-hover-bg);
   }
 
   .footer-icon {
@@ -219,6 +226,8 @@ const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category)
     font-size: var(--font-size-sm);
     color: var(--color-text-light);
     margin: 0;
+    font-family: var(--font-family-serif);
+    font-style: italic;
   }
 
   .footer-licenses {
@@ -236,10 +245,13 @@ const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category)
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
   }
 
   .footer-license-link:hover {
     color: var(--color-link);
+    background-color: var(--color-hover-bg);
   }
 
   .footer-external-icon {

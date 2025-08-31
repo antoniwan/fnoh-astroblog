@@ -47,19 +47,33 @@ const {
 		width: 3rem;
 		height: 3rem;
 		border-radius: 50%;
-		background-color: #ff0000;
+		background-color: var(--color-primary);
 		color: white;
-		border: 2px solid var(--color-border);
+		border: 2px solid var(--color-border-light);
 		cursor: pointer;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		opacity: 1;
-		visibility: visible;
-		transform: translateY(0);
-		transition: all var(--transition-fast);
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(1rem);
+		transition: all var(--transition-normal);
 		z-index: 9999;
 		box-shadow: var(--shadow-lg);
+		overflow: hidden;
+	}
+	
+	.scroll-to-top::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+		opacity: 0;
+		transition: opacity var(--transition-fast);
+		z-index: 0;
 	}
 	
 	.scroll-to-top.position-bottom-right {
@@ -89,9 +103,14 @@ const {
 	}
 	
 	.scroll-to-top:hover {
-		background-color: var(--color-link-hover);
+		background-color: var(--color-primary-dark);
 		transform: translateY(-0.25rem);
 		box-shadow: var(--shadow-xl);
+		border-color: var(--color-primary);
+	}
+	
+	.scroll-to-top:hover::before {
+		opacity: 1;
 	}
 	
 	.scroll-to-top.position-bottom-center:hover {
@@ -101,11 +120,14 @@ const {
 	.scroll-to-top:focus {
 		outline: 2px solid var(--color-focus);
 		outline-offset: 2px;
+		box-shadow: 0 0 0 4px var(--color-focus-ring);
 	}
 	
 	.scroll-to-top svg {
 		width: 1.25rem;
 		height: 1.25rem;
+		position: relative;
+		z-index: 1;
 	}
 	
 	/* Responsive adjustments */
@@ -129,13 +151,13 @@ const {
 	
 	/* Dark theme adjustments */
 	html[data-theme="dark"] .scroll-to-top {
-		background-color: var(--color-link);
+		background-color: var(--color-primary);
 		border-color: var(--color-border-dark);
 		box-shadow: var(--shadow-lg);
 	}
 	
 	html[data-theme="dark"] .scroll-to-top:hover {
-		background-color: var(--color-link-hover);
+		background-color: var(--color-primary-dark);
 		box-shadow: var(--shadow-xl);
 	}
 </style>

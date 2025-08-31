@@ -43,7 +43,9 @@ const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category)
       function toggleDropdown() {
         isOpen = !isOpen;
         
-        trigger.setAttribute('aria-expanded', isOpen.toString());
+        if (trigger) {
+          trigger.setAttribute('aria-expanded', isOpen.toString());
+        }
         dropdown.classList.toggle('open', isOpen);
         
         // Close other dropdowns
@@ -60,7 +62,9 @@ const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category)
       
       function closeDropdown() {
         isOpen = false;
-        trigger.setAttribute('aria-expanded', 'false');
+        if (trigger) {
+          trigger.setAttribute('aria-expanded', 'false');
+        }
         dropdown.classList.remove('open');
       }
       
