@@ -1,7 +1,7 @@
 ---
-// Import the global.css file here so that it is included on
+// Import the tailwind.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import "../styles/global.css";
+import "../styles/tailwind.css";
 import { SITE_TITLE } from "../consts";
 import StructuredData from "./StructuredData.astro";
 
@@ -65,12 +65,14 @@ const {
 <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
 <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <!-- Preload critical resources -->
 <link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" />
-<link rel="preload" href="/_astro/global.css" as="style" />
 
-<!-- Typography: Inter for body text, Merriweather for headings (loaded via CSS variables) -->
-<!-- Fonts are now loaded through our CSS variables for better performance -->
+<!-- Typography: Inter for body text, Merriweather for headings, JetBrains Mono for code -->
+<!-- Fonts are loaded from Google Fonts for optimal performance -->
 
 <meta name="generator" content={Astro.generator} />
 
