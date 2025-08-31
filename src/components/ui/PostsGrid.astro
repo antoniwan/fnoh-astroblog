@@ -23,16 +23,19 @@ const remainingPosts = totalPosts - initialPostsCount;
 ---
 
 <div class:list={[
-  "grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-xl w-full max-w-full items-start justify-items-stretch m-0 p-0 box-border min-w-0 lg:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] lg:gap-lg md:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] md:gap-lg md:px-md sm:grid-cols-1 sm:gap-base sm:px-sm xs:grid-cols-1 xs:gap-sm xs:px-xs",
+  "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full",
   className
 ]}>
-  {posts.map((post) => <PostCard post={post} class="w-full max-w-full m-0 p-0 box-border min-w-0" />)}
+  {posts.map((post) => <PostCard post={post} class="w-full" />)}
 </div>
 
 {
   showLoadMore && hasMorePosts && (
-    <div class="text-center mt-8 py-xl">
-      <button id="load-more" class="inline-block bg-primary-800 text-white border-none py-md px-xl rounded-lg text-base font-medium cursor-pointer transition-all duration-normal shadow-sm hover:bg-primary-900 hover:-translate-y-0.5 hover:shadow-md disabled:bg-text-lighter disabled:cursor-not-allowed disabled:transform-none disabled:shadow-sm">
+    <div class="text-center mt-8 py-8">
+      <button 
+        id="load-more" 
+        class="inline-block bg-blue-600 text-white border-none py-3 px-6 rounded-lg text-base font-medium cursor-pointer transition-all duration-200 shadow-sm hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-sm"
+      >
         Load More Writings ({remainingPosts} remaining)
       </button>
     </div>

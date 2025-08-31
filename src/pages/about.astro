@@ -14,163 +14,48 @@ const categories = await getAllCategories();
   type="website"
   section="About"
 >
-  <div class="about-container container-md">
-    <div class="about-content">
-      <h1>About the Field Notes on Humanity</h1>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="max-w-3xl mx-auto">
+      <h1 class="text-4xl font-bold text-gray-900 mb-8 text-center">About the Field Notes on Humanity</h1>
 
-      <p>
-        I've always wanted to "write this book". My field journal. My
-        personalized record of this 'modern' experiement we call life. Not a
-        theory of humanity, not a doctrine but what I've observed and am able to
-        report. My understandings of what it means to be human.
-      </p>
-      <p>
-        I write these notes so I don't forget what it costs, and what it gives,
-        to live.
-      </p>
-      <p>
-        My field notes are organized into several areas of inquiry, each
-        representing a different lens through which I observe and document my
-        human experience.
-      </p>
+      <div class="space-y-6 text-lg text-gray-700 leading-relaxed">
+        <p>
+          I've always wanted to "write this book". My field journal. My
+          personalized record of this 'modern' experiement we call life. Not a
+          theory of humanity, not a doctrine but what I've observed and am able to
+          report. My understandings of what it means to be human.
+        </p>
+        <p>
+          I write these notes so I don't forget what it costs, and what it gives,
+          to live.
+        </p>
+        <p>
+          My field notes are organized into several areas of inquiry, each
+          representing a different lens through which I observe and document my
+          human experience.
+        </p>
 
-      <ul class="categories-list">
-        {
-          categories.map((category) => (
-            <li>
-              <strong>
-                {category.emoji} {category.title}
-              </strong>{" "}
-              — {category.description}
-              <a href={`/${category.slug}`} class="category-link">
-                Explore →
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-      <p class="closing">These are my coordinates. Draw your own map.</p>
+        <ul class="space-y-4 mt-8">
+          {
+            categories.map((category) => (
+              <li class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <strong class="text-gray-900">
+                      {category.emoji} {category.title}
+                    </strong>
+                    <span class="text-gray-600"> — {category.description}</span>
+                  </div>
+                  <a href={`/${category.slug}`} class="text-blue-600 hover:text-blue-800 transition-colors duration-200 font-medium ml-4">
+                    Explore →
+                  </a>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="text-center text-xl font-medium text-gray-800 mt-12 italic">These are my coordinates. Draw your own map.</p>
+      </div>
     </div>
   </div>
 </BaseLayout>
-
-<style>
-  .about-container {
-    min-height: 60vh;
-    padding: var(--spacing-xl) 0;
-  }
-
-  .about-content {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .about-content h1 {
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-4xl);
-    margin-bottom: var(--spacing-lg);
-    color: var(--color-heading);
-    text-align: center;
-    line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tight);
-  }
-
-  .about-content h2 {
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-2xl);
-    margin: var(--spacing-xl) 0 var(--spacing-md) 0;
-    color: var(--color-heading);
-    border-bottom: 2px solid var(--color-border-light);
-    padding-bottom: var(--spacing-sm);
-    line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tight);
-  }
-
-  .about-content .intro {
-    font-size: var(--font-size-xl);
-    color: var(--color-text);
-    line-height: var(--line-height-relaxed);
-    font-weight: var(--font-weight-medium);
-    margin-bottom: var(--spacing-lg);
-    text-align: center;
-    font-style: italic;
-    font-family: var(--font-family-serif);
-  }
-
-  .about-content p {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-light);
-    line-height: var(--line-height-relaxed);
-    margin-bottom: var(--spacing-md);
-    text-align: justify;
-  }
-
-  .about-content strong {
-    color: var(--color-heading);
-    font-weight: var(--font-weight-semibold);
-  }
-
-  .about-content ul {
-    margin: var(--spacing-md) 0 var(--spacing-lg) var(--spacing-lg);
-    padding-left: var(--spacing-md);
-  }
-
-  .about-content li {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-light);
-    line-height: var(--line-height-relaxed);
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .categories-list {
-    margin: var(--spacing-lg) 0 var(--spacing-xl) var(--spacing-lg);
-    padding-left: var(--spacing-md);
-  }
-
-  .categories-list li {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-light);
-    line-height: var(--line-height-relaxed);
-    margin-bottom: var(--spacing-md);
-  }
-
-  .category-link {
-    display: inline-block;
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-sm);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-wider);
-    margin-left: var(--spacing-sm);
-    transition: all var(--transition-fast);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--border-radius-sm);
-    background-color: var(--color-bg-secondary);
-    border: 1px solid var(--color-border-light);
-  }
-
-  .category-link:hover {
-    color: var(--color-primary-dark);
-    background-color: var(--color-hover-bg);
-    transform: translateX(2px);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .about-content .closing {
-    font-size: var(--font-size-xl);
-    color: var(--color-text);
-    font-weight: var(--font-weight-medium);
-    text-align: center;
-    font-style: italic;
-    margin-top: var(--spacing-xl);
-    font-family: var(--font-family-serif);
-    line-height: var(--line-height-relaxed);
-  }
-
-  @media (min-width: 768px) {
-    .categories-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-</style>

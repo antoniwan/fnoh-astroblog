@@ -19,39 +19,57 @@ if (category) {
 }
 ---
 
-<article class:list={[
-  "border border-border-light rounded-lg overflow-hidden transition-all duration-normal bg-background shadow-sm relative flex flex-col m-0 p-0 box-border min-w-0 max-w-full w-full h-full hover:border-border hover:shadow-md hover:-translate-y-0.5 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-0.5 before:bg-gradient-to-r before:from-primary-800 before:to-primary-600 before:opacity-0 before:transition-opacity before:duration-normal hover:before:opacity-100",
-  className
-]}>
-  <a href={`/writings/${post.id.replace(/\.md$/, "")}`} class="flex flex-col h-full no-underline text-inherit m-0 p-0 box-border min-w-0 max-w-full">
+<article
+  class:list={[
+    "border border-gray-200 rounded-lg overflow-hidden transition-all duration-200 bg-white shadow-sm relative flex flex-col h-full hover:border-gray-300 hover:shadow-md hover:-translate-y-0.5 group",
+    className,
+  ]}
+>
+  <a
+    href={`/writings/${post.id.replace(/\.md$/, "")}`}
+    class="flex flex-col h-full no-underline text-inherit"
+  >
     {
       showImage && heroImage && (
-        <div class="w-full h-[200px] overflow-hidden relative flex-shrink-0 bg-background-secondary max-w-full box-border m-0 md:h-[150px] sm:h-[120px]">
+        <div class="w-full h-48 overflow-hidden relative flex-shrink-0 bg-gray-100 md:h-36 sm:h-32">
           <img
             src={heroImage.src}
             alt={title || `Image for ${title}`}
             loading="lazy"
-            class="w-full h-full object-cover transition-transform duration-normal block max-w-full box-border m-0 hover:scale-105"
+            class="w-full h-full object-cover transition-transform duration-200 block group-hover:scale-105"
           />
         </div>
       )
     }
-    <div class="p-xl flex-1 flex flex-col m-0 box-border min-w-0 max-w-full md:p-lg sm:p-md">
+    <div class="p-6 flex-1 flex flex-col md:p-4 sm:p-3">
       {
         categoryData && (
           <a
             href={`/${categoryData.slug}`}
-            class="inline-flex items-center gap-xs mb-md text-sm text-text-light no-underline transition-all duration-fast py-xs px-sm rounded-md bg-background-secondary border border-border-light w-fit font-medium uppercase tracking-wider hover:bg-primary-800 hover:border-primary-800 hover:text-white hover:-translate-y-0.5 hover:shadow-sm md:text-xs md:py-xs md:px-sm md:mb-sm sm:text-xs sm:py-[calc(0.5rem*0.5)] sm:px-sm"
+            class="inline-flex items-center gap-2 mb-4 text-sm text-gray-600 no-underline transition-all duration-200 py-1 px-3 rounded-md bg-gray-100 border border-gray-200 w-fit font-medium uppercase tracking-wider hover:bg-blue-600 hover:border-blue-600 hover:text-white hover:-translate-y-0.5 hover:shadow-sm md:text-xs md:py-1 md:px-2 md:mb-3"
             data-astro-reload
           >
             <span class="text-base md:text-sm">{categoryData.emoji}</span>
-            <span class="font-medium text-inherit text-xs">{categoryData.title}</span>
+            <span class="font-medium text-inherit text-xs">
+              {categoryData.title}
+            </span>
           </a>
         )
       }
-      <h2 class="font-heading text-xl font-semibold text-heading m-0 mb-md leading-tight tracking-tight flex-shrink-0 break-words max-w-full md:text-lg sm:text-base">{title}</h2>
-      <p class="text-base text-text-light m-0 mb-md leading-relaxed line-clamp-3 text-justify flex-1 break-words max-w-full sm:text-sm">{description}</p>
-      <time class="text-sm text-text-lighter italic font-serif flex-shrink-0 mt-auto" datetime={pubDate.toISOString()}>
+      <h2
+        class="font-serif text-xl font-semibold text-gray-900 m-0 mb-4 leading-tight tracking-tight flex-shrink-0 break-words max-w-full md:text-lg sm:text-base"
+      >
+        {title}
+      </h2>
+      <p
+        class="text-base text-gray-600 m-0 mb-4 leading-relaxed line-clamp-3 text-justify flex-1 break-words max-w-full sm:text-sm"
+      >
+        {description}
+      </p>
+      <time
+        class="text-sm text-gray-500 italic font-serif flex-shrink-0 mt-auto"
+        datetime={pubDate.toISOString()}
+      >
         {
           pubDate.toLocaleDateString("en-US", {
             year: "numeric",
@@ -65,25 +83,6 @@ if (category) {
 </article>
 
 <style>
-  /* Fallback for missing images */
-  .post-image:empty::before {
-    content: "📝";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.625rem;
-    color: #6b7280;
-    opacity: 0.5;
-  }
-
-  /* Ensure proper grid behavior */
-  @media (min-width: 769px) {
-    .post-card {
-      min-height: 400px;
-    }
-  }
-
   /* Line clamp utility */
   .line-clamp-3 {
     display: -webkit-box;

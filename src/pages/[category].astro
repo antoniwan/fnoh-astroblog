@@ -48,15 +48,15 @@ const categoryEmoji = categoryData?.emoji || "📁";
   type="website"
   section={pageTitle}
 >
-  <div class="container-full-no-padding">
-    <div class="category-header">
-      <div class="category-info">
-        <span class="category-emoji">{categoryEmoji}</span>
-        <h1 class="category-title">{pageTitle}</h1>
+  <div class="w-full">
+    <div class="text-center mb-12 py-8 border-b border-gray-200">
+      <div class="mb-4">
+        <span class="text-4xl mb-4 block">{categoryEmoji}</span>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">{pageTitle}</h1>
       </div>
-      <p class="category-description">
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
         {categoryDescription}
-        <strong
+        <strong class="text-gray-900"
           >{categoryPosts.length} writing{
             categoryPosts.length !== 1 ? "s" : ""
           }</strong
@@ -64,14 +64,14 @@ const categoryEmoji = categoryData?.emoji || "📁";
       </p>
     </div>
 
-    <main class="category-content">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {
         categoryPosts.length > 0 ? (
           <PostsGrid posts={categoryPosts} />
         ) : (
-          <div class="no-posts">
-            <p>No posts found in this category.</p>
-            <a href="/" class="back-link">
+          <div class="text-center py-12">
+            <p class="text-gray-600 mb-4">No posts found in this category.</p>
+            <a href="/" class="text-blue-600 hover:text-blue-800 transition-colors duration-200">
               ← Back to Home
             </a>
           </div>
@@ -80,115 +80,3 @@ const categoryEmoji = categoryData?.emoji || "📁";
     </main>
   </div>
 </BaseLayout>
-
-<style>
-  .category-header {
-    text-align: center;
-    margin-bottom: var(--spacing-2xl);
-    padding: var(--spacing-xl) 0;
-    border-bottom: 1px solid var(--color-border-light);
-    position: relative;
-  }
-
-  .category-header::after {
-    content: "";
-    position: absolute;
-    bottom: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      var(--color-primary),
-      var(--color-accent)
-    );
-    border-radius: var(--border-radius-sm);
-  }
-
-  .category-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing);
-    margin-bottom: var(--spacing);
-  }
-
-  .category-emoji {
-    font-size: var(--font-size-3xl);
-  }
-
-  .category-title {
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-3xl);
-    font-weight: var(--font-weight-bold);
-    margin: 0;
-    color: var(--color-heading);
-    line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tight);
-  }
-
-  .category-description {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-light);
-    max-width: 600px;
-    margin: 0 auto var(--spacing);
-    line-height: var(--line-height-relaxed);
-    text-align: justify;
-  }
-
-  .category-content {
-    width: 100%;
-  }
-
-  .no-posts {
-    text-align: center;
-    padding: var(--spacing-2xl);
-  }
-
-  .no-posts p {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-light);
-    margin-bottom: var(--spacing-lg);
-    text-align: justify;
-  }
-
-  .back-link {
-    display: inline-block;
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: var(--font-weight-medium);
-    transition: all var(--transition-fast);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius-sm);
-    background-color: var(--color-bg-secondary);
-    border: 1px solid var(--color-border-light);
-  }
-
-  .back-link:hover {
-    color: var(--color-primary-dark);
-    background-color: var(--color-hover-bg);
-    transform: translateX(-2px);
-    box-shadow: var(--shadow-sm);
-  }
-
-  @media (max-width: 768px) {
-    .category-header {
-      padding: var(--spacing-lg) 0;
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .category-title {
-      font-size: var(--font-size-2xl);
-    }
-
-    .category-description {
-      font-size: var(--font-size-base);
-    }
-
-    .posts-grid {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-lg);
-    }
-  }
-</style>

@@ -27,13 +27,13 @@ const totalPosts = sortedPosts.length;
   type="website"
   section="Writings"
 >
-  <div class="container-full">
-    <div class="category-header">
-      <div class="category-info">
-        <span class="category-emoji">✍️</span>
-        <h1 class="category-title">Writings</h1>
+  <div class="w-full">
+    <div class="text-center mb-12 py-8 border-b border-gray-200">
+      <div class="mb-4">
+        <span class="text-4xl mb-4 block">✍️</span>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">Writings</h1>
       </div>
-      <p class="category-description">
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
         Thoughtful explorations of what it means to be human <strong
           >{totalPosts} writing{totalPosts !== 1 ? "s" : ""}</strong
         >.
@@ -43,17 +43,21 @@ const totalPosts = sortedPosts.length;
     {/* Category Filter Section */}
     {
       categoriesWithPosts.length > 0 && (
-        <section class="category-filter-section">
-          <h2 class="filter-title">Browse by Category</h2>
-          <div class="category-filters">
+        <section class="mb-12">
+          <h2 class="text-xl font-semibold text-gray-900 mb-6 text-center">
+            Browse by Category
+          </h2>
+          <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
             <a
               href="/writings"
-              class="category-filter active"
+              class="flex items-center gap-3 px-4 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200"
               data-astro-reload
             >
-              <span class="filter-emoji">📚</span>
-              <span class="filter-name">All Posts</span>
-              <span class="filter-count">{totalPosts}</span>
+              <span class="text-lg">📚</span>
+              <span>All Posts</span>
+              <span class="bg-blue-500 px-2 py-1 rounded text-sm">
+                {totalPosts}
+              </span>
             </a>
             {categoriesWithPosts.map((category) => {
               const categoryPosts = allPosts.filter(
@@ -62,12 +66,14 @@ const totalPosts = sortedPosts.length;
               return (
                 <a
                   href={`/${category.slug}`}
-                  class="category-filter"
+                  class="flex items-center gap-3 px-4 py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200"
                   data-astro-reload
                 >
-                  <span class="filter-emoji">{category.emoji}</span>
-                  <span class="filter-name">{category.title}</span>
-                  <span class="filter-count">{categoryPosts.length}</span>
+                  <span class="text-lg">{category.emoji}</span>
+                  <span>{category.title}</span>
+                  <span class="bg-gray-200 px-2 py-1 rounded text-sm">
+                    {categoryPosts.length}
+                  </span>
                 </a>
               );
             })}
@@ -76,7 +82,7 @@ const totalPosts = sortedPosts.length;
       )
     }
 
-    <main class="category-content">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {
         initialPosts.length > 0 ? (
           <PostsGrid
@@ -86,16 +92,21 @@ const totalPosts = sortedPosts.length;
             initialPostsCount={POSTS_PER_PAGE}
           />
         ) : (
-          <div class="no-posts">
-            <div class="empty-field-notes">
-              <span class="empty-emoji">📝</span>
-              <h3 class="empty-title">Field Notes Empty</h3>
-              <p class="empty-description">
+          <div class="text-center py-16">
+            <div class="max-w-md mx-auto">
+              <span class="text-6xl block mb-4">📝</span>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                Field Notes Empty
+              </h3>
+              <p class="text-gray-600 mb-6">
                 The observation journal is currently blank. Perhaps the
                 pseudothropologist is still in the field, gathering fresh
                 insights to document.
               </p>
-              <a href="/" class="back-link">
+              <a
+                href="/"
+                class="text-blue-600 hover:text-blue-800 transition-colors duration-200"
+              >
                 ← Return to Base Camp
               </a>
             </div>
@@ -105,255 +116,3 @@ const totalPosts = sortedPosts.length;
     </main>
   </div>
 </BaseLayout>
-
-<style>
-  .category-header {
-    text-align: center;
-    margin-bottom: var(--spacing-2xl);
-    padding: var(--spacing-xl) 0;
-    border-bottom: 1px solid var(--color-border-light);
-    position: relative;
-  }
-
-  .category-header::after {
-    content: "";
-    position: absolute;
-    bottom: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      var(--color-primary),
-      var(--color-accent)
-    );
-    border-radius: var(--border-radius-sm);
-  }
-
-  .category-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing);
-    margin-bottom: var(--spacing);
-  }
-
-  .category-emoji {
-    font-size: var(--font-size-3xl);
-  }
-
-  .category-title {
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-3xl);
-    font-weight: var(--font-weight-bold);
-    margin: 0;
-    color: var(--color-heading);
-    line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tight);
-  }
-
-  .category-description {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-light);
-    max-width: 600px;
-    margin: 0 auto var(--spacing);
-    line-height: var(--line-height-relaxed);
-    text-align: justify;
-  }
-
-  /* Category Filter Styles */
-  .category-filter-section {
-    margin-bottom: var(--spacing-2xl);
-    padding: var(--spacing-xl) 0;
-    border-bottom: 1px solid var(--color-border-light);
-  }
-
-  .filter-title {
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-heading);
-    margin: 0 0 var(--spacing-lg) 0;
-    text-align: center;
-  }
-
-  .category-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-md);
-    justify-content: center;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .category-filter {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border: 2px solid var(--color-border-light);
-    border-radius: var(--border-radius-lg);
-    text-decoration: none;
-    color: var(--color-text);
-    background: var(--color-bg);
-    transition: all var(--transition-fast);
-    font-weight: var(--font-weight-medium);
-    min-width: 120px;
-    justify-content: center;
-  }
-
-  .category-filter:hover {
-    border-color: var(--color-primary);
-    background: var(--color-bg-secondary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .category-filter.active {
-    border-color: var(--color-primary);
-    background: var(--color-primary);
-    color: white;
-  }
-
-  .filter-emoji {
-    font-size: var(--font-size-lg);
-  }
-
-  .filter-name {
-    font-size: var(--font-size-sm);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-wider);
-  }
-
-  .filter-count {
-    background: var(--color-bg-secondary);
-    color: var(--color-text-light);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--border-radius-full);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    min-width: 24px;
-    text-align: center;
-  }
-
-  .category-filter.active .filter-count {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-  }
-
-  .category-content {
-    width: 100%;
-  }
-
-  .no-posts {
-    text-align: center;
-    padding: var(--spacing-2xl);
-  }
-
-  .empty-field-notes {
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
-  .empty-emoji {
-    font-size: var(--font-size-4xl);
-    display: block;
-    margin-bottom: var(--spacing-lg);
-  }
-
-  .empty-title {
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-heading);
-    margin: 0 0 var(--spacing-md) 0;
-    line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tight);
-  }
-
-  .empty-description {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-light);
-    margin: 0 0 var(--spacing-lg) 0;
-    line-height: var(--line-height-relaxed);
-    font-style: italic;
-    font-family: var(--font-family-serif);
-    text-align: justify;
-  }
-
-  .no-posts p {
-    font-size: var(--font-size-lg);
-    color: var(--color-text-light);
-    margin-bottom: var(--spacing-lg);
-  }
-
-  .back-link {
-    display: inline-block;
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: var(--font-weight-medium);
-    transition: all var(--transition-fast);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius-sm);
-    background-color: var(--color-bg-secondary);
-    border: 1px solid var(--color-border-light);
-  }
-
-  .back-link:hover {
-    color: var(--color-primary-dark);
-    background-color: var(--color-hover-bg);
-    transform: translateX(-2px);
-    box-shadow: var(--shadow-sm);
-  }
-
-  @media (max-width: 768px) {
-    .category-header {
-      padding: var(--spacing-lg) 0;
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .category-title {
-      font-size: var(--font-size-2xl);
-    }
-
-    .category-description {
-      font-size: var(--font-size-base);
-    }
-
-    .category-filter-section {
-      padding: var(--spacing-lg) 0;
-      margin-bottom: var(--spacing-xl);
-    }
-
-    .filter-title {
-      font-size: var(--font-size-lg);
-    }
-
-    .category-filters {
-      gap: var(--spacing-sm);
-    }
-
-    .category-filter {
-      min-width: 100px;
-      padding: var(--spacing-xs) var(--spacing-sm);
-    }
-
-    .filter-name {
-      font-size: var(--font-size-xs);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .category-filters {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .category-filter {
-      width: 100%;
-      max-width: 200px;
-      justify-content: space-between;
-    }
-  }
-</style>

@@ -23,448 +23,91 @@ const totalPosts = posts.length;
   description={SITE_DESCRIPTION}
   type="organization"
 >
-  <header class="container-md">
-    <h1 class="site-title">{SITE_TITLE}</h1>
-    <p class="site-description">
+  <header class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">{SITE_TITLE}</h1>
+    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
       {SITE_DESCRIPTION} Currently featuring <strong
         >{totalPosts} total writings</strong
       > across various categories.
     </p>
   </header>
 
-  <main class="container-lg">
-    {
-      categoriesWithCounts.map((category) => {
-        const hasPosts = category.postCount > 0;
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+    <div class="grid gap-6">
+      {
+        categoriesWithCounts.map((category) => {
+          const hasPosts = category.postCount > 0;
 
-        return (
-          <section class={`toc-section ${!hasPosts ? "coming-soon" : ""}`}>
-            {hasPosts ? (
-              <a
-                href={`/${category.slug}`}
-                class="section-link"
-                data-astro-reload
-              >
-                <div class="section-header">
-                  <span class="section-emoji">{category.emoji}</span>
-                  <div class="section-info">
-                    <h2 class="section-title">{category.title}</h2>
-                    <p class="section-description">{category.description}</p>
-                  </div>
-                  <div class="section-meta">
-                    <span class="post-count">{category.postCount}</span>
-                    <span class="count-label">posts</span>
-                    <span class="arrow">→</span>
-                  </div>
-                </div>
-              </a>
-            ) : (
-              <div class="section-link coming-soon-link">
-                <div class="section-header">
-                  <span class="section-emoji coming-soon-emoji">
-                    {category.emoji}
-                  </span>
-                  <div class="section-info">
-                    <h2 class="section-title">{category.title}</h2>
-                    <p class="section-description">{category.description}</p>
-                    <div class="coming-soon-badge">
-                      <span class="badge-text">Coming Soon</span>
+          return (
+            <section class={`bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200 ${!hasPosts ? "opacity-75" : ""}`}>
+              {hasPosts ? (
+                <a
+                  href={`/${category.slug}`}
+                  class="block p-6 hover:bg-gray-50 transition-colors duration-200"
+                  data-astro-reload
+                >
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-4">
+                      <span class="text-3xl">{category.emoji}</span>
+                      <div class="flex-1">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-2">{category.title}</h2>
+                        <p class="text-gray-600 leading-relaxed">{category.description}</p>
+                      </div>
+                    </div>
+                    <div class="flex items-center space-x-2 text-sm text-gray-500">
+                      <span class="font-medium">{category.postCount}</span>
+                      <span>posts</span>
+                      <span class="text-blue-600 text-lg">→</span>
                     </div>
                   </div>
-                  <div class="section-meta">
-                    <span class="post-count coming-soon-count">0</span>
-                    <span class="count-label">posts</span>
-                    <span class="coming-soon-icon">⏳</span>
+                </a>
+              ) : (
+                <div class="p-6">
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-start space-x-4">
+                      <span class="text-3xl opacity-60">{category.emoji}</span>
+                      <div class="flex-1">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-2">{category.title}</h2>
+                        <p class="text-gray-600 leading-relaxed mb-3">{category.description}</p>
+                        <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                          <span>Coming Soon</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex items-center space-x-2 text-sm text-gray-400">
+                      <span class="font-medium">0</span>
+                      <span>posts</span>
+                      <span class="text-lg">⏳</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </section>
-        );
-      })
-    }
+              )}
+            </section>
+          );
+        })
+      }
 
-    {/* View All Posts Section */}
-    <section class="toc-section view-all-section">
-      <a href="/writings" class="section-link view-all-link" data-astro-reload>
-        <div class="section-header">
-          <span class="section-emoji">📚</span>
-          <div class="section-info">
-            <h2 class="section-title">All Writings</h2>
-            <p class="section-description">
-              Browse all posts chronologically, including uncategorized ones.
-            </p>
-          </div>
-          <div class="section-meta">
-            <span class="post-count">{totalPosts}</span>
-            <span class="count-label">posts</span>
-            <span class="arrow">→</span>
-          </div>
-        </div>
-      </a>
-    </section>
-
-    {
-      uncategorizedPosts.length > 0 && (
-        <section class="toc-section uncategorized-section">
-          <div class="section-link uncategorized-link">
-            <div class="section-header">
-              <span class="section-emoji">📝</span>
-              <div class="section-info">
-                <h2 class="section-title">Uncategorized Posts</h2>
-                <p class="section-description">
-                  There are {uncategorizedPosts.length} posts without category
-                  assignments.
+      {/* View All Posts Section */}
+      <section class="bg-blue-50 rounded-lg border border-blue-200 shadow-sm hover:shadow-md transition-shadow duration-200">
+        <a href="/writings" class="block p-6 hover:bg-blue-100 transition-colors duration-200" data-astro-reload>
+          <div class="flex items-start justify-between">
+            <div class="flex items-start space-x-4">
+              <span class="text-3xl">📚</span>
+              <div class="flex-1">
+                <h2 class="text-xl font-semibold text-blue-900 mb-2">All Writings</h2>
+                <p class="text-blue-700 leading-relaxed">
+                  Browse all posts chronologically, including uncategorized ones.
                 </p>
               </div>
-              <div class="section-meta">
-                <span class="post-count">{uncategorizedPosts.length}</span>
-                <span class="count-label">posts</span>
-                <span class="info-icon">ℹ️</span>
-              </div>
+            </div>
+            <div class="flex items-center space-x-2 text-sm text-blue-600">
+              <span class="font-medium">{totalPosts}</span>
+              <span>posts</span>
+              <span class="text-lg">→</span>
             </div>
           </div>
-        </section>
-      )
-    }
+        </a>
+      </section>
+    </div>
   </main>
-
-  <style>
-    .site-title {
-      font-family: var(--font-family-heading);
-      font-size: var(--font-size-4xl);
-      font-weight: var(--font-weight-bold);
-      margin-bottom: var(--spacing-lg);
-      color: var(--color-heading);
-      letter-spacing: var(--letter-spacing-tight);
-      line-height: var(--line-height-tight);
-    }
-
-    .site-description {
-      font-size: var(--font-size-xl);
-      color: var(--color-text-light);
-      margin: 0 auto var(--spacing-xl);
-      line-height: var(--line-height-relaxed);
-      text-align: justify;
-    }
-
-    .index-content {
-      /* Container utilities handle max-width and padding */
-    }
-
-    .toc-intro {
-      text-align: center;
-      margin-bottom: var(--spacing-3xl);
-      padding: var(--spacing-xl) 0;
-    }
-
-    .toc-title {
-      font-size: var(--font-size-2xl);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text);
-      margin: 0 0 var(--spacing-sm) 0;
-    }
-
-    .toc-subtitle {
-      font-size: var(--font-size-lg);
-      color: var(--color-text-light);
-      margin: 0;
-    }
-
-    .toc-section {
-      margin-bottom: var(--spacing-lg);
-    }
-
-    .section-link {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      border: 2px solid var(--color-border-light);
-      border-radius: var(--border-radius-lg);
-      transition: all var(--transition-normal);
-      background: var(--color-bg);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .section-link::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(
-        90deg,
-        var(--color-primary),
-        var(--color-accent)
-      );
-      opacity: 0;
-      transition: opacity var(--transition-normal);
-    }
-
-    .section-link:hover {
-      border-color: var(--color-primary);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-
-    .section-link:hover::before {
-      opacity: 1;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-lg);
-      padding: var(--spacing-xl);
-    }
-
-    .section-emoji {
-      font-size: var(--font-size-3xl);
-      flex-shrink: 0;
-    }
-
-    .section-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .section-title {
-      font-family: var(--font-family-heading);
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-heading);
-      margin: 0 0 var(--spacing-sm) 0;
-      line-height: var(--line-height-tight);
-      letter-spacing: var(--letter-spacing-tight);
-    }
-
-    .section-description {
-      font-size: var(--font-size-base);
-      color: var(--color-text-light);
-      margin: 0;
-      line-height: var(--line-height-relaxed);
-      text-align: justify;
-    }
-
-    .section-meta {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--spacing-xs);
-      flex-shrink: 0;
-      min-width: 80px;
-    }
-
-    .post-count {
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-bold);
-      color: var(--color-primary);
-      font-family: var(--font-family-heading);
-    }
-
-    .count-label {
-      font-size: var(--font-size-xs);
-      color: var(--color-text-lighter);
-      text-transform: uppercase;
-      letter-spacing: var(--letter-spacing-wider);
-      font-weight: var(--font-weight-medium);
-    }
-
-    .arrow {
-      font-size: var(--font-size-lg);
-      color: var(--color-text-light);
-      transition: transform var(--transition-normal);
-    }
-
-    .section-link:hover .arrow {
-      transform: translateX(4px);
-      color: var(--color-primary);
-    }
-
-    /* View All Section Styles */
-    .view-all-section {
-      margin-top: var(--spacing-2xl);
-    }
-
-    .view-all-link {
-      border-color: var(--color-accent);
-      background: linear-gradient(
-        135deg,
-        var(--color-bg),
-        var(--color-bg-secondary)
-      );
-    }
-
-    .view-all-link:hover {
-      border-color: var(--color-accent);
-      background: linear-gradient(
-        135deg,
-        var(--color-bg-secondary),
-        var(--color-bg)
-      );
-    }
-
-    /* Uncategorized Section Styles */
-    .uncategorized-section {
-      margin-top: var(--spacing-lg);
-    }
-
-    .uncategorized-link {
-      cursor: default;
-      opacity: 0.8;
-      background: var(--color-bg-tertiary);
-      border-color: var(--color-border-light);
-    }
-
-    .info-icon {
-      font-size: var(--font-size-lg);
-      color: var(--color-text-lighter);
-    }
-
-    /* Coming Soon Styles */
-    .coming-soon-link {
-      cursor: default;
-      opacity: 0.7;
-      background: var(--color-bg-secondary);
-      border-color: var(--color-border-light);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .coming-soon-link::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-      );
-      animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-      0% {
-        left: -100%;
-      }
-      100% {
-        left: 100%;
-      }
-    }
-
-    .coming-soon-emoji {
-      opacity: 0.6;
-      filter: grayscale(0.3);
-    }
-
-    .coming-soon-badge {
-      margin-top: var(--spacing-sm);
-    }
-
-    .badge-text {
-      display: inline-block;
-      background: var(--color-accent);
-      color: white;
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-medium);
-      padding: var(--spacing-xs) var(--spacing-sm);
-      border-radius: var(--border-radius-full);
-      text-transform: uppercase;
-      letter-spacing: var(--letter-spacing-wider);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .coming-soon-count {
-      color: var(--color-text-lighter);
-    }
-
-    .coming-soon-icon {
-      font-size: var(--font-size-lg);
-      color: var(--color-text-lighter);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%,
-      100% {
-        opacity: 0.6;
-      }
-      50% {
-        opacity: 1;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .index-header {
-        padding: var(--spacing-xl) 0;
-        margin-bottom: var(--spacing-2xl);
-      }
-
-      .site-title {
-        font-size: var(--font-size-3xl);
-      }
-
-      .site-description {
-        font-size: var(--font-size-lg);
-      }
-
-      .toc-intro {
-        margin-bottom: var(--spacing-2xl);
-        padding: var(--spacing-lg) 0;
-      }
-
-      .section-header {
-        flex-direction: column;
-        text-align: center;
-        gap: var(--spacing);
-        padding: var(--spacing-lg);
-      }
-
-      .section-meta {
-        flex-direction: row;
-        gap: var(--spacing-sm);
-      }
-
-      .arrow {
-        transform: rotate(90deg);
-      }
-
-      .section-link:hover .arrow {
-        transform: rotate(90deg) translateY(-4px);
-      }
-
-      .coming-soon-badge {
-        margin-top: var(--spacing-xs);
-      }
-
-      .view-all-section {
-        margin-top: var(--spacing-xl);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .section-header {
-        padding: var(--spacing);
-      }
-
-      .section-title {
-        font-size: var(--font-size-lg);
-      }
-
-      .section-description {
-        font-size: var(--font-size-sm);
-      }
-
-      .badge-text {
-        font-size: var(--font-size-xs);
-        padding: var(--spacing-xs) var(--spacing-sm);
-      }
-    }
-  </style>
 </BaseLayout>
