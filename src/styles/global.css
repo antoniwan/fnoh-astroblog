@@ -1,3 +1,13 @@
+/* ===== ENHANCED EDITORIAL CSS ENTRY POINT ===== */
+@import './_fonts.css';
+@import './_variables.css';
+@import './_utilities.css';
+@import './_print.css';
+
+/* ===== PHILOSOPHICAL EDITORIAL GLOBAL STYLES ===== */
+@import './main.css';
+@import './_view-transitions.css';
+
 /* ===== GLOBAL CSS RESET AND OVERFLOW PREVENTION ===== */
 
 /* Reset box-sizing for all elements */
@@ -78,16 +88,6 @@ th {
   overflow-wrap: break-word;
   hyphens: auto;
 }
-
-/* ===== ENHANCED EDITORIAL CSS ENTRY POINT ===== */
-@import './_fonts.css';
-@import './_variables.css';
-@import './_utilities.css';
-@import './_print.css';
-
-/* ===== PHILOSOPHICAL EDITORIAL GLOBAL STYLES ===== */
-@import './main.css';
-@import './_view-transitions.css';
 
 /* Smooth theme transitions with philosophical colors */
 html {

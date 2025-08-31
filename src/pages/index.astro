@@ -23,12 +23,12 @@ const totalPosts = posts.length;
 	description={SITE_DESCRIPTION}
 	type="organization"
 >
-			<header class="index-header container-lg">
+	<header class="container-md">
 		<h1 class="site-title">{SITE_TITLE}</h1>
 		<p class="site-description">{SITE_DESCRIPTION} Currently featuring <strong>{totalPosts} total writings</strong> across various categories.</p>
 	</header>
 
-	<main class="index-content container-lg">
+	<main class="container-lg">
 
 		{categoriesWithCounts.map((category) => {
 			const hasPosts = category.postCount > 0;
@@ -112,25 +112,7 @@ const totalPosts = posts.length;
 </BaseLayout>
 
 <style>
-	.index-header {
-		text-align: center;
-		margin-bottom: var(--spacing-3xl);
-		padding: var(--spacing-2xl) 0;
-		border-bottom: 2px solid var(--color-border-light);
-		position: relative;
-	}
 
-	.index-header::after {
-		content: '';
-		position: absolute;
-		bottom: -2px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 60%;
-		height: 2px;
-		background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-		border-radius: var(--border-radius-sm);
-	}
 
 	.site-title {
 		font-family: var(--font-family-heading);
@@ -145,7 +127,6 @@ const totalPosts = posts.length;
 	.site-description {
 		font-size: var(--font-size-xl);
 		color: var(--color-text-light);
-		max-width: 700px;
 		margin: 0 auto var(--spacing-xl);
 		line-height: var(--line-height-relaxed);
 		text-align: justify;
