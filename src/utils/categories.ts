@@ -26,9 +26,17 @@ export async function getAllCategories(): Promise<CategoryData[]> {
   
   try {
     const categories = await getCollection('categories');
-    // Type assertion to ensure proper typing
-    categoriesCache = categories as unknown as CategoryData[];
-    return categoriesCache;
+    
+    // Properly extract category data from collection entries
+    const categoryData: CategoryData[] = categories.map(category => ({
+      title: category.data.title,
+      emoji: category.data.emoji,
+      description: category.data.description,
+      slug: category.data.slug
+    }));
+    
+    categoriesCache = categoryData;
+    return categoryData;
   } catch (error) {
     console.error('Error fetching categories:', error);
     return [];
@@ -60,11 +68,21 @@ export async function getCategoriesWithPostCounts(): Promise<CategoryWithCount[]
     const categories = await getAllCategories();
     const writings = await getCollection('writings');
     
+    console.log('Categories found:', categories);
+    console.log('Writings found:', writings.length);
+    
     const result = categories.map(category => {
       const postCount = writings.filter(post => {
         // Check if post has a category reference that matches this category
-        return post.data.category && post.data.category.collection === 'categories' && post.data.category.id === category.slug;
+        // The reference will be {collection: 'categories', id: 'filename'}
+        // We need to match the id with the category slug
+        return post.data.category && 
+               post.data.category.collection === 'categories' && 
+               post.data.category.id === category.slug;
       }).length;
+      
+      console.log(`Category "${category.slug}" has ${postCount} posts`);
+      
       return {
         ...category,
         postCount
