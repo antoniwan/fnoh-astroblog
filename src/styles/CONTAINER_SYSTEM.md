@@ -12,7 +12,12 @@ The new container system is designed to prevent horizontal scroll issues while m
 - **`.container-md`** - Medium container (max-width: var(--max-width))
 - **`.container-lg`** - Large container (max-width: var(--max-width-wide))
 - **`.container-xl`** - Extra large container (max-width: var(--max-width-xl))
-- **`.container-full`** - Full width container (max-width: 100vw)
+
+### Full-Width Containers
+
+- **`.container-full`** - Full width with padding (content contained within viewport)
+- **`.container-full-edge`** - True full width extending to viewport edges with padding
+- **`.container-full-no-padding`** - Full width extending to viewport edges without padding
 
 ### Content Wrappers
 

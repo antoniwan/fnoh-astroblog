@@ -51,9 +51,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		</section>
 		
 		<section class="test-section">
-			<h2>Container Full</h2>
+			<h2>Container Full (with padding, contained within viewport)</h2>
 			<div class="container-full">
-				<p>This is a full width container with max-width: 100vw. It should contain content properly without causing horizontal scroll.</p>
+				<p>This is a full width container with padding. It should contain content properly without causing horizontal scroll. The content stays within the viewport bounds.</p>
+				<div class="test-content">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				</div>
+			</div>
+		</section>
+		
+		<section class="test-section">
+			<h2>Container Full Edge (extends to viewport edges with padding)</h2>
+			<div class="container-full-edge">
+				<p>This container extends to the very edges of the viewport but still has padding. It's useful for hero sections or full-width backgrounds.</p>
+				<div class="test-content">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				</div>
+			</div>
+		</section>
+		
+		<section class="test-section">
+			<h2>Container Full No Padding (extends to viewport edges without padding)</h2>
+			<div class="container-full-no-padding">
+				<p>This container extends to the very edges of the viewport with no padding. It's perfect for full-width images or backgrounds.</p>
 				<div class="test-content">
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 				</div>

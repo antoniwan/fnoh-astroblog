@@ -72,6 +72,7 @@ const remainingPosts = totalPosts - initialPostsCount;
 		.posts-grid {
 			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 			gap: var(--spacing-lg);
+			padding: 0 var(--spacing-md);
 		}
 	}
 
@@ -79,6 +80,7 @@ const remainingPosts = totalPosts - initialPostsCount;
 		.posts-grid {
 			grid-template-columns: 1fr;
 			gap: var(--spacing);
+			padding: 0 var(--spacing-sm);
 		}
 	}
 
@@ -86,7 +88,7 @@ const remainingPosts = totalPosts - initialPostsCount;
 		.posts-grid {
 			grid-template-columns: 1fr;
 			gap: var(--spacing-sm);
-			padding: 0 var(--spacing-sm);
+			padding: 0 var(--spacing-xs);
 		}
 		
 		.posts-grid .post-card {
