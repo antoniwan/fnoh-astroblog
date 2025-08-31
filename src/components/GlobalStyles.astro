@@ -1,6 +1,7 @@
 ---
-// GlobalStyles.astro - Tailwind 4 with Vite plugin
-// No need to import CSS files when using @tailwindcss/vite
+// GlobalStyles.astro - Import Tailwind CSS 4
 ---
 
-<!-- Tailwind 4 is handled by the Vite plugin in astro.config.mjs -->
+<style is:global>
+    @import "tailwindcss";
+</style>

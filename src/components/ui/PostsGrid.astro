@@ -23,7 +23,7 @@ const remainingPosts = totalPosts - initialPostsCount;
 ---
 
 <div class:list={[
-  "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full",
+  "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full",
   className
 ]}>
   {posts.map((post) => <PostCard post={post} class="w-full" />)}
@@ -31,10 +31,10 @@ const remainingPosts = totalPosts - initialPostsCount;
 
 {
   showLoadMore && hasMorePosts && (
-    <div class="text-center mt-8 py-8">
+    <div class="text-center mt-12 py-8">
       <button 
         id="load-more" 
-        class="inline-block bg-blue-600 text-white border-none py-3 px-6 rounded-lg text-base font-medium cursor-pointer transition-all duration-200 shadow-sm hover:bg-blue-700 hover:-translate-y-0.5 hover:shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-sm"
+        class="inline-flex items-center justify-center bg-blue-600 dark:bg-blue-500 text-white border-none py-3 px-8 rounded-xl text-base font-semibold cursor-pointer transition-all duration-300 shadow-lg hover:bg-blue-700 dark:hover:bg-blue-600 hover:-translate-y-1 hover:shadow-xl disabled:bg-gray-400 dark:disabled:bg-gray-600 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
       >
         Load More Writings ({remainingPosts} remaining)
       </button>

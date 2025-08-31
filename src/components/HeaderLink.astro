@@ -12,9 +12,11 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 <a
   href={href}
   class:list={[
-    "relative text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100",
+    "relative text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-all duration-200 py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium",
     className,
-    { "text-blue-600 bg-blue-50": isActive }
+    { 
+      "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 font-semibold": isActive 
+    }
   ]}
   data-astro-reload
   {...props}

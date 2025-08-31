@@ -28,568 +28,109 @@ if (category) {
   section={categoryData?.title || undefined}
   tags={categoryData ? [categoryData.slug] : []}
 >
-  <article class="blog-post-container">
-    <!-- Sidebar -->
-    <aside class="blog-sidebar">
-      <div class="sidebar-content">
-        <header class="sidebar-header">
-          <h1 class="post-title">{title}</h1>
-          {description && <p class="post-subtitle">{description}</p>}
-        </header>
+  <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+    <!-- Mobile Header (visible on small screens) -->
+    <div class="lg:hidden mb-8 text-center">
+      <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 leading-tight">
+        {title}
+      </h1>
+      {description && (
+        <p class="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+          {description}
+        </p>
+      )}
+    </div>
 
-        <div class="post-meta-container">
-          <div class="meta-item">
-            <svg
-              class="meta-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12,6 12,12 16,14"></polyline>
-            </svg>
-            <span class="meta-text">~5 min read</span>
+    <div class="grid grid-cols-1 lg:grid-cols-[350px_1fr] xl:grid-cols-[400px_1fr] gap-8 lg:gap-12 xl:gap-16">
+      <!-- Sidebar -->
+      <aside class="lg:order-1">
+        <div class="lg:sticky lg:top-24">
+          <!-- Desktop Header (hidden on mobile) -->
+          <div class="hidden lg:block mb-8">
+            <h1 class="text-4xl xl:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4 leading-tight">
+              {title}
+            </h1>
+            {description && (
+              <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+                {description}
+              </p>
+            )}
           </div>
 
-          <div class="meta-item">
-            <svg
-              class="meta-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"
-              ></path>
-            </svg>
-            <span class="meta-text">
-              <FormattedDate date={pubDate} />
-            </span>
-          </div>
+          <!-- Post Meta -->
+          <div class="space-y-4 mb-8">
+            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12,6 12,12 16,14"></polyline>
+              </svg>
+              <span>~5 min read</span>
+            </div>
 
-          {
-            updatedDate && (
-              <div class="meta-item">
-                <svg
-                  class="meta-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path>
+              </svg>
+              <span>Published <FormattedDate date={pubDate} /></span>
+            </div>
+
+            {updatedDate && (
+              <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                 </svg>
-                <span class="meta-text">
-                  Updated <FormattedDate date={updatedDate} />
-                </span>
+                <span>Updated <FormattedDate date={updatedDate} /></span>
               </div>
-            )
-          }
+            )}
 
-          {
-            categoryData && (
-              <div class="meta-item">
-                <svg
-                  class="meta-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+            {categoryData && (
+              <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M3 3h18v18H3zM21 9H3M21 15H3M12 3v18" />
                 </svg>
-                <span class="meta-text">
-                  <span class="category-emoji">{categoryData.emoji}</span>
-                  <span class="category-name">{categoryData.title}</span>
-                </span>
+                <span class="text-lg">{categoryData.emoji}</span>
+                <span class="font-medium text-blue-600 dark:text-blue-400">{categoryData.title}</span>
               </div>
-            )
-          }
-        </div>
+            )}
+          </div>
 
-        <!-- Back to home navigation -->
-        <div class="back-navigation">
-          <a href="/" class="back-link" data-astro-reload>
-            <svg
-              class="back-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
+          <!-- Back Navigation -->
+          <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+            <a 
+              href="/" 
+              class="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200 group"
+              data-astro-reload
             >
-              <path d="M19 12H5M12 19l-7-7 7-7"></path>
-            </svg>
-            <span>Back to Home</span>
-          </a>
+              <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"></path>
+              </svg>
+              <span>Back to Home</span>
+            </a>
+          </div>
         </div>
-      </div>
-    </aside>
+      </aside>
 
-    <!-- Main Content -->
-    <main class="blog-main">
-      {
-        heroImage && (
-          <div class="hero-image-container">
+      <!-- Main Content -->
+      <main class="lg:order-2">
+        {heroImage && (
+          <div class="mb-8 lg:mb-12">
             <Image
               src={heroImage}
               alt={title}
               width={1020}
               height={400}
-              class="main-hero-image"
+              class="w-full h-auto rounded-2xl shadow-lg"
               format="webp"
               quality={85}
               loading="eager"
             />
           </div>
-        )
-      }
+        )}
 
-      <div class="content-wrapper">
-        <div class="prose">
+        <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:dark:text-gray-100 prose-p:text-gray-700 prose-p:dark:text-gray-300 prose-strong:text-gray-900 prose-strong:dark:text-gray-100 prose-a:text-blue-600 prose-a:dark:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-blue-500 prose-blockquote:bg-gray-50 prose-blockquote:dark:bg-gray-800 prose-code:text-gray-900 prose-code:dark:text-gray-100 prose-code:bg-gray-100 prose-code:dark:bg-gray-800 prose-pre:bg-gray-900 prose-pre:dark:bg-gray-800 prose-pre:text-gray-100 prose-img:rounded-xl prose-img:shadow-md">
           <slot />
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </article>
 </BaseLayout>
-
-<style>
-  .blog-post-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--spacing-2xl);
-    width: 100%;
-    max-width: 100%;
-    padding: 0 var(--spacing-lg);
-    margin: 0 auto;
-    padding-top: calc(60px + var(--spacing-xl)); /* Account for fixed header */
-  }
-
-  /* Sidebar Styles */
-  .blog-sidebar {
-    order: 1;
-  }
-
-  .sidebar-content {
-    position: sticky;
-    top: calc(60px + var(--spacing-xl)); /* Account for fixed header */
-  }
-
-  .sidebar-header {
-    margin-bottom: var(--spacing-xl);
-  }
-
-  .post-title {
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-3xl);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tight);
-    color: var(--color-heading);
-    margin-bottom: var(--spacing-lg);
-  }
-
-  .post-subtitle {
-    font-size: var(--font-size-lg);
-    line-height: var(--line-height-relaxed);
-    color: var(--color-text-light);
-    font-weight: var(--font-weight-normal);
-    margin: 0;
-  }
-
-  .post-meta-container {
-    margin-bottom: var(--spacing-xl);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-  }
-
-  /* Meta container variants */
-  .post-meta-container--horizontal {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--spacing-md);
-  }
-
-  .post-meta-container--compact {
-    gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-lg);
-  }
-
-  .post-meta-container--spacious {
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-2xl);
-  }
-
-  .meta-item {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    color: var(--color-text-light);
-    font-size: var(--font-size-sm);
-    padding: var(--spacing-sm) 0;
-    font-weight: var(--font-weight-medium);
-    transition: color var(--transition-fast);
-  }
-
-  .meta-item:hover {
-    color: var(--color-text);
-  }
-
-  .meta-icon {
-    width: 16px;
-    height: 16px;
-    color: var(--color-text-lighter);
-    opacity: 0.8;
-    flex-shrink: 0;
-    transition: opacity var(--transition-fast);
-  }
-
-  .meta-item:hover .meta-icon {
-    opacity: 1;
-  }
-
-  /* Icon variants */
-  .meta-icon--large {
-    width: 18px;
-    height: 18px;
-  }
-
-  .meta-icon--small {
-    width: 14px;
-    height: 14px;
-  }
-
-  .meta-icon--accent {
-    color: var(--color-link);
-    opacity: 1;
-  }
-
-  .meta-icon--success {
-    color: var(--color-success);
-    opacity: 1;
-  }
-
-  .meta-icon--warning {
-    color: var(--color-warning);
-    opacity: 1;
-  }
-
-  .meta-text {
-    font-weight: var(--font-weight-medium);
-  }
-
-  .category-emoji {
-    margin-right: var(--spacing-xs);
-    font-size: var(--font-size-base);
-  }
-
-  .category-name {
-    color: var(--color-primary);
-    font-weight: var(--font-weight-semibold);
-  }
-
-  /* Meta item variants */
-  .meta-item--highlight {
-    color: var(--color-text);
-    font-weight: var(--font-weight-semibold);
-  }
-
-  .meta-item--muted {
-    color: var(--color-text-lighter);
-    font-weight: var(--font-weight-normal);
-  }
-
-  .meta-item--compact {
-    padding: calc(var(--spacing-sm) * 0.5) 0;
-    font-size: var(--font-size-xs);
-  }
-
-  /* Meta text variants */
-  .meta-text--large {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-semibold);
-  }
-
-  .meta-text--small {
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-normal);
-  }
-
-  .meta-text--accent {
-    color: var(--color-link);
-  }
-
-  .meta-text--muted {
-    color: var(--color-text-lighter);
-  }
-
-  .sidebar-divider {
-    height: 1px;
-    background: var(--color-border-light);
-    margin: var(--spacing-xl) 0;
-    opacity: 0.6;
-  }
-
-  /* Back navigation styling */
-  .back-navigation {
-    margin-top: var(--spacing-xl);
-    padding-top: var(--spacing-lg);
-    border-top: 1px solid var(--color-border-light);
-  }
-
-  .back-link {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    color: var(--color-link);
-    text-decoration: none;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    padding: var(--spacing-sm);
-    border-radius: var(--border-radius-sm);
-    transition: all var(--transition-fast);
-  }
-
-  .back-link:hover {
-    background-color: var(--color-hover-bg);
-    color: var(--color-link-hover);
-    transform: translateX(-2px);
-  }
-
-  .back-icon {
-    width: 16px;
-    height: 16px;
-    transition: transform var(--transition-fast);
-  }
-
-  .back-link:hover .back-icon {
-    transform: translateX(-2px);
-  }
-
-  /* Main Content Styles */
-  .blog-main {
-    order: 2;
-  }
-
-  .hero-image-container {
-    margin-bottom: var(--spacing-2xl);
-  }
-
-  .main-hero-image {
-    border-radius: var(--border-radius-xl);
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-  }
-
-  .content-wrapper {
-    max-width: var(--max-width-wide);
-  }
-
-  .prose {
-    width: 100%;
-    line-height: var(--line-height-relaxed);
-    font-size: var(--font-size-base);
-    color: var(--color-text);
-  }
-
-  .prose h2 {
-    margin-top: var(--spacing-2xl);
-  }
-
-  .prose h3 {
-    margin-top: var(--spacing-xl);
-  }
-
-  .prose h4,
-  .prose h5,
-  .prose h6 {
-    margin-top: var(--spacing-lg);
-  }
-
-  .prose p {
-    font-size: var(--font-size-lg);
-  }
-
-  .prose blockquote {
-    border-left-color: var(--color-primary);
-    border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
-  }
-
-  .prose pre {
-    border-radius: var(--border-radius-lg);
-  }
-
-  .prose img {
-    margin: var(--spacing-2xl) 0;
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
-  }
-
-  .prose table {
-    border-radius: var(--border-radius-lg);
-    border: 1px solid var(--color-border);
-  }
-
-  /* Tablet Layout */
-  @media (min-width: 768px) {
-    .blog-post-container {
-      padding: 0 var(--spacing-xl);
-      gap: var(--spacing-3xl);
-    }
-
-    .post-title {
-      font-size: var(--font-size-4xl);
-    }
-
-    .prose h2 {
-      font-size: var(--font-size-4xl);
-    }
-
-    .prose h3 {
-      font-size: var(--font-size-3xl);
-    }
-
-    /* Tablet meta item optimizations */
-    .post-meta-container--horizontal {
-      flex-direction: column;
-      gap: var(--spacing-sm);
-    }
-
-    .meta-item--compact {
-      padding: var(--spacing-sm) 0;
-    }
-  }
-
-  /* Desktop Layout */
-  @media (min-width: 1024px) {
-    .blog-post-container {
-      grid-template-columns: 350px 1fr;
-      gap: var(--spacing-3xl);
-      max-width: 1400px;
-    }
-
-    .blog-sidebar {
-      order: 1;
-    }
-
-    .blog-main {
-      order: 2;
-    }
-
-    .sidebar-content {
-      position: sticky;
-      top: calc(60px + var(--spacing-xl)); /* Account for fixed header */
-    }
-
-    .post-title {
-      font-size: var(--font-size-4xl);
-    }
-
-    .prose h2 {
-      font-size: var(--font-size-4xl);
-    }
-
-    .prose h3 {
-      font-size: var(--font-size-3xl);
-    }
-
-    /* Desktop meta item optimizations */
-    .post-meta-container--horizontal {
-      flex-direction: row;
-      gap: var(--spacing-md);
-    }
-
-    .meta-item:hover {
-      transform: translateX(2px);
-    }
-  }
-
-  /* Wide Desktop Layout */
-  @media (min-width: 1280px) {
-    .blog-post-container {
-      grid-template-columns: 400px 1fr;
-      max-width: 1600px;
-    }
-
-    .post-title {
-      font-size: var(--font-size-5xl);
-    }
-
-    .prose h2 {
-      font-size: var(--font-size-5xl);
-    }
-  }
-
-  /* Mobile Optimizations */
-  @media (max-width: 767px) {
-    .blog-post-container {
-      gap: var(--spacing-xl);
-      padding-top: calc(
-        55px + var(--spacing-lg)
-      ); /* Account for mobile header height */
-    }
-
-    .sidebar-content {
-      position: static;
-      padding: var(--spacing-lg) 0;
-    }
-
-    .post-title {
-      font-size: var(--font-size-3xl);
-      text-align: center;
-    }
-
-    .post-subtitle {
-      text-align: center;
-      font-size: var(--font-size-base);
-    }
-
-    .post-meta-container {
-      align-items: center;
-    }
-
-    .meta-item {
-      justify-content: center;
-    }
-
-    /* Mobile meta item optimizations */
-    .meta-item--compact {
-      padding: var(--spacing-xs) 0;
-    }
-
-    .meta-icon--large {
-      width: 16px;
-      height: 16px;
-    }
-
-    .meta-text--large {
-      font-size: var(--font-size-sm);
-    }
-
-    .prose h2 {
-      font-size: var(--font-size-2xl);
-    }
-
-    .prose h3 {
-      font-size: var(--font-size-xl);
-    }
-
-    .prose p {
-      font-size: var(--font-size-base);
-    }
-
-    .prose blockquote {
-      padding: var(--spacing-lg);
-      margin: var(--spacing-xl) 0;
-    }
-
-    .prose pre {
-      padding: var(--spacing);
-      margin: var(--spacing-xl) 0;
-    }
-  }
-</style>

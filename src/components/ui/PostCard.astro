@@ -21,7 +21,7 @@ if (category) {
 
 <article
   class:list={[
-    "border border-gray-200 rounded-lg overflow-hidden transition-all duration-200 bg-white shadow-sm relative flex flex-col h-full hover:border-gray-300 hover:shadow-md hover:-translate-y-0.5 group",
+    "border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden transition-all duration-300 bg-white dark:bg-gray-800 shadow-sm hover:shadow-lg relative flex flex-col h-full hover:border-gray-300 dark:hover:border-gray-600 hover:-translate-y-1 group",
     className,
   ]}
 >
@@ -31,12 +31,12 @@ if (category) {
   >
     {
       showImage && heroImage && (
-        <div class="w-full h-48 overflow-hidden relative flex-shrink-0 bg-gray-100 md:h-36 sm:h-32">
+        <div class="w-full h-48 overflow-hidden relative flex-shrink-0 bg-gray-100 dark:bg-gray-700 md:h-36 sm:h-32">
           <img
             src={heroImage.src}
             alt={title || `Image for ${title}`}
             loading="lazy"
-            class="w-full h-full object-cover transition-transform duration-200 block group-hover:scale-105"
+            class="w-full h-full object-cover transition-transform duration-300 block group-hover:scale-105"
           />
         </div>
       )
@@ -46,7 +46,7 @@ if (category) {
         categoryData && (
           <a
             href={`/${categoryData.slug}`}
-            class="inline-flex items-center gap-2 mb-4 text-sm text-gray-600 no-underline transition-all duration-200 py-1 px-3 rounded-md bg-gray-100 border border-gray-200 w-fit font-medium uppercase tracking-wider hover:bg-blue-600 hover:border-blue-600 hover:text-white hover:-translate-y-0.5 hover:shadow-sm md:text-xs md:py-1 md:px-2 md:mb-3"
+            class="inline-flex items-center gap-2 mb-4 text-sm text-gray-600 dark:text-gray-400 no-underline transition-all duration-200 py-1 px-3 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 w-fit font-medium uppercase tracking-wider hover:bg-blue-600 hover:border-blue-600 hover:text-white hover:-translate-y-0.5 hover:shadow-sm md:text-xs md:py-1 md:px-2 md:mb-3"
             data-astro-reload
           >
             <span class="text-base md:text-sm">{categoryData.emoji}</span>
@@ -57,17 +57,17 @@ if (category) {
         )
       }
       <h2
-        class="font-serif text-xl font-semibold text-gray-900 m-0 mb-4 leading-tight tracking-tight flex-shrink-0 break-words max-w-full md:text-lg sm:text-base"
+        class="font-serif text-xl font-semibold text-gray-900 dark:text-gray-100 m-0 mb-4 leading-tight tracking-tight flex-shrink-0 break-words max-w-full md:text-lg sm:text-base"
       >
         {title}
       </h2>
       <p
-        class="text-base text-gray-600 m-0 mb-4 leading-relaxed line-clamp-3 text-justify flex-1 break-words max-w-full sm:text-sm"
+        class="text-base text-gray-600 dark:text-gray-400 m-0 mb-4 leading-relaxed flex-1 break-words max-w-full sm:text-sm line-clamp-3"
       >
         {description}
       </p>
       <time
-        class="text-sm text-gray-500 italic font-serif flex-shrink-0 mt-auto"
+        class="text-sm text-gray-500 dark:text-gray-500 italic font-serif flex-shrink-0 mt-auto"
         datetime={pubDate.toISOString()}
       >
         {

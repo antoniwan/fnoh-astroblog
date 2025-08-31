@@ -23,87 +23,107 @@ const totalPosts = posts.length;
   description={SITE_DESCRIPTION}
   type="organization"
 >
-  <header class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-    <h1 class="text-4xl font-bold text-gray-900 mb-4">{SITE_TITLE}</h1>
-    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-      {SITE_DESCRIPTION} Currently featuring <strong
-        >{totalPosts} total writings</strong
-      > across various categories.
-    </p>
-  </header>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 py-16 lg:py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-6 leading-tight">
+        {SITE_TITLE}
+      </h1>
+      <p class="text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        {SITE_DESCRIPTION} Currently featuring <strong class="text-blue-600 dark:text-blue-400">{totalPosts} total writings</strong> across various categories.
+      </p>
+    </div>
+  </section>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-    <div class="grid gap-6">
-      {
-        categoriesWithCounts.map((category) => {
-          const hasPosts = category.postCount > 0;
+  <!-- Categories Grid -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+    <div class="grid gap-8">
+      {categoriesWithCounts.map((category) => {
+        const hasPosts = category.postCount > 0;
 
-          return (
-            <section class={`bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200 ${!hasPosts ? "opacity-75" : ""}`}>
-              {hasPosts ? (
-                <a
-                  href={`/${category.slug}`}
-                  class="block p-6 hover:bg-gray-50 transition-colors duration-200"
-                  data-astro-reload
-                >
-                  <div class="flex items-start justify-between">
-                    <div class="flex items-start space-x-4">
-                      <span class="text-3xl">{category.emoji}</span>
-                      <div class="flex-1">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-2">{category.title}</h2>
-                        <p class="text-gray-600 leading-relaxed">{category.description}</p>
-                      </div>
-                    </div>
-                    <div class="flex items-center space-x-2 text-sm text-gray-500">
-                      <span class="font-medium">{category.postCount}</span>
-                      <span>posts</span>
-                      <span class="text-blue-600 text-lg">→</span>
+        return (
+          <section 
+            class={`bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-all duration-300 ${
+              !hasPosts ? "opacity-75" : "hover:scale-[1.02]"
+            }`}
+          >
+            {hasPosts ? (
+              <a
+                href={`/${category.slug}`}
+                class="block p-8 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                data-astro-reload
+              >
+                <div class="flex items-start justify-between">
+                  <div class="flex items-start space-x-6">
+                    <span class="text-4xl lg:text-5xl">{category.emoji}</span>
+                    <div class="flex-1">
+                      <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3">
+                        {category.title}
+                      </h2>
+                      <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                        {category.description}
+                      </p>
                     </div>
                   </div>
-                </a>
-              ) : (
-                <div class="p-6">
-                  <div class="flex items-start justify-between">
-                    <div class="flex items-start space-x-4">
-                      <span class="text-3xl opacity-60">{category.emoji}</span>
-                      <div class="flex-1">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-2">{category.title}</h2>
-                        <p class="text-gray-600 leading-relaxed mb-3">{category.description}</p>
-                        <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-                          <span>Coming Soon</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="flex items-center space-x-2 text-sm text-gray-400">
-                      <span class="font-medium">0</span>
-                      <span>posts</span>
-                      <span class="text-lg">⏳</span>
-                    </div>
+                  <div class="flex items-center space-x-3 text-lg text-gray-500 dark:text-gray-400">
+                    <span class="font-bold text-blue-600 dark:text-blue-400">{category.postCount}</span>
+                    <span class="text-sm">posts</span>
+                    <span class="text-blue-600 dark:text-blue-400 text-2xl transform transition-transform duration-200 group-hover:translate-x-1">→</span>
                   </div>
                 </div>
-              )}
-            </section>
-          );
-        })
-      }
+              </a>
+            ) : (
+              <div class="p-8">
+                <div class="flex items-start justify-between">
+                  <div class="flex items-start space-x-6">
+                    <span class="text-4xl lg:text-5xl opacity-60">{category.emoji}</span>
+                    <div class="flex-1">
+                      <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-3">
+                        {category.title}
+                      </h2>
+                      <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+                        {category.description}
+                      </p>
+                      <div class="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200">
+                        <span>Coming Soon</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-3 text-lg text-gray-400 dark:text-gray-500">
+                    <span class="font-bold">0</span>
+                    <span class="text-sm">posts</span>
+                    <span class="text-2xl">⏳</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </section>
+        );
+      })}
 
       {/* View All Posts Section */}
-      <section class="bg-blue-50 rounded-lg border border-blue-200 shadow-sm hover:shadow-md transition-shadow duration-200">
-        <a href="/writings" class="block p-6 hover:bg-blue-100 transition-colors duration-200" data-astro-reload>
+      <section class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl border border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+        <a 
+          href="/writings" 
+          class="block p-8 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors duration-200" 
+          data-astro-reload
+        >
           <div class="flex items-start justify-between">
-            <div class="flex items-start space-x-4">
-              <span class="text-3xl">📚</span>
+            <div class="flex items-start space-x-6">
+              <span class="text-4xl lg:text-5xl">📚</span>
               <div class="flex-1">
-                <h2 class="text-xl font-semibold text-blue-900 mb-2">All Writings</h2>
-                <p class="text-blue-700 leading-relaxed">
+                <h2 class="text-2xl lg:text-3xl font-bold text-blue-900 dark:text-blue-100 mb-3">
+                  All Writings
+                </h2>
+                <p class="text-lg text-blue-700 dark:text-blue-300 leading-relaxed">
                   Browse all posts chronologically, including uncategorized ones.
                 </p>
               </div>
             </div>
-            <div class="flex items-center space-x-2 text-sm text-blue-600">
-              <span class="font-medium">{totalPosts}</span>
-              <span>posts</span>
-              <span class="text-lg">→</span>
+            <div class="flex items-center space-x-3 text-lg text-blue-600 dark:text-blue-400">
+              <span class="font-bold">{totalPosts}</span>
+              <span class="text-sm">posts</span>
+              <span class="text-2xl transform transition-transform duration-200 group-hover:translate-x-1">→</span>
             </div>
           </div>
         </a>

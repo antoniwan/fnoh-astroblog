@@ -15,16 +15,16 @@ const navigationLinks = [
 ---
 
 <header
-  class="fixed top-0 left-0 right-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm"
+  class="fixed top-0 left-0 right-0 z-50 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm"
 >
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo/Site Title -->
       <div class="flex-shrink-0">
-        <h1 class="text-xl font-bold text-gray-900">
+        <h1 class="text-xl font-bold">
           <a
             href="/"
-            class="text-gray-900 hover:text-blue-600 transition-colors duration-200"
+            class="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
           >
             {SITE_TITLE}
           </a>
@@ -49,7 +49,7 @@ const navigationLinks = [
       <div class="lg:hidden">
         <button
           type="button"
-          class="mobile-menu-button bg-white p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+          class="mobile-menu-button p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 transition-all duration-200"
           aria-controls="mobile-menu"
           aria-expanded="false"
         >
@@ -63,7 +63,7 @@ const navigationLinks = [
     <!-- Mobile menu -->
     <div class="lg:hidden hidden mobile-menu" id="mobile-menu">
       <div
-        class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200"
+        class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"
       >
         {
           navigationLinks.map((link) =>
@@ -74,7 +74,7 @@ const navigationLinks = [
             ) : (
               <a
                 href={link.href}
-                class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
+                class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-all duration-200"
               >
                 {link.label}
               </a>
