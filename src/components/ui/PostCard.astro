@@ -17,7 +17,7 @@ const { title, description, pubDate, heroImage } = post.data;
 ---
 
 <article class:list={['post-card', className]}>
-	<a href={`/writings/${post.id}`} class="post-link">
+	<a href={`/writings/${post.id.replace(/\.md$/, '')}`} class="post-link">
 		{showImage && heroImage && (
 			<div class="post-image">
 				<img 
