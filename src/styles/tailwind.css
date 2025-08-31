@@ -2,20 +2,47 @@
 
 /* Custom font fallbacks and CSS custom properties */
 :root {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-serif: 'Merriweather', Georgia, 'Times New Roman', serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-serif: 'Merriweather', Georgia, 'Times New Roman', serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
 }
 
-/* Ensure fonts are loaded and applied */
+/* Ensure fonts are loaded and applied with proper fallbacks */
 .font-sans {
-  font-family: var(--font-sans);
+    font-family: var(--font-sans);
+    font-display: swap;
 }
 
 .font-serif {
-  font-family: var(--font-serif);
+    font-family: var(--font-serif);
+    font-display: swap;
 }
 
 .font-mono {
-  font-family: var(--font-mono);
+    font-family: var(--font-mono);
+    font-display: swap;
+}
+
+/* Apply default font to body */
+body {
+    font-family: var(--font-sans);
+    font-display: swap;
+}
+
+/* Ensure headings use serif font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-serif);
+    font-display: swap;
+}
+
+/* Ensure code uses monospace font */
+code,
+pre {
+    font-family: var(--font-mono);
+    font-display: swap;
 }

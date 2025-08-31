@@ -1,0 +1,164 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+    title="Font Test - Field Notes on Humanity"
+    description="Test page to verify custom fonts are loading correctly"
+>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h1
+            class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-12 text-center"
+        >
+            Font Loading Test
+        </h1>
+
+        <div class="space-y-12">
+            <!-- Inter (Sans) Font Test -->
+            <section
+                class="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700"
+            >
+                <h2
+                    class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6"
+                >
+                    Inter (Sans) Font Family
+                </h2>
+                <div class="space-y-4">
+                    <p
+                        class="font-sans text-lg text-gray-700 dark:text-gray-300"
+                    >
+                        <strong>Font: Inter</strong> - This is the primary sans-serif
+                        font used for body text throughout the site.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="font-sans font-light">
+                            Light (300): The quick brown fox jumps over the lazy
+                            dog.
+                        </div>
+                        <div class="font-sans font-normal">
+                            Normal (400): The quick brown fox jumps over the
+                            lazy dog.
+                        </div>
+                        <div class="font-sans font-medium">
+                            Medium (500): The quick brown fox jumps over the
+                            lazy dog.
+                        </div>
+                        <div class="font-sans font-semibold">
+                            Semibold (600): The quick brown fox jumps over the
+                            lazy dog.
+                        </div>
+                        <div class="font-sans font-bold">
+                            Bold (700): The quick brown fox jumps over the lazy
+                            dog.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Merriweather (Serif) Font Test -->
+            <section
+                class="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700"
+            >
+                <h2
+                    class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6"
+                >
+                    Merriweather (Serif) Font Family
+                </h2>
+                <div class="space-y-4">
+                    <p
+                        class="font-serif text-lg text-gray-700 dark:text-gray-300"
+                    >
+                        <strong>Font: Merriweather</strong> - This is the serif font
+                        used for headings and important text.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="font-serif font-light">
+                            Light (300): The quick brown fox jumps over the lazy
+                            dog.
+                        </div>
+                        <div class="font-serif font-normal">
+                            Normal (400): The quick brown fox jumps over the
+                            lazy dog.
+                        </div>
+                        <div class="font-serif font-bold">
+                            Bold (700): The quick brown fox jumps over the lazy
+                            dog.
+                        </div>
+                        <div class="font-serif font-black">
+                            Black (900): The quick brown fox jumps over the lazy
+                            dog.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- JetBrains Mono (Monospace) Font Test -->
+            <section
+                class="bg-white dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-700"
+            >
+                <h2
+                    class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-6"
+                >
+                    JetBrains Mono (Monospace) Font Family
+                </h2>
+                <div class="space-y-4">
+                    <p
+                        class="font-mono text-lg text-gray-700 dark:text-gray-300"
+                    >
+                        <strong>Font: JetBrains Mono</strong> - This is the monospace
+                        font used for code and technical content.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div class="font-mono font-light">
+                            Light (300): The quick brown fox jumps over the lazy
+                            dog.
+                        </div>
+                        <div class="font-mono font-normal">
+                            Normal (400): The quick brown fox jumps over the
+                            lazy dog.
+                        </div>
+                        <div class="font-mono font-medium">
+                            Medium (500): The quick brown fox jumps over the
+                            lazy dog.
+                        </div>
+                        <div class="font-mono font-semibold">
+                            Semibold (600): The quick brown fox jumps over the
+                            lazy dog.
+                        </div>
+                        <div class="font-mono font-bold">
+                            Bold (700): The quick brown fox jumps over the lazy
+                            dog.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Font Loading Status -->
+            <section
+                class="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-xl border border-blue-200 dark:border-blue-700"
+            >
+                <h2
+                    class="text-2xl font-semibold text-blue-900 dark:text-blue-100 mb-6"
+                >
+                    Font Loading Status
+                </h2>
+                <div class="space-y-4 text-blue-800 dark:text-blue-200">
+                    <p class="font-sans">
+                        <span class="font-bold">✓ Inter:</span> If you see this text
+                        in a clean, modern sans-serif font, Inter is loading correctly.
+                    </p>
+                    <p class="font-serif">
+                        <span class="font-bold">✓ Merriweather:</span> If you see
+                        this text in a serif font with distinctive serifs, Merriweather
+                        is loading correctly.
+                    </p>
+                    <p class="font-mono">
+                        <span class="font-bold">✓ JetBrains Mono:</span> If you see
+                        this text in a monospace font with equal character widths,
+                        JetBrains Mono is loading correctly.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</BaseLayout>
