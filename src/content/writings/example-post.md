@@ -26,8 +26,34 @@ The new system provides:
 - **Type Safety**: Compile-time validation of image paths
 - **Performance**: Lazy loading and proper sizing
 - **Accessibility**: Enforced alt text requirements
+- **Consistent Sizing**: Standardized dimensions across all post images
+
+### Using Astro's Native Image Component
+
+For consistent image handling in blog posts, use Astro's native `<Image>` component:
+
+```astro
+---
+import { Image } from 'astro:assets';
+---
+
+<Image
+  src={imageSrc}
+  alt="Descriptive alt text"
+  width={800}
+  height={600}
+  format="webp"
+  quality={85}
+/>
+```
+
+### Current Markdown Image
+
+This image will be automatically styled with consistent dimensions:
 
 ![Young Link pulling the Master Sword out of its pedestal](../../assets/images/symbols/master-sword.avif)
+
+*The Master Sword represents the power and responsibility that comes with knowledge and growth.*
 
 ## Content Schema
 
@@ -47,6 +73,7 @@ To use this new system:
 1. Store images in `src/assets/images/`
 2. Reference them with relative paths in frontmatter
 3. Always provide descriptive alt text
-4. Use the new image components in your layouts
+4. Use Astro's native Image component in your layouts
+5. Follow the standardized image dimensions for consistency
 
 This ensures your site follows Astro best practices and provides the best user experience.
