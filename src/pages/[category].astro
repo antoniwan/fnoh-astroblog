@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-import PostCard from '../components/ui/PostCard.astro';
+import PostsGrid from '../components/ui/PostsGrid.astro';
 import { SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
 import { getCategoryBySlug } from '../utils/categories';
@@ -47,21 +47,17 @@ const categoryEmoji = categoryData?.emoji || '📁';
 	section={pageTitle}
 >
 	<div class="container-full">
-		<header class="category-header">
+		<div class="category-header">
 			<div class="category-info">
 				<span class="category-emoji">{categoryEmoji}</span>
 				<h1 class="category-title">{pageTitle}</h1>
 			</div>
 			<p class="category-description">{categoryDescription} <strong>{categoryPosts.length} writing{categoryPosts.length !== 1 ? 's' : ''}</strong>.</p>
-		</header>
+		</div>
 
 		<main class="category-content">
 			{categoryPosts.length > 0 ? (
-				<div class="posts-grid">
-					{categoryPosts.map((post) => (
-						<PostCard post={post} />
-					))}
-				</div>
+				<PostsGrid posts={categoryPosts} />
 			) : (
 				<div class="no-posts">
 					<p>No posts found in this category.</p>
@@ -125,13 +121,6 @@ const categoryEmoji = categoryData?.emoji || '📁';
 	}
 
 	.category-content {
-		width: 100%;
-	}
-
-	.posts-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-		gap: var(--spacing-xl);
 		width: 100%;
 	}
 

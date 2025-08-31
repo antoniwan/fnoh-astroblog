@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-import PostCard from '../../components/ui/PostCard.astro';
+import PostsGrid from '../../components/ui/PostsGrid.astro';
 import { SITE_TITLE } from '../../consts';
 import { getCategoriesWithPosts } from '../../utils/categories';
 
@@ -26,13 +26,13 @@ const totalPosts = sortedPosts.length;
 	section="Writings"
 >
 	<div class="container-full">
-		<header class="category-header">
+		<div class="category-header">
 			<div class="category-info">
 				<span class="category-emoji">✍️</span>
 				<h1 class="category-title">Writings</h1>
 			</div>
 			<p class="category-description">Thoughtful explorations of what it means to be human <strong>{totalPosts} writing{totalPosts !== 1 ? 's' : ''}</strong>.</p>
-		</header>
+		</div>
 
 		{/* Category Filter Section */}
 		{categoriesWithPosts.length > 0 && (
@@ -62,11 +62,12 @@ const totalPosts = sortedPosts.length;
 
 		<main class="category-content">
 		{initialPosts.length > 0 ? (
-			<div class="posts-grid">
-				{initialPosts.map((post) => (
-					<PostCard post={post} />
-				))}
-			</div>
+			<PostsGrid 
+				posts={initialPosts} 
+				showLoadMore={totalPosts > POSTS_PER_PAGE}
+				totalPosts={totalPosts}
+				initialPostsCount={POSTS_PER_PAGE}
+			/>
 		) : (
 			<div class="no-posts">
 				<div class="empty-field-notes">
@@ -77,42 +78,11 @@ const totalPosts = sortedPosts.length;
 				</div>
 			</div>
 		)}
-		
-		{totalPosts > POSTS_PER_PAGE && (
-			<div class="pagination">
-				<button id="load-more" class="load-more-btn">
-					Load More Writings ({totalPosts - initialPosts.length} remaining)
-				</button>
-			</div>
-		)}
-			</main>
+		</main>
 	</div>
 </BaseLayout>
 
-<script>
-	// Lazy load more posts for better performance
-	const loadMoreBtn = document.getElementById('load-more') as HTMLButtonElement;
-	const postsGrid = document.querySelector('.posts-grid');
-	
-	if (loadMoreBtn && postsGrid) {
-		loadMoreBtn.addEventListener('click', async () => {
-			loadMoreBtn.textContent = 'Loading...';
-			loadMoreBtn.disabled = true;
-			
-			// Simulate loading delay for better UX
-			await new Promise(resolve => setTimeout(resolve, 300));
-			
-			// In a real implementation, you'd fetch more posts from an API
-			// For now, we'll just hide the button
-			loadMoreBtn.style.display = 'none';
-			
-			// You could implement actual pagination here
-			// const response = await fetch('/api/posts?page=2');
-			// const morePosts = await response.json();
-			// Render more posts...
-		});
-	}
-</script>
+
 
 <style>
 	.category-header {
@@ -250,12 +220,7 @@ const totalPosts = sortedPosts.length;
 		width: 100%;
 	}
 
-	.posts-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-		gap: var(--spacing-xl);
-		width: 100%;
-	}
+
 
 	.no-posts {
 		text-align: center;
@@ -318,54 +283,7 @@ const totalPosts = sortedPosts.length;
 		box-shadow: var(--shadow-sm);
 	}
 
-	.pagination {
-		text-align: center;
-		margin-top: var(--spacing-2xl);
-	}
-	
-	.load-more-btn {
-		background-color: var(--color-primary);
-		color: white;
-		border: none;
-		padding: var(--spacing) var(--spacing-xl);
-		border-radius: var(--border-radius-md);
-		font-size: var(--font-size-base);
-		font-weight: var(--font-weight-medium);
-		cursor: pointer;
-		transition: all var(--transition-fast);
-		font-family: var(--font-family);
-		letter-spacing: var(--letter-spacing-normal);
-		position: relative;
-		overflow: hidden;
-	}
-	
-	.load-more-btn::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-		opacity: 0;
-		transition: opacity var(--transition-fast);
-		z-index: 0;
-	}
-	
-	.load-more-btn:hover:not(:disabled) {
-		background-color: var(--color-primary-dark);
-		transform: translateY(-2px);
-		box-shadow: var(--shadow-md);
-	}
-	
-	.load-more-btn:hover:not(:disabled)::before {
-		opacity: 0.1;
-	}
-	
-	.load-more-btn:disabled {
-		opacity: 0.6;
-		cursor: not-allowed;
-	}
+
 
 	@media (max-width: 768px) {
 		.category-header {
@@ -403,10 +321,7 @@ const totalPosts = sortedPosts.length;
 			font-size: var(--font-size-xs);
 		}
 
-		.posts-grid {
-			grid-template-columns: 1fr;
-			gap: var(--spacing-lg);
-		}
+
 	}
 
 	@media (max-width: 480px) {

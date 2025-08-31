@@ -1,0 +1,178 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PostCard from './PostCard.astro';
+
+interface Props {
+	posts: CollectionEntry<'writings'>[];
+	class?: string;
+	showLoadMore?: boolean;
+	totalPosts?: number;
+	initialPostsCount?: number;
+}
+
+const { 
+	posts, 
+	class: className = '',
+	showLoadMore = false,
+	totalPosts = 0,
+	initialPostsCount = 0
+} = Astro.props;
+
+const hasMorePosts = showLoadMore && totalPosts > initialPostsCount;
+const remainingPosts = totalPosts - initialPostsCount;
+---
+
+<div class:list={['posts-grid', className]}>
+	{posts.map((post) => (
+		<PostCard post={post} />
+	))}
+</div>
+
+{showLoadMore && hasMorePosts && (
+	<div class="pagination">
+		<button id="load-more" class="load-more-btn">
+			Load More Writings ({remainingPosts} remaining)
+		</button>
+	</div>
+)}
+
+<style>
+	.posts-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+		gap: var(--spacing-xl);
+		width: 100%;
+		max-width: 100%;
+		align-items: start;
+		justify-items: stretch;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		overflow: hidden;
+		min-width: 0; /* Prevent grid from overflowing container */
+		overflow-x: hidden; /* Prevent horizontal overflow */
+	}
+
+	.posts-grid .post-card {
+		width: 100%;
+		max-width: 100%;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		min-width: 0; /* Prevent grid items from overflowing */
+	}
+
+	/* Responsive grid adjustments */
+	@media (max-width: 1024px) {
+		.posts-grid {
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: var(--spacing-lg);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.posts-grid {
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: var(--spacing-lg);
+		}
+	}
+
+	@media (max-width: 480px) {
+		.posts-grid {
+			grid-template-columns: 1fr;
+			gap: var(--spacing);
+		}
+	}
+
+	@media (max-width: 320px) {
+		.posts-grid {
+			grid-template-columns: 1fr;
+			gap: var(--spacing-sm);
+			padding: 0 var(--spacing-sm);
+		}
+		
+		.posts-grid .post-card {
+			min-width: 0;
+			max-width: 100%;
+		}
+	}
+
+	/* Additional overflow prevention for very small screens */
+	@media (max-width: 480px) {
+		.posts-grid {
+			overflow-x: hidden;
+			max-width: 100vw;
+			width: 100%;
+		}
+	}
+
+	/* Pagination styles */
+	.pagination {
+		text-align: center;
+		margin-top: var(--spacing-2xl);
+		padding: var(--spacing-xl) 0;
+	}
+
+	.load-more-btn {
+		display: inline-block;
+		background: var(--color-primary);
+		color: white;
+		border: none;
+		padding: var(--spacing-md) var(--spacing-xl);
+		border-radius: var(--border-radius-lg);
+		font-size: var(--font-size-base);
+		font-weight: var(--font-weight-medium);
+		cursor: pointer;
+		transition: all var(--transition-normal);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.load-more-btn:hover {
+		background: var(--color-primary-dark);
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+	}
+
+	.load-more-btn:disabled {
+		background: var(--color-text-lighter);
+		cursor: not-allowed;
+		transform: none;
+		box-shadow: var(--shadow-sm);
+	}
+
+	/* Additional grid container fixes */
+	.posts-grid {
+		contain: layout style paint; /* Improve performance and prevent overflow */
+	}
+
+	/* Ensure grid items don't overflow their containers */
+	.posts-grid > * {
+		min-width: 0;
+		max-width: 100%;
+	}
+</style>
+
+<script>
+	// Lazy load more posts for better performance
+	const loadMoreBtn = document.getElementById('load-more') as HTMLButtonElement;
+	const postsGrid = document.querySelector('.posts-grid');
+	
+	if (loadMoreBtn && postsGrid) {
+		loadMoreBtn.addEventListener('click', async () => {
+			loadMoreBtn.textContent = 'Loading...';
+			loadMoreBtn.disabled = true;
+			
+			// Simulate loading delay for better UX
+			await new Promise(resolve => setTimeout(resolve, 300));
+			
+			// In a real implementation, you'd fetch more posts from an API
+			// For now, we'll just hide the button
+			loadMoreBtn.style.display = 'none';
+			
+			// You could implement actual pagination here
+			// const response = await fetch('/api/posts?page=2');
+			// const morePosts = await response.json();
+			// Render more posts...
+		});
+	}
+</script>

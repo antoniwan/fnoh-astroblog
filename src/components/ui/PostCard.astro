@@ -63,6 +63,14 @@ if (category) {
 		background: var(--color-bg);
 		box-shadow: var(--shadow-sm);
 		position: relative;
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		min-width: 0; /* Prevent flex item from overflowing */
+		max-width: 100%; /* Ensure card doesn't exceed container width */
+		width: 100%; /* Ensure card takes full width of container */
 	}
 
 	.post-card:hover {
@@ -87,11 +95,28 @@ if (category) {
 		opacity: 1;
 	}
 
+	.link-card {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		text-decoration: none;
+		color: inherit;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		min-width: 0; /* Prevent flex item from overflowing */
+		max-width: 100%; /* Ensure link doesn't exceed container width */
+	}
+
 	.post-image {
 		width: 100%;
 		height: 200px;
 		overflow: hidden;
 		position: relative;
+		flex-shrink: 0;
+		background: var(--color-bg-secondary);
+		max-width: 100%; /* Ensure image container doesn't exceed parent width */
+		box-sizing: border-box;
 	}
 
 	.post-image img {
@@ -99,14 +124,37 @@ if (category) {
 		height: 100%;
 		object-fit: cover;
 		transition: transform var(--transition-normal);
+		display: block;
+		max-width: 100%; /* Ensure image doesn't exceed container width */
+		height: auto; /* Maintain aspect ratio */
+		box-sizing: border-box;
 	}
 
 	.post-card:hover .post-image img {
 		transform: scale(1.05);
 	}
 
+	/* Fallback for missing images */
+	.post-image:empty::before {
+		content: '📝';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		font-size: var(--font-size-3xl);
+		color: var(--color-text-lighter);
+		opacity: 0.5;
+	}
+
 	.post-content {
 		padding: var(--spacing-xl);
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		box-sizing: border-box;
+		min-width: 0; /* Prevent flex item from overflowing */
+		max-width: 100%; /* Ensure content doesn't exceed container width */
 	}
 
 	.post-category {
@@ -153,6 +201,10 @@ if (category) {
 		margin: 0 0 var(--spacing-md) 0;
 		line-height: var(--line-height-tight);
 		letter-spacing: var(--letter-spacing-tight);
+		flex-shrink: 0;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+		max-width: 100%;
 	}
 
 	.post-description {
@@ -165,6 +217,10 @@ if (category) {
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 		text-align: justify;
+		flex: 1;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+		max-width: 100%;
 	}
 
 	.post-date {
@@ -172,6 +228,8 @@ if (category) {
 		color: var(--color-text-lighter);
 		font-style: italic;
 		font-family: var(--font-family-serif);
+		flex-shrink: 0;
+		margin-top: auto;
 	}
 
 	@media (max-width: 768px) {
@@ -194,6 +252,31 @@ if (category) {
 
 		.category-emoji {
 			font-size: var(--font-size-sm);
+		}
+	}
+
+	@media (max-width: 480px) {
+		.post-image {
+			height: 120px;
+		}
+		
+		.post-content {
+			padding: var(--spacing-md);
+		}
+		
+		.post-title {
+			font-size: var(--font-size-base);
+		}
+
+		.post-description {
+			font-size: var(--font-size-sm);
+		}
+	}
+
+	/* Ensure proper grid behavior */
+	@media (min-width: 769px) {
+		.post-card {
+			min-height: 400px;
 		}
 	}
 </style>
