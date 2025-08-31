@@ -1,28 +1,57 @@
-# Field Notes on Humanity - Astro Blog
+# Fnoh Astroblog
 
-A thoughtful blog exploring what it means to be human, built with Astro for optimal performance.
+A modern, performant blog built with [Astro](https://astro.build) featuring static site generation, content collections, and optimized performance.
 
-## 🚀 Performance Optimizations
+## 🚀 Features
 
-This project has been optimized for fast development and production builds:
+- **Static Site Generation** - Pre-built HTML for optimal performance
+- **Content Collections** - Type-safe content management with Markdown
+- **Responsive Design** - Mobile-first approach with modern CSS
+- **Performance Optimized** - Lighthouse scores optimized with lazy loading and image optimization
+- **SEO Ready** - Structured data, sitemaps, and RSS feeds
+- **Dark/Light Theme** - User preference-based theme switching
+- **Service Worker** - Offline support and caching strategies
 
-### Development Performance
-- **Content Management**: 12 blog posts with efficient pagination
-- **Lazy Loading**: Images use `loading="lazy"` and `decoding="async"`
-- **Optimized JavaScript**: Reduced DOM queries and event listeners
-- **CSS Simplification**: Streamlined styling with CSS variables
-- **Vite Optimizations**: Dependency pre-bundling and chunk splitting
+## 🛠️ Tech Stack
 
-### Build Optimizations
-- **Tree Shaking**: Dead code elimination enabled
-- **Image Optimization**: Sharp integration with WebP/AVIF/JPEG support
-- **CSS Inlining**: Critical styles inlined automatically
-- **Asset Optimization**: Vendor chunking for better caching
-- **Responsive Images**: Multiple densities (1x, 2x) for different devices
+- **Framework**: [Astro](https://astro.build) 4.x
+- **Styling**: CSS with custom properties and utility classes
+- **Content**: Markdown with frontmatter
+- **Build Tool**: Vite
+- **Package Manager**: pnpm
+- **TypeScript**: Full type safety
+- **Deployment**: Static hosting ready
 
-## 🛠️ Development
+## 📁 Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ui/             # Base UI components
+│   └── ...             # Layout and feature components
+├── content/             # Content collections
+│   └── writings/        # Blog posts (Markdown)
+├── layouts/             # Page layouts and templates
+├── pages/               # Route definitions
+├── styles/              # Global styles and CSS modules
+├── utils/               # Utility functions
+└── consts.ts           # Constants and configuration
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- pnpm (recommended) or npm
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone <repository-url>
+cd fnoh-astroblog
+
 # Install dependencies
 pnpm install
 
@@ -34,59 +63,153 @@ pnpm build
 
 # Preview production build
 pnpm preview
-
-# Check performance metrics
-pnpm perf
 ```
 
-## 📁 Project Structure
+## 📝 Content Management
 
+### Adding Blog Posts
+
+1. Create a new `.md` file in `src/content/writings/`
+2. Use the following frontmatter structure:
+
+```yaml
+---
+title: "Your Post Title"
+description: "Brief description of the post"
+pubDate: 2024-01-01
+updatedDate: 2024-01-01
+heroImage: "/path/to/image.jpg"
+tags: ["tag1", "tag2"]
+---
+
+Your content here...
 ```
-src/
-├── components/     # Reusable UI components (BaseHead, Header, Footer, etc.)
-├── content/       # Blog posts (Markdown/MDX) - 12 posts
-├── layouts/       # Page layouts (BaseLayout, ArticleLayout, BlogPost)
-├── pages/         # Route pages (index, about, writings, categories)
-├── styles/        # Global styles, typography, and utilities
-└── ui/            # UI components (Container, PostCard, HeroImage, etc.)
-```
 
-## 🎯 Performance Tips
+### Content Collections
 
-1. **Keep posts under 12 per page** for optimal loading
-2. **Use lazy loading** for images below the fold
-3. **Optimize hero images** with responsive formats
-4. **Avoid heavy JavaScript** in components
-5. **Leverage CSS variables** for consistent theming
+The project uses Astro's content collections for type-safe content management. Configuration is in `src/content.config.ts`.
+
+## 🎨 Styling
+
+- **CSS Variables**: Theme colors and spacing defined in `src/styles/_variables.css`
+- **Utility Classes**: Helper classes in `src/styles/_utilities.css`
+- **Typography**: Font settings and text styles in `src/styles/_typography.css`
+- **Responsive**: Mobile-first responsive design patterns
+
+## ⚡ Performance Features
+
+- **Image Optimization**: Automatic image optimization with `astro:assets`
+- **Lazy Loading**: Images and components load on demand
+- **CSS Optimization**: Critical CSS inlining and unused CSS removal
+- **Service Worker**: Offline support and intelligent caching
+- **Preload Hints**: Critical resource preloading
 
 ## 🔧 Configuration
 
-- **Astro 5.13.4** with latest optimizations
-- **Sharp** for image processing (WebP, AVIF, JPEG)
-- **MDX** support for rich content
-- **RSS & Sitemap** generation
-- **Responsive design** with mobile-first approach
-- **TypeScript** support with strict configuration
-- **Performance monitoring** script included
+### Astro Config (`astro.config.mjs`)
 
-## 📱 Browser Support
+- Static site generation enabled
+- Image optimization configured
+- Service worker generation
+- RSS feed generation
 
-- Modern browsers with ES2020+ support
-- Progressive enhancement for older browsers
-- Optimized for mobile and desktop performance
-- Responsive images with multiple formats
+### TypeScript (`tsconfig.json`)
 
-## 🚀 Quick Start
+- Strict type checking enabled
+- Path aliases configured
+- Astro-specific types included
 
-1. Clone the repository
-2. Install dependencies with `pnpm install`
-3. Start development server with `pnpm dev`
-4. Build for production with `pnpm build`
+## 📱 Responsive Design
 
-## 📊 Current Status
+- Mobile-first approach
+- Breakpoint system: `sm`, `md`, `lg`, `xl`
+- Flexible grid layouts
+- Touch-friendly interactions
 
-- **Blog Posts**: 12 published articles
-- **Categories**: Multiple writing categories
-- **Performance**: Optimized for fast loading
-- **SEO**: RSS feeds and sitemaps generated
-- **Accessibility**: Semantic HTML and ARIA support
+## 🌐 SEO & Accessibility
+
+- Semantic HTML structure
+- Meta tags and Open Graph support
+- Structured data (JSON-LD)
+- Sitemap generation
+- RSS feed
+- Alt text for images
+- Keyboard navigation support
+
+## 🚀 Deployment
+
+### Build Output
+
+```bash
+pnpm build
+```
+
+Generated files are in the `dist/` directory, ready for static hosting.
+
+### Hosting Options
+
+- **Vercel**: Zero-config deployment
+- **Netlify**: Drag-and-drop deployment
+- **GitHub Pages**: Free hosting for open source
+- **Any static host**: Upload `dist/` contents
+
+## 📊 Performance Monitoring
+
+The project includes a performance check script:
+
+```bash
+node scripts/performance-check.js
+```
+
+This analyzes build output and provides performance insights.
+
+## 🔍 Development
+
+### Available Scripts
+
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm preview` - Preview production build
+- `pnpm astro` - Run Astro CLI commands
+
+### Code Quality
+
+- TypeScript for type safety
+- Consistent code formatting
+- Component-based architecture
+- Reusable utility functions
+
+## 📚 Resources
+
+- [Astro Documentation](https://docs.astro.build)
+- [Content Collections](https://docs.astro.build/en/guides/content-collections/)
+- [Performance Best Practices](https://docs.astro.build/en/guides/performance/)
+- [Deployment Guide](https://docs.astro.build/en/guides/deploy/)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📄 License
+
+This project is dual-licensed:
+
+- **Content License**: [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/) (CC BY-NC-SA 4.0)
+  - You may share and adapt the content for non-commercial purposes
+  - Attribution is required
+  - Derivative works must be shared under the same license
+
+- **Code License**: [MIT License](https://opensource.org/licenses/MIT)
+  - Free to use, modify, and distribute
+  - Minimal restrictions on code usage
+  - Compatible with most open source licenses
+
+The content (blog posts, articles) is licensed under CC BY-NC-SA 4.0, while the codebase is licensed under MIT for maximum developer freedom.
+
+---
+
+Built with ❤️ using [Astro](https://astro.build)

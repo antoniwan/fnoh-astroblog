@@ -2,14 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/ui/Container.astro';
 import PostCard from '../components/ui/PostCard.astro';
-import { SITE_TITLE, CATEGORIES } from '../consts';
+import { SITE_TITLE, getCategoryDescription, getCategoryEmoji, getCategoryDisplayName, type CategoryKey } from '../consts';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('writings');
 	
 	// Get unique categories from posts
-	const categories = [...new Set(posts.map(post => post.data.category).filter(Boolean))];
+	const categories = [...new Set(posts.map(post => post.data.category).filter(Boolean))] as CategoryKey[];
 	
 	return categories.map(category => ({
 		params: { category },
@@ -23,23 +23,24 @@ const categoryPosts = posts
 	.filter(post => post.data.category === category)
 	.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
 
-const categoryInfo = CATEGORIES[category as keyof typeof CATEGORIES];
-const pageTitle = categoryInfo ? categoryInfo.title : category;
+const pageTitle = getCategoryDisplayName(category as CategoryKey);
+const categoryDescription = getCategoryDescription(category as CategoryKey);
+const categoryEmoji = getCategoryEmoji(category as CategoryKey);
 ---
 
 <BaseLayout 
 	title={`${pageTitle} - ${SITE_TITLE}`} 
-	description={categoryInfo?.description || `Posts in the ${category} category`}
+	description={categoryDescription}
 	type="website"
-	section={categoryInfo?.title}
+	section={pageTitle}
 >
 	<Container size="full">
 		<header class="category-header">
 			<div class="category-info">
-				<span class="category-emoji">{categoryInfo?.emoji || '📁'}</span>
+				<span class="category-emoji">{categoryEmoji}</span>
 				<h1 class="category-title">{pageTitle}</h1>
 			</div>
-			<p class="category-description">{categoryInfo?.description} <strong>{categoryPosts.length} writing{categoryPosts.length !== 1 ? 's' : ''}</strong>.</p>
+			<p class="category-description">{categoryDescription} <strong>{categoryPosts.length} writing{categoryPosts.length !== 1 ? 's' : ''}</strong>.</p>
 		</header>
 
 		<main class="category-content">

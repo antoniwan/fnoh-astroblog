@@ -15,10 +15,15 @@ export const CATEGORIES = {
     emoji: '🌀',
     description: 'Short fragments and field notes in process. Observations and thoughts marked as works-in-progress.'
   },
-  'healing-growth': {
-    title: 'Healing & Growth',
-    emoji: '🌱',
+  'recovery-reconstruction': {
+    title: 'Recovery & Reconstruction',
+    emoji: '🏗️',
     description: 'Essays on emotional regulation, compassion, and creating safety. Frameworks, rituals, and scaffolding for personal growth and empathy. Documentation of survival strategies and rebuilding processes.'
+  },
+  'empathy-healing': {
+    title: 'Empathy & Healing',
+    emoji: '🌱',
+    description: 'Content focused on emotional intelligence, compassion, and healing processes. Tools and frameworks for building empathy and supporting others through difficult times.'
   },
   'modern-life': {
     title: 'Modern Life (Systems & Culture)',
@@ -31,3 +36,23 @@ export const CATEGORIES = {
     description: 'Intellectual experiments, philosophical inquiries, and exploration of big questions. Testing ground for ideas and examination of fundamental concepts.'
   }
 } as const;
+
+// Utility functions to reduce duplication
+export const getCategoryDisplayName = (category: keyof typeof CATEGORIES) => {
+  return CATEGORIES[category]?.title || category;
+};
+
+export const getCategoryUrl = (category: keyof typeof CATEGORIES) => {
+  return `/${category}`;
+};
+
+export const getCategoryEmoji = (category: keyof typeof CATEGORIES) => {
+  return CATEGORIES[category]?.emoji || '📁';
+};
+
+export const getCategoryDescription = (category: keyof typeof CATEGORIES) => {
+  return CATEGORIES[category]?.description || `Posts in the ${category} category`;
+};
+
+// Type for category keys
+export type CategoryKey = keyof typeof CATEGORIES;

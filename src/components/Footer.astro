@@ -5,34 +5,14 @@ import {
   Heart,
   ExternalLink
 } from 'lucide-astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { SITE_TITLE, SITE_DESCRIPTION, getCategoryDisplayName, getCategoryUrl, type CategoryKey } from '../consts';
 import { getCollection } from 'astro:content';
 
 const today = new Date();
 
 // Get all posts and extract unique categories that have posts
 const allPosts = await getCollection('writings');
-const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category).filter(Boolean))];
-
-// Category display names mapping
-const categoryDisplayNames = {
-  'curiosity-lab': 'Curiosity Lab',
-  'recovery-reconstruction': 'Recovery & Reconstruction',
-  'empathy-healing': 'Empathy & Healing',
-  'lessons-in-balance': 'Lessons in Balance',
-  'chaos-notes': 'Chaos Notes',
-  'modern-life': 'Modern Life'
-};
-
-// Category URL mapping
-const categoryUrls = {
-  'curiosity-lab': '/curiosity-lab',
-  'recovery-reconstruction': '/recovery-reconstruction',
-  'empathy-healing': '/empathy-healing',
-  'lessons-in-balance': '/lessons-in-balance',
-  'chaos-notes': '/chaos-notes',
-  'modern-life': '/modern-life'
-};
+const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category).filter(Boolean))] as CategoryKey[];
 ---
 
 <footer class="site-footer">
@@ -59,8 +39,8 @@ const categoryUrls = {
           <ul class="footer-link-list">
             {categoriesWithPosts.map(category => (
               <li>
-                <a href={categoryUrls[category]} class="footer-link">
-                  {categoryDisplayNames[category]}
+                <a href={getCategoryUrl(category)} class="footer-link">
+                  {getCategoryDisplayName(category)}
                 </a>
               </li>
             ))}

@@ -7,8 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "perf": "node scripts/performance-check.js",
-    "migrate-images": "node scripts/migrate-to-new-image-system.js"
+    "perf": "node scripts/performance-check.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.4",

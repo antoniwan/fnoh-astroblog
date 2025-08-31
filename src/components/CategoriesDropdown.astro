@@ -1,30 +1,11 @@
 ---
 import { ChevronDown } from 'lucide-astro';
 import { getCollection } from 'astro:content';
+import { getCategoryDisplayName, getCategoryUrl, type CategoryKey } from '../consts';
 
 // Get all posts and extract unique categories that have posts
 const allPosts = await getCollection('writings');
-const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category).filter(Boolean))];
-
-// Category display names mapping
-const categoryDisplayNames = {
-  'curiosity-lab': 'Curiosity Lab',
-  'recovery-reconstruction': 'Recovery & Reconstruction',
-  'empathy-healing': 'Empathy & Healing',
-  'lessons-in-balance': 'Lessons in Balance',
-  'chaos-notes': 'Chaos Notes',
-  'modern-life': 'Modern Life'
-};
-
-// Category URL mapping
-const categoryUrls = {
-  'curiosity-lab': '/curiosity-lab',
-  'recovery-reconstruction': '/recovery-reconstruction',
-  'empathy-healing': '/empathy-healing',
-  'lessons-in-balance': '/lessons-in-balance',
-  'chaos-notes': '/chaos-notes',
-  'modern-life': '/modern-life'
-};
+const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category).filter(Boolean))] as CategoryKey[];
 ---
 
 <div class="categories-dropdown" data-dropdown>
@@ -36,11 +17,11 @@ const categoryUrls = {
   <div class="dropdown-menu" role="menu">
     {categoriesWithPosts.map(category => (
       <a 
-        href={categoryUrls[category]} 
+        href={getCategoryUrl(category)} 
         class="dropdown-item"
         role="menuitem"
       >
-        {categoryDisplayNames[category]}
+        {getCategoryDisplayName(category)}
       </a>
     ))}
   </div>
