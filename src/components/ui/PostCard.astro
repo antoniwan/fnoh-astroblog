@@ -17,7 +17,7 @@ const { title, description, pubDate, heroImage } = post.data;
 ---
 
 <article class:list={['post-card', className]}>
-	<a href={`/writings/${post.id.replace(/\.md$/, '')}`} class="post-link">
+	<a href={`/writings/${post.id.replace(/\.md$/, '')}`} class="link-card">
 		{showImage && heroImage && (
 			<div class="post-image">
 				<img 
@@ -72,13 +72,6 @@ const { title, description, pubDate, heroImage } = post.data;
 
 	.post-card:hover::before {
 		opacity: 1;
-	}
-
-	.post-link {
-		display: block;
-		text-decoration: none;
-		color: inherit;
-		height: 100%;
 	}
 
 	.post-image {

@@ -9,45 +9,15 @@ const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} data-astro-reload {...props}>
+<a href={href} class:list={['link-nav', className, { 'active': isActive }]} data-astro-reload {...props}>
 	<slot />
 </a>
 
 <style>
-	a {
-		color: var(--color-text);
-		text-decoration: none;
-		padding: 0.5rem 1rem;
-		border-radius: var(--border-radius-md);
-		transition: all var(--transition-fast);
-		font-weight: var(--font-weight-medium);
-		font-size: var(--font-size-sm);
-		line-height: var(--line-height-normal);
-		display: inline-flex;
-		align-items: center;
-		height: 2.25rem;
-		font-family: var(--font-family);
-		letter-spacing: var(--letter-spacing-normal);
-		position: relative;
-	}
+	/* HeaderLink now uses utility classes for base styling */
+	/* Additional custom styles only for unique features */
 	
-	a:hover {
-		color: var(--color-link);
-		background-color: var(--color-hover-bg);
-		text-decoration: none;
-		transform: translateY(-1px);
-		box-shadow: var(--shadow-sm);
-	}
-	
-	a.active {
-		color: var(--color-link);
-		font-weight: var(--font-weight-semibold);
-		background-color: var(--color-bg-tertiary);
-		border: 1px solid var(--color-border-light);
-		box-shadow: var(--shadow-sm);
-	}
-	
-	a.active::before {
+	.link-nav.active::before {
 		content: '';
 		position: absolute;
 		bottom: 0;

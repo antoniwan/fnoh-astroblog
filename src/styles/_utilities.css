@@ -373,3 +373,97 @@
     padding: var(--spacing);
   }
 }
+
+/* ===== LINK UTILITY CLASSES ===== */
+/* These provide consistent link styling patterns that components can use */
+
+/* Base link with underline on hover */
+.link-underline {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  border-bottom: 1px solid transparent;
+}
+
+.link-underline:hover,
+.link-underline:focus {
+  color: var(--color-link-hover);
+  border-bottom-color: var(--color-link-hover);
+}
+
+/* Link with no underline (for cards, buttons, etc.) */
+.link-clean {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.link-clean:hover,
+.link-clean:focus {
+  color: var(--color-link-hover);
+}
+
+/* Navigation link with active state indicator */
+.link-nav {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  position: relative;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+}
+
+.link-nav:hover,
+.link-nav:focus {
+  color: var(--color-link);
+  background-color: var(--color-hover-bg);
+}
+
+.link-nav.active {
+  color: var(--color-link);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Button-style link */
+.link-button {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--border-radius-md);
+  transition: all var(--transition-fast);
+  font-weight: var(--font-weight-medium);
+}
+
+.link-button:hover,
+.link-button:focus {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Card link (for post cards, etc.) */
+.link-card {
+  color: inherit;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  display: block;
+  height: 100%;
+}
+
+.link-card:hover,
+.link-card:focus {
+  color: inherit;
+}
+
+/* Focus styles for all link types */
+.link-underline:focus-visible,
+.link-clean:focus-visible,
+.link-nav:focus-visible,
+.link-button:focus-visible,
+.link-card:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--border-radius-sm);
+}

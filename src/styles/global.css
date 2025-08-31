@@ -315,22 +315,7 @@ p {
   -ms-hyphens: auto;
 }
 
-/* Philosophical link styling */
-a {
-  color: var(--color-link);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: all var(--transition-fast);
-}
-
-a:hover {
-  color: var(--color-link-hover);
-  border-bottom-color: var(--color-link-hover);
-}
-
-a:visited {
-  color: var(--color-link-visited);
-}
+/* Philosophical link styling - Now handled in GlobalStyles.astro for consistency */
 
 /* Enhanced blockquote styling for philosophical quotes */
 blockquote {
