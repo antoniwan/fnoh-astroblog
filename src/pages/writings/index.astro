@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/ui/Container.astro';
 import { SITE_TITLE } from '../../consts';
 
 // Get all posts and sort by publication date
@@ -19,15 +20,16 @@ const totalPosts = sortedPosts.length;
 	type="website"
 	section="Writings"
 >
-	<header class="category-header">
-		<div class="category-info">
-			<span class="category-emoji">✍️</span>
-			<h1 class="category-title">Writings</h1>
-		</div>
-		<p class="category-description">Thoughtful explorations of what it means to be human <strong>{totalPosts} writing{totalPosts !== 1 ? 's' : ''}</strong>.</p>
-	</header>
+	<Container size="full">
+		<header class="category-header">
+			<div class="category-info">
+				<span class="category-emoji">✍️</span>
+				<h1 class="category-title">Writings</h1>
+			</div>
+			<p class="category-description">Thoughtful explorations of what it means to be human <strong>{totalPosts} writing{totalPosts !== 1 ? 's' : ''}</strong>.</p>
+		</header>
 
-	<main class="category-content">
+		<main class="category-content">
 		{initialPosts.length > 0 ? (
 			<div class="posts-grid">
 				{initialPosts.map((post) => (
@@ -65,7 +67,8 @@ const totalPosts = sortedPosts.length;
 				</button>
 			</div>
 		)}
-	</main>
+			</main>
+	</Container>
 </BaseLayout>
 
 <script>
@@ -129,14 +132,14 @@ const totalPosts = sortedPosts.length;
 	}
 
 	.category-content {
-		max-width: 1200px;
-		margin: 0 auto;
+		width: 100%;
 	}
 
 	.posts-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 		gap: var(--spacing-xl);
+		width: 100%;
 	}
 
 	.post-card {

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/ui/Container.astro';
 import { SITE_TITLE, CATEGORIES } from '../consts';
 import { getCollection } from 'astro:content';
 
@@ -31,45 +32,47 @@ const pageTitle = categoryInfo ? categoryInfo.title : category;
 	type="website"
 	section={categoryInfo?.title}
 >
-	<header class="category-header">
-		<div class="category-info">
-			<span class="category-emoji">{categoryInfo?.emoji || '📁'}</span>
-			<h1 class="category-title">{pageTitle}</h1>
-		</div>
-		<p class="category-description">{categoryInfo?.description} <strong>{categoryPosts.length} writing{categoryPosts.length !== 1 ? 's' : ''}</strong>.</p>
-	</header>
+	<Container size="full">
+		<header class="category-header">
+			<div class="category-info">
+				<span class="category-emoji">{categoryInfo?.emoji || '📁'}</span>
+				<h1 class="category-title">{pageTitle}</h1>
+			</div>
+			<p class="category-description">{categoryInfo?.description} <strong>{categoryPosts.length} writing{categoryPosts.length !== 1 ? 's' : ''}</strong>.</p>
+		</header>
 
-	<main class="category-content">
-		{categoryPosts.length > 0 ? (
-			<div class="posts-grid">
-				{categoryPosts.map((post) => (
-					<article class="post-card">
-						<a href={`/writings/${post.id}`} class="post-link">
-							<div class="post-image">
-								<img src={post.data.heroImage?.src || ''} alt={post.data.title || `Image for ${post.data.title}`} loading="lazy" />
-							</div>
-							<div class="post-content">
-								<h2 class="post-title">{post.data.title}</h2>
-								<p class="post-description">{post.data.description}</p>
-								<time class="post-date" datetime={post.data.pubDate.toISOString()}>
-									{post.data.pubDate.toLocaleDateString('en-US', { 
-										year: 'numeric', 
-										month: 'long', 
-										day: 'numeric' 
-									})}
-								</time>
-							</div>
-						</a>
-					</article>
-				))}
-			</div>
-		) : (
-			<div class="no-posts">
-				<p>No posts found in this category.</p>
-				<a href="/" class="back-link">← Back to Home</a>
-			</div>
-		)}
-	</main>
+		<main class="category-content">
+			{categoryPosts.length > 0 ? (
+				<div class="posts-grid">
+					{categoryPosts.map((post) => (
+						<article class="post-card">
+							<a href={`/writings/${post.id}`} class="post-link">
+								<div class="post-image">
+									<img src={post.data.heroImage?.src || ''} alt={post.data.title || `Image for ${post.data.title}`} loading="lazy" />
+								</div>
+								<div class="post-content">
+									<h2 class="post-title">{post.data.title}</h2>
+									<p class="post-description">{post.data.description}</p>
+									<time class="post-date" datetime={post.data.pubDate.toISOString()}>
+										{post.data.pubDate.toLocaleDateString('en-US', { 
+											year: 'numeric', 
+											month: 'long', 
+											day: 'numeric' 
+										})}
+									</time>
+								</div>
+							</a>
+						</article>
+					))}
+				</div>
+			) : (
+				<div class="no-posts">
+					<p>No posts found in this category.</p>
+					<a href="/" class="back-link">← Back to Home</a>
+				</div>
+			)}
+		</main>
+	</Container>
 </BaseLayout>
 
 <style>
@@ -115,14 +118,14 @@ const pageTitle = categoryInfo ? categoryInfo.title : category;
 	}
 
 	.category-content {
-		max-width: 1200px;
-		margin: 0 auto;
+		width: 100%;
 	}
 
 	.posts-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 		gap: var(--spacing-xl);
+		width: 100%;
 	}
 
 	.post-card {
