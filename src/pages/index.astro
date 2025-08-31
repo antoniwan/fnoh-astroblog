@@ -39,7 +39,7 @@ const totalPosts = posts.length;
 			return (
 				<section class={`toc-section ${!hasPosts ? 'coming-soon' : ''}`}>
 					{hasPosts ? (
-						<a href={`/${categoryKey}`} class="section-link">
+						<a href={`/${categoryKey}`} class="section-link" data-astro-reload>
 							<div class="section-header">
 								<span class="section-emoji">{category.emoji}</span>
 								<div class="section-info">
@@ -78,7 +78,7 @@ const totalPosts = posts.length;
 
 		{uncategorizedPosts.length > 0 && (
 			<section class="toc-section">
-				<a href="/writings" class="section-link">
+				<a href="/writings" class="section-link" data-astro-reload>
 					<div class="section-header">
 						<span class="section-emoji">📝</span>
 						<div class="section-info">

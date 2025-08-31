@@ -67,239 +67,25 @@ const {
 	.main-content {
 		width: 100%;
 		max-width: 100%;
-		/* Account for fixed header (60px) + footer height + proper spacing */
 		min-height: calc(100vh - 60px - 120px - var(--spacing-2xl));
-		/* Add top padding to prevent content from being hidden behind fixed header */
 		padding-top: calc(60px + var(--spacing-2xl));
-		/* Add top margin to account for fixed header */
 		margin-top: 0;
 		background-color: var(--color-bg);
 		color: var(--color-text);
 	}
 	
-	/* Ensure all direct children of main-content have proper spacing */
-	.main-content > *:first-child {
-		margin-top: 0;
-	}
-	
-	.main-content > *:last-child {
-		margin-bottom: calc(var(--spacing-2xl) + 60px);
-	}
-	
-	/* Handle common content elements with editorial styling */
-	.main-content p {
-		line-height: var(--line-height-relaxed);
-		margin-bottom: var(--spacing-lg);
-		color: var(--color-text);
-	}
-	
-	.main-content h1,
-	.main-content h2,
-	.main-content h3,
-	.main-content h4,
-	.main-content h5,
-	.main-content h6 {
-		margin-bottom: var(--spacing-md);
-		color: var(--color-heading);
-		font-family: var(--font-family-heading);
-	}
-	
-	.main-content h1 {
-		font-size: var(--font-size-5xl);
-		margin-bottom: var(--spacing-xl);
-	}
-	
-	.main-content h2 {
-		font-size: var(--font-size-4xl);
-		margin-bottom: var(--spacing-lg);
-	}
-	
-	.main-content h3 {
-		font-size: var(--font-size-3xl);
-		margin-bottom: var(--spacing);
-	}
-	
-	.main-content h4 {
-		font-size: var(--font-size-2xl);
-		margin-bottom: var(--spacing);
-	}
-	
-	.main-content h5 {
-		font-size: var(--font-size-xl);
-		margin-bottom: var(--spacing);
-	}
-	
-	.main-content h6 {
-		font-size: var(--font-size-lg);
-		margin-bottom: var(--spacing);
-	}
-	
-	/* Enhanced list styling */
-	.main-content ul,
-	.main-content ol {
-		margin-bottom: var(--spacing-lg);
-		padding-left: var(--spacing-xl);
-		line-height: var(--line-height-relaxed);
-	}
-	
-	.main-content li {
-		margin-bottom: var(--spacing-sm);
-		color: var(--color-text);
-	}
-	
-	/* Enhanced blockquote styling */
-	.main-content blockquote {
-		margin: var(--spacing-xl) 0;
-		padding: var(--spacing-lg) var(--spacing-xl);
-		border-left: 4px solid var(--color-link);
-		background-color: var(--color-blockquote-bg);
-		font-style: italic;
-		font-size: var(--font-size-lg);
-		color: var(--color-text);
-		line-height: var(--line-height-relaxed);
-		border-radius: var(--border-radius-md);
-		box-shadow: var(--shadow-sm);
-	}
-	
-	.main-content blockquote p {
-		margin: 0;
-		font-family: var(--font-family-serif);
-	}
-	
-	/* Enhanced code styling */
-	.main-content code {
-		font-family: var(--font-family-mono);
-		font-size: var(--font-size-sm);
-		background-color: var(--color-inline-code-bg);
-		color: var(--color-code-text);
-		padding: var(--spacing-xs) var(--spacing-sm);
-		border-radius: var(--border-radius-sm);
-		border: 1px solid var(--color-code-border);
-		font-weight: var(--font-weight-medium);
-	}
-	
-	.main-content pre {
-		font-family: var(--font-family-mono);
-		font-size: var(--font-size-sm);
-		background-color: var(--color-code-bg);
-		color: var(--color-code-text);
-		padding: var(--spacing-lg);
-		border-radius: var(--border-radius-md);
-		border: 1px solid var(--color-code-border);
-		overflow-x: auto;
-		line-height: var(--line-height-relaxed);
-		max-width: 100%;
-		margin: var(--spacing-xl) 0;
-		box-shadow: var(--shadow-sm);
-	}
-	
-	/* Enhanced table styling */
-	.main-content table {
-		width: 100%;
-		border-collapse: collapse;
-		margin: var(--spacing-xl) 0;
-		font-size: var(--font-size-sm);
-		max-width: 100%;
-		border: 1px solid var(--color-table-border);
-		border-radius: var(--border-radius-md);
-		overflow: hidden;
-		box-shadow: var(--shadow-sm);
-	}
-	
-	.main-content th,
-	.main-content td {
-		padding: var(--spacing);
-		text-align: left;
-		border-bottom: 1px solid var(--color-table-border);
-		color: var(--color-text);
-	}
-	
-	.main-content th {
-		background-color: var(--color-table-header-bg);
-		font-weight: var(--font-weight-semibold);
-		color: var(--color-heading);
-		border-bottom: 2px solid var(--color-table-border);
-	}
-	
-	.main-content tr:hover {
-		background-color: var(--color-hover-bg);
-	}
-	
 	/* Responsive adjustments */
-	@media (max-width: 1024px) {
-		.main-content {
-			padding-top: calc(60px + var(--spacing-2xl));
-		}
-	}
-	
 	@media (max-width: 768px) {
 		.main-content {
-			/* Adjust top padding for mobile header height (55px) */
 			padding-top: calc(55px + var(--spacing-xl));
-			/* Adjust min-height for mobile */
 			min-height: calc(100vh - 55px - 100px - var(--spacing-xl));
-		}
-		
-		.main-content > *:first-child {
-			margin-top: 0;
-		}
-		
-		.main-content > *:last-child {
-			margin-bottom: calc(var(--spacing-xl) + 55px);
-		}
-		
-		.main-content h1 {
-			font-size: var(--font-size-4xl);
-			margin-bottom: var(--spacing-lg);
-		}
-		
-		.main-content h2 {
-			font-size: var(--font-size-3xl);
-			margin-bottom: var(--spacing);
-		}
-		
-		.main-content h3 {
-			font-size: var(--font-size-2xl);
-			margin-bottom: var(--spacing);
-		}
-		
-		.main-content blockquote {
-			padding: var(--spacing) var(--spacing-lg);
-			margin: var(--spacing-lg) 0;
-		}
-		
-		.main-content ul,
-		.main-content ol {
-			padding-left: var(--spacing-lg);
 		}
 	}
 	
 	@media (max-width: 480px) {
 		.main-content {
-			/* Further adjust top padding for small mobile */
 			padding-top: calc(55px + var(--spacing-lg));
-			/* Further adjust min-height for small mobile */
 			min-height: calc(100vh - 55px - 90px - var(--spacing-lg));
-		}
-		
-		.main-content > *:first-child {
-			margin-top: 0;
-		}
-		
-		.main-content > *:last-child {
-			margin-bottom: calc(var(--spacing-lg) + 55px);
-		}
-		
-		.main-content h1 {
-			font-size: var(--font-size-3xl);
-		}
-		
-		.main-content h2 {
-			font-size: var(--font-size-2xl);
-		}
-		
-		.main-content h3 {
-			font-size: var(--font-size-xl);
 		}
 	}
 </style>
