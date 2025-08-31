@@ -55,8 +55,12 @@ const totalPosts = sortedPosts.length;
 			</div>
 		) : (
 			<div class="no-posts">
-				<p>No writings found.</p>
-				<a href="/" class="back-link">← Back to Home</a>
+				<div class="empty-field-notes">
+					<span class="empty-emoji">📝</span>
+					<h3 class="empty-title">Field Notes Empty</h3>
+					<p class="empty-description">The observation journal is currently blank. Perhaps the pseudothropologist is still in the field, gathering fresh insights to document.</p>
+					<a href="/" class="back-link">← Return to Base Camp</a>
+				</div>
 			</div>
 		)}
 		
@@ -212,6 +216,32 @@ const totalPosts = sortedPosts.length;
 	.no-posts {
 		text-align: center;
 		padding: var(--spacing-2xl);
+	}
+
+	.empty-field-notes {
+		max-width: 500px;
+		margin: 0 auto;
+	}
+
+	.empty-emoji {
+		font-size: var(--font-size-4xl);
+		display: block;
+		margin-bottom: var(--spacing-lg);
+	}
+
+	.empty-title {
+		font-size: var(--font-size-xl);
+		font-weight: var(--font-weight-semibold);
+		color: var(--color-text);
+		margin: 0 0 var(--spacing-md) 0;
+	}
+
+	.empty-description {
+		font-size: var(--font-size-lg);
+		color: var(--color-text-light);
+		margin: 0 0 var(--spacing-lg) 0;
+		line-height: var(--line-height-relaxed);
+		font-style: italic;
 	}
 
 	.no-posts p {
