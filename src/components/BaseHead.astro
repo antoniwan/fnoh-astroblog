@@ -1,34 +1,34 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import '../styles/global.css';
-import { SITE_TITLE } from '../consts';
-import StructuredData from './StructuredData.astro';
+import "../styles/global.css";
+import { SITE_TITLE } from "../consts";
+import StructuredData from "./StructuredData.astro";
 
 interface Props {
-	title: string;
-	description: string;
-	image?: string;
-	type?: 'website' | 'article' | 'organization';
-	publishedTime?: string;
-	modifiedTime?: string;
-	author?: string;
-	section?: string;
-	tags?: string[];
+  title: string;
+  description: string;
+  image?: string;
+  type?: "website" | "article" | "organization";
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { 
-	title, 
-	description, 
-	image = '/images/default.avif',
-	type = 'website',
-	publishedTime,
-	modifiedTime,
-	author,
-	section,
-	tags = []
+const {
+  title,
+  description,
+  image = "/images/default.avif",
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  author,
+  section,
+  tags = [],
 } = Astro.props;
 ---
 
@@ -41,29 +41,29 @@ const {
 <!-- Theme initialization script -->
 <script is:inline>
   // Initialize theme immediately to prevent flash of unstyled content
-  (function() {
-    const theme = localStorage.getItem('theme') || 'light';
+  (function () {
+    const theme = localStorage.getItem("theme") || "light";
     const htmlElement = document.documentElement;
-    
+
     // Set the data-theme attribute
-    htmlElement.setAttribute('data-theme', theme);
-    
+    htmlElement.setAttribute("data-theme", theme);
+
     // Apply theme colors immediately to prevent flash
-    if (theme === 'dark') {
-      htmlElement.style.backgroundColor = '#0a0a0a';
-      htmlElement.style.color = '#f1f5f9';
+    if (theme === "dark") {
+      htmlElement.style.backgroundColor = "#0a0a0a";
+      htmlElement.style.color = "#f1f5f9";
     } else {
-      htmlElement.style.backgroundColor = '#fafafa';
-      htmlElement.style.color = '#1a1a1a';
+      htmlElement.style.backgroundColor = "#fafafa";
+      htmlElement.style.color = "#1a1a1a";
     }
   })();
 </script>
 
 <!-- Resource Hints for Performance -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="dns-prefetch" href="https://fonts.googleapis.com">
-<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
 <!-- Preload critical resources -->
 <link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" />
@@ -82,7 +82,10 @@ const {
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <meta name="author" content="Field Notes on Humanity" />
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
 <meta name="language" content="en-US" />
 <meta name="revisit-after" content="7 days" />
 <meta name="theme-color" content="#1e3a8a" />
@@ -111,28 +114,32 @@ const {
 <meta property="twitter:creator" content="@fieldnotesonhumanity" />
 
 <!-- Article-specific meta tags -->
-{type === 'article' && publishedTime && (
-	<>
-		<meta property="article:published_time" content={publishedTime} />
-		<meta property="article:modified_time" content={modifiedTime || publishedTime} />
-		{author && <meta property="article:author" content={author} />}
-		{section && <meta property="article:section" content={section} />}
-		{tags.length > 0 && tags.map(tag => (
-			<meta property="article:tag" content={tag} />
-		))}
-	</>
-)}
+{
+  type === "article" && publishedTime && (
+    <>
+      <meta property="article:published_time" content={publishedTime} />
+      <meta
+        property="article:modified_time"
+        content={modifiedTime || publishedTime}
+      />
+      {author && <meta property="article:author" content={author} />}
+      {section && <meta property="article:section" content={section} />}
+      {tags.length > 0 &&
+        tags.map((tag) => <meta property="article:tag" content={tag} />)}
+    </>
+  )
+}
 
 <!-- Structured Data -->
 <StructuredData
-	type={type}
-	title={title}
-	description={description}
-	url={canonicalURL.toString()}
-	image={new URL(image, Astro.url).toString()}
-	publishedTime={publishedTime}
-	modifiedTime={modifiedTime}
-	author={author}
-	section={section}
-	tags={tags}
+  type={type}
+  title={title}
+  description={description}
+  url={canonicalURL.toString()}
+  image={new URL(image, Astro.url).toString()}
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+  author={author}
+  section={section}
+  tags={tags}
 />

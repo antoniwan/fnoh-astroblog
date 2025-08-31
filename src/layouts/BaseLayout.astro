@@ -1,95 +1,95 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import ScrollToTop from '../components/ui/ScrollToTop.astro';
-import GlobalStyles from '../components/GlobalStyles.astro';
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import ScrollToTop from "../components/ui/ScrollToTop.astro";
+import GlobalStyles from "../components/GlobalStyles.astro";
 
 interface Props {
-	title: string;
-	description: string;
-	image?: string;
-	showHeader?: boolean;
-	showFooter?: boolean;
-	class?: string;
-	type?: 'website' | 'article' | 'organization';
-	publishedTime?: string;
-	modifiedTime?: string;
-	author?: string;
-	section?: string;
-	tags?: string[];
+  title: string;
+  description: string;
+  image?: string;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  class?: string;
+  type?: "website" | "article" | "organization";
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
 }
 
 const {
-	title,
-	description,
-	image,
-	showHeader = true,
-	showFooter = true,
-	class: className = '',
-	type = 'website',
-	publishedTime,
-	modifiedTime,
-	author,
-	section,
-	tags = []
+  title,
+  description,
+  image,
+  showHeader = true,
+  showFooter = true,
+  class: className = "",
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  author,
+  section,
+  tags = [],
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead 
-			title={title} 
-			description={description} 
-			image={image}
-			type={type}
-			publishedTime={publishedTime}
-			modifiedTime={modifiedTime}
-			author={author}
-			section={section}
-			tags={tags}
-		/>
-	</head>
-	<body class={className}>
-		<GlobalStyles />
-		{showHeader && <Header />}
-		
-		<main class="main-content">
-			<div class="content-wrapper">
-				<slot />
-			</div>
-		</main>
-		
-		{showFooter && <Footer />}
-		
-		<ScrollToTop position="bottom-right" threshold={300} />
-	</body>
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+      author={author}
+      section={section}
+      tags={tags}
+    />
+  </head>
+  <body class={className}>
+    <GlobalStyles />
+    {showHeader && <Header />}
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <slot />
+      </div>
+    </main>
+
+    {showFooter && <Footer />}
+
+    <ScrollToTop position="bottom-right" threshold={300} />
+  </body>
 </html>
 
 <style>
-	.main-content {
-		width: 100%;
-		max-width: 100%;
-		min-height: calc(100vh - 60px - 120px - var(--spacing-2xl));
-		padding-top: calc(60px + var(--spacing-2xl));
-		margin-top: 0;
-		background-color: var(--color-bg);
-		color: var(--color-text);
-	}
-	
-	/* Responsive adjustments */
-	@media (max-width: 768px) {
-		.main-content {
-			padding-top: calc(55px + var(--spacing-xl));
-			min-height: calc(100vh - 55px - 100px - var(--spacing-xl));
-		}
-	}
-	
-	@media (max-width: 480px) {
-		.main-content {
-			padding-top: calc(55px + var(--spacing-lg));
-			min-height: calc(100vh - 55px - 90px - var(--spacing-lg));
-		}
-	}
+  .main-content {
+    width: 100%;
+    max-width: 100%;
+    min-height: calc(100vh - 60px - 120px - var(--spacing-2xl));
+    padding-top: calc(60px + var(--spacing-2xl));
+    margin-top: 0;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .main-content {
+      padding-top: calc(55px + var(--spacing-xl));
+      min-height: calc(100vh - 55px - 100px - var(--spacing-xl));
+    }
+  }
+
+  @media (max-width: 480px) {
+    .main-content {
+      padding-top: calc(55px + var(--spacing-lg));
+      min-height: calc(100vh - 55px - 90px - var(--spacing-lg));
+    }
+  }
 </style>

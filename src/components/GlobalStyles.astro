@@ -5,58 +5,66 @@
 
 <style is:global>
   /* ===== GLOBAL TYPOGRAPHY STYLES ===== */
-  
+
   /* Base typography */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-family-heading);
     color: var(--color-heading);
     line-height: var(--line-height-tight);
     margin: 0;
   }
-  
+
   h1 {
     font-size: var(--font-size-5xl);
     font-weight: var(--font-weight-bold);
     margin-bottom: var(--spacing-xl);
   }
-  
+
   h2 {
     font-size: var(--font-size-4xl);
     font-weight: var(--font-weight-bold);
     margin-bottom: var(--spacing-lg);
   }
-  
+
   h3 {
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-semibold);
     margin-bottom: var(--spacing);
   }
-  
-  h4, h5, h6 {
+
+  h4,
+  h5,
+  h6 {
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
     margin-bottom: var(--spacing-sm);
   }
-  
+
   p {
     font-size: var(--font-size-base);
     line-height: var(--line-height-relaxed);
     color: var(--color-text);
     margin-bottom: var(--spacing-lg);
   }
-  
+
   /* Lists */
-  ul, ol {
+  ul,
+  ol {
     margin-bottom: var(--spacing-lg);
     padding-left: var(--spacing-xl);
     line-height: var(--line-height-relaxed);
   }
-  
+
   li {
     margin-bottom: var(--spacing-sm);
     color: var(--color-text);
   }
-  
+
   /* ===== ATOMIC LINK FOUNDATION ===== */
   /* Only the most basic, non-conflicting styles */
   a {
@@ -64,13 +72,13 @@
     text-decoration: none;
     transition: color var(--transition-fast);
   }
-  
+
   a:visited {
     color: var(--color-link-visited);
   }
-  
+
   /* ===== GLOBAL CODE STYLES ===== */
-  
+
   /* Inline code - no background, just styling */
   code {
     font-family: var(--font-family-mono);
@@ -78,7 +86,7 @@
     color: var(--color-code-text);
     padding: var(--spacing-xs) var(--spacing-sm);
   }
-  
+
   /* Code blocks - only pre tags get backgrounds */
   pre {
     font-family: var(--font-family-mono);
@@ -93,7 +101,7 @@
     margin: var(--spacing-xl) 0;
     box-shadow: var(--shadow-sm);
   }
-  
+
   /* Remove background from code inside pre */
   pre code {
     background: none;
@@ -101,22 +109,22 @@
     border: none;
     border-radius: 0;
   }
-  
+
   /* Code selection styling */
   code::selection,
   pre::selection {
     background-color: var(--color-code-selection-bg);
     color: var(--color-code-text);
   }
-  
+
   code::-moz-selection,
   pre::-moz-selection {
     background-color: var(--color-code-selection-bg);
     color: var(--color-code-text);
   }
-  
+
   /* ===== GLOBAL BLOCKQUOTE STYLES ===== */
-  
+
   blockquote {
     margin: var(--spacing-xl) 0;
     padding: var(--spacing-lg) var(--spacing-xl);
@@ -130,7 +138,7 @@
     color: var(--color-blockquote-text);
     position: relative;
   }
-  
+
   blockquote::before {
     content: '"';
     font-size: var(--font-size-4xl);
@@ -140,14 +148,14 @@
     left: var(--spacing-lg);
     font-family: var(--font-family-heading);
   }
-  
+
   blockquote p {
     margin: 0;
     color: var(--color-blockquote-text);
   }
-  
+
   /* ===== GLOBAL TABLE STYLES ===== */
-  
+
   table {
     width: 100%;
     border-collapse: collapse;
@@ -159,27 +167,28 @@
     overflow: hidden;
     box-shadow: var(--shadow-sm);
   }
-  
-  th, td {
+
+  th,
+  td {
     padding: var(--spacing);
     text-align: left;
     border-bottom: 1px solid var(--color-table-border);
     color: var(--color-text);
   }
-  
+
   th {
     background-color: var(--color-table-header-bg);
     font-weight: var(--font-weight-semibold);
     color: var(--color-heading);
     border-bottom: 2px solid var(--color-table-border);
   }
-  
+
   tr:hover {
     background-color: var(--color-hover-bg);
   }
-  
+
   /* ===== GLOBAL IMAGE STYLES ===== */
-  
+
   img {
     max-width: 100%;
     height: auto;
@@ -187,9 +196,9 @@
     box-shadow: var(--shadow-sm);
     margin: var(--spacing-lg) 0;
   }
-  
+
   /* ===== GLOBAL HORIZONTAL RULE STYLES ===== */
-  
+
   hr {
     border: none;
     height: 1px;
@@ -197,22 +206,22 @@
     margin: var(--spacing-2xl) 0;
     opacity: 0.6;
   }
-  
+
   /* ===== GLOBAL SELECTION STYLES ===== */
-  
+
   ::selection {
     background-color: var(--color-selection-bg);
     color: var(--color-selection-text);
   }
-  
+
   /* ===== GLOBAL FOCUS STYLES ===== */
-  
+
   *:focus {
     outline: 2px solid var(--color-focus);
     outline-offset: 3px;
     border-radius: var(--border-radius-sm);
   }
-  
+
   button:focus,
   a:focus,
   input:focus,
@@ -223,54 +232,55 @@
     box-shadow: 0 0 0 4px var(--color-focus-ring);
     border-radius: var(--border-radius-sm);
   }
-  
+
   /* ===== RESPONSIVE TYPOGRAPHY ===== */
-  
+
   @media (max-width: 768px) {
     h1 {
       font-size: var(--font-size-3xl);
       margin-bottom: var(--spacing-lg);
     }
-    
+
     h2 {
       font-size: var(--font-size-2xl);
       margin-bottom: var(--spacing);
     }
-    
+
     h3 {
       font-size: var(--font-size-xl);
       margin-bottom: var(--spacing-sm);
     }
-    
+
     p {
       font-size: var(--font-size-base);
     }
-    
+
     blockquote {
       padding: var(--spacing) var(--spacing-lg);
       margin: var(--spacing-lg) 0;
       font-size: var(--font-size-base);
     }
-    
-    ul, ol {
+
+    ul,
+    ol {
       padding-left: var(--spacing-lg);
     }
-    
+
     pre {
       padding: var(--spacing);
       margin: var(--spacing-xl) 0;
     }
   }
-  
+
   @media (max-width: 480px) {
     h1 {
       font-size: var(--font-size-2xl);
     }
-    
+
     h2 {
       font-size: var(--font-size-xl);
     }
-    
+
     h3 {
       font-size: var(--font-size-lg);
     }

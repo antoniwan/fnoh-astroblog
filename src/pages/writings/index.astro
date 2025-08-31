@@ -1,14 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
-import PostsGrid from '../../components/ui/PostsGrid.astro';
-import { SITE_TITLE } from '../../consts';
-import { getCategoriesWithPosts } from '../../utils/categories';
+import PostsGrid from "../../components/ui/PostsGrid.astro";
+import { SITE_TITLE } from "../../consts";
+import { getCategoriesWithPosts } from "../../utils/categories";
 
 // Get all posts and sort by publication date
-const allPosts = await getCollection('writings');
-const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const allPosts = await getCollection("writings");
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
 
 // Get categories that have posts
 const categoriesWithPosts = await getCategoriesWithPosts();
@@ -19,321 +21,339 @@ const initialPosts = sortedPosts.slice(0, POSTS_PER_PAGE);
 const totalPosts = sortedPosts.length;
 ---
 
-<BaseLayout 
-	title={`Writings - ${SITE_TITLE}`} 
-	description="Explore thoughtful reflections on humanity, personal growth, and the human condition through our collection of writings."
-	type="website"
-	section="Writings"
+<BaseLayout
+  title={`Writings - ${SITE_TITLE}`}
+  description="Explore thoughtful reflections on humanity, personal growth, and the human condition through our collection of writings."
+  type="website"
+  section="Writings"
 >
-	<div class="container-full">
-		<div class="category-header">
-			<div class="category-info">
-				<span class="category-emoji">✍️</span>
-				<h1 class="category-title">Writings</h1>
-			</div>
-			<p class="category-description">Thoughtful explorations of what it means to be human <strong>{totalPosts} writing{totalPosts !== 1 ? 's' : ''}</strong>.</p>
-		</div>
+  <div class="container-full">
+    <div class="category-header">
+      <div class="category-info">
+        <span class="category-emoji">✍️</span>
+        <h1 class="category-title">Writings</h1>
+      </div>
+      <p class="category-description">
+        Thoughtful explorations of what it means to be human <strong
+          >{totalPosts} writing{totalPosts !== 1 ? "s" : ""}</strong
+        >.
+      </p>
+    </div>
 
-		{/* Category Filter Section */}
-		{categoriesWithPosts.length > 0 && (
-			<section class="category-filter-section">
-				<h2 class="filter-title">Browse by Category</h2>
-				<div class="category-filters">
-					<a href="/writings" class="category-filter active" data-astro-reload>
-						<span class="filter-emoji">📚</span>
-						<span class="filter-name">All Posts</span>
-						<span class="filter-count">{totalPosts}</span>
-					</a>
-					{categoriesWithPosts.map(category => {
-						const categoryPosts = allPosts.filter(post => 
-							post.data.category?.id === category.slug
-						);
-						return (
-							<a href={`/${category.slug}`} class="category-filter" data-astro-reload>
-								<span class="filter-emoji">{category.emoji}</span>
-								<span class="filter-name">{category.title}</span>
-								<span class="filter-count">{categoryPosts.length}</span>
-							</a>
-						);
-					})}
-				</div>
-			</section>
-		)}
+    {/* Category Filter Section */}
+    {
+      categoriesWithPosts.length > 0 && (
+        <section class="category-filter-section">
+          <h2 class="filter-title">Browse by Category</h2>
+          <div class="category-filters">
+            <a
+              href="/writings"
+              class="category-filter active"
+              data-astro-reload
+            >
+              <span class="filter-emoji">📚</span>
+              <span class="filter-name">All Posts</span>
+              <span class="filter-count">{totalPosts}</span>
+            </a>
+            {categoriesWithPosts.map((category) => {
+              const categoryPosts = allPosts.filter(
+                (post) => post.data.category?.id === category.slug,
+              );
+              return (
+                <a
+                  href={`/${category.slug}`}
+                  class="category-filter"
+                  data-astro-reload
+                >
+                  <span class="filter-emoji">{category.emoji}</span>
+                  <span class="filter-name">{category.title}</span>
+                  <span class="filter-count">{categoryPosts.length}</span>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )
+    }
 
-		<main class="category-content">
-		{initialPosts.length > 0 ? (
-			<PostsGrid 
-				posts={initialPosts} 
-				showLoadMore={totalPosts > POSTS_PER_PAGE}
-				totalPosts={totalPosts}
-				initialPostsCount={POSTS_PER_PAGE}
-			/>
-		) : (
-			<div class="no-posts">
-				<div class="empty-field-notes">
-					<span class="empty-emoji">📝</span>
-					<h3 class="empty-title">Field Notes Empty</h3>
-					<p class="empty-description">The observation journal is currently blank. Perhaps the pseudothropologist is still in the field, gathering fresh insights to document.</p>
-					<a href="/" class="back-link">← Return to Base Camp</a>
-				</div>
-			</div>
-		)}
-		</main>
-	</div>
+    <main class="category-content">
+      {
+        initialPosts.length > 0 ? (
+          <PostsGrid
+            posts={initialPosts}
+            showLoadMore={totalPosts > POSTS_PER_PAGE}
+            totalPosts={totalPosts}
+            initialPostsCount={POSTS_PER_PAGE}
+          />
+        ) : (
+          <div class="no-posts">
+            <div class="empty-field-notes">
+              <span class="empty-emoji">📝</span>
+              <h3 class="empty-title">Field Notes Empty</h3>
+              <p class="empty-description">
+                The observation journal is currently blank. Perhaps the
+                pseudothropologist is still in the field, gathering fresh
+                insights to document.
+              </p>
+              <a href="/" class="back-link">
+                ← Return to Base Camp
+              </a>
+            </div>
+          </div>
+        )
+      }
+    </main>
+  </div>
 </BaseLayout>
 
-
-
 <style>
-	.category-header {
-		text-align: center;
-		margin-bottom: var(--spacing-2xl);
-		padding: var(--spacing-xl) 0;
-		border-bottom: 1px solid var(--color-border-light);
-		position: relative;
-	}
+  .category-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border-light);
+    position: relative;
+  }
 
-	.category-header::after {
-		content: '';
-		position: absolute;
-		bottom: -1px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 60%;
-		height: 2px;
-		background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-		border-radius: var(--border-radius-sm);
-	}
+  .category-header::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary),
+      var(--color-accent)
+    );
+    border-radius: var(--border-radius-sm);
+  }
 
-	.category-info {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: var(--spacing);
-		margin-bottom: var(--spacing);
-	}
+  .category-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing);
+    margin-bottom: var(--spacing);
+  }
 
-	.category-emoji {
-		font-size: var(--font-size-3xl);
-	}
+  .category-emoji {
+    font-size: var(--font-size-3xl);
+  }
 
-	.category-title {
-		font-family: var(--font-family-heading);
-		font-size: var(--font-size-3xl);
-		font-weight: var(--font-weight-bold);
-		margin: 0;
-		color: var(--color-heading);
-		line-height: var(--line-height-tight);
-		letter-spacing: var(--letter-spacing-tight);
-	}
+  .category-title {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+    color: var(--color-heading);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+  }
 
-	.category-description {
-		font-size: var(--font-size-lg);
-		color: var(--color-text-light);
-		max-width: 600px;
-		margin: 0 auto var(--spacing);
-		line-height: var(--line-height-relaxed);
-		text-align: justify;
-	}
+  .category-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto var(--spacing);
+    line-height: var(--line-height-relaxed);
+    text-align: justify;
+  }
 
-	/* Category Filter Styles */
-	.category-filter-section {
-		margin-bottom: var(--spacing-2xl);
-		padding: var(--spacing-xl) 0;
-		border-bottom: 1px solid var(--color-border-light);
-	}
+  /* Category Filter Styles */
+  .category-filter-section {
+    margin-bottom: var(--spacing-2xl);
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
 
-	.filter-title {
-		font-family: var(--font-family-heading);
-		font-size: var(--font-size-xl);
-		font-weight: var(--font-weight-semibold);
-		color: var(--color-heading);
-		margin: 0 0 var(--spacing-lg) 0;
-		text-align: center;
-	}
+  .filter-title {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-heading);
+    margin: 0 0 var(--spacing-lg) 0;
+    text-align: center;
+  }
 
-	.category-filters {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--spacing-md);
-		justify-content: center;
-		max-width: 800px;
-		margin: 0 auto;
-	}
+  .category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
 
-	.category-filter {
-		display: flex;
-		align-items: center;
-		gap: var(--spacing-sm);
-		padding: var(--spacing-sm) var(--spacing-md);
-		border: 2px solid var(--color-border-light);
-		border-radius: var(--border-radius-lg);
-		text-decoration: none;
-		color: var(--color-text);
-		background: var(--color-bg);
-		transition: all var(--transition-fast);
-		font-weight: var(--font-weight-medium);
-		min-width: 120px;
-		justify-content: center;
-	}
+  .category-filter {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--color-border-light);
+    border-radius: var(--border-radius-lg);
+    text-decoration: none;
+    color: var(--color-text);
+    background: var(--color-bg);
+    transition: all var(--transition-fast);
+    font-weight: var(--font-weight-medium);
+    min-width: 120px;
+    justify-content: center;
+  }
 
-	.category-filter:hover {
-		border-color: var(--color-primary);
-		background: var(--color-bg-secondary);
-		transform: translateY(-2px);
-		box-shadow: var(--shadow-sm);
-	}
+  .category-filter:hover {
+    border-color: var(--color-primary);
+    background: var(--color-bg-secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
 
-	.category-filter.active {
-		border-color: var(--color-primary);
-		background: var(--color-primary);
-		color: white;
-	}
+  .category-filter.active {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: white;
+  }
 
-	.filter-emoji {
-		font-size: var(--font-size-lg);
-	}
+  .filter-emoji {
+    font-size: var(--font-size-lg);
+  }
 
-	.filter-name {
-		font-size: var(--font-size-sm);
-		text-transform: uppercase;
-		letter-spacing: var(--letter-spacing-wider);
-	}
+  .filter-name {
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wider);
+  }
 
-	.filter-count {
-		background: var(--color-bg-secondary);
-		color: var(--color-text-light);
-		padding: var(--spacing-xs) var(--spacing-sm);
-		border-radius: var(--border-radius-full);
-		font-size: var(--font-size-xs);
-		font-weight: var(--font-weight-semibold);
-		min-width: 24px;
-		text-align: center;
-	}
+  .filter-count {
+    background: var(--color-bg-secondary);
+    color: var(--color-text-light);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    min-width: 24px;
+    text-align: center;
+  }
 
-	.category-filter.active .filter-count {
-		background: rgba(255, 255, 255, 0.2);
-		color: white;
-	}
+  .category-filter.active .filter-count {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
 
-	.category-content {
-		width: 100%;
-	}
+  .category-content {
+    width: 100%;
+  }
 
+  .no-posts {
+    text-align: center;
+    padding: var(--spacing-2xl);
+  }
 
+  .empty-field-notes {
+    max-width: 500px;
+    margin: 0 auto;
+  }
 
-	.no-posts {
-		text-align: center;
-		padding: var(--spacing-2xl);
-	}
+  .empty-emoji {
+    font-size: var(--font-size-4xl);
+    display: block;
+    margin-bottom: var(--spacing-lg);
+  }
 
-	.empty-field-notes {
-		max-width: 500px;
-		margin: 0 auto;
-	}
+  .empty-title {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-heading);
+    margin: 0 0 var(--spacing-md) 0;
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+  }
 
-	.empty-emoji {
-		font-size: var(--font-size-4xl);
-		display: block;
-		margin-bottom: var(--spacing-lg);
-	}
+  .empty-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-light);
+    margin: 0 0 var(--spacing-lg) 0;
+    line-height: var(--line-height-relaxed);
+    font-style: italic;
+    font-family: var(--font-family-serif);
+    text-align: justify;
+  }
 
-	.empty-title {
-		font-family: var(--font-family-heading);
-		font-size: var(--font-size-xl);
-		font-weight: var(--font-weight-semibold);
-		color: var(--color-heading);
-		margin: 0 0 var(--spacing-md) 0;
-		line-height: var(--line-height-tight);
-		letter-spacing: var(--letter-spacing-tight);
-	}
+  .no-posts p {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+  }
 
-	.empty-description {
-		font-size: var(--font-size-lg);
-		color: var(--color-text-light);
-		margin: 0 0 var(--spacing-lg) 0;
-		line-height: var(--line-height-relaxed);
-		font-style: italic;
-		font-family: var(--font-family-serif);
-		text-align: justify;
-	}
+  .back-link {
+    display: inline-block;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: all var(--transition-fast);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-light);
+  }
 
-	.no-posts p {
-		font-size: var(--font-size-lg);
-		color: var(--color-text-light);
-		margin-bottom: var(--spacing-lg);
-	}
+  .back-link:hover {
+    color: var(--color-primary-dark);
+    background-color: var(--color-hover-bg);
+    transform: translateX(-2px);
+    box-shadow: var(--shadow-sm);
+  }
 
-	.back-link {
-		display: inline-block;
-		color: var(--color-primary);
-		text-decoration: none;
-		font-weight: var(--font-weight-medium);
-		transition: all var(--transition-fast);
-		padding: var(--spacing-sm) var(--spacing-md);
-		border-radius: var(--border-radius-sm);
-		background-color: var(--color-bg-secondary);
-		border: 1px solid var(--color-border-light);
-	}
+  @media (max-width: 768px) {
+    .category-header {
+      padding: var(--spacing-lg) 0;
+      margin-bottom: var(--spacing-xl);
+    }
 
-	.back-link:hover {
-		color: var(--color-primary-dark);
-		background-color: var(--color-hover-bg);
-		transform: translateX(-2px);
-		box-shadow: var(--shadow-sm);
-	}
+    .category-title {
+      font-size: var(--font-size-2xl);
+    }
 
+    .category-description {
+      font-size: var(--font-size-base);
+    }
 
+    .category-filter-section {
+      padding: var(--spacing-lg) 0;
+      margin-bottom: var(--spacing-xl);
+    }
 
-	@media (max-width: 768px) {
-		.category-header {
-			padding: var(--spacing-lg) 0;
-			margin-bottom: var(--spacing-xl);
-		}
+    .filter-title {
+      font-size: var(--font-size-lg);
+    }
 
-		.category-title {
-			font-size: var(--font-size-2xl);
-		}
+    .category-filters {
+      gap: var(--spacing-sm);
+    }
 
-		.category-description {
-			font-size: var(--font-size-base);
-		}
+    .category-filter {
+      min-width: 100px;
+      padding: var(--spacing-xs) var(--spacing-sm);
+    }
 
-		.category-filter-section {
-			padding: var(--spacing-lg) 0;
-			margin-bottom: var(--spacing-xl);
-		}
+    .filter-name {
+      font-size: var(--font-size-xs);
+    }
+  }
 
-		.filter-title {
-			font-size: var(--font-size-lg);
-		}
+  @media (max-width: 480px) {
+    .category-filters {
+      flex-direction: column;
+      align-items: center;
+    }
 
-		.category-filters {
-			gap: var(--spacing-sm);
-		}
-
-		.category-filter {
-			min-width: 100px;
-			padding: var(--spacing-xs) var(--spacing-sm);
-		}
-
-		.filter-name {
-			font-size: var(--font-size-xs);
-		}
-
-
-	}
-
-	@media (max-width: 480px) {
-		.category-filters {
-			flex-direction: column;
-			align-items: center;
-		}
-
-		.category-filter {
-			width: 100%;
-			max-width: 200px;
-			justify-content: space-between;
-		}
-	}
+    .category-filter {
+      width: 100%;
+      max-width: 200px;
+      justify-content: space-between;
+    }
+  }
 </style>

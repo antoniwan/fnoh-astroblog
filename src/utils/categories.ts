@@ -1,4 +1,10 @@
-import { getCollection, getEntry, getEntries, type CollectionEntry, type ReferenceDataEntry } from 'astro:content';
+import {
+  getCollection,
+  getEntry,
+  getEntries,
+  type CollectionEntry,
+  type ReferenceDataEntry,
+} from "astro:content";
 
 export interface CategoryData {
   title: string;
@@ -23,22 +29,22 @@ export async function getAllCategories(): Promise<CategoryData[]> {
   if (categoriesCache) {
     return categoriesCache;
   }
-  
+
   try {
-    const categories = await getCollection('categories');
-    
+    const categories = await getCollection("categories");
+
     // Properly extract category data from collection entries
-    const categoryData: CategoryData[] = categories.map(category => ({
+    const categoryData: CategoryData[] = categories.map((category) => ({
       title: category.data.title,
       emoji: category.data.emoji,
       description: category.data.description,
-      slug: category.data.slug
+      slug: category.data.slug,
     }));
-    
+
     categoriesCache = categoryData;
     return categoryData;
   } catch (error) {
-    console.error('Error fetching categories:', error);
+    console.error("Error fetching categories:", error);
     return [];
   }
 }
@@ -46,12 +52,14 @@ export async function getAllCategories(): Promise<CategoryData[]> {
 /**
  * Get a specific category by slug
  */
-export async function getCategoryBySlug(slug: string): Promise<CategoryData | undefined> {
+export async function getCategoryBySlug(
+  slug: string,
+): Promise<CategoryData | undefined> {
   try {
     const categories = await getAllCategories();
-    return categories.find(category => category.slug === slug);
+    return categories.find((category) => category.slug === slug);
   } catch (error) {
-    console.error('Error fetching category by slug:', error);
+    console.error("Error fetching category by slug:", error);
     return undefined;
   }
 }
@@ -59,40 +67,44 @@ export async function getCategoryBySlug(slug: string): Promise<CategoryData | un
 /**
  * Get categories with post counts with caching
  */
-export async function getCategoriesWithPostCounts(): Promise<CategoryWithCount[]> {
+export async function getCategoriesWithPostCounts(): Promise<
+  CategoryWithCount[]
+> {
   if (categoriesWithCountsCache) {
     return categoriesWithCountsCache;
   }
-  
+
   try {
     const categories = await getAllCategories();
-    const writings = await getCollection('writings');
-    
-    console.log('Categories found:', categories);
-    console.log('Writings found:', writings.length);
-    
-    const result = categories.map(category => {
-      const postCount = writings.filter(post => {
+    const writings = await getCollection("writings");
+
+    console.log("Categories found:", categories);
+    console.log("Writings found:", writings.length);
+
+    const result = categories.map((category) => {
+      const postCount = writings.filter((post) => {
         // Check if post has a category reference that matches this category
         // The reference will be {collection: 'categories', id: 'filename'}
         // We need to match the id with the category slug
-        return post.data.category && 
-               post.data.category.collection === 'categories' && 
-               post.data.category.id === category.slug;
+        return (
+          post.data.category &&
+          post.data.category.collection === "categories" &&
+          post.data.category.id === category.slug
+        );
       }).length;
-      
+
       console.log(`Category "${category.slug}" has ${postCount} posts`);
-      
+
       return {
         ...category,
-        postCount
+        postCount,
       };
     });
-    
+
     categoriesWithCountsCache = result;
     return result;
   } catch (error) {
-    console.error('Error fetching categories with post counts:', error);
+    console.error("Error fetching categories with post counts:", error);
     return [];
   }
 }
@@ -104,23 +116,24 @@ export async function getCategoriesWithPosts(): Promise<CategoryData[]> {
   if (categoriesWithPostsCache) {
     return categoriesWithPostsCache;
   }
-  
+
   try {
     const categories = await getAllCategories();
-    const writings = await getCollection('writings');
-    
-    const result = categories.filter(category => 
-      writings.some(post => 
-        post.data.category && 
-        post.data.category.collection === 'categories' && 
-        post.data.category.id === category.slug
-      )
+    const writings = await getCollection("writings");
+
+    const result = categories.filter((category) =>
+      writings.some(
+        (post) =>
+          post.data.category &&
+          post.data.category.collection === "categories" &&
+          post.data.category.id === category.slug,
+      ),
     );
-    
+
     categoriesWithPostsCache = result;
     return result;
   } catch (error) {
-    console.error('Error fetching categories with posts:', error);
+    console.error("Error fetching categories with posts:", error);
     return [];
   }
 }
@@ -128,24 +141,26 @@ export async function getCategoriesWithPosts(): Promise<CategoryData[]> {
 /**
  * Get category data from a writing entry's category reference
  */
-export async function getCategoryFromReference(categoryRef: ReferenceDataEntry<'categories', string> | undefined): Promise<CategoryData | undefined> {
-  if (!categoryRef || categoryRef.collection !== 'categories') {
+export async function getCategoryFromReference(
+  categoryRef: ReferenceDataEntry<"categories", string> | undefined,
+): Promise<CategoryData | undefined> {
+  if (!categoryRef || categoryRef.collection !== "categories") {
     return undefined;
   }
-  
+
   try {
-    const category = await getEntry('categories', categoryRef.id);
+    const category = await getEntry("categories", categoryRef.id);
     if (category) {
       return {
         title: category.data.title,
         emoji: category.data.emoji,
         description: category.data.description,
-        slug: category.data.slug
+        slug: category.data.slug,
       };
     }
     return undefined;
   } catch (error) {
-    console.error('Error fetching category from reference:', error);
+    console.error("Error fetching category from reference:", error);
     return undefined;
   }
 }
@@ -155,8 +170,8 @@ export async function getCategoryFromReference(categoryRef: ReferenceDataEntry<'
  */
 export async function getWritingsWithCategories() {
   try {
-    const writings = await getCollection('writings');
-    
+    const writings = await getCollection("writings");
+
     // Resolve category references for each writing
     const writingsWithCategories = await Promise.all(
       writings.map(async (writing) => {
@@ -164,17 +179,17 @@ export async function getWritingsWithCategories() {
         if (writing.data.category) {
           categoryData = await getCategoryFromReference(writing.data.category);
         }
-        
+
         return {
           ...writing,
-          categoryData
+          categoryData,
         };
-      })
+      }),
     );
-    
+
     return writingsWithCategories;
   } catch (error) {
-    console.error('Error fetching writings with categories:', error);
+    console.error("Error fetching writings with categories:", error);
     return [];
   }
 }
@@ -191,18 +206,27 @@ export function clearCategoriesCache(): void {
 /**
  * Utility functions for backward compatibility
  */
-export const getCategoryDisplayName = (category: string, categories: CategoryData[]): string => {
-  const found = categories.find(c => c.slug === category);
+export const getCategoryDisplayName = (
+  category: string,
+  categories: CategoryData[],
+): string => {
+  const found = categories.find((c) => c.slug === category);
   return found?.title || category;
 };
 
-export const getCategoryEmoji = (category: string, categories: CategoryData[]): string => {
-  const found = categories.find(c => c.slug === category);
-  return found?.emoji || '📁';
+export const getCategoryEmoji = (
+  category: string,
+  categories: CategoryData[],
+): string => {
+  const found = categories.find((c) => c.slug === category);
+  return found?.emoji || "📁";
 };
 
-export const getCategoryDescription = (category: string, categories: CategoryData[]): string => {
-  const found = categories.find(c => c.slug === category);
+export const getCategoryDescription = (
+  category: string,
+  categories: CategoryData[],
+): string => {
+  const found = categories.find((c) => c.slug === category);
   return found?.description || `Posts in the ${category} category`;
 };
 

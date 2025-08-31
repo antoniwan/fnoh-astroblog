@@ -190,13 +190,21 @@
 }
 
 /* Text alignment utilities */
-.text-center { text-align: center; }
-.text-left { text-align: left; }
-.text-right { text-align: right; }
-.text-justify { text-align: justify; }
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-justify {
+  text-align: justify;
+}
 
 /* Enhanced typography utilities for philosophical content */
-.text-editorial { 
+.text-editorial {
   font-family: var(--font-family);
   line-height: var(--line-height-relaxed);
   letter-spacing: var(--letter-spacing-normal);
@@ -206,20 +214,20 @@
   -ms-hyphens: auto;
 }
 
-.text-heading { 
+.text-heading {
   font-family: var(--font-family-heading);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
   color: var(--color-heading);
 }
 
-.text-serif { 
+.text-serif {
   font-family: var(--font-family-serif);
   line-height: var(--line-height-relaxed);
   font-style: italic;
 }
 
-.text-mono { 
+.text-mono {
   font-family: var(--font-family-mono);
   line-height: var(--line-height-normal);
 }
@@ -245,107 +253,259 @@
 }
 
 /* Font weight utilities */
-.font-light { font-weight: var(--font-weight-light); }
-.font-normal { font-weight: var(--font-weight-normal); }
-.font-medium { font-weight: var(--font-weight-medium); }
-.font-semibold { font-weight: var(--font-weight-semibold); }
-.font-bold { font-weight: var(--font-weight-bold); }
-.font-extrabold { font-weight: var(--font-weight-extrabold); }
+.font-light {
+  font-weight: var(--font-weight-light);
+}
+.font-normal {
+  font-weight: var(--font-weight-normal);
+}
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}
+.font-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+.font-extrabold {
+  font-weight: var(--font-weight-extrabold);
+}
 
 /* Font size utilities */
-.text-xs { font-size: var(--font-size-xs); }
-.text-sm { font-size: var(--font-size-sm); }
-.text-base { font-size: var(--font-size-base); }
-.text-lg { font-size: var(--font-size-lg); }
-.text-xl { font-size: var(--font-size-xl); }
-.text-2xl { font-size: var(--font-size-2xl); }
-.text-3xl { font-size: var(--font-size-3xl); }
-.text-4xl { font-size: var(--font-size-4xl); }
-.text-5xl { font-size: var(--font-size-5xl); }
-.text-6xl { font-size: var(--font-size-6xl); }
+.text-xs {
+  font-size: var(--font-size-xs);
+}
+.text-sm {
+  font-size: var(--font-size-sm);
+}
+.text-base {
+  font-size: var(--font-size-base);
+}
+.text-lg {
+  font-size: var(--font-size-lg);
+}
+.text-xl {
+  font-size: var(--font-size-xl);
+}
+.text-2xl {
+  font-size: var(--font-size-2xl);
+}
+.text-3xl {
+  font-size: var(--font-size-3xl);
+}
+.text-4xl {
+  font-size: var(--font-size-4xl);
+}
+.text-5xl {
+  font-size: var(--font-size-5xl);
+}
+.text-6xl {
+  font-size: var(--font-size-6xl);
+}
 
 /* Line height utilities */
-.leading-tight { line-height: var(--line-height-tight); }
-.leading-snug { line-height: var(--line-height-snug); }
-.leading-normal { line-height: var(--line-height-normal); }
-.leading-relaxed { line-height: var(--line-height-relaxed); }
-.leading-loose { line-height: var(--line-height-loose); }
+.leading-tight {
+  line-height: var(--line-height-tight);
+}
+.leading-snug {
+  line-height: var(--line-height-snug);
+}
+.leading-normal {
+  line-height: var(--line-height-normal);
+}
+.leading-relaxed {
+  line-height: var(--line-height-relaxed);
+}
+.leading-loose {
+  line-height: var(--line-height-loose);
+}
 
 /* Letter spacing utilities */
-.tracking-tight { letter-spacing: var(--letter-spacing-tight); }
-.tracking-normal { letter-spacing: var(--letter-spacing-normal); }
-.tracking-wide { letter-spacing: var(--letter-spacing-wide); }
-.tracking-wider { letter-spacing: var(--letter-spacing-wider); }
+.tracking-tight {
+  letter-spacing: var(--letter-spacing-tight);
+}
+.tracking-normal {
+  letter-spacing: var(--letter-spacing-normal);
+}
+.tracking-wide {
+  letter-spacing: var(--letter-spacing-wide);
+}
+.tracking-wider {
+  letter-spacing: var(--letter-spacing-wider);
+}
 
 /* Spacing utilities using new variables */
-.mb-xs { margin-bottom: var(--spacing-xs); }
-.mb-sm { margin-bottom: var(--spacing-sm); }
-.mb-md { margin-bottom: var(--spacing-md); }
-.mb-lg { margin-bottom: var(--spacing-lg); }
-.mb-xl { margin-bottom: var(--spacing-xl); }
-.mb-2xl { margin-bottom: var(--spacing-2xl); }
-.mb-3xl { margin-bottom: var(--spacing-3xl); }
+.mb-xs {
+  margin-bottom: var(--spacing-xs);
+}
+.mb-sm {
+  margin-bottom: var(--spacing-sm);
+}
+.mb-md {
+  margin-bottom: var(--spacing-md);
+}
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
+.mb-xl {
+  margin-bottom: var(--spacing-xl);
+}
+.mb-2xl {
+  margin-bottom: var(--spacing-2xl);
+}
+.mb-3xl {
+  margin-bottom: var(--spacing-3xl);
+}
 
-.mt-xs { margin-top: var(--spacing-xs); }
-.mt-sm { margin-top: var(--spacing-sm); }
-.mt-md { margin-top: var(--spacing-md); }
-.mt-lg { margin-top: var(--spacing-lg); }
-.mt-xl { margin-top: var(--spacing-xl); }
-.mt-2xl { margin-top: var(--spacing-2xl); }
-.mt-3xl { margin-top: var(--spacing-3xl); }
+.mt-xs {
+  margin-top: var(--spacing-xs);
+}
+.mt-sm {
+  margin-top: var(--spacing-sm);
+}
+.mt-md {
+  margin-top: var(--spacing-md);
+}
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
+.mt-xl {
+  margin-top: var(--spacing-xl);
+}
+.mt-2xl {
+  margin-top: var(--spacing-2xl);
+}
+.mt-3xl {
+  margin-top: var(--spacing-3xl);
+}
 
 /* Padding utilities */
-.p-xs { padding: var(--spacing-xs); }
-.p-sm { padding: var(--spacing-sm); }
-.p-md { padding: var(--spacing-md); }
-.p-lg { padding: var(--spacing-lg); }
-.p-xl { padding: var(--spacing-xl); }
-.p-2xl { padding: var(--spacing-2xl); }
-.p-3xl { padding: var(--spacing-3xl); }
+.p-xs {
+  padding: var(--spacing-xs);
+}
+.p-sm {
+  padding: var(--spacing-sm);
+}
+.p-md {
+  padding: var(--spacing-md);
+}
+.p-lg {
+  padding: var(--spacing-lg);
+}
+.p-xl {
+  padding: var(--spacing-xl);
+}
+.p-2xl {
+  padding: var(--spacing-2xl);
+}
+.p-3xl {
+  padding: var(--spacing-3xl);
+}
 
 /* Enhanced spacing utilities with philosophical rhythm */
-.section-spacing { padding: var(--spacing-2xl) 0; }
-.section-spacing-lg { padding: var(--spacing-3xl) 0; }
+.section-spacing {
+  padding: var(--spacing-2xl) 0;
+}
+.section-spacing-lg {
+  padding: var(--spacing-3xl) 0;
+}
 
 /* Legacy spacing utilities for backward compatibility */
-.mb-1 { margin-bottom: var(--spacing); }
-.mb-2 { margin-bottom: calc(var(--spacing) * 2); }
-.mb-3 { margin-bottom: calc(var(--spacing) * 3); }
+.mb-1 {
+  margin-bottom: var(--spacing);
+}
+.mb-2 {
+  margin-bottom: calc(var(--spacing) * 2);
+}
+.mb-3 {
+  margin-bottom: calc(var(--spacing) * 3);
+}
 
-.mt-1 { margin-top: var(--spacing); }
-.mt-2 { margin-top: calc(var(--spacing) * 2); }
-.mt-3 { margin-top: calc(var(--spacing) * 3); }
+.mt-1 {
+  margin-top: var(--spacing);
+}
+.mt-2 {
+  margin-top: calc(var(--spacing) * 2);
+}
+.mt-3 {
+  margin-top: calc(var(--spacing) * 3);
+}
 
 /* Enhanced color utilities for philosophical content */
-.text-muted { color: var(--color-muted); }
-.text-muted-light { color: var(--color-muted-light); }
-.text-heading { color: var(--color-heading); }
-.text-subtle { color: var(--color-subtle); }
-.text-primary { color: var(--color-primary); }
-.text-accent { color: var(--color-accent); }
+.text-muted {
+  color: var(--color-muted);
+}
+.text-muted-light {
+  color: var(--color-muted-light);
+}
+.text-heading {
+  color: var(--color-heading);
+}
+.text-subtle {
+  color: var(--color-subtle);
+}
+.text-primary {
+  color: var(--color-primary);
+}
+.text-accent {
+  color: var(--color-accent);
+}
 
-.bg-muted { background-color: var(--color-bg-secondary); }
-.bg-subtle { background-color: var(--color-subtle); }
-.bg-primary { background-color: var(--color-primary); }
-.bg-accent { background-color: var(--color-accent); }
+.bg-muted {
+  background-color: var(--color-bg-secondary);
+}
+.bg-subtle {
+  background-color: var(--color-subtle);
+}
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-accent {
+  background-color: var(--color-accent);
+}
 
 /* Border utilities with philosophical depth */
-.border-light { border-color: var(--color-border-light); }
-.border-dark { border-color: var(--color-border-dark); }
-.border-primary { border-color: var(--color-primary); }
-.border-accent { border-color: var(--color-accent); }
+.border-light {
+  border-color: var(--color-border-light);
+}
+.border-dark {
+  border-color: var(--color-border-dark);
+}
+.border-primary {
+  border-color: var(--color-primary);
+}
+.border-accent {
+  border-color: var(--color-accent);
+}
 
 /* Enhanced shadow utilities for philosophical depth */
-.shadow-sm { box-shadow: var(--shadow-sm); }
-.shadow-md { box-shadow: var(--shadow-md); }
-.shadow-lg { box-shadow: var(--shadow-lg); }
-.shadow-xl { box-shadow: var(--shadow-xl); }
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+.shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
 
 /* Border radius utilities with philosophical subtlety */
-.rounded-sm { border-radius: var(--border-radius-sm); }
-.rounded-md { border-radius: var(--border-radius-md); }
-.rounded-lg { border-radius: var(--border-radius-lg); }
-.rounded-xl { border-radius: var(--border-radius-xl); }
+.rounded-sm {
+  border-radius: var(--border-radius-sm);
+}
+.rounded-md {
+  border-radius: var(--border-radius-md);
+}
+.rounded-lg {
+  border-radius: var(--border-radius-lg);
+}
+.rounded-xl {
+  border-radius: var(--border-radius-xl);
+}
 
 /* Enhanced philosophical card utilities */
 .editorial-card {
@@ -365,7 +525,7 @@
 }
 
 .editorial-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -413,57 +573,71 @@
 }
 
 /* Transition utilities with philosophical contemplation */
-.transition-fast { transition: all var(--transition-fast); }
-.transition-normal { transition: all var(--transition-normal); }
-.transition-slow { transition: all var(--transition-slow); }
+.transition-fast {
+  transition: all var(--transition-fast);
+}
+.transition-normal {
+  transition: all var(--transition-normal);
+}
+.transition-slow {
+  transition: all var(--transition-slow);
+}
 
 /* Philosophical separation utilities */
 .separator {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border),
+    transparent
+  );
   margin: var(--spacing-2xl) 0;
   border: none;
 }
 
 .separator-thick {
   height: 2px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-primary));
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent),
+    var(--color-primary)
+  );
   margin: var(--spacing-3xl) 0;
   border: none;
 }
 
 /* Enhanced responsive utilities with philosophical considerations */
 @media (max-width: 1024px) {
-  
   .editorial-content,
   .editorial-content-wide {
     padding: var(--spacing) 0;
   }
-  
+
   .section-spacing {
     padding: var(--spacing-xl) 0;
   }
-  
+
   .section-spacing-lg {
     padding: var(--spacing-2xl) 0;
   }
 }
 
 @media (max-width: 768px) {
-  
   .editorial-content,
   .editorial-content-wide {
     padding: var(--spacing) 0;
   }
-  
+
   .section-spacing {
     padding: var(--spacing-lg) 0;
   }
-  
+
   .section-spacing-lg {
     padding: var(--spacing-xl) 0;
   }
-  
+
   .editorial-card {
     padding: var(--spacing-lg);
   }
@@ -474,15 +648,15 @@
   .editorial-content-wide {
     padding: var(--spacing-sm) 0;
   }
-  
+
   .section-spacing {
     padding: var(--spacing) 0;
   }
-  
+
   .section-spacing-lg {
     padding: var(--spacing-lg) 0;
   }
-  
+
   .editorial-card {
     padding: var(--spacing);
   }

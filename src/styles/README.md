@@ -5,6 +5,7 @@ This directory contains a well-structured CSS architecture that follows **Astro 
 ## 🏗️ Architecture Overview
 
 Our CSS is organized following Astro's recommended patterns:
+
 - **Global styles** → `GlobalStyles.astro` component (using `<style is:global>`)
 - **Component styles** → Component's `.astro` file using `<style>` blocks (scoped)
 - **Design tokens** → `_variables.css` for CSS custom properties
@@ -40,33 +41,39 @@ The `main.css` file imports foundation CSS files in a specific order that **MUST
 ## 📋 File Purposes
 
 ### `GlobalStyles.astro`
+
 - **Purpose**: Global styles for typography, code blocks, tables, and shared elements
 - **Contains**: Base element styles, typography system, code styling, blockquotes, tables
 - **Usage**: Automatically included in BaseLayout for all pages
 - **Method**: Uses `<style is:global>` for Astro best practices
 
 ### `_variables.css`
+
 - **Purpose**: Design system foundation
 - **Contains**: Colors, typography, spacing, shadows, transitions, z-index, border radius
 - **Usage**: Reference these variables instead of hardcoded values
 - **Example**: `color: var(--color-primary);`
 
 ### `_utilities.css`
+
 - **Purpose**: Helper classes and utilities
 - **Contains**: Layout helpers, spacing utilities, text utilities, responsive helpers
 - **Usage**: Apply utility classes to HTML elements for quick styling
 
 ### `_fonts.css`
+
 - **Purpose**: Font management
 - **Contains**: Font imports, font-face declarations, font loading strategies
 - **Usage**: Handles all typography imports and font loading
 
 ### `_print.css`
+
 - **Purpose**: Print-optimized styles
 - **Contains**: Print-specific styling, PDF generation styles
 - **Usage**: Automatically applied when printing
 
 ### `_view-transitions.css`
+
 - **Purpose**: Page transition animations
 - **Contains**: View transition styles, page animation effects
 - **Usage**: Handles smooth page transitions
@@ -74,21 +81,34 @@ The `main.css` file imports foundation CSS files in a specific order that **MUST
 ## 🚀 Best Practices (Astro 2025)
 
 ### 1. **Use GlobalStyles Component for Shared Elements**
+
 ```astro
 <!-- ✅ Good - Global styles in GlobalStyles.astro -->
 <style is:global>
-  h1, h2, h3 { /* Global heading styles */ }
-  code, pre { /* Global code styles */ }
-  table { /* Global table styles */ }
+  h1,
+  h2,
+  h3 {
+    /* Global heading styles */
+  }
+  code,
+  pre {
+    /* Global code styles */
+  }
+  table {
+    /* Global table styles */
+  }
 </style>
 
 <!-- ✅ Good - Component-specific styles in component -->
 <style>
-  .my-component { /* Component-specific styles */ }
+  .my-component {
+    /* Component-specific styles */
+  }
 </style>
 ```
 
 ### 2. **Use CSS Variables**
+
 ```css
 /* ✅ Good */
 color: var(--color-primary);
@@ -102,6 +122,7 @@ border-radius: 6px;
 ```
 
 ### 3. **Component & Page Styles with Astro CSS Scoping**
+
 ```astro
 <!-- ✅ Good - Component-specific styles in component -->
 <style>
@@ -121,11 +142,9 @@ border-radius: 6px;
 ```
 
 ### 4. **Global Styles for Shared Elements**
-```astro
-<!-- ✅ Good - Use GlobalStyles.astro for typography, code, tables -->
-<!-- These styles apply to all pages automatically -->
 
-<!-- ✅ Good - Use component styles for unique layouts -->
+```astro
+<!-- ✅ Good - Use GlobalStyles.astro for typography, code, tables --><!-- These styles apply to all pages automatically --><!-- ✅ Good - Use component styles for unique layouts -->
 <style>
   .blog-post-container {
     /* Blog-specific layout styles */
@@ -156,15 +175,28 @@ Is it specific to one component or page?
 ## 📍 Common CSS Patterns & Where They Go
 
 ### Typography & Shared Elements
+
 ```css
 /* ✅ GlobalStyles.astro */
-h1, h2, h3 { /* Global heading styles */ }
-code, pre { /* Global code styles */ }
-table { /* Global table styles */ }
-blockquote { /* Global blockquote styles */ }
+h1,
+h2,
+h3 {
+  /* Global heading styles */
+}
+code,
+pre {
+  /* Global code styles */
+}
+table {
+  /* Global table styles */
+}
+blockquote {
+  /* Global blockquote styles */
+}
 ```
 
 ### Design Tokens
+
 ```css
 /* ✅ _variables.css */
 :root {
@@ -175,14 +207,22 @@ blockquote { /* Global blockquote styles */ }
 ```
 
 ### Utilities
+
 ```css
 /* ✅ _utilities.css */
-.text-center { text-align: center; }
-.font-bold { font-weight: var(--font-weight-bold); }
-.container { max-width: var(--container-max-width); }
+.text-center {
+  text-align: center;
+}
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+.container {
+  max-width: var(--container-max-width);
+}
 ```
 
 ### Component & Page Styles
+
 ```css
 /* ✅ Component/Page .astro file (scoped) */
 <style>

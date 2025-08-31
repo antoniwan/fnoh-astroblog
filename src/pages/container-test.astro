@@ -1,138 +1,203 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout 
-	title="Container System Test" 
-	description="Testing the new container system for horizontal scroll prevention"
+<BaseLayout
+  title="Container System Test"
+  description="Testing the new container system for horizontal scroll prevention"
 >
-	<div class="container-test">
-		<h1>Container System Test</h1>
-		<p>This page tests all container variants to ensure no horizontal scroll occurs.</p>
-		
-		<section class="test-section">
-			<h2>Container Small</h2>
-			<div class="container-sm">
-				<p>This is a small container with max-width: var(--max-width-sm). It should contain content properly without causing horizontal scroll.</p>
-				<div class="test-content">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				</div>
-			</div>
-		</section>
-		
-		<section class="test-section">
-			<h2>Container Medium</h2>
-			<div class="container-md">
-				<p>This is a medium container with max-width: var(--max-width). It should contain content properly without causing horizontal scroll.</p>
-				<div class="test-content">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				</div>
-			</div>
-		</section>
-		
-		<section class="test-section">
-			<h2>Container Large</h2>
-			<div class="container-lg">
-				<p>This is a large container with max-width: var(--max-width-wide). It should contain content properly without causing horizontal scroll.</p>
-				<div class="test-content">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				</div>
-			</div>
-		</section>
-		
-		<section class="test-section">
-			<h2>Container Extra Large</h2>
-			<div class="container-xl">
-				<p>This is an extra large container with max-width: var(--max-width-xl). It should contain content properly without causing horizontal scroll.</p>
-				<div class="test-content">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				</div>
-			</div>
-		</section>
-		
-		<section class="test-section">
-			<h2>Container Full (with padding, contained within viewport)</h2>
-			<div class="container-full">
-				<p>This is a full width container with padding. It should contain content properly without causing horizontal scroll. The content stays within the viewport bounds.</p>
-				<div class="test-content">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				</div>
-			</div>
-		</section>
-		
-		<section class="test-section">
-			<h2>Container Full Edge (extends to viewport edges with padding)</h2>
-			<div class="container-full-edge">
-				<p>This container extends to the very edges of the viewport but still has padding. It's useful for hero sections or full-width backgrounds.</p>
-				<div class="test-content">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				</div>
-			</div>
-		</section>
-		
-		<section class="test-section">
-			<h2>Container Full No Padding (extends to viewport edges without padding)</h2>
-			<div class="container-full-no-padding">
-				<p>This container extends to the very edges of the viewport with no padding. It's perfect for full-width images or backgrounds.</p>
-				<div class="test-content">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-				</div>
-			</div>
-		</section>
-		
-		<section class="test-section">
-			<h2>Grid Container Test</h2>
-			<div class="grid-container grid-container--responsive">
-				<div class="grid-item">Grid Item 1</div>
-				<div class="grid-item">Grid Item 2</div>
-				<div class="grid-item">Grid Item 3</div>
-				<div class="grid-item">Grid Item 4</div>
-			</div>
-		</section>
-		
-		<section class="test-section">
-			<h2>Content Wrapper Test</h2>
-			<div class="content-wrapper content-wrapper--narrow">
-				<p>This is a narrow content wrapper. It should contain content properly without causing horizontal scroll.</p>
-			</div>
-		</section>
-	</div>
+  <div class="container-test">
+    <h1>Container System Test</h1>
+    <p>
+      This page tests all container variants to ensure no horizontal scroll
+      occurs.
+    </p>
+
+    <section class="test-section">
+      <h2>Container Small</h2>
+      <div class="container-sm">
+        <p>
+          This is a small container with max-width: var(--max-width-sm). It
+          should contain content properly without causing horizontal scroll.
+        </p>
+        <div class="test-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>Container Medium</h2>
+      <div class="container-md">
+        <p>
+          This is a medium container with max-width: var(--max-width). It should
+          contain content properly without causing horizontal scroll.
+        </p>
+        <div class="test-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>Container Large</h2>
+      <div class="container-lg">
+        <p>
+          This is a large container with max-width: var(--max-width-wide). It
+          should contain content properly without causing horizontal scroll.
+        </p>
+        <div class="test-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>Container Extra Large</h2>
+      <div class="container-xl">
+        <p>
+          This is an extra large container with max-width: var(--max-width-xl).
+          It should contain content properly without causing horizontal scroll.
+        </p>
+        <div class="test-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>Container Full (with padding, contained within viewport)</h2>
+      <div class="container-full">
+        <p>
+          This is a full width container with padding. It should contain content
+          properly without causing horizontal scroll. The content stays within
+          the viewport bounds.
+        </p>
+        <div class="test-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>Container Full Edge (extends to viewport edges with padding)</h2>
+      <div class="container-full-edge">
+        <p>
+          This container extends to the very edges of the viewport but still has
+          padding. It's useful for hero sections or full-width backgrounds.
+        </p>
+        <div class="test-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>
+        Container Full No Padding (extends to viewport edges without padding)
+      </h2>
+      <div class="container-full-no-padding">
+        <p>
+          This container extends to the very edges of the viewport with no
+          padding. It's perfect for full-width images or backgrounds.
+        </p>
+        <div class="test-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>Grid Container Test</h2>
+      <div class="grid-container grid-container--responsive">
+        <div class="grid-item">Grid Item 1</div>
+        <div class="grid-item">Grid Item 2</div>
+        <div class="grid-item">Grid Item 3</div>
+        <div class="grid-item">Grid Item 4</div>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>Content Wrapper Test</h2>
+      <div class="content-wrapper content-wrapper--narrow">
+        <p>
+          This is a narrow content wrapper. It should contain content properly
+          without causing horizontal scroll.
+        </p>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
 
 <style>
-	.container-test {
-		padding: var(--spacing-xl) 0;
-	}
-	
-	.test-section {
-		margin-bottom: var(--spacing-3xl);
-		padding: var(--spacing-xl) 0;
-		border-bottom: 1px solid var(--color-border-light);
-	}
-	
-	.test-section h2 {
-		color: var(--color-primary);
-		margin-bottom: var(--spacing-lg);
-	}
-	
-	.test-content {
-		background: var(--color-bg-secondary);
-		padding: var(--spacing-lg);
-		border-radius: var(--border-radius-md);
-		margin-top: var(--spacing-lg);
-	}
-	
-	.grid-item {
-		background: var(--color-bg-secondary);
-		padding: var(--spacing-lg);
-		border-radius: var(--border-radius-md);
-		text-align: center;
-		border: 1px solid var(--color-border-light);
-	}
-	
-	/* Test long content that might cause overflow */
-	.test-content p {
-		word-break: break-word;
-		overflow-wrap: break-word;
-	}
+  .container-test {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .test-section {
+    margin-bottom: var(--spacing-3xl);
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .test-section h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .test-content {
+    background: var(--color-bg-secondary);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    margin-top: var(--spacing-lg);
+  }
+
+  .grid-item {
+    background: var(--color-bg-secondary);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    border: 1px solid var(--color-border-light);
+  }
+
+  /* Test long content that might cause overflow */
+  .test-content p {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
 </style>

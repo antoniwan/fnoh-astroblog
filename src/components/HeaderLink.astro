@@ -1,31 +1,40 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
 
-type Props = HTMLAttributes<'a'>;
+type Props = HTMLAttributes<"a">;
 
 const { href, class: className, ...props } = Astro.props;
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "");
 const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 ---
 
-<a href={href} class:list={['link-nav', className, { 'active': isActive }]} data-astro-reload {...props}>
-	<slot />
+<a
+  href={href}
+  class:list={["link-nav", className, { active: isActive }]}
+  data-astro-reload
+  {...props}
+>
+  <slot />
 </a>
 
 <style>
-	/* HeaderLink now uses utility classes for base styling */
-	/* Additional custom styles only for unique features */
-	
-	.link-nav.active::before {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 60%;
-		height: 2px;
-		background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-		border-radius: var(--border-radius-sm);
-	}
+  /* HeaderLink now uses utility classes for base styling */
+  /* Additional custom styles only for unique features */
+
+  .link-nav.active::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary),
+      var(--color-accent)
+    );
+    border-radius: var(--border-radius-sm);
+  }
 </style>

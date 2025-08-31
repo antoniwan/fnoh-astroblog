@@ -23,15 +23,28 @@ Is it specific to one component or page?
 ## 📍 Common CSS Patterns & Where They Go
 
 ### Typography & Shared Elements
+
 ```css
 /* ✅ GlobalStyles.astro */
-h1, h2, h3 { /* Global heading styles */ }
-code, pre { /* Global code styles */ }
-table { /* Global table styles */ }
-blockquote { /* Global blockquote styles */ }
+h1,
+h2,
+h3 {
+  /* Global heading styles */
+}
+code,
+pre {
+  /* Global code styles */
+}
+table {
+  /* Global table styles */
+}
+blockquote {
+  /* Global blockquote styles */
+}
 ```
 
 ### Colors & Design
+
 ```css
 /* ✅ _variables.css */
 :root {
@@ -47,14 +60,22 @@ blockquote { /* Global blockquote styles */ }
 ```
 
 ### Utilities
+
 ```css
 /* ✅ _utilities.css */
-.text-center { text-align: center; }
-.font-bold { font-weight: var(--font-weight-bold); }
-.container { max-width: var(--container-max-width); }
+.text-center {
+  text-align: center;
+}
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+.container {
+  max-width: var(--container-max-width);
+}
 ```
 
 ### Component & Page Styles
+
 ```css
 /* ✅ Component/Page .astro file (scoped) */
 <style>
@@ -68,6 +89,7 @@ blockquote { /* Global blockquote styles */ }
 ## 🎯 Quick Examples
 
 ### Adding a New Heading Style
+
 ```css
 /* ✅ GlobalStyles.astro */
 h4 {
@@ -77,6 +99,7 @@ h4 {
 ```
 
 ### Adding a New Component
+
 ```css
 /* ✅ Component.astro file */
 <style>
@@ -88,6 +111,7 @@ h4 {
 ```
 
 ### Adding a New Utility
+
 ```css
 /* ✅ _utilities.css */
 .text-muted {
@@ -96,6 +120,7 @@ h4 {
 ```
 
 ### Adding a New Color Variable
+
 ```css
 /* ✅ _variables.css */
 :root {

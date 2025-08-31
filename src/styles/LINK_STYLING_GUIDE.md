@@ -33,26 +33,31 @@ a:visited {
 ## Link Utility Classes
 
 ### `.link-underline`
+
 - **Use case**: Content links, blog post links, external links
 - **Behavior**: Shows underline on hover
 - **Example**: `<a href="/about" class="link-underline">About</a>`
 
 ### `.link-clean`
+
 - **Use case**: Header titles, navigation items that shouldn't have underlines
 - **Behavior**: Color change on hover, no underline
 - **Example**: `<a href="/" class="link-clean">Site Title</a>`
 
 ### `.link-nav`
+
 - **Use case**: Navigation links, menu items
 - **Behavior**: Background color change on hover, active state support
 - **Example**: `<a href="/writings" class="link-nav">Writings</a>`
 
 ### `.link-button`
+
 - **Use case**: Call-to-action links, primary actions
 - **Behavior**: Button appearance with hover effects
 - **Example**: `<a href="/contact" class="link-button">Contact Us</a>`
 
 ### `.link-card`
+
 - **Use case**: Post cards, article previews, card-based layouts
 - **Behavior**: Inherits parent color, no visual link styling
 - **Example**: `<a href="/post" class="link-card">Post Title</a>`
@@ -60,6 +65,7 @@ a:visited {
 ## Component Implementation
 
 ### Header Component
+
 ```astro
 <!-- Site title -->
 <h1><a href="/" class="link-clean">{SITE_TITLE}</a></h1>
@@ -69,6 +75,7 @@ a:visited {
 ```
 
 ### PostCard Component
+
 ```astro
 <!-- Post links use link-card utility -->
 <a href={`/writings/${post.id}`} class="link-card">
@@ -77,6 +84,7 @@ a:visited {
 ```
 
 ### Footer Component
+
 ```astro
 <!-- Footer links use custom styling without utilities -->
 <a href="/privacy" class="footer-link">Privacy</a>
@@ -93,6 +101,7 @@ a:visited {
 ## Migration Guide
 
 ### Before (Conflicting)
+
 ```css
 /* Global styles with border-bottom */
 a {
@@ -106,6 +115,7 @@ a {
 ```
 
 ### After (Clean)
+
 ```css
 /* Global styles - minimal foundation */
 a {
@@ -136,6 +146,7 @@ To add a new link pattern:
 3. **Use in components** as needed
 
 Example:
+
 ```css
 .link-social {
   color: var(--color-text-light);
@@ -151,16 +162,19 @@ Example:
 ## Troubleshooting
 
 ### Link not styled correctly?
+
 - Check if you're using the right utility class
 - Verify the component isn't overriding utility styles
 - Ensure global styles aren't conflicting
 
 ### Focus styles missing?
+
 - Utility classes handle focus automatically
 - Check if custom CSS is overriding focus styles
 - Verify focus styles are defined in utilities
 
 ### Hover effects not working?
+
 - Ensure the utility class includes hover states
 - Check for CSS specificity conflicts
 - Verify transitions are defined in CSS variables

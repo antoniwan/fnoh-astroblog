@@ -34,7 +34,7 @@ For consistent image handling in blog posts, use Astro's native `<Image>` compon
 
 ```astro
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 ---
 
 <Image
@@ -53,7 +53,7 @@ This image will be automatically styled with consistent dimensions:
 
 ![Young Link pulling the Master Sword out of its pedestal](../../assets/images/symbols/master-sword.avif)
 
-*The Master Sword represents the power and responsibility that comes with knowledge and growth.*
+_The Master Sword represents the power and responsibility that comes with knowledge and growth._
 
 ## Content Schema
 

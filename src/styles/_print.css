@@ -11,45 +11,45 @@
     box-shadow: none !important;
     text-shadow: none !important;
   }
-  
+
   /* Ensure links are visible and show URLs */
   a,
   a:visited {
     text-decoration: underline;
   }
-  
+
   a[href]:after {
     content: " (" attr(href) ")";
   }
-  
+
   /* Show abbreviations and their titles */
   abbr[title]:after {
     content: " (" attr(title) ")";
   }
-  
+
   /* Prevent page breaks in important content */
   pre,
   blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
-  
+
   /* Ensure table headers repeat on each page */
   thead {
     display: table-header-group;
   }
-  
+
   /* Prevent page breaks in table rows and images */
   tr,
   img {
     page-break-inside: avoid;
   }
-  
+
   /* Ensure images don't exceed page width */
   img {
     max-width: 100% !important;
   }
-  
+
   /* Typography optimization for print */
   p,
   h2,
@@ -57,39 +57,46 @@
     orphans: 3;
     widows: 3;
   }
-  
+
   /* Prevent headings from being orphaned at page bottom */
   h2,
   h3 {
     page-break-after: avoid;
   }
-  
+
   /* Additional print optimizations */
   body {
     font-size: 12pt;
     line-height: 1.4;
     margin: 1in;
   }
-  
+
   /* Reduce margins for better space usage */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin-top: 1em;
     margin-bottom: 0.5em;
   }
-  
+
   /* Optimize list spacing for print */
-  ul, ol {
+  ul,
+  ol {
     margin-bottom: 0.5em;
   }
-  
+
   /* Ensure code blocks are readable */
-  code, pre {
+  code,
+  pre {
     border: 1px solid #ccc;
     background: #f9f9f9 !important;
     color: #333 !important;
     font-size: 10pt;
   }
-  
+
   /* Hide non-essential elements */
   .no-print,
   .skip-link,

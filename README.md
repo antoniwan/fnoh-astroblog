@@ -42,7 +42,7 @@ src/
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - pnpm (recommended) or npm
 
 ### Installation
@@ -81,7 +81,6 @@ updatedDate: 2024-01-01
 heroImage: "/path/to/image.jpg"
 tags: ["tag1", "tag2"]
 ---
-
 Your content here...
 ```
 

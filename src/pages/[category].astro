@@ -1,177 +1,194 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 
-import PostsGrid from '../components/ui/PostsGrid.astro';
-import { SITE_TITLE } from '../consts';
-import { getCollection } from 'astro:content';
-import { getCategoryBySlug } from '../utils/categories';
+import PostsGrid from "../components/ui/PostsGrid.astro";
+import { SITE_TITLE } from "../consts";
+import { getCollection } from "astro:content";
+import { getCategoryBySlug } from "../utils/categories";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('writings');
-	
-	// Get unique categories from posts using references
-	const categories = [...new Set(
-		posts
-			.map(post => post.data.category?.id)
-			.filter(Boolean)
-	)];
-	
-	return categories.map(category => ({
-		params: { category },
-		props: { category }
-	}));
+  const posts = await getCollection("writings");
+
+  // Get unique categories from posts using references
+  const categories = [
+    ...new Set(posts.map((post) => post.data.category?.id).filter(Boolean)),
+  ];
+
+  return categories.map((category) => ({
+    params: { category },
+    props: { category },
+  }));
 }
 
 const { category } = Astro.props;
-const posts = await getCollection('writings');
+const posts = await getCollection("writings");
 const categoryPosts = posts
-	.filter(post => post.data.category?.id === category)
-	.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+  .filter((post) => post.data.category?.id === category)
+  .sort(
+    (a, b) =>
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
+  );
 
 // Ensure category is defined
 if (!category) {
-	throw new Error('Category parameter is required');
+  throw new Error("Category parameter is required");
 }
 
 // Get category data from collection
 const categoryData = await getCategoryBySlug(category);
 const pageTitle = categoryData?.title || category;
-const categoryDescription = categoryData?.description || `Posts in the ${category} category`;
-const categoryEmoji = categoryData?.emoji || '📁';
+const categoryDescription =
+  categoryData?.description || `Posts in the ${category} category`;
+const categoryEmoji = categoryData?.emoji || "📁";
 ---
 
-<BaseLayout 
-	title={`${pageTitle} - ${SITE_TITLE}`} 
-	description={categoryDescription}
-	type="website"
-	section={pageTitle}
+<BaseLayout
+  title={`${pageTitle} - ${SITE_TITLE}`}
+  description={categoryDescription}
+  type="website"
+  section={pageTitle}
 >
-	<div class="container-full-no-padding">
-		<div class="category-header">
-			<div class="category-info">
-				<span class="category-emoji">{categoryEmoji}</span>
-				<h1 class="category-title">{pageTitle}</h1>
-			</div>
-			<p class="category-description">{categoryDescription} <strong>{categoryPosts.length} writing{categoryPosts.length !== 1 ? 's' : ''}</strong>.</p>
-		</div>
+  <div class="container-full-no-padding">
+    <div class="category-header">
+      <div class="category-info">
+        <span class="category-emoji">{categoryEmoji}</span>
+        <h1 class="category-title">{pageTitle}</h1>
+      </div>
+      <p class="category-description">
+        {categoryDescription}
+        <strong
+          >{categoryPosts.length} writing{
+            categoryPosts.length !== 1 ? "s" : ""
+          }</strong
+        >.
+      </p>
+    </div>
 
-		<main class="category-content">
-			{categoryPosts.length > 0 ? (
-				<PostsGrid posts={categoryPosts} />
-			) : (
-				<div class="no-posts">
-					<p>No posts found in this category.</p>
-					<a href="/" class="back-link">← Back to Home</a>
-				</div>
-			)}
-		</main>
-	</div>
+    <main class="category-content">
+      {
+        categoryPosts.length > 0 ? (
+          <PostsGrid posts={categoryPosts} />
+        ) : (
+          <div class="no-posts">
+            <p>No posts found in this category.</p>
+            <a href="/" class="back-link">
+              ← Back to Home
+            </a>
+          </div>
+        )
+      }
+    </main>
+  </div>
 </BaseLayout>
 
 <style>
-	.category-header {
-		text-align: center;
-		margin-bottom: var(--spacing-2xl);
-		padding: var(--spacing-xl) 0;
-		border-bottom: 1px solid var(--color-border-light);
-		position: relative;
-	}
+  .category-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border-light);
+    position: relative;
+  }
 
-	.category-header::after {
-		content: '';
-		position: absolute;
-		bottom: -1px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 60%;
-		height: 2px;
-		background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-		border-radius: var(--border-radius-sm);
-	}
+  .category-header::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary),
+      var(--color-accent)
+    );
+    border-radius: var(--border-radius-sm);
+  }
 
-	.category-info {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: var(--spacing);
-		margin-bottom: var(--spacing);
-	}
+  .category-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing);
+    margin-bottom: var(--spacing);
+  }
 
-	.category-emoji {
-		font-size: var(--font-size-3xl);
-	}
+  .category-emoji {
+    font-size: var(--font-size-3xl);
+  }
 
-	.category-title {
-		font-family: var(--font-family-heading);
-		font-size: var(--font-size-3xl);
-		font-weight: var(--font-weight-bold);
-		margin: 0;
-		color: var(--color-heading);
-		line-height: var(--line-height-tight);
-		letter-spacing: var(--letter-spacing-tight);
-	}
+  .category-title {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+    color: var(--color-heading);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+  }
 
-	.category-description {
-		font-size: var(--font-size-lg);
-		color: var(--color-text-light);
-		max-width: 600px;
-		margin: 0 auto var(--spacing);
-		line-height: var(--line-height-relaxed);
-		text-align: justify;
-	}
+  .category-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto var(--spacing);
+    line-height: var(--line-height-relaxed);
+    text-align: justify;
+  }
 
-	.category-content {
-		width: 100%;
-	}
+  .category-content {
+    width: 100%;
+  }
 
-	.no-posts {
-		text-align: center;
-		padding: var(--spacing-2xl);
-	}
+  .no-posts {
+    text-align: center;
+    padding: var(--spacing-2xl);
+  }
 
-	.no-posts p {
-		font-size: var(--font-size-lg);
-		color: var(--color-text-light);
-		margin-bottom: var(--spacing-lg);
-		text-align: justify;
-	}
+  .no-posts p {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+    text-align: justify;
+  }
 
-	.back-link {
-		display: inline-block;
-		color: var(--color-primary);
-		text-decoration: none;
-		font-weight: var(--font-weight-medium);
-		transition: all var(--transition-fast);
-		padding: var(--spacing-sm) var(--spacing-md);
-		border-radius: var(--border-radius-sm);
-		background-color: var(--color-bg-secondary);
-		border: 1px solid var(--color-border-light);
-	}
+  .back-link {
+    display: inline-block;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: all var(--transition-fast);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-light);
+  }
 
-	.back-link:hover {
-		color: var(--color-primary-dark);
-		background-color: var(--color-hover-bg);
-		transform: translateX(-2px);
-		box-shadow: var(--shadow-sm);
-	}
+  .back-link:hover {
+    color: var(--color-primary-dark);
+    background-color: var(--color-hover-bg);
+    transform: translateX(-2px);
+    box-shadow: var(--shadow-sm);
+  }
 
-	@media (max-width: 768px) {
-		.category-header {
-			padding: var(--spacing-lg) 0;
-			margin-bottom: var(--spacing-xl);
-		}
+  @media (max-width: 768px) {
+    .category-header {
+      padding: var(--spacing-lg) 0;
+      margin-bottom: var(--spacing-xl);
+    }
 
-		.category-title {
-			font-size: var(--font-size-2xl);
-		}
+    .category-title {
+      font-size: var(--font-size-2xl);
+    }
 
-		.category-description {
-			font-size: var(--font-size-base);
-		}
+    .category-description {
+      font-size: var(--font-size-base);
+    }
 
-		.posts-grid {
-			grid-template-columns: 1fr;
-			gap: var(--spacing-lg);
-		}
-	}
+    .posts-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+  }
 </style>

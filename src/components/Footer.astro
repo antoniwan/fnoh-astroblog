@@ -1,12 +1,11 @@
 ---
-import { 
-  Rss,
-  FileText,
-  Heart,
-  ExternalLink
-} from 'lucide-astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCategoriesWithPosts, getCategoryDisplayName, getCategoryUrl } from '../utils/categories';
+import { Rss, FileText, Heart, ExternalLink } from "lucide-astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import {
+  getCategoriesWithPosts,
+  getCategoryDisplayName,
+  getCategoryUrl,
+} from "../utils/categories";
 
 const today = new Date();
 
@@ -22,7 +21,7 @@ const categoriesWithPosts = await getCategoriesWithPosts();
         <h3 class="footer-title">{SITE_TITLE}</h3>
         <p class="footer-description">{SITE_DESCRIPTION}</p>
       </div>
-      
+
       <div class="footer-links">
         <div class="footer-section">
           <h4 class="footer-section-title">Navigation</h4>
@@ -32,58 +31,70 @@ const categoriesWithPosts = await getCategoriesWithPosts();
             <li><a href="/about" class="footer-link">About</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h4 class="footer-section-title">Categories</h4>
           <ul class="footer-link-list">
-            {categoriesWithPosts.map(category => (
-              <li>
-                <a href={getCategoryUrl(category.slug)} class="footer-link">
-                  {getCategoryDisplayName(category.slug, categoriesWithPosts)}
-                </a>
-              </li>
-            ))}
+            {
+              categoriesWithPosts.map((category) => (
+                <li>
+                  <a href={getCategoryUrl(category.slug)} class="footer-link">
+                    {getCategoryDisplayName(category.slug, categoriesWithPosts)}
+                  </a>
+                </li>
+              ))
+            }
           </ul>
         </div>
-        
+
         <div class="footer-section">
           <h4 class="footer-section-title">Resources</h4>
           <ul class="footer-link-list">
-            <li><a href="/rss.xml" class="footer-link">
-              <Rss class="footer-icon" />
-              RSS Feed
-            </a></li>
-            <li><a href="/sitemap-index.xml" class="footer-link">Sitemap</a></li>
+            <li>
+              <a href="/rss.xml" class="footer-link">
+                <Rss class="footer-icon" />
+                RSS Feed
+              </a>
+            </li>
+            <li>
+              <a href="/sitemap-index.xml" class="footer-link">Sitemap</a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
-    
+
     <!-- Footer bottom with legal and version info -->
     <div class="footer-bottom">
       <div class="footer-legal">
         <p class="footer-copyright">
-          <sup>©</sup> {today.getFullYear()} {SITE_TITLE}. All rights reserved.
+          <sup>©</sup>
+          {today.getFullYear()}
+          {SITE_TITLE}. All rights reserved.
         </p>
         <div class="footer-licenses">
-          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" 
-             target="_blank" 
-             rel="noopener noreferrer" 
-             class="footer-license-link">
+          <a
+            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-license-link"
+          >
             CC BY-NC-SA 4.0
             <ExternalLink class="footer-external-icon" />
           </a>
           <span class="footer-separator">•</span>
-          <a href="https://opensource.org/licenses/MIT" 
-             target="_blank" 
-             rel="noopener noreferrer" 
-             class="footer-license-link">
+          <a
+            href="https://opensource.org/licenses/MIT"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-license-link"
+          >
             MIT License
             <ExternalLink class="footer-external-icon" />
           </a>
         </div>
       </div>
-      
+
       <div class="footer-meta">
         <span class="footer-version">v0.0.1</span>
         <span class="footer-made-with">
@@ -105,7 +116,7 @@ const categoriesWithPosts = await getCategoriesWithPosts();
   }
 
   .footer-content {
-    	padding: 0 var(--spacing-xl);
+    padding: 0 var(--spacing-xl);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-3xl);
@@ -292,8 +303,13 @@ const categoriesWithPosts = await getCategoriesWithPosts();
   }
 
   @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
   }
 
   /* Responsive Design */
