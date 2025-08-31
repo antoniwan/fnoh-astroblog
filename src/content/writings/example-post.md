@@ -3,6 +3,7 @@ title: "Example Blog Post with New Image System"
 description: "This is an example post demonstrating the new Astro image handling system and strict content schema."
 pubDate: 2024-01-15
 updatedDate: 2024-01-16
+heroImage: "../../assets/images/breathing-deep.avif"
 heroImageAlt: "A beautiful example image showing the new system"
 category: "curiosity-lab"
 author: "Your Name"
