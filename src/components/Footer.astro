@@ -5,14 +5,13 @@ import {
   Heart,
   ExternalLink
 } from 'lucide-astro';
-import { SITE_TITLE, SITE_DESCRIPTION, getCategoryDisplayName, getCategoryUrl, type CategoryKey } from '../consts';
-import { getCollection } from 'astro:content';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCategoriesWithPosts, getCategoryDisplayName, getCategoryUrl } from '../utils/categories';
 
 const today = new Date();
 
-// Get all posts and extract unique categories that have posts
-const allPosts = await getCollection('writings');
-const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category).filter(Boolean))] as CategoryKey[];
+// Get categories that have posts
+const categoriesWithPosts = await getCategoriesWithPosts();
 ---
 
 <footer class="site-footer">
@@ -39,8 +38,8 @@ const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category)
           <ul class="footer-link-list">
             {categoriesWithPosts.map(category => (
               <li>
-                <a href={getCategoryUrl(category)} class="footer-link">
-                  {getCategoryDisplayName(category)}
+                <a href={getCategoryUrl(category.slug)} class="footer-link">
+                  {getCategoryDisplayName(category.slug, categoriesWithPosts)}
                 </a>
               </li>
             ))}

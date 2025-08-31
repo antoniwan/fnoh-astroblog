@@ -1,6 +1,8 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z, reference } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const writings = defineCollection({
+	loader: glob({ pattern: "**/*.md", base: "./src/content/writings" }),
 	schema: ({ image }) =>
 		z.object({
 			// Required fields
@@ -12,14 +14,7 @@ const writings = defineCollection({
 			updatedDate: z.coerce.date().optional(),
 			heroImage: image().optional(),
 			heroImageAlt: z.string().optional(),
-			category: z.enum([
-				'lessons-in-balance',
-				'chaos-notes', 
-				'recovery-reconstruction',
-				'empathy-healing',
-				'modern-life',
-				'curiosity-lab'
-			]).optional(),
+			category: reference('categories').optional(),
 			
 			// SEO and metadata
 			author: z.string().optional(),
@@ -32,4 +27,14 @@ const writings = defineCollection({
 		}),
 });
 
-export const collections = { writings };
+const categories = defineCollection({
+	loader: glob({ pattern: "**/*.md", base: "./src/content/categories" }),
+	schema: z.object({
+		title: z.string(),
+		emoji: z.string(),
+		description: z.string(),
+		slug: z.string(),
+	}),
+});
+
+export const collections = { writings, categories };

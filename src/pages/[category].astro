@@ -2,14 +2,19 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 import PostCard from '../components/ui/PostCard.astro';
-import { SITE_TITLE, getCategoryDescription, getCategoryEmoji, getCategoryDisplayName, type CategoryKey } from '../consts';
+import { SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
+import { getCategoryBySlug } from '../utils/categories';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('writings');
 	
-	// Get unique categories from posts
-	const categories = [...new Set(posts.map(post => post.data.category).filter(Boolean))] as CategoryKey[];
+	// Get unique categories from posts using references
+	const categories = [...new Set(
+		posts
+			.map(post => post.data.category?.id)
+			.filter(Boolean)
+	)];
 	
 	return categories.map(category => ({
 		params: { category },
@@ -20,12 +25,19 @@ export async function getStaticPaths() {
 const { category } = Astro.props;
 const posts = await getCollection('writings');
 const categoryPosts = posts
-	.filter(post => post.data.category === category)
+	.filter(post => post.data.category?.id === category)
 	.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
 
-const pageTitle = getCategoryDisplayName(category as CategoryKey);
-const categoryDescription = getCategoryDescription(category as CategoryKey);
-const categoryEmoji = getCategoryEmoji(category as CategoryKey);
+// Ensure category is defined
+if (!category) {
+	throw new Error('Category parameter is required');
+}
+
+// Get category data from collection
+const categoryData = await getCategoryBySlug(category);
+const pageTitle = categoryData?.title || category;
+const categoryDescription = categoryData?.description || `Posts in the ${category} category`;
+const categoryEmoji = categoryData?.emoji || '📁';
 ---
 
 <BaseLayout 

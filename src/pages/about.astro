@@ -1,7 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from '../consts';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getAllCategories } from '../utils/categories';
+
+// Get all categories
+const categories = await getAllCategories();
 ---
 
 <BaseLayout 
@@ -25,10 +29,10 @@ import { SITE_TITLE, SITE_DESCRIPTION, CATEGORIES } from '../consts';
 			</p>
 			
 			<ul class="categories-list">
-				{Object.entries(CATEGORIES).map(([key, category]) => (
+				{categories.map((category) => (
 					<li>
 						<strong>{category.emoji} {category.title}</strong> — {category.description}
-						<a href={`/${key}`} class="category-link">Explore →</a>
+						<a href={`/${category.slug}`} class="category-link">Explore →</a>
 					</li>
 				))}
 			</ul>

@@ -3,10 +3,17 @@ import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import { getCategoryFromReference } from '../utils/categories';
 
 type Props = CollectionEntry<'writings'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage, category } = Astro.props;
+
+// Get category data if category reference exists
+let categoryData = null;
+if (category) {
+	categoryData = await getCategoryFromReference(category);
+}
 ---
 
 <BaseLayout 
@@ -17,8 +24,8 @@ const { title, description, pubDate, updatedDate, heroImage, category } = Astro.
 	publishedTime={pubDate.toISOString()}
 	modifiedTime={updatedDate?.toISOString()}
 	author="Field Notes on Humanity"
-	section={category || undefined}
-	tags={category ? [category as string] : []}
+	section={categoryData?.title || undefined}
+	tags={categoryData ? [categoryData.slug] : []}
 >
 	<article class="blog-post-container">
 		<!-- Sidebar -->
@@ -61,12 +68,15 @@ const { title, description, pubDate, updatedDate, heroImage, category } = Astro.
 						</div>
 					)}
 					
-					{category && (
+					{categoryData && (
 						<div class="meta-item">
 							<svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 								<path d="M3 3h18v18H3zM21 9H3M21 15H3M12 3v18"/>
 							</svg>
-							<span class="meta-text">{category}</span>
+							<span class="meta-text">
+								<span class="category-emoji">{categoryData.emoji}</span>
+								<span class="category-name">{categoryData.title}</span>
+							</span>
 						</div>
 					)}
 				</div>				
@@ -234,6 +244,16 @@ const { title, description, pubDate, updatedDate, heroImage, category } = Astro.
 	
 	.meta-text {
 		font-weight: var(--font-weight-medium);
+	}
+
+	.category-emoji {
+		margin-right: var(--spacing-xs);
+		font-size: var(--font-size-base);
+	}
+
+	.category-name {
+		color: var(--color-primary);
+		font-weight: var(--font-weight-semibold);
 	}
 	
 	/* Meta item variants */

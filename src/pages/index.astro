@@ -1,19 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-import { SITE_DESCRIPTION, SITE_TITLE, CATEGORIES } from '../consts';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
+import { getCategoriesWithPostCounts } from '../utils/categories';
 
 // Get all blog posts
 const posts = await getCollection('writings');
 
-// Group posts by category
-const postsByCategory = Object.keys(CATEGORIES).reduce((acc, categoryKey) => {
-	acc[categoryKey] = posts.filter(post => post.data.category === categoryKey);
-	return acc;
-}, {} as Record<string, typeof posts>);
+// Get categories with post counts
+const categoriesWithCounts = await getCategoriesWithPostCounts();
 
-// Get uncategorized posts
+// Get uncategorized posts (posts without category references)
 const uncategorizedPosts = posts.filter(post => !post.data.category);
 
 // Calculate total posts
@@ -32,14 +30,13 @@ const totalPosts = posts.length;
 
 	<main class="index-content container-lg">
 
-		{Object.entries(CATEGORIES).map(([categoryKey, category]) => {
-			const categoryPosts = postsByCategory[categoryKey] || [];
-			const hasPosts = categoryPosts.length > 0;
+		{categoriesWithCounts.map((category) => {
+			const hasPosts = category.postCount > 0;
 			
 			return (
 				<section class={`toc-section ${!hasPosts ? 'coming-soon' : ''}`}>
 					{hasPosts ? (
-						<a href={`/${categoryKey}`} class="section-link" data-astro-reload>
+						<a href={`/${category.slug}`} class="section-link" data-astro-reload>
 							<div class="section-header">
 								<span class="section-emoji">{category.emoji}</span>
 								<div class="section-info">
@@ -47,7 +44,7 @@ const totalPosts = posts.length;
 									<p class="section-description">{category.description}</p>
 								</div>
 								<div class="section-meta">
-									<span class="post-count">{categoryPosts.length}</span>
+									<span class="post-count">{category.postCount}</span>
 									<span class="count-label">posts</span>
 									<span class="arrow">→</span>
 								</div>
@@ -76,22 +73,40 @@ const totalPosts = posts.length;
 			);
 		})}
 
+		{/* View All Posts Section */}
+		<section class="toc-section view-all-section">
+			<a href="/writings" class="section-link view-all-link" data-astro-reload>
+				<div class="section-header">
+					<span class="section-emoji">📚</span>
+					<div class="section-info">
+						<h2 class="section-title">All Writings</h2>
+						<p class="section-description">Browse all posts chronologically, including uncategorized ones.</p>
+					</div>
+					<div class="section-meta">
+						<span class="post-count">{totalPosts}</span>
+						<span class="count-label">posts</span>
+						<span class="arrow">→</span>
+					</div>
+				</div>
+			</a>
+		</section>
+
 		{uncategorizedPosts.length > 0 && (
-			<section class="toc-section">
-				<a href="/writings" class="section-link" data-astro-reload>
+			<section class="toc-section uncategorized-section">
+				<div class="section-link uncategorized-link">
 					<div class="section-header">
 						<span class="section-emoji">📝</span>
 						<div class="section-info">
-							<h2 class="section-title">All Writings</h2>
-							<p class="section-description">Browse all posts chronologically, including uncategorized ones.</p>
+							<h2 class="section-title">Uncategorized Posts</h2>
+							<p class="section-description">There are {uncategorizedPosts.length} posts without category assignments.</p>
 						</div>
 						<div class="section-meta">
-							<span class="post-count">{totalPosts}</span>
+							<span class="post-count">{uncategorizedPosts.length}</span>
 							<span class="count-label">posts</span>
-							<span class="arrow">→</span>
+							<span class="info-icon">ℹ️</span>
 						</div>
 					</div>
-				</a>
+				</div>
 			</section>
 		)}
 </BaseLayout>
@@ -267,6 +282,38 @@ const totalPosts = posts.length;
 		color: var(--color-primary);
 	}
 
+	/* View All Section Styles */
+	.view-all-section {
+		margin-top: var(--spacing-2xl);
+	}
+
+	.view-all-link {
+		border-color: var(--color-accent);
+		background: linear-gradient(135deg, var(--color-bg), var(--color-bg-secondary));
+	}
+
+	.view-all-link:hover {
+		border-color: var(--color-accent);
+		background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg));
+	}
+
+	/* Uncategorized Section Styles */
+	.uncategorized-section {
+		margin-top: var(--spacing-lg);
+	}
+
+	.uncategorized-link {
+		cursor: default;
+		opacity: 0.8;
+		background: var(--color-bg-tertiary);
+		border-color: var(--color-border-light);
+	}
+
+	.info-icon {
+		font-size: var(--font-size-lg);
+		color: var(--color-text-lighter);
+	}
+
 	/* Coming Soon Styles */
 	.coming-soon-link {
 		cursor: default;
@@ -376,6 +423,10 @@ const totalPosts = posts.length;
 
 		.coming-soon-badge {
 			margin-top: var(--spacing-xs);
+		}
+
+		.view-all-section {
+			margin-top: var(--spacing-xl);
 		}
 	}
 

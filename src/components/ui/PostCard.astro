@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { getCategoryFromReference } from '../../utils/categories';
 
 interface Props {
 	post: CollectionEntry<'writings'>;
@@ -13,7 +14,13 @@ const {
 	class: className = ''
 } = Astro.props;
 
-const { title, description, pubDate, heroImage } = post.data;
+const { title, description, pubDate, heroImage, category } = post.data;
+
+// Get category data if category reference exists
+let categoryData = null;
+if (category) {
+	categoryData = await getCategoryFromReference(category);
+}
 ---
 
 <article class:list={['post-card', className]}>
@@ -28,6 +35,12 @@ const { title, description, pubDate, heroImage } = post.data;
 			</div>
 		)}
 		<div class="post-content">
+			{categoryData && (
+				<a href={`/${categoryData.slug}`} class="post-category" data-astro-reload>
+					<span class="category-emoji">{categoryData.emoji}</span>
+					<span class="category-name">{categoryData.title}</span>
+				</a>
+			)}
 			<h2 class="post-title">{title}</h2>
 			<p class="post-description">{description}</p>
 			<time class="post-date" datetime={pubDate.toISOString()}>
@@ -96,6 +109,42 @@ const { title, description, pubDate, heroImage } = post.data;
 		padding: var(--spacing-xl);
 	}
 
+	.post-category {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-xs);
+		margin-bottom: var(--spacing-sm);
+		font-size: var(--font-size-sm);
+		color: var(--color-text-light);
+		text-decoration: none;
+		transition: all var(--transition-fast);
+		padding: var(--spacing-xs) var(--spacing-sm);
+		border-radius: var(--border-radius-sm);
+		background: var(--color-bg-secondary);
+		border: 1px solid var(--color-border-light);
+		width: fit-content;
+	}
+
+	.post-category:hover {
+		background: var(--color-hover-bg);
+		border-color: var(--color-primary);
+		color: var(--color-primary);
+		transform: translateY(-1px);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.category-emoji {
+		font-size: var(--font-size-base);
+	}
+
+	.category-name {
+		font-weight: var(--font-weight-medium);
+		color: inherit;
+		text-transform: uppercase;
+		letter-spacing: var(--letter-spacing-wider);
+		font-size: var(--font-size-xs);
+	}
+
 	.post-title {
 		font-family: var(--font-family-heading);
 		font-size: var(--font-size-xl);
@@ -136,6 +185,15 @@ const { title, description, pubDate, heroImage } = post.data;
 		
 		.post-title {
 			font-size: var(--font-size-lg);
+		}
+
+		.post-category {
+			font-size: var(--font-size-xs);
+			padding: calc(var(--spacing-xs) * 0.5) var(--spacing-sm);
+		}
+
+		.category-emoji {
+			font-size: var(--font-size-sm);
 		}
 	}
 </style>
