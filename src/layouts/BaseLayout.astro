@@ -66,30 +66,3 @@ const {
     <ScrollToTop position="bottom-right" threshold={300} />
   </body>
 </html>
-
-<style>
-  .main-content {
-    width: 100%;
-    max-width: 100%;
-    min-height: calc(100vh - 60px - 120px - var(--spacing-2xl));
-    padding-top: calc(60px + var(--spacing-2xl));
-    margin-top: 0;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .main-content {
-      padding-top: calc(55px + var(--spacing-xl));
-      min-height: calc(100vh - 55px - 100px - var(--spacing-xl));
-    }
-  }
-
-  @media (max-width: 480px) {
-    .main-content {
-      padding-top: calc(55px + var(--spacing-lg));
-      min-height: calc(100vh - 55px - 90px - var(--spacing-lg));
-    }
-  }
-</style>

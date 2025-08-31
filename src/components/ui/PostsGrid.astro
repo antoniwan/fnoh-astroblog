@@ -22,115 +22,22 @@ const hasMorePosts = showLoadMore && totalPosts > initialPostsCount;
 const remainingPosts = totalPosts - initialPostsCount;
 ---
 
-<div class:list={["posts-grid", "grid-container", className]}>
-  {posts.map((post) => <PostCard post={post} />)}
+<div class:list={[
+  "grid grid-cols-[repeat(auto-fill,minmax(350px,1fr))] gap-xl w-full max-w-full items-start justify-items-stretch m-0 p-0 box-border min-w-0 lg:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] lg:gap-lg md:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] md:gap-lg md:px-md sm:grid-cols-1 sm:gap-base sm:px-sm xs:grid-cols-1 xs:gap-sm xs:px-xs",
+  className
+]}>
+  {posts.map((post) => <PostCard post={post} class="w-full max-w-full m-0 p-0 box-border min-w-0" />)}
 </div>
 
 {
   showLoadMore && hasMorePosts && (
-    <div class="pagination">
-      <button id="load-more" class="load-more-btn">
+    <div class="text-center mt-8 py-xl">
+      <button id="load-more" class="inline-block bg-primary-800 text-white border-none py-md px-xl rounded-lg text-base font-medium cursor-pointer transition-all duration-normal shadow-sm hover:bg-primary-900 hover:-translate-y-0.5 hover:shadow-md disabled:bg-text-lighter disabled:cursor-not-allowed disabled:transform-none disabled:shadow-sm">
         Load More Writings ({remainingPosts} remaining)
       </button>
     </div>
   )
 }
-
-<style>
-  .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: var(--spacing-xl);
-    width: 100%;
-    max-width: 100%;
-    align-items: start;
-    justify-items: stretch;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    min-width: 0; /* Prevent grid from overflowing container */
-  }
-
-  .posts-grid .post-card {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    min-width: 0; /* Prevent grid items from overflowing */
-  }
-
-  /* Responsive grid adjustments */
-  @media (max-width: 1024px) {
-    .posts-grid {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: var(--spacing-lg);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .posts-grid {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--spacing-lg);
-      padding: 0 var(--spacing-md);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .posts-grid {
-      grid-template-columns: 1fr;
-      gap: var(--spacing);
-      padding: 0 var(--spacing-sm);
-    }
-  }
-
-  @media (max-width: 320px) {
-    .posts-grid {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-sm);
-      padding: 0 var(--spacing-xs);
-    }
-
-    .posts-grid .post-card {
-      min-width: 0;
-      max-width: 100%;
-    }
-  }
-
-  /* Pagination styles */
-  .pagination {
-    text-align: center;
-    margin-top: var(--spacing-2xl);
-    padding: var(--spacing-xl) 0;
-  }
-
-  .load-more-btn {
-    display: inline-block;
-    background: var(--color-primary);
-    color: white;
-    border: none;
-    padding: var(--spacing-md) var(--spacing-xl);
-    border-radius: var(--border-radius-lg);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-medium);
-    cursor: pointer;
-    transition: all var(--transition-normal);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .load-more-btn:hover {
-    background: var(--color-primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-
-  .load-more-btn:disabled {
-    background: var(--color-text-lighter);
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: var(--shadow-sm);
-  }
-</style>
 
 <script>
   // Lazy load more posts for better performance

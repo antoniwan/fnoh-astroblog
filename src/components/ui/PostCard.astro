@@ -19,35 +19,39 @@ if (category) {
 }
 ---
 
-<article class:list={["post-card", className]}>
-  <a href={`/writings/${post.id.replace(/\.md$/, "")}`} class="link-card">
+<article class:list={[
+  "border border-border-light rounded-lg overflow-hidden transition-all duration-normal bg-background shadow-sm relative flex flex-col m-0 p-0 box-border min-w-0 max-w-full w-full h-full hover:border-border hover:shadow-md hover:-translate-y-0.5 before:content-[''] before:absolute before:top-0 before:left-0 before:right-0 before:h-0.5 before:bg-gradient-to-r before:from-primary-800 before:to-primary-600 before:opacity-0 before:transition-opacity before:duration-normal hover:before:opacity-100",
+  className
+]}>
+  <a href={`/writings/${post.id.replace(/\.md$/, "")}`} class="flex flex-col h-full no-underline text-inherit m-0 p-0 box-border min-w-0 max-w-full">
     {
       showImage && heroImage && (
-        <div class="post-image">
+        <div class="w-full h-[200px] overflow-hidden relative flex-shrink-0 bg-background-secondary max-w-full box-border m-0 md:h-[150px] sm:h-[120px]">
           <img
             src={heroImage.src}
             alt={title || `Image for ${title}`}
             loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-normal block max-w-full box-border m-0 hover:scale-105"
           />
         </div>
       )
     }
-    <div class="post-content">
+    <div class="p-xl flex-1 flex flex-col m-0 box-border min-w-0 max-w-full md:p-lg sm:p-md">
       {
         categoryData && (
           <a
             href={`/${categoryData.slug}`}
-            class="post-category"
+            class="inline-flex items-center gap-xs mb-md text-sm text-text-light no-underline transition-all duration-fast py-xs px-sm rounded-md bg-background-secondary border border-border-light w-fit font-medium uppercase tracking-wider hover:bg-primary-800 hover:border-primary-800 hover:text-white hover:-translate-y-0.5 hover:shadow-sm md:text-xs md:py-xs md:px-sm md:mb-sm sm:text-xs sm:py-[calc(0.5rem*0.5)] sm:px-sm"
             data-astro-reload
           >
-            <span class="category-emoji">{categoryData.emoji}</span>
-            <span class="category-name">{categoryData.title}</span>
+            <span class="text-base md:text-sm">{categoryData.emoji}</span>
+            <span class="font-medium text-inherit text-xs">{categoryData.title}</span>
           </a>
         )
       }
-      <h2 class="post-title">{title}</h2>
-      <p class="post-description">{description}</p>
-      <time class="post-date" datetime={pubDate.toISOString()}>
+      <h2 class="font-heading text-xl font-semibold text-heading m-0 mb-md leading-tight tracking-tight flex-shrink-0 break-words max-w-full md:text-lg sm:text-base">{title}</h2>
+      <p class="text-base text-text-light m-0 mb-md leading-relaxed line-clamp-3 text-justify flex-1 break-words max-w-full sm:text-sm">{description}</p>
+      <time class="text-sm text-text-lighter italic font-serif flex-shrink-0 mt-auto" datetime={pubDate.toISOString()}>
         {
           pubDate.toLocaleDateString("en-US", {
             year: "numeric",
@@ -61,91 +65,6 @@ if (category) {
 </article>
 
 <style>
-  .post-card {
-    border: 1px solid var(--color-border-light);
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-    transition: all var(--transition-normal);
-    background: var(--color-bg);
-    box-shadow: var(--shadow-sm);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    min-width: 0;
-    max-width: 100%;
-    width: 100%;
-    height: 100%;
-  }
-
-  .post-card:hover {
-    border-color: var(--color-border);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-  }
-
-  .post-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      var(--color-primary),
-      var(--color-accent)
-    );
-    opacity: 0;
-    transition: opacity var(--transition-normal);
-  }
-
-  .post-card:hover::before {
-    opacity: 1;
-  }
-
-  .link-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    text-decoration: none;
-    color: inherit;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  .post-image {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    position: relative;
-    flex-shrink: 0;
-    background: var(--color-bg-secondary);
-    max-width: 100%;
-    box-sizing: border-box;
-    margin: 0;
-  }
-
-  .post-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-normal);
-    display: block;
-    max-width: 100%;
-    box-sizing: border-box;
-    margin: 0;
-  }
-
-  .post-card:hover .post-image img {
-    transform: scale(1.05);
-  }
-
   /* Fallback for missing images */
   .post-image:empty::before {
     content: "📝";
@@ -153,143 +72,9 @@ if (category) {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: var(--font-size-3xl);
-    color: var(--color-text-lighter);
+    font-size: 1.625rem;
+    color: #6b7280;
     opacity: 0.5;
-  }
-
-  .post-content {
-    padding: var(--spacing-xl);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    box-sizing: border-box;
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  .post-category {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-md);
-    font-size: var(--font-size-sm);
-    color: var(--color-text-light);
-    text-decoration: none;
-    transition: all var(--transition-fast);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--border-radius-md);
-    background: var(--color-bg-secondary);
-    border: 1px solid var(--color-border-light);
-    width: fit-content;
-    font-weight: var(--font-weight-medium);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-wider);
-  }
-
-  .post-category:hover {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
-    color: white;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .category-emoji {
-    font-size: var(--font-size-base);
-  }
-
-  .category-name {
-    font-weight: var(--font-weight-medium);
-    color: inherit;
-    font-size: var(--font-size-xs);
-  }
-
-  .post-title {
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-heading);
-    margin: 0 0 var(--spacing-md) 0;
-    line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tight);
-    flex-shrink: 0;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    max-width: 100%;
-  }
-
-  .post-description {
-    font-size: var(--font-size-base);
-    color: var(--color-text-light);
-    margin: 0 0 var(--spacing-md) 0;
-    line-height: var(--line-height-relaxed);
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-align: justify;
-    flex: 1;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    max-width: 100%;
-  }
-
-  .post-date {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-lighter);
-    font-style: italic;
-    font-family: var(--font-family-serif);
-    flex-shrink: 0;
-    margin-top: auto;
-  }
-
-  @media (max-width: 768px) {
-    .post-image {
-      height: 150px;
-    }
-
-    .post-content {
-      padding: var(--spacing-lg);
-    }
-
-    .post-title {
-      font-size: var(--font-size-lg);
-    }
-
-    .post-category {
-      font-size: var(--font-size-xs);
-      padding: var(--spacing-xs) var(--spacing-sm);
-      margin-bottom: var(--spacing-sm);
-    }
-
-    .category-emoji {
-      font-size: var(--font-size-sm);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .post-image {
-      height: 120px;
-    }
-
-    .post-content {
-      padding: var(--spacing-md);
-    }
-
-    .post-title {
-      font-size: var(--font-size-base);
-    }
-
-    .post-description {
-      font-size: var(--font-size-sm);
-    }
-
-    .post-category {
-      font-size: var(--font-size-xs);
-      padding: calc(var(--spacing-xs) * 0.5) var(--spacing-sm);
-    }
   }
 
   /* Ensure proper grid behavior */
@@ -297,5 +82,13 @@ if (category) {
     .post-card {
       min-height: 400px;
     }
+  }
+
+  /* Line clamp utility */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 </style>

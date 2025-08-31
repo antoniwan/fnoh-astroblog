@@ -13,32 +13,71 @@ const today = new Date();
 const categoriesWithPosts = await getCategoriesWithPosts();
 ---
 
-<footer class="site-footer">
-  <div class="footer-content">
+<footer
+  class="bg-background-secondary border-t border-border-light text-text py-12 mt-12 shadow-sm"
+>
+  <div class="px-xl flex flex-col gap-12">
     <!-- Main footer section -->
-    <div class="footer-main">
-      <div class="footer-brand">
-        <h3 class="footer-title">{SITE_TITLE}</h3>
-        <p class="footer-description">{SITE_DESCRIPTION}</p>
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:items-start">
+      <div class="flex flex-col gap-lg">
+        <h3
+          class="font-heading text-2xl font-bold text-heading m-0 leading-tight tracking-tight"
+        >
+          {SITE_TITLE}
+        </h3>
+        <p
+          class="text-base leading-relaxed text-text-light m-0 max-w-[40ch] text-justify"
+        >
+          {SITE_DESCRIPTION}
+        </p>
       </div>
 
-      <div class="footer-links">
-        <div class="footer-section">
-          <h4 class="footer-section-title">Navigation</h4>
-          <ul class="footer-link-list">
-            <li><a href="/" class="footer-link">Home</a></li>
-            <li><a href="/writings" class="footer-link">Writings</a></li>
-            <li><a href="/about" class="footer-link">About</a></li>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="flex flex-col gap-md">
+          <h4
+            class="font-heading text-lg font-semibold text-heading m-0 leading-tight tracking-tight"
+          >
+            Navigation
+          </h4>
+          <ul class="list-none p-0 m-0 flex flex-col gap-sm">
+            <li class="list-none m-0">
+              <a
+                href="/"
+                class="text-text-light no-underline text-sm transition-all duration-fast flex items-center gap-xs py-xs px-sm rounded-sm hover:text-link hover:translate-x-0.5 hover:bg-hover"
+                >Home</a
+              >
+            </li>
+            <li class="list-none m-0">
+              <a
+                href="/writings"
+                class="text-text-light no-underline text-sm transition-all duration-fast flex items-center gap-xs py-xs px-sm rounded-sm hover:text-link hover:translate-x-0.5 hover:bg-hover"
+                >Writings</a
+              >
+            </li>
+            <li class="list-none m-0">
+              <a
+                href="/about"
+                class="text-text-light no-underline text-sm transition-all duration-fast flex items-center gap-xs py-xs px-sm rounded-sm hover:text-link hover:translate-x-0.5 hover:bg-hover"
+                >About</a
+              >
+            </li>
           </ul>
         </div>
 
-        <div class="footer-section">
-          <h4 class="footer-section-title">Categories</h4>
-          <ul class="footer-link-list">
+        <div class="flex flex-col gap-md">
+          <h4
+            class="font-heading text-lg font-semibold text-heading m-0 leading-tight tracking-tight"
+          >
+            Categories
+          </h4>
+          <ul class="list-none p-0 m-0 flex flex-col gap-sm">
             {
               categoriesWithPosts.map((category) => (
-                <li>
-                  <a href={getCategoryUrl(category.slug)} class="footer-link">
+                <li class="list-none m-0">
+                  <a
+                    href={getCategoryUrl(category.slug)}
+                    class="text-text-light no-underline text-sm transition-all duration-fast flex items-center gap-xs py-xs px-sm rounded-sm hover:text-link hover:translate-x-0.5 hover:bg-hover"
+                  >
                     {getCategoryDisplayName(category.slug, categoriesWithPosts)}
                   </a>
                 </li>
@@ -47,17 +86,28 @@ const categoriesWithPosts = await getCategoriesWithPosts();
           </ul>
         </div>
 
-        <div class="footer-section">
-          <h4 class="footer-section-title">Resources</h4>
-          <ul class="footer-link-list">
-            <li>
-              <a href="/rss.xml" class="footer-link">
-                <Rss class="footer-icon" />
+        <div class="flex flex-col gap-md">
+          <h4
+            class="font-heading text-lg font-semibold text-heading m-0 leading-tight tracking-tight"
+          >
+            Resources
+          </h4>
+          <ul class="list-none p-0 m-0 flex flex-col gap-sm">
+            <li class="list-none m-0">
+              <a
+                href="/rss.xml"
+                class="text-text-light no-underline text-sm transition-all duration-fast flex items-center gap-xs py-xs px-sm rounded-sm hover:text-link hover:translate-x-0.5 hover:bg-hover"
+              >
+                <Rss class="w-4 h-4 flex-shrink-0" />
                 RSS Feed
               </a>
             </li>
-            <li>
-              <a href="/sitemap-index.xml" class="footer-link">Sitemap</a>
+            <li class="list-none m-0">
+              <a
+                href="/sitemap-index.xml"
+                class="text-text-light no-underline text-sm transition-all duration-fast flex items-center gap-xs px-sm rounded-sm hover:text-link hover:translate-x-0.5 hover:bg-hover"
+                >Sitemap</a
+              >
             </li>
           </ul>
         </div>
@@ -65,40 +115,44 @@ const categoriesWithPosts = await getCategoriesWithPosts();
     </div>
 
     <!-- Footer bottom with legal and version info -->
-    <div class="footer-bottom">
-      <div class="footer-legal">
-        <p class="footer-copyright">
+    <div
+      class="flex flex-col sm:flex-row sm:justify-between sm:items-center pt-8 border-t border-border-light gap-lg"
+    >
+      <div class="flex flex-col gap-sm">
+        <p class="text-sm text-text-light m-0 font-serif italic">
           <sup>©</sup>
           {today.getFullYear()}
           {SITE_TITLE}. All rights reserved.
         </p>
-        <div class="footer-licenses">
+        <div class="flex items-center gap-sm flex-wrap">
           <a
             href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
             target="_blank"
             rel="noopener noreferrer"
-            class="footer-license-link"
+            class="text-text-light no-underline text-sm transition-colors duration-fast flex items-center gap-xs py-xs px-sm rounded-sm hover:text-link hover:bg-hover"
           >
             CC BY-NC-SA 4.0
-            <ExternalLink class="footer-external-icon" />
+            <ExternalLink class="w-[14px] h-[14px] opacity-70" />
           </a>
-          <span class="footer-separator">•</span>
+          <span class="text-text-lighter text-sm">•</span>
           <a
             href="https://opensource.org/licenses/MIT"
             target="_blank"
             rel="noopener noreferrer"
-            class="footer-license-link"
+            class="text-text-light no-underline text-sm transition-colors duration-fast flex items-center gap-xs py-xs px-sm rounded-sm hover:text-link hover:bg-hover"
           >
             MIT License
-            <ExternalLink class="footer-external-icon" />
+            <ExternalLink class="w-[14px] h-[14px] opacity-70" />
           </a>
         </div>
       </div>
 
-      <div class="footer-meta">
-        <span class="footer-version">v0.0.1</span>
-        <span class="footer-made-with">
-          Made with <Heart class="footer-heart" /> using Astro
+      <div class="flex flex-col items-start sm:items-end gap-xs">
+        <span class="text-xs text-text-lighter font-mono">v0.0.1</span>
+        <span class="text-xs text-text-lighter flex items-center gap-xs">
+          Made with <Heart
+            class="w-[14px] h-[14px] text-red-500 animate-pulse"
+          /> using Astro
         </span>
       </div>
     </div>
@@ -106,291 +160,13 @@ const categoriesWithPosts = await getCategoriesWithPosts();
 </footer>
 
 <style>
-  .site-footer {
-    background-color: var(--color-bg-secondary);
-    border-top: 1px solid var(--color-border-light);
-    color: var(--color-text);
-    padding: var(--spacing-3xl) 0 var(--spacing-2xl);
-    margin-top: var(--spacing-3xl);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .footer-content {
-    padding: 0 var(--spacing-xl);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-3xl);
-  }
-
-  .footer-main {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: var(--spacing-3xl);
-    align-items: start;
-  }
-
-  .footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-  }
-
-  .footer-title {
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-heading);
-    margin: 0;
-    line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tight);
-  }
-
-  .footer-description {
-    font-size: var(--font-size-base);
-    line-height: var(--line-height-relaxed);
-    color: var(--color-text-light);
-    margin: 0;
-    max-width: 40ch;
-    text-align: justify;
-  }
-
-  .footer-links {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-2xl);
-  }
-
-  .footer-section {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-  }
-
-  .footer-section-title {
-    font-family: var(--font-family-heading);
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-heading);
-    margin: 0;
-    line-height: var(--line-height-tight);
-    letter-spacing: var(--letter-spacing-tight);
-  }
-
-  .footer-link-list {
-    list-style: none !important;
-    list-style-type: none !important;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-  }
-
-  .footer-link-list li {
-    list-style: none !important;
-    list-style-type: none !important;
-    margin: 0;
-  }
-
-  .footer-link {
-    color: var(--color-text-light);
-    text-decoration: none;
-    font-size: var(--font-size-sm);
-    transition: all var(--transition-fast);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--border-radius-sm);
-  }
-
-  .footer-link:hover {
-    color: var(--color-link);
-    transform: translateX(2px);
-    background-color: var(--color-hover-bg);
-  }
-
-  .footer-icon {
-    width: 1rem;
-    height: 1rem;
-    flex-shrink: 0;
-  }
-
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: var(--spacing-2xl);
-    border-top: 1px solid var(--color-border-light);
-    gap: var(--spacing-lg);
-  }
-
-  .footer-legal {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-  }
-
-  .footer-copyright {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-light);
-    margin: 0;
-    font-family: var(--font-family-serif);
-    font-style: italic;
-  }
-
-  .footer-licenses {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    flex-wrap: wrap;
-  }
-
-  .footer-license-link {
-    color: var(--color-text-light);
-    text-decoration: none;
-    font-size: var(--font-size-sm);
-    transition: color var(--transition-fast);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--border-radius-sm);
-  }
-
-  .footer-license-link:hover {
-    color: var(--color-link);
-    background-color: var(--color-hover-bg);
-  }
-
-  .footer-external-icon {
-    width: 0.875rem;
-    height: 0.875rem;
-    opacity: 0.7;
-  }
-
-  .footer-separator {
-    color: var(--color-text-lighter);
-    font-size: var(--font-size-sm);
-  }
-
-  .footer-meta {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: var(--spacing-xs);
-  }
-
-  .footer-version {
-    font-size: var(--font-size-xs);
-    color: var(--color-text-lighter);
-    font-family: var(--font-family-mono);
-  }
-
-  .footer-made-with {
-    font-size: var(--font-size-xs);
-    color: var(--color-text-lighter);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-  }
-
-  .footer-heart {
-    width: 0.875rem;
-    height: 0.875rem;
-    color: #ef4444;
-    animation: heartbeat 2s ease-in-out infinite;
-  }
-
-  @keyframes heartbeat {
-    0%,
-    100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-  }
-
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .footer-main {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-2xl);
-    }
-
-    .footer-links {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--spacing-xl);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .site-footer {
-      padding: var(--spacing-2xl) 0 var(--spacing-xl);
-      margin-top: var(--spacing-2xl);
-    }
-
-    .footer-content {
-      gap: var(--spacing-2xl);
-      padding: 0 var(--spacing-lg);
-    }
-
-    .footer-links {
-      grid-template-columns: 1fr;
-      gap: var(--spacing-lg);
-    }
-
-    .footer-bottom {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--spacing-md);
-    }
-
-    .footer-meta {
-      align-items: flex-start;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .site-footer {
-      padding: var(--spacing-xl) 0 var(--spacing-lg);
-      margin-top: var(--spacing-xl);
-    }
-
-    .footer-content {
-      gap: var(--spacing-xl);
-      padding: 0 var(--spacing-sm);
-    }
-
-    .footer-main {
-      gap: var(--spacing-xl);
-    }
-
-    .footer-title {
-      font-size: var(--font-size-xl);
-    }
-
-    .footer-description {
-      font-size: var(--font-size-sm);
-    }
-
-    .footer-section-title {
-      font-size: var(--font-size-base);
-    }
-
-    .footer-link {
-      font-size: var(--font-size-xs);
-    }
-  }
-
   /* Dark theme adjustments */
   html[data-theme="dark"] .site-footer {
-    background-color: var(--color-bg-tertiary);
-    border-top-color: var(--color-border-dark);
+    background-color: #eeeeee;
+    border-color: #9ca3af;
   }
 
   html[data-theme="dark"] .footer-bottom {
-    border-top-color: var(--color-border-dark);
+    border-color: #9ca3af;
   }
 </style>
