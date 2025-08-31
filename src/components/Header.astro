@@ -2,7 +2,16 @@
 import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
+import CategoriesDropdown from './CategoriesDropdown.astro';
 import { Menu, X } from 'lucide-astro';
+
+// Navigation links configuration
+const navigationLinks = [
+	{ href: '/', label: 'Home' },
+	{ component: CategoriesDropdown, type: 'component' },
+	{ href: '/writings', label: 'All Writings' },
+	{ href: '/about', label: 'About' }
+];
 ---
 
 <header class="header-nav" data-scroll="show">
@@ -11,9 +20,11 @@ import { Menu, X } from 'lucide-astro';
 		
 		<!-- Desktop Navigation -->
 		<div class="nav-links desktop-nav">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/writings">Writings</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+			{navigationLinks.map(link => 
+				link.type === 'component' ? 
+					<link.component /> : 
+					<HeaderLink href={link.href}>{link.label}</HeaderLink>
+			)}
 			<ThemeToggle />
 		</div>
 		
@@ -29,9 +40,11 @@ import { Menu, X } from 'lucide-astro';
 		<div class="mobile-nav" aria-hidden="true">
 			<div class="mobile-nav-content">
 				<div class="mobile-nav-links">
-					<HeaderLink href="/">Home</HeaderLink>
-					<HeaderLink href="/writings">Writings</HeaderLink>
-					<HeaderLink href="/about">About</HeaderLink>
+					{navigationLinks.map(link => 
+						link.type === 'component' ? 
+							<link.component /> : 
+							<HeaderLink href={link.href}>{link.label}</HeaderLink>
+					)}
 					<div class="mobile-theme-toggle">
 						<ThemeToggle />
 					</div>

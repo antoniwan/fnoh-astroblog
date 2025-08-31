@@ -6,8 +6,33 @@ import {
   ExternalLink
 } from 'lucide-astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
 
 const today = new Date();
+
+// Get all posts and extract unique categories that have posts
+const allPosts = await getCollection('writings');
+const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category).filter(Boolean))];
+
+// Category display names mapping
+const categoryDisplayNames = {
+  'curiosity-lab': 'Curiosity Lab',
+  'recovery-reconstruction': 'Recovery & Reconstruction',
+  'empathy-healing': 'Empathy & Healing',
+  'lessons-in-balance': 'Lessons in Balance',
+  'chaos-notes': 'Chaos Notes',
+  'modern-life': 'Modern Life'
+};
+
+// Category URL mapping
+const categoryUrls = {
+  'curiosity-lab': '/curiosity-lab',
+  'recovery-reconstruction': '/recovery-reconstruction',
+  'empathy-healing': '/empathy-healing',
+  'lessons-in-balance': '/lessons-in-balance',
+  'chaos-notes': '/chaos-notes',
+  'modern-life': '/modern-life'
+};
 ---
 
 <footer class="site-footer">
@@ -32,12 +57,13 @@ const today = new Date();
         <div class="footer-section">
           <h4 class="footer-section-title">Categories</h4>
           <ul class="footer-link-list">
-            <li><a href="/lessons-in-balance" class="footer-link">Lessons in Balance</a></li>
-            <li><a href="/chaos-notes" class="footer-link">Chaos Notes</a></li>
-            <li><a href="/recovery-reconstruction" class="footer-link">Recovery & Reconstruction</a></li>
-            <li><a href="/empathy-healing" class="footer-link">Empathy & Healing</a></li>
-            <li><a href="/modern-life" class="footer-link">Modern Life</a></li>
-            <li><a href="/curiosity-lab" class="footer-link">Curiosity Lab</a></li>
+            {categoriesWithPosts.map(category => (
+              <li>
+                <a href={categoryUrls[category]} class="footer-link">
+                  {categoryDisplayNames[category]}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
         

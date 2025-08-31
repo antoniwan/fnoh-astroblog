@@ -1,0 +1,257 @@
+---
+import { ChevronDown } from 'lucide-astro';
+import { getCollection } from 'astro:content';
+
+// Get all posts and extract unique categories that have posts
+const allPosts = await getCollection('writings');
+const categoriesWithPosts = [...new Set(allPosts.map(post => post.data.category).filter(Boolean))];
+
+// Category display names mapping
+const categoryDisplayNames = {
+  'curiosity-lab': 'Curiosity Lab',
+  'recovery-reconstruction': 'Recovery & Reconstruction',
+  'empathy-healing': 'Empathy & Healing',
+  'lessons-in-balance': 'Lessons in Balance',
+  'chaos-notes': 'Chaos Notes',
+  'modern-life': 'Modern Life'
+};
+
+// Category URL mapping
+const categoryUrls = {
+  'curiosity-lab': '/curiosity-lab',
+  'recovery-reconstruction': '/recovery-reconstruction',
+  'empathy-healing': '/empathy-healing',
+  'lessons-in-balance': '/lessons-in-balance',
+  'chaos-notes': '/chaos-notes',
+  'modern-life': '/modern-life'
+};
+---
+
+<div class="categories-dropdown" data-dropdown>
+  <button class="dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+    Categories
+    <ChevronDown class="dropdown-icon" />
+  </button>
+  
+  <div class="dropdown-menu" role="menu">
+    {categoriesWithPosts.map(category => (
+      <a 
+        href={categoryUrls[category]} 
+        class="dropdown-item"
+        role="menuitem"
+      >
+        {categoryDisplayNames[category]}
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  // Dropdown functionality
+  (function() {
+    const dropdowns = document.querySelectorAll('[data-dropdown]');
+    
+    dropdowns.forEach(dropdown => {
+      const trigger = dropdown.querySelector('.dropdown-trigger');
+      const menu = dropdown.querySelector('.dropdown-menu');
+      
+      if (!trigger || !menu) return;
+      
+      let isOpen = false;
+      
+      function toggleDropdown() {
+        isOpen = !isOpen;
+        
+        trigger.setAttribute('aria-expanded', isOpen.toString());
+        dropdown.classList.toggle('open', isOpen);
+        
+        // Close other dropdowns
+        dropdowns.forEach(otherDropdown => {
+          if (otherDropdown !== dropdown) {
+            otherDropdown.classList.remove('open');
+            const otherTrigger = otherDropdown.querySelector('.dropdown-trigger');
+            if (otherTrigger) {
+              otherTrigger.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
+      }
+      
+      function closeDropdown() {
+        isOpen = false;
+        trigger.setAttribute('aria-expanded', 'false');
+        dropdown.classList.remove('open');
+      }
+      
+      // Toggle on click
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleDropdown();
+      });
+      
+      // Close when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target as Element)) {
+          closeDropdown();
+        }
+      });
+      
+      // Close on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) {
+          closeDropdown();
+        }
+      });
+      
+      // Close on hover out (for better UX)
+      dropdown.addEventListener('mouseleave', () => {
+        if (isOpen) {
+          closeDropdown();
+        }
+      });
+    });
+  })();
+</script>
+
+<style>
+  .categories-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--border-radius-md);
+    transition: all var(--transition-fast);
+    font-weight: var(--font-weight-medium);
+  }
+  
+  .dropdown-trigger:hover {
+    color: var(--color-link);
+    background-color: var(--color-hover-bg);
+  }
+  
+  .dropdown-trigger:focus {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+  
+  .dropdown-icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform var(--transition-fast);
+  }
+  
+  .categories-dropdown.open .dropdown-icon {
+    transform: rotate(180deg);
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    min-width: 200px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-normal);
+    z-index: 1000;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+  }
+  
+  .categories-dropdown.open .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .dropdown-item {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    font-size: var(--font-size-sm);
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .dropdown-item:hover {
+    background-color: var(--color-hover-bg);
+    color: var(--color-link);
+  }
+  
+  .dropdown-item:focus {
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
+  }
+  
+  /* Dark theme adjustments */
+  html[data-theme="dark"] .dropdown-menu {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-border-dark);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Mobile adjustments */
+  @media (max-width: 1024px) {
+    .dropdown-menu {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      box-shadow: none;
+      border: none;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      min-width: auto;
+    }
+    
+    .dropdown-trigger {
+      justify-content: space-between;
+      width: 100%;
+      padding: var(--spacing-lg) var(--spacing-xl);
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-semibold);
+    }
+    
+    .dropdown-icon {
+      display: none;
+    }
+    
+    .categories-dropdown.open .dropdown-menu {
+      display: block;
+    }
+    
+    .categories-dropdown:not(.open) .dropdown-menu {
+      display: none;
+    }
+    
+    .dropdown-item {
+      padding: var(--spacing-md) var(--spacing-xl);
+      font-size: var(--font-size-lg);
+      text-align: center;
+    }
+  }
+</style>
