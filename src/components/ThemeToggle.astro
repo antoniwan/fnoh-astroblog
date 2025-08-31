@@ -2,19 +2,36 @@
 import { Sun, Moon } from "lucide-astro";
 ---
 
-<button id="theme-toggle" aria-label="Toggle theme" class="theme-toggle">
-  <Sun class="sun-icon" />
-  <Moon class="moon-icon" />
+<button 
+  id="theme-toggle" 
+  aria-label="Toggle theme" 
+  class="p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 relative"
+>
+  <Sun class="w-5 h-5 sun-icon transition-all duration-200" />
+  <Moon class="w-5 h-5 moon-icon absolute inset-0 transition-all duration-200 opacity-0 scale-75 -rotate-90" />
 </button>
 
 <script>
   // Simplified theme toggle functionality
   const themeToggle = document.getElementById("theme-toggle");
   const htmlElement = document.documentElement;
+  const sunIcon = document.querySelector('.sun-icon');
+  const moonIcon = document.querySelector('.moon-icon');
 
   // Get current theme
   const currentTheme = localStorage.getItem("theme") || "light";
   htmlElement.setAttribute("data-theme", currentTheme);
+
+  // Update icon visibility
+  function updateIconVisibility(theme: string) {
+    if (theme === "dark") {
+      sunIcon?.classList.add('opacity-0', 'scale-75', 'rotate-90');
+      moonIcon?.classList.remove('opacity-0', 'scale-75', '-rotate-90');
+    } else {
+      sunIcon?.classList.remove('opacity-0', 'scale-75', 'rotate-90');
+      moonIcon?.classList.add('opacity-0', 'scale-75', '-rotate-90');
+    }
+  }
 
   // Toggle theme function
   function toggleTheme() {
@@ -23,111 +40,13 @@ import { Sun, Moon } from "lucide-astro";
 
     htmlElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("theme", newTheme);
-
-    // Update button state
-    htmlElement.classList.toggle("dark", newTheme === "dark");
+    updateIconVisibility(newTheme);
   }
 
   // Event listener
   themeToggle?.addEventListener("click", toggleTheme);
 
-  // Initialize button state
-  htmlElement.classList.toggle("dark", currentTheme === "dark");
+  // Initialize icon state
+  updateIconVisibility(currentTheme);
 </script>
 
-<style>
-  .theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: var(--border-radius-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    transition: all var(--transition-fast);
-    color: var(--color-text);
-    background-color: transparent;
-    border: 1px solid var(--color-border-light);
-    height: 2.25rem;
-    width: 2.25rem;
-    overflow: hidden;
-  }
-
-  .theme-toggle::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      135deg,
-      var(--color-primary),
-      var(--color-accent)
-    );
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-    z-index: 0;
-  }
-
-  .theme-toggle:hover {
-    background-color: var(--color-hover-bg);
-    transform: scale(1.05);
-    border-color: var(--color-link);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .theme-toggle:hover::before {
-    opacity: 0.1;
-  }
-
-  .theme-toggle:focus {
-    outline: 2px solid var(--color-focus);
-    outline-offset: 2px;
-    border-color: var(--color-focus);
-    box-shadow: 0 0 0 4px var(--color-focus-ring);
-  }
-
-  .sun-icon,
-  .moon-icon {
-    width: 1.125rem;
-    height: 1.125rem;
-    transition: all var(--transition-fast);
-    color: var(--color-text);
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Show sun icon in dark mode, moon icon in light mode */
-  .sun-icon {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
-
-  .moon-icon {
-    opacity: 0;
-    transform: scale(0.8) rotate(-90deg);
-    position: absolute;
-  }
-
-  html[data-theme="dark"] .sun-icon {
-    opacity: 0;
-    transform: scale(0.8) rotate(90deg);
-  }
-
-  html[data-theme="dark"] .moon-icon {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
-
-  /* Respect user's motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    .theme-toggle,
-    .sun-icon,
-    .moon-icon {
-      transition: none;
-    }
-  }
-</style>

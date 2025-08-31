@@ -12,27 +12,12 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 <a
   href={href}
   class:list={[
-    "relative text-text no-underline transition-colors duration-fast py-2 px-3 rounded-md hover:text-link hover:bg-hover",
+    "relative text-gray-700 hover:text-gray-900 transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100",
     className,
-    { active: isActive }
+    { "text-blue-600 bg-blue-50": isActive }
   ]}
   data-astro-reload
   {...props}
 >
   <slot />
 </a>
-
-<style>
-  /* HeaderLink active indicator */
-  .link-nav.active::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 2px;
-    background: linear-gradient(to right, #1e3a8a, #2563eb);
-    border-radius: 0.125rem;
-  }
-</style>

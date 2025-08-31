@@ -11,18 +11,25 @@ import {
 const categoriesWithPosts = await getCategoriesWithPosts();
 ---
 
-<div class="categories-dropdown" data-dropdown>
-  <button class="dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+<div class="relative" data-dropdown>
+  <button
+    class="flex items-center gap-2 bg-transparent border-none text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-200 font-medium py-2 px-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
     Categories
-    <ChevronDown class="dropdown-icon" />
+    <ChevronDown class="w-4 h-4 transition-transform duration-200" />
   </button>
 
-  <div class="dropdown-menu" role="menu">
+  <div
+    class="absolute top-full left-0 mt-2 min-w-[200px] bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible -translate-y-2 transition-all duration-200 z-50 py-2"
+    role="menu"
+  >
     {
       categoriesWithPosts.map((category) => (
         <a
           href={getCategoryUrl(category.slug)}
-          class="dropdown-item"
+          class="block w-full text-left px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors duration-200 text-sm"
           role="menuitem"
         >
           {getCategoryDisplayName(category.slug, categoriesWithPosts)}
@@ -38,8 +45,9 @@ const categoriesWithPosts = await getCategoriesWithPosts();
     const dropdowns = document.querySelectorAll("[data-dropdown]");
 
     dropdowns.forEach((dropdown) => {
-      const trigger = dropdown.querySelector(".dropdown-trigger");
-      const menu = dropdown.querySelector(".dropdown-menu");
+      const trigger = dropdown.querySelector("button");
+      const menu = dropdown.querySelector("div[role='menu']");
+      const icon = trigger?.querySelector("svg");
 
       if (!trigger || !menu) return;
 
@@ -51,16 +59,41 @@ const categoriesWithPosts = await getCategoriesWithPosts();
         if (trigger) {
           trigger.setAttribute("aria-expanded", isOpen.toString());
         }
-        dropdown.classList.toggle("open", isOpen);
+
+        if (isOpen && menu) {
+          menu.classList.remove("opacity-0", "invisible", "-translate-y-2");
+          menu.classList.add("opacity-100", "visible", "translate-y-0");
+          icon?.classList.add("rotate-180");
+        } else if (menu) {
+          menu.classList.add("opacity-0", "invisible", "-translate-y-2");
+          menu.classList.remove("opacity-100", "visible", "translate-y-0");
+          icon?.classList.remove("rotate-180");
+        }
 
         // Close other dropdowns
         dropdowns.forEach((otherDropdown) => {
           if (otherDropdown !== dropdown) {
-            otherDropdown.classList.remove("open");
-            const otherTrigger =
-              otherDropdown.querySelector(".dropdown-trigger");
+            const otherTrigger = otherDropdown.querySelector("button");
+            const otherMenu = otherDropdown.querySelector("div[role='menu']");
+            const otherIcon = otherTrigger?.querySelector("svg");
+
             if (otherTrigger) {
               otherTrigger.setAttribute("aria-expanded", "false");
+            }
+            if (otherMenu) {
+              otherMenu.classList.add(
+                "opacity-0",
+                "invisible",
+                "-translate-y-2",
+              );
+              otherMenu.classList.remove(
+                "opacity-100",
+                "visible",
+                "translate-y-0",
+              );
+            }
+            if (otherIcon) {
+              otherIcon.classList.remove("rotate-180");
             }
           }
         });
@@ -71,7 +104,11 @@ const categoriesWithPosts = await getCategoriesWithPosts();
         if (trigger) {
           trigger.setAttribute("aria-expanded", "false");
         }
-        dropdown.classList.remove("open");
+        if (menu) {
+          menu.classList.add("opacity-0", "invisible", "-translate-y-2");
+          menu.classList.remove("opacity-100", "visible", "translate-y-0");
+        }
+        icon?.classList.remove("rotate-180");
       }
 
       // Toggle on click
@@ -104,145 +141,3 @@ const categoriesWithPosts = await getCategoriesWithPosts();
     });
   })();
 </script>
-
-<style>
-  .categories-dropdown {
-    position: relative;
-    display: inline-block;
-  }
-
-  .dropdown-trigger {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: transparent;
-    border: none;
-    color: var(--color-text);
-    text-decoration: none;
-    font-size: inherit;
-    font-family: inherit;
-    cursor: pointer;
-    padding: 0.5rem 0.75rem;
-    border-radius: var(--border-radius-md);
-    transition: all var(--transition-fast);
-    font-weight: var(--font-weight-medium);
-  }
-
-  .dropdown-trigger:hover {
-    color: var(--color-link);
-    background-color: var(--color-hover-bg);
-  }
-
-  .dropdown-trigger:focus {
-    outline: 2px solid var(--color-focus);
-    outline-offset: 2px;
-  }
-
-  .dropdown-icon {
-    width: 1rem;
-    height: 1rem;
-    transition: transform var(--transition-fast);
-  }
-
-  .categories-dropdown.open .dropdown-icon {
-    transform: rotate(180deg);
-  }
-
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    min-width: 200px;
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-lg);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all var(--transition-normal);
-    z-index: 1000;
-    padding: 0.5rem 0;
-    margin-top: 0.5rem;
-  }
-
-  .categories-dropdown.open .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .dropdown-item {
-    display: block;
-    padding: 0.75rem 1rem;
-    color: var(--color-text);
-    text-decoration: none;
-    transition: all var(--transition-fast);
-    font-size: var(--font-size-sm);
-    border: none;
-    background: transparent;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-  }
-
-  .dropdown-item:hover {
-    background-color: var(--color-hover-bg);
-    color: var(--color-link);
-  }
-
-  .dropdown-item:focus {
-    outline: 2px solid var(--color-focus);
-    outline-offset: -2px;
-  }
-
-  /* Dark theme adjustments */
-  html[data-theme="dark"] .dropdown-menu {
-    background-color: var(--color-bg-secondary);
-    border-color: var(--color-border-dark);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Mobile adjustments */
-  @media (max-width: 1024px) {
-    .dropdown-menu {
-      position: static;
-      opacity: 1;
-      visibility: visible;
-      transform: none;
-      box-shadow: none;
-      border: none;
-      background: transparent;
-      padding: 0;
-      margin: 0;
-      min-width: auto;
-    }
-
-    .dropdown-trigger {
-      justify-content: space-between;
-      width: 100%;
-      padding: var(--spacing-lg) var(--spacing-xl);
-      font-size: var(--font-size-2xl);
-      font-weight: var(--font-weight-semibold);
-    }
-
-    .dropdown-icon {
-      display: none;
-    }
-
-    .categories-dropdown.open .dropdown-menu {
-      display: block;
-    }
-
-    .categories-dropdown:not(.open) .dropdown-menu {
-      display: none;
-    }
-
-    .dropdown-item {
-      padding: var(--spacing-md) var(--spacing-xl);
-      font-size: var(--font-size-lg);
-      text-align: center;
-    }
-  }
-</style>

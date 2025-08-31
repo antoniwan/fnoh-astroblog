@@ -15,75 +15,74 @@ const navigationLinks = [
 ---
 
 <header
-  class="fixed top-0 left-0 right-0 z-[1000] w-full max-w-screen p-0 border-b border-border/15 bg-background/80 backdrop-blur-subtle transition-all duration-normal h-[60px] flex items-center box-border overflow-hidden shadow-sm"
-  data-scroll="show"
+  class="fixed top-0 left-0 right-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm"
 >
-  <nav
-    class="w-full max-w-full flex items-center justify-between px-xl h-[50px] relative"
-  >
-    <h1
-      class="m-0 text-xl font-bold z-[1001] leading-tight font-heading tracking-tight"
-    >
-      <a
-        href="/"
-        class="text-heading no-underline transition-colors duration-fast hover:text-link"
-        data-astro-reload>{SITE_TITLE}</a
-      >
-    </h1>
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo/Site Title -->
+      <div class="flex-shrink-0">
+        <h1 class="text-xl font-bold text-gray-900">
+          <a
+            href="/"
+            class="text-gray-900 hover:text-blue-600 transition-colors duration-200"
+          >
+            {SITE_TITLE}
+          </a>
+        </h1>
+      </div>
 
-    <!-- Desktop Navigation -->
-    <div class="flex gap-3 items-center h-full desktop-nav">
-      {
-        navigationLinks.map((link) =>
-          link.type === "component" ? (
-            <link.component />
-          ) : (
-            <HeaderLink href={link.href}>{link.label}</HeaderLink>
-          ),
-        )
-      }
-      <ThemeToggle />
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex lg:items-center lg:space-x-8">
+        {
+          navigationLinks.map((link) =>
+            link.type === "component" ? (
+              <link.component />
+            ) : (
+              <HeaderLink href={link.href}>{link.label}</HeaderLink>
+            ),
+          )
+        }
+        <ThemeToggle />
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="lg:hidden">
+        <button
+          type="button"
+          class="mobile-menu-button bg-white p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Open main menu</span>
+          <Menu class="block h-6 w-6" />
+          <X class="hidden h-6 w-6" />
+        </button>
+      </div>
     </div>
 
-    <!-- Mobile Navigation Toggle -->
-    <button
-      class="hidden lg:hidden bg-transparent border-none cursor-pointer p-2 rounded-md z-[1001] transition-all duration-fast text-text border border-border-light relative overflow-hidden h-10 w-10 hover:bg-hover hover:border-link hover:scale-105 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-800 focus:ring-offset-2 focus:border-primary-800 mobile-nav-toggle"
-      aria-label="Toggle navigation menu"
-      aria-expanded="false"
-    >
-      <div class="relative w-5 h-5 flex items-center justify-center">
-        <Menu
-          class="w-5 h-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-fast menu-icon"
-        />
-        <X
-          class="w-5 h-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-fast opacity-0 rotate-90 close-icon"
-        />
-      </div>
-    </button>
-
-    <!-- Mobile Navigation Menu -->
-    <div
-      class="hidden fixed top-0 left-0 right-0 bottom-0 z-[999] opacity-0 invisible transition-all duration-normal mobile-nav"
-      aria-hidden="true"
-    >
+    <!-- Mobile menu -->
+    <div class="lg:hidden hidden mobile-menu" id="mobile-menu">
       <div
-        class="absolute top-0 left-0 right-0 bottom-0 bg-background min-h-screen min-w-screen"
+        class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200"
       >
-        <div
-          class="flex flex-col items-center justify-center h-screen py-12 px-xl gap-xl w-full relative bg-background-secondary"
-        >
-          {
-            navigationLinks.map((link) =>
-              link.type === "component" ? (
+        {
+          navigationLinks.map((link) =>
+            link.type === "component" ? (
+              <div class="px-3 py-2">
                 <link.component />
-              ) : (
-                <HeaderLink href={link.href}>{link.label}</HeaderLink>
-              ),
-            )
-          }
-          <div class="mt-lg p-4 mobile-theme-toggle">
-            <ThemeToggle />
-          </div>
+              </div>
+            ) : (
+              <a
+                href={link.href}
+                class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            ),
+          )
+        }
+        <div class="px-3 py-2">
+          <ThemeToggle />
         </div>
       </div>
     </div>
@@ -91,246 +90,33 @@ const navigationLinks = [
 </header>
 
 <script>
-  // Mobile navigation functionality
-  (function () {
-    const mobileNavToggle = document.querySelector(".mobile-nav-toggle");
-    const mobileNav = document.querySelector(".mobile-nav");
-    let isNavOpen = false;
+  // Simple mobile menu toggle
+  document.addEventListener("DOMContentLoaded", function () {
+    const mobileMenuButton = document.querySelector(".mobile-menu-button");
+    const mobileMenu = document.querySelector(".mobile-menu");
+    const menuIcon = mobileMenuButton?.querySelector("svg:first-child");
+    const closeIcon = mobileMenuButton?.querySelector("svg:last-child");
 
-    function toggleMobileNav() {
-      isNavOpen = !isNavOpen;
+    if (mobileMenuButton && mobileMenu && menuIcon && closeIcon) {
+      mobileMenuButton.addEventListener("click", function () {
+        const isExpanded =
+          mobileMenuButton.getAttribute("aria-expanded") === "true";
 
-      if (mobileNavToggle) {
-        mobileNavToggle.setAttribute("aria-expanded", isNavOpen.toString());
-      }
-      if (mobileNav) {
-        mobileNav.setAttribute("aria-hidden", (!isNavOpen).toString());
-        mobileNav.classList.toggle("active", isNavOpen);
-      }
+        mobileMenuButton.setAttribute(
+          "aria-expanded",
+          (!isExpanded).toString(),
+        );
 
-      mobileNavToggle?.classList.toggle("active", isNavOpen);
-      document.body.style.overflow = isNavOpen ? "hidden" : "";
-    }
-
-    // Event delegation for better performance
-    document.addEventListener("click", (e) => {
-      const target = e.target as Element;
-
-      // Handle mobile nav toggle
-      if (target.closest(".mobile-nav-toggle")) {
-        toggleMobileNav();
-        return;
-      }
-
-      // Close mobile nav when clicking outside
-      if (
-        isNavOpen &&
-        !target.closest(".mobile-nav") &&
-        !target.closest(".mobile-nav-toggle")
-      ) {
-        toggleMobileNav();
-      }
-    });
-
-    // Close mobile nav when pressing Escape
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && isNavOpen) {
-        toggleMobileNav();
-      }
-    });
-
-    // Close mobile nav on resize
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        if (window.innerWidth > 1024 && isNavOpen) {
-          toggleMobileNav();
+        if (isExpanded) {
+          mobileMenu.classList.add("hidden");
+          menuIcon.classList.remove("hidden");
+          closeIcon.classList.add("hidden");
+        } else {
+          mobileMenu.classList.remove("hidden");
+          menuIcon.classList.add("hidden");
+          closeIcon.classList.remove("hidden");
         }
-      }, 150);
-    });
-
-    // Scroll-based header behavior
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-
-    function updateHeader() {
-      const header = document.querySelector(".header-nav");
-      if (!header) return;
-
-      const currentScrollY = window.scrollY;
-
-      // Show/hide header based on scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        header.setAttribute("data-scroll", "hide");
-      } else if (currentScrollY < lastScrollY || currentScrollY <= 100) {
-        header.setAttribute("data-scroll", "show");
-      }
-
-      // Add scrolled state for backdrop blur
-      header.setAttribute(
-        "data-scrolled",
-        currentScrollY > 10 ? "true" : "false",
-      );
-
-      lastScrollY = currentScrollY;
-      ticking = false;
+      });
     }
-
-    function requestTick() {
-      if (!ticking) {
-        requestAnimationFrame(updateHeader);
-        ticking = true;
-      }
-    }
-
-    window.addEventListener("scroll", requestTick, { passive: true });
-
-    // Initial call
-    updateHeader();
-  })();
+  });
 </script>
-
-<style>
-  /* Header scroll behavior and positioning */
-  .header-nav[data-scrolled="true"] {
-    background-color: rgba(250, 250, 250, 0.95);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-color: rgba(209, 213, 219, 0.25);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Scroll hide/show animations */
-  .header-nav[data-scroll="hide"] {
-    transform: translateY(-100%);
-  }
-
-  .header-nav[data-scroll="show"] {
-    transform: translateY(0);
-  }
-
-  /* Dark theme adjustments */
-  html[data-theme="dark"] .header-nav {
-    background-color: rgba(17, 24, 39, 0.8);
-    border-color: rgba(75, 85, 99, 0.2);
-  }
-
-  html[data-theme="dark"] .header-nav[data-scrolled="true"] {
-    background-color: rgba(17, 24, 39, 0.95);
-    border-color: rgba(75, 85, 99, 0.3);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Show close icon when menu is active */
-  .mobile-nav-toggle.active .menu-icon {
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(-90deg);
-  }
-
-  .mobile-nav-toggle.active .close-icon {
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-
-  /* Mobile Navigation Menu */
-  .mobile-nav.active {
-    opacity: 1;
-    visibility: visible;
-    display: block;
-  }
-
-  .mobile-nav-links a {
-    font-size: 1.625rem;
-    font-weight: 600;
-    padding: 2rem 2.5rem;
-    border-radius: 0.5rem;
-    transition: all 150ms ease;
-    text-align: center;
-    width: 100%;
-    max-width: 300px;
-    color: #1a1a1a;
-    text-decoration: none;
-    position: relative;
-    z-index: 1;
-    font-family: "Merriweather", Georgia, "Times New Roman", serif;
-    letter-spacing: -0.025em;
-  }
-
-  .mobile-nav-links a:hover {
-    color: #1e3a8a;
-    background-color: rgba(0, 0, 0, 0.03);
-    transform: translateY(-2px);
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  }
-
-  .mobile-nav-links a.active {
-    color: #1e3a8a;
-    font-weight: 700;
-    background-color: #f5f5f5;
-    border: 1px solid #e5e7eb;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .header-nav {
-      padding: 0.75rem 2rem;
-    }
-
-    .mobile-nav-links {
-      padding: 3rem 2rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .header-nav {
-      height: 55px;
-      padding: 0.75rem 1rem;
-    }
-
-    nav {
-      height: 45px;
-    }
-
-    header h1 {
-      font-size: 1.1875rem;
-    }
-
-    .mobile-nav-links a {
-      font-size: 1.3125rem;
-    }
-
-    .mobile-nav-toggle {
-      padding: 0.375rem;
-      height: 2.25rem;
-      width: 2.25rem;
-    }
-
-    .icon-container {
-      width: 18px;
-      height: 18px;
-    }
-
-    .menu-icon,
-    .close-icon {
-      width: 18px;
-      height: 18px;
-    }
-  }
-
-  /* Ensure header doesn't overflow on very small screens */
-  @media (max-width: 360px) {
-    .header-nav {
-      padding: 0.75rem 0.5rem;
-    }
-
-    header h1 {
-      font-size: 1.0625rem;
-    }
-  }
-
-  /* Smooth scrolling for the page */
-  html {
-    scroll-behavior: smooth;
-  }
-</style>
