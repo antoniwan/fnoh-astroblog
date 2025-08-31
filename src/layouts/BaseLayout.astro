@@ -56,7 +56,9 @@ const {
 		{showHeader && <Header />}
 		
 		<main class="main-content">
-			<slot />
+			<div class="content-wrapper">
+				<slot />
+			</div>
 		</main>
 		
 		{showFooter && <Footer />}

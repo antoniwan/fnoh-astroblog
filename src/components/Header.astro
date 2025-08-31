@@ -15,7 +15,7 @@ const navigationLinks = [
 ---
 
 	<header class="header-nav" data-scroll="show">
-	<nav>
+	<nav class="header-container">
 		<h1><a href="/" class="link-clean" data-astro-reload>{SITE_TITLE}</a></h1>
 		
 		<!-- Desktop Navigation -->
@@ -160,7 +160,7 @@ const navigationLinks = [
 		z-index: 1000;
 		width: 100%;
 		max-width: 100vw;
-		padding: 0.75rem var(--spacing-xl);
+		padding: 0;
 		border-bottom: 1px solid rgba(var(--color-border-rgb, 209, 213, 219), 0.15);
 		background-color: rgba(var(--color-bg-rgb, 250, 250, 250), 0.8);
 		backdrop-filter: blur(0px);
@@ -172,6 +172,19 @@ const navigationLinks = [
 		box-sizing: border-box;
 		overflow: hidden;
 		box-shadow: var(--shadow-sm);
+	}
+	
+	/* Header container for proper content containment */
+	.header-container {
+		width: 100%;
+		max-width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 var(--spacing-xl);
+		height: 100%;
+		box-sizing: border-box;
+		overflow: hidden;
 	}
 	
 	/* Ensure the header content is properly contained */
