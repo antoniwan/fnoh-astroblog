@@ -39,10 +39,11 @@
   --color-text-subtle: #d1d5db;
   
   /* Code and technical elements */
-  --color-code-bg: #f8f9fa;
-  --color-code-border: #e5e7eb;
-  --color-code-text: #374151;
-  --color-inline-code-bg: #f3f4f6;
+  --color-code-bg: #f1f3f4;
+  --color-code-border: #d1d5db;
+  --color-code-text: #1f2937;
+  --color-inline-code-bg: #e5e7eb;
+  --color-code-selection-bg: rgba(59, 130, 246, 0.1);
   
   /* Editorial content elements */
   --color-blockquote-bg: #f8f6f3;
@@ -192,6 +193,7 @@ html[data-theme="dark"] {
   --color-code-border: #475569;
   --color-code-text: #e2e8f0;
   --color-inline-code-bg: #334155;
+  --color-code-selection-bg: rgba(96, 165, 250, 0.1);
   
   --color-blockquote-bg: #1e293b;
   --color-blockquote-border: #f59e0b;

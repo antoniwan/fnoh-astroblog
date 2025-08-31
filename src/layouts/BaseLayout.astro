@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import ScrollToTop from '../components/ui/ScrollToTop.astro';
+import GlobalStyles from '../components/GlobalStyles.astro';
 
 interface Props {
 	title: string;
@@ -51,6 +52,7 @@ const {
 		/>
 	</head>
 	<body class={className}>
+		<GlobalStyles />
 		{showHeader && <Header />}
 		
 		<main class="main-content">
