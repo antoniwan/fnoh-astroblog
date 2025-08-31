@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import ScrollToTop from '../components/ui/ScrollToTop.astro';
 
 interface Props {
 	title: string;
@@ -57,6 +58,8 @@ const {
 		</main>
 		
 		{showFooter && <Footer />}
+		
+		<ScrollToTop position="bottom-right" threshold={300} />
 	</body>
 </html>
 

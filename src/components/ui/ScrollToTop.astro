@@ -24,13 +24,14 @@ const {
 		const scrollToTopBtn = document.getElementById('scroll-to-top');
 		if (!scrollToTopBtn) return;
 		
-		let scrollTimeout: ReturnType<typeof setTimeout>;
+		let scrollTimeout;
 		
 		// Throttled scroll handler for better performance
 		function handleScroll() {
 			clearTimeout(scrollTimeout);
 			scrollTimeout = setTimeout(() => {
 				const shouldShow = window.pageYOffset > threshold;
+				console.log('Scroll position:', window.pageYOffset, 'Threshold:', threshold, 'Should show:', shouldShow);
 				scrollToTopBtn.classList.toggle('visible', shouldShow);
 			}, 100);
 		}
@@ -57,18 +58,19 @@ const {
 		width: 3rem;
 		height: 3rem;
 		border-radius: 50%;
-		background-color: #8b5cf6;
+		background-color: #ff0000;
 		color: white;
-		border: none;
+		border: 2px solid var(--color-border);
 		cursor: pointer;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		opacity: 0;
-		visibility: hidden;
-		transform: translateY(1rem);
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
 		transition: all var(--transition-fast);
-		z-index: 1000;
+		z-index: 9999;
+		box-shadow: var(--shadow-lg);
 	}
 	
 	.scroll-to-top.position-bottom-right {
@@ -98,8 +100,9 @@ const {
 	}
 	
 	.scroll-to-top:hover {
-		background-color: #7c3aed;
+		background-color: var(--color-link-hover);
 		transform: translateY(-0.25rem);
+		box-shadow: var(--shadow-xl);
 	}
 	
 	.scroll-to-top.position-bottom-center:hover {
@@ -123,15 +126,27 @@ const {
 			height: 2.5rem;
 		}
 		
-			.scroll-to-top.position-bottom-right,
-	.scroll-to-top.position-bottom-left,
-	.scroll-to-top.position-bottom-center {
-		bottom: 1rem;
-	}
+		.scroll-to-top.position-bottom-right,
+		.scroll-to-top.position-bottom-left,
+		.scroll-to-top.position-bottom-center {
+			bottom: 1rem;
+		}
 		
 		.scroll-to-top svg {
 			width: 1rem;
 			height: 1rem;
 		}
+	}
+	
+	/* Dark theme adjustments */
+	html[data-theme="dark"] .scroll-to-top {
+		background-color: var(--color-link);
+		border-color: var(--color-border-dark);
+		box-shadow: var(--shadow-lg);
+	}
+	
+	html[data-theme="dark"] .scroll-to-top:hover {
+		background-color: var(--color-link-hover);
+		box-shadow: var(--shadow-xl);
 	}
 </style>
