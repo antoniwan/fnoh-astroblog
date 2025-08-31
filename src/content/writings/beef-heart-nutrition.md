@@ -5,13 +5,9 @@ description: >-
   zinc, and CoQ10 content. Includes cooking methods and ways to add it to your
   diet.
 pubDate: '2025-05-01T16:45:00.000Z'
-heroImage: beef_heart_comparison_chart
+heroImage: /images/beef-heart-comparison-chart.png
 category: curiosity-lab
 ---
-
-import beef_heart_comparison_chart from '../../assets/images/beef-heart-comparison-chart.png';
-
-
 
 ## Introduction
 

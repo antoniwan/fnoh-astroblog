@@ -4,13 +4,9 @@ description: >-
   Someone slid into my Bluesky DMs claiming I was chosen. I answered like a god.
   Here's what really went down.
 pubDate: '2025-05-01T15:45:00.000Z'
-heroImage: the_internet_is_fucking_weird
+heroImage: /images/the_internet_is_fucking_weird.avif
 category: modern-life
 ---
-
-import the_internet_is_fucking_weird from '../../assets/images/the_internet_is_fucking_weird.avif';
-
-
 
 I opened my Bluesky account for the first time.
 

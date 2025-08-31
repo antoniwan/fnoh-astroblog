@@ -5,14 +5,9 @@ description: >-
   theme parks to algorithmic playlists, we pay premium prices to be herded
   through corporate processing systems while calling it freedom.
 pubDate: '2025-08-03T17:25:00.000Z'
-heroImage: good_sheep
+heroImage: /images/good-sheep.avif
 category: modern-life
 ---
-
-import good_sheep from '../../assets/images/good-sheep.avif';
-import lord_take_us_all from '../../assets/images/lord-take-us-all.avif';
-
-
 
 > ## A Note Before We Begin
 > This essay might trigger you. If it does, please stop reading rather than lashing out at the messenger.

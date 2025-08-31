@@ -6,13 +6,9 @@ description: >-
   emotionally starved generation ever to exist. This is the paradox I cannot
   stop thinking about.
 pubDate: '2025-07-16T20:00:00.000Z'
-heroImage: empathy
+heroImage: /images/empathy.avif
 category: modern-life
 ---
-
-import empathy from '../../assets/images/empathy.avif';
-
-
 
 We are living in the most advanced moment in human history. That statement is fact, not fantasy. By nearly every measurable indicator — lifespan, access to education, reduction in absolute poverty, technological capability, global connectivity — humanity has reached its peak.
 

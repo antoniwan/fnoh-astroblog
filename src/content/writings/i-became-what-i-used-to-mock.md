@@ -4,13 +4,9 @@ description: >-
   When an AI mirror shows you who you've become - a raw reflection on
   transformation, humility, and the unconscious arrogance of growth
 pubDate: '2025-07-17T15:00:00.000Z'
-heroImage: unclean_one
+heroImage: /images/unclean-one.avif
 category: empathy-healing
 ---
-
-import unclean_one from '../../assets/images/unclean-one.avif';
-
-
 
 I asked an AI to look at my writing and tell me what it saw. Four years of posts — 47 pieces about therapy, boundaries, conscious parenting, all that shit. Roughly 150,000 words documenting my journey from unconscious living to... whatever this is. Just wanted some feedback, you know?
 

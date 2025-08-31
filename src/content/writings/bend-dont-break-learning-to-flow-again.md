@@ -5,13 +5,9 @@ description: >-
   the breakdown of a 33-value system, and the path toward flexible strength
   through acceptance and presence.
 pubDate: '2025-07-30T23:15:00.000Z'
-heroImage: saitama_okay
+heroImage: /images/saitama-okay.webp
 category: empathy-healing
 ---
-
-import saitama_okay from '../../assets/images/saitama-okay.webp';
-
-
 
 There was a time — not long ago — when I thought I could optimize my way to being the near-perfect human. I had **33 core values** mapped out like some kind of life operating system. Accountability, Authenticity, Balance, Efficiency, Honesty, Integrity, Kindness, Responsibility... the whole fucking alphabet of human virtue.
 

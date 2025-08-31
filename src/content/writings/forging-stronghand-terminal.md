@@ -8,14 +8,6 @@ pubDate: '2025-04-28T00:00:00.000Z'
 category: curiosity-lab
 ---
 
-import _1_hZS3n1fhg_eDQTmqxg8O2w from '../../assets/images/1_hZS3n1fhg_eDQTmqxg8O2w.png';
-import _1_JMkniJ9RmTng62SL37WSBA from '../../assets/images/1_JMkniJ9RmTng62SL37WSBA.png';
-import _1_wjEXa_8z9DI8Wq4zMCBqig from '../../assets/images/1_wjEXa_8z9DI8Wq4zMCBqig.png';
-import _1_UVQ9Lyp4yJ3dnpMbnSIOCQ from '../../assets/images/1_UVQ9Lyp4yJ3dnpMbnSIOCQ.png';
-import _1_Fdmjbqh4eRaDwA12bYERgw from '../../assets/images/1_Fdmjbqh4eRaDwA12bYERgw.png';
-
-
-
 "Stronghand" is the name I gave my computer after the latest reformat. I destroyed **EVERYTHING** across all my drives — four disks totaling over 10TB — wiping them clean to zero.
 
 Why? Because clutter carries inertia. Because old data is old gravity. Because sometimes the only way forward is to burn the ship.

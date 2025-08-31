@@ -4,13 +4,9 @@ description: >-
   A reflection on the power of self-control, curiosity, and value-based decision
   making in personal growth and emotional regulation.
 pubDate: '2024-05-06T00:00:00.000Z'
-heroImage: self_control
+heroImage: /images/self-control.avif
 category: empathy-healing
 ---
-
-import self_control from '../../assets/images/self-control.avif';
-
-
 
 Self-control and curiosity are vessels for growth and peace. This world wants everything from us: our health, our attention, our wealth, and our time. It's such a hassle, and it's hard.
 But hope is not lost; on the contrary, that epiphany moment one realizes that all one has to do is plant our feet, relax our arms, and take a deep breath, then another one, and another one, and as we ground ourselves in ourselves, and our emotions regulate. The clarity seeps in, and we can understand what is wanted for us and what is required from us to take the next step, do nothing, or utter the next words within the boundaries of our values.

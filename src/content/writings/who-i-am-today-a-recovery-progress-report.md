@@ -5,13 +5,9 @@ description: >-
   what recovery from narcissism and codependency actually looks like in
   practice.
 pubDate: '2025-08-06T11:00:00.000Z'
-heroImage: lost_af
+heroImage: /images/lost-af.avif
 category: recovery-reconstruction
 ---
-
-import lost_af from '../../assets/images/lost-af.avif';
-
-
 
 I'm a 38-year-old recovering narcissist documenting what it looks like to rebuild a human being from scratch.
 

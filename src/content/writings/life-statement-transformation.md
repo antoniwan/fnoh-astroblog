@@ -5,13 +5,9 @@ description: >-
   exploring the gap between values and actions, and finding clarity in personal
   identity.
 pubDate: '2024-04-27T08:50:00.000Z'
-heroImage: life_statement
+heroImage: /images/life-statement.webp
 category: recovery-reconstruction
 ---
-
-import life_statement from '../../assets/images/life-statement.webp';
-
-
 
 Found this interesting note in my archives:
 When our daughter, now 1-year-old, was born, I endured many rough patches when self-reflection was not kind to me. I thought I was a family- centric and "family first" man for most of my adult life. However, through the newly added responsibilities of having a baby, I noticed that my professional work and individual leisure activities were where I was putting in the most effort and hours. I was not being a parent or a family- centric man. The gap between my thoughts and actions was evident and shook me to my core. Do I value my books and games more than my family? I didn't think so. What is going on with me then?

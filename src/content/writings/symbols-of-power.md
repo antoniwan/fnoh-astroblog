@@ -5,20 +5,9 @@ description: >-
   resilience, willpower, and transformation. These are the icons I'd etch into
   my skin if I ever choose to.
 pubDate: '2024-07-06T11:20:00.000Z'
-heroImage: symbols_of_power
+heroImage: /images/symbols-of-power.avif
 category: empathy-healing
 ---
-
-import symbols_of_power from '../../assets/images/symbols-of-power.avif';
-import narsil from '../../assets/images/symbols/narsil.avif';
-import master_sword from '../../assets/images/symbols/master-sword.avif';
-import ma5c from '../../assets/images/symbols/ma5c.avif';
-import mjolnir from '../../assets/images/symbols/mjolnir.avif';
-import dragon_slayer from '../../assets/images/symbols/dragon-slayer.avif';
-import vegvisir from '../../assets/images/symbols/vegvisir.avif';
-import lightsaber from '../../assets/images/symbols/lightsaber.avif';
-
-
 
 I've been thinking about getting a tattoo—or many—but I can't pull the trigger. There's something about having a "clean" body that feels sacred. Still, the idea of _customizing_ it, of turning my body into a living archive of meaning, also deeply appeals to me.
 

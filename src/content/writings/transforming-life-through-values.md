@@ -5,13 +5,9 @@ description: >-
   daily actions with core values led to improved mental health and
   relationships.
 pubDate: '2024-04-28T00:00:00.000Z'
-heroImage: saitama_okay
+heroImage: /images/saitama-okay.webp
 category: recovery-reconstruction
 ---
-
-import saitama_okay from '../../assets/images/saitama-okay.webp';
-
-
 
 > Warning: The following essay is a lengthy humblebrag! Close your browser tab now if you are unable to experience freudenfreude. Close your browser tab now if you do not want to take responsibility for your life and are hurt when others can do so.
 

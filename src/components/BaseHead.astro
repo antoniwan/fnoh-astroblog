@@ -2,14 +2,13 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
-import type { CollectionEntry } from 'astro:content';
 import { SITE_TITLE } from '../consts';
 import StructuredData from './StructuredData.astro';
 
 interface Props {
 	title: string;
 	description: string;
-	image?: CollectionEntry<'writings'>['data']['heroImage'];
+	image?: string;
 	type?: 'website' | 'article' | 'organization';
 	publishedTime?: string;
 	modifiedTime?: string;
@@ -31,8 +30,6 @@ const {
 	section,
 	tags = []
 } = Astro.props;
-
-const imageUrl = typeof image === 'string' ? image : image?.src || '/images/default.avif';
 ---
 
 <!-- Global Metadata -->
@@ -102,7 +99,7 @@ const imageUrl = typeof image === 'string' ? image : image?.src || '/images/defa
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(imageUrl, Astro.url)} />
+<meta property="og:image" content={new URL(image, Astro.url)} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content={title} />
@@ -114,7 +111,7 @@ const imageUrl = typeof image === 'string' ? image : image?.src || '/images/defa
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(imageUrl, Astro.url)} />
+<meta property="twitter:image" content={new URL(image, Astro.url)} />
 <meta property="twitter:image:alt" content={title} />
 <meta property="twitter:site" content="@fieldnotesonhumanity" />
 <meta property="twitter:creator" content="@fieldnotesonhumanity" />
@@ -138,7 +135,7 @@ const imageUrl = typeof image === 'string' ? image : image?.src || '/images/defa
 	title={title}
 	description={description}
 	url={canonicalURL.toString()}
-	image={new URL(imageUrl, Astro.url).toString()}
+	image={new URL(image, Astro.url).toString()}
 	publishedTime={publishedTime}
 	modifiedTime={modifiedTime}
 	author={author}

@@ -7,14 +7,9 @@ description: >-
   teaching me about discipline, brotherhood, pain as power, and the loneliness
   of mastery.
 pubDate: '2025-04-17T13:56:47.000Z'
-heroImage: anime_souls
+heroImage: /images/anime-souls.avif
 category: empathy-healing
 ---
-
-import anime_souls from '../../assets/images/anime-souls.avif';
-import mia_y_yo_anime from '../../assets/images/mia-y-yo-anime.avif';
-
-
 
 I've been thinking a lot about who raised me to be who I am. And I'm preparing an essay about that. _But this one is not about that._ This one is about the **fictional characters** that raised me.
 

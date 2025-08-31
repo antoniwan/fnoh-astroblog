@@ -1,8 +1,6 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-
 interface Props {
-	src: CollectionEntry<'writings'>['data']['heroImage'];
+	src: string;
 	alt: string;
 	title?: string;
 	width?: number;
@@ -26,7 +24,7 @@ const {
 
 <div class:list={['hero-image', { 'centered': centered, 'rounded': rounded }, className]}>
 	<img 
-		src={src?.src || ''} 
+		src={src} 
 		alt={alt}
 		title={title || alt}
 		width={width}

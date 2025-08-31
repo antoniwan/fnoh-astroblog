@@ -4,13 +4,9 @@ description: >-
   A lightweight cognitive system to visually track project intent and mental
   context through color-coded VS Code title bars.
 pubDate: '2025-05-15T00:00:00.000Z'
-heroImage: vs_code_signals
+heroImage: /images/vs-code-signals.avif
 category: curiosity-lab
 ---
-
-import vs_code_signals from '../../assets/images/vs-code-signals.avif';
-
-
 
 ## 🎯 PURPOSE
 

@@ -5,13 +5,9 @@ description: >-
   the deepening love that makes goodbyes harder, and finding strength through
   the rhythm of seasonal separation.
 pubDate: '2025-08-23T11:20:00.000Z'
-heroImage: i_lose_mia
+heroImage: /images/i-lose-mia.avif
 category: empathy-healing
 ---
-
-import i_lose_mia from '../../assets/images/i-lose-mia.avif';
-
-
 
 It's been several weeks since I returned my daughter to her mother, with whom she lives during the school year. We spent what I consider the most beautiful 85 days of summer together. We did what we wanted, when we wanted—always together.
 

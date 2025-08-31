@@ -4,14 +4,9 @@ description: >-
   A rhythmic, box-style breathing technique used to cultivate focus, regulate
   the nervous system, and deepen mind-body awareness.
 pubDate: '2025-05-06T07:15:00.000Z'
-heroImage: breathing_deep
+heroImage: /images/breathing-deep.avif
 category: empathy-healing
 ---
-
-import breathing_deep from '../../assets/images/breathing-deep.avif';
-import tcb from '../../assets/images/tcb.avif';
-
-
 
 ## 🔄 Breathing Cycle
 

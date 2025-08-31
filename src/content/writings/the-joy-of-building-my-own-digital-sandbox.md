@@ -5,13 +5,9 @@ description: >-
   solutions exist.  Because this digital art project—code and content
   together—is how I view the world.
 pubDate: '2025-07-29T22:00:00.000Z'
-heroImage: how_i_view_the_world
+heroImage: /images/how-i-view-the-world.avif
 category: curiosity-lab
 ---
-
-import how_i_view_the_world from '../../assets/images/how-i-view-the-world.avif';
-
-
 
 I fucking love working on my blog.
 

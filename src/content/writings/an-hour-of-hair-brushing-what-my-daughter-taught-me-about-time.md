@@ -4,13 +4,9 @@ description: >-
   Sometimes the most radical thing you can do is sit still with your daughter
   and brush her hair for an hour.
 pubDate: '2025-07-28T10:14:00.000Z'
-heroImage: mia_long_hair
+heroImage: /images/mia-long-hair.webp
 category: empathy-healing
 ---
-
-import mia_long_hair from '../../assets/images/mia-long-hair.webp';
-
-
 
 My daughter has never cut her hair. She's five now, and it covers her entire back. When she stays with me, she refuses to brush it herself, so I do it for her. It takes about an hour every day.
 

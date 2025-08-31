@@ -7,13 +7,9 @@ description: >-
   age-appropriate responses and protective language. Based on attachment theory
   and developmental psychology.
 pubDate: '2025-05-06T16:30:00.000Z'
-heroImage: guia_practica_padres_conscientes
+heroImage: /images/guia-practica-padres-conscientes.avif
 category: empathy-healing
 ---
-
-import guia_practica_padres_conscientes from '../../assets/images/guia-practica-padres-conscientes.avif';
-
-
 
 Tengo una hija de 5 años y un hijastro que crié desde los 7 — hoy tiene 20. He criado con mucha curiosidad, observando, equivocándome, aprendiendo. Además, tengo sobrines con quienes he compartido desde juegos corporales hasta preguntas existenciales.
 

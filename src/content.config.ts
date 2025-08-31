@@ -12,7 +12,7 @@ const writings = defineCollection({
 			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
-			heroImage: image().optional(),
+			heroImage: z.string().optional(),
 			category: z.enum(['lessons-in-balance', 'chaos-notes', 'recovery-reconstruction', 'empathy-healing', 'modern-life', 'curiosity-lab']).optional(),
 		}),
 });

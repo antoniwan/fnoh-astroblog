@@ -4,13 +4,9 @@ description: >-
   A raw reflection on the state of democracy, the gap between rhetoric and
   reality, and the need for genuine systemic change.
 pubDate: '2025-07-02T13:07:00.000Z'
-heroImage: ai_is_creepy
+heroImage: /images/ai-is-creepy.avif
 category: modern-life
 ---
-
-import ai_is_creepy from '../../assets/images/ai-is-creepy.avif';
-
-
 
 They keep calling it democracy.
 

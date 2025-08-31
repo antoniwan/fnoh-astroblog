@@ -5,13 +5,9 @@ description: >-
   básicas,  y cómo se ve la recuperación del narcisismo y codependencia en la
   práctica.
 pubDate: '2025-08-06T11:00:00.000Z'
-heroImage: lost_af
+heroImage: /images/lost-af.avif
 category: recovery-reconstruction
 ---
-
-import lost_af from '../../assets/images/lost-af.avif';
-
-
 
 Soy un boricua de 38 años en recuperación del narcisismo, documentando cómo se ve reconstruir un ser humano desde cero.
 

@@ -3,13 +3,9 @@ title: Empathy as a Shield
 description: >-
   How empathy serves as protective armor against judgment, bias, and emotional spirals.
 pubDate: '2025-08-24T17:30:00.000Z'
-heroImage: waaaat
+heroImage: /images/waaaat.jpg
 category: empathy-healing
 ---
-
-import waaaat from '../../assets/images/waaaat.jpg';
-
-
 
 <small>Hero Image by [Nik](https://unsplash.com/@helloimnik?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)</small>
 

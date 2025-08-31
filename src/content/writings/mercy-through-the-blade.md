@@ -5,13 +5,9 @@ description: >-
   truth and comfort, and the sacred responsibility of wielding power with grace
   and ferocity.
 pubDate: '2025-04-26T00:00:00.000Z'
-heroImage: _0_uLjrPcjl6O6biWBM
+heroImage: /images/0_uLjrPcjl6O6biWBM.jpg
 category: empathy-healing
 ---
-
-import _0_uLjrPcjl6O6biWBM from '../../assets/images/0_uLjrPcjl6O6biWBM.jpg';
-
-
 
 > This is a silent topic. Nobody really wants to talk about it. I think because it's uncomfortable. It exposes things most people would rather keep hidden. But here we go — no ego, no drama, just truth. If this resonates, or if it challenges you, leave a comment below. I'll reply to every comment personally. Let's sharpen each other the way warriors are supposed to — with presence, respect, and real conversation. ¡Gracias por leer!
 

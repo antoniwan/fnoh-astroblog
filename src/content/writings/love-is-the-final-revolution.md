@@ -3,13 +3,9 @@ title: Love Is the Final Revolution
 description: >-
   After nearly losing myself to global chaos, I found the most radical act isn't outrage — it's love. A reflection on politics, fear, and why building a home rooted in kindness may be the ultimate rebellion.
 pubDate: '2025-08-13T12:20:00.000Z'
-heroImage: guy_fawkes_family_love
+heroImage: /images/guy-fawkes-family-love.avif
 category: empathy-healing
 ---
-
-import guy_fawkes_family_love from '../../assets/images/guy-fawkes-family-love.avif';
-
-
 
 For weeks, I've been drowning in the world's problems — and almost forgot to love my own life. My thoughts, writings, and ramblings have been almost entirely consumed by problems—both microscopic and massive. From dissecting my own self-sabotaging tendencies and the constant work of staying open to feedback, to learning about the ongoing civil war in Sudan, the reality that Israel has universal healthcare- and we don't..., the Gaza crisis, and the tangled mess that our own government officials describe and prescribe… somewhere in that constant stream of madness, I got lost in the sauce.
 

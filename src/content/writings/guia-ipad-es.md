@@ -7,13 +7,9 @@ description: >-
   consciente de un iPad para niños, con valores boricuas y responsabilidad
   adulta al centro.
 pubDate: '2025-05-01T10:30:00.000Z'
-heroImage: guia_padres
+heroImage: /images/guia-padres.jpg
 category: empathy-healing
 ---
-
-import guia_padres from '../../assets/images/guia-padres.jpg';
-
-
 
 ## Introducción: Nuestra Responsabilidad, No la de Ellos
 

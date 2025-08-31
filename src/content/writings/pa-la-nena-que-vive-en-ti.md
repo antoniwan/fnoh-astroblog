@@ -2,13 +2,9 @@
 title: ☀️ Pa’ la nena que vive en ti
 description: Desde la paz, el respeto, y la crianza compartida
 pubDate: '2025-04-21T12:21:28.000Z'
-heroImage: una_nena_poderosa
+heroImage: /images/una-nena-poderosa.avif
 category: empathy-healing
 ---
-
-import una_nena_poderosa from '../../assets/images/una-nena-poderosa.avif';
-
-
 
 _Desde la paz, el respeto, y la crianza compartida_
 
