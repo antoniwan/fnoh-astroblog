@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Container from '../../components/ui/Container.astro';
+import PostCard from '../../components/ui/PostCard.astro';
 import { SITE_TITLE } from '../../consts';
 
 // Get all posts and sort by publication date
@@ -33,24 +34,7 @@ const totalPosts = sortedPosts.length;
 		{initialPosts.length > 0 ? (
 			<div class="posts-grid">
 				{initialPosts.map((post) => (
-					<article class="post-card">
-						<a href={`/writings/${post.id}`} class="post-link">
-							<div class="post-image">
-								<img src={post.data.heroImage?.src || ''} alt={post.data.title || `Image for ${post.data.title}`} loading="lazy" />
-							</div>
-							<div class="post-content">
-								<h2 class="post-title">{post.data.title}</h2>
-								<p class="post-description">{post.data.description}</p>
-								<time class="post-date" datetime={post.data.pubDate.toISOString()}>
-									{post.data.pubDate.toLocaleDateString('en-US', { 
-										year: 'numeric', 
-										month: 'long', 
-										day: 'numeric' 
-									})}
-								</time>
-							</div>
-						</a>
-					</article>
+					<PostCard post={post} />
 				))}
 			</div>
 		) : (
@@ -146,73 +130,6 @@ const totalPosts = sortedPosts.length;
 		width: 100%;
 	}
 
-	.post-card {
-		border: 1px solid var(--color-border-subtle);
-		border-radius: var(--border-radius);
-		overflow: hidden;
-		transition: all 0.2s ease;
-		background: var(--color-background);
-	}
-
-	.post-card:hover {
-		border-color: var(--color-border);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-		transform: translateY(-2px);
-	}
-
-	.post-link {
-		display: block;
-		text-decoration: none;
-		color: inherit;
-		height: 100%;
-	}
-
-	.post-image {
-		width: 100%;
-		height: 200px;
-		overflow: hidden;
-	}
-
-	.post-image img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		transition: transform 0.3s ease;
-	}
-
-	.post-card:hover .post-image img {
-		transform: scale(1.05);
-	}
-
-	.post-content {
-		padding: var(--spacing-lg);
-	}
-
-	.post-title {
-		font-size: var(--font-size-lg);
-		font-weight: var(--font-weight-semibold);
-		color: var(--color-text);
-		margin: 0 0 var(--spacing-sm) 0;
-		line-height: var(--line-height-tight);
-	}
-
-	.post-description {
-		font-size: var(--font-size-base);
-		color: var(--color-text-light);
-		margin: 0 0 var(--spacing-sm) 0;
-		line-height: var(--line-height-relaxed);
-		display: -webkit-box;
-		-webkit-line-clamp: 3;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-	}
-
-	.post-date {
-		font-size: var(--font-size-sm);
-		color: var(--color-text-lighter);
-		font-style: italic;
-	}
-
 	.no-posts {
 		text-align: center;
 		padding: var(--spacing-2xl);
@@ -306,10 +223,6 @@ const totalPosts = sortedPosts.length;
 		.posts-grid {
 			grid-template-columns: 1fr;
 			gap: var(--spacing-lg);
-		}
-
-		.post-image {
-			height: 150px;
 		}
 	}
 </style>
