@@ -3,11 +3,12 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import ScrollToTop from '../components/ui/ScrollToTop.astro';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
 	title: string;
 	description: string;
-	image?: import('astro').ImageMetadata;
+	image?: CollectionEntry<'writings'>['data']['heroImage'];
 	showHeader?: boolean;
 	showFooter?: boolean;
 	class?: string;

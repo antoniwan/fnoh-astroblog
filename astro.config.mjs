@@ -36,16 +36,5 @@ export default defineConfig({
 				overlay: false
 			}
 		}
-	},
-	// Image optimization
-	image: {
-		// Enable Sharp for better image processing
-		serviceEntryPoint: '@astrojs/image/sharp',
-		// Responsive images
-		densities: [1, 2],
-		// Format optimization
-		formats: ['webp', 'avif', 'jpeg'],
-		// Quality settings
-		quality: 80
 	}
 });
