@@ -27,6 +27,8 @@ The new system provides:
 - **Performance**: Lazy loading and proper sizing
 - **Accessibility**: Enforced alt text requirements
 
+![Young Link pulling the Master Sword out of its pedestal](../../assets/images/symbols/master-sword.avif)
+
 ## Content Schema
 
 The content schema now enforces:
